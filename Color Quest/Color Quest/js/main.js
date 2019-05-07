@@ -41,6 +41,75 @@ Play.prototype = {
    }
 }
 
+// Red color state
+var Red = function(game) {};
+Red.prototype = {
+
+   // Variables used in Red
+   init: function() {
+
+   },
+
+   preload: function() {
+      console.log('Play: preload');
+   },
+
+   create: function() {
+      console.log('Play: create');
+
+   },
+
+   update: function() {
+
+   }
+}
+
+// Yellow color state
+var Yellow = function(game) {};
+Yellow.prototype = {
+
+   // Variables used in Yellow
+   init: function() {
+
+   },
+
+   preload: function() {
+      console.log('Play: preload');
+   },
+
+   create: function() {
+      console.log('Play: create');
+
+   },
+
+   update: function() {
+
+   }
+}
+
+// Blue color state
+var Blue = function(game) {};
+Blue.prototype = {
+
+   // Variables used in Blue
+   init: function() {
+
+   },
+
+   preload: function() {
+      console.log('Play: preload');
+   },
+
+   create: function() {
+      console.log('Play: create');
+
+   },
+
+   update: function() {
+
+   }
+}
+
 // GameOver state
 var GameOver = function(game) {};
 GameOver.prototype = {
