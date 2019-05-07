@@ -19,6 +19,7 @@ MainMenu.prototype = {
 }
 
 // Play state
+// the first level of the game.
 var Play = function(game) {};
 Play.prototype = {
 
