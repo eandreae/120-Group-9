@@ -8,11 +8,11 @@ Red.prototype = {
    },
 
    preload: function() {
-      console.log('Play: preload');
+      console.log('Red: preload');
    },
 
    create: function() {
-      console.log('Play: create');
+      console.log('Red: create');
 
    },
 

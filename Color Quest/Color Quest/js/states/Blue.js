@@ -8,11 +8,11 @@ Blue.prototype = {
    },
 
    preload: function() {
-      console.log('Play: preload');
+      console.log('Blue: preload');
    },
 
    create: function() {
-      console.log('Play: create');
+      console.log('Blue: create');
 
    },
 

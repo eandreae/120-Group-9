@@ -9,11 +9,11 @@ Tutorial.prototype = {
    },
 
    preload: function() {
-      console.log('Play: preload');
+      console.log('Tutorial: preload');
    },
 
    create: function() {
-      console.log('Play: create');
+      console.log('Tutorial: create');
 
    },
 

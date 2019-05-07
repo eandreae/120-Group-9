@@ -8,11 +8,11 @@ Yellow.prototype = {
    },
 
    preload: function() {
-      console.log('Play: preload');
+      console.log('Yellow: preload');
    },
 
    create: function() {
-      console.log('Play: create');
+      console.log('Yellow: create');
 
    },
 
