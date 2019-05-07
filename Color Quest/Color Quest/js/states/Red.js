@@ -17,6 +17,7 @@ Red.prototype = {
    },
 
    update: function() {
+      console.log('Red: update');
        if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
            game.state.start('GameOver');
        }

@@ -7,6 +7,7 @@
 "use strict";
 
 // define globals
+var game;
 
 // wait for browser to load before creating Phaser game
 window.onload = function() {
@@ -14,7 +15,7 @@ window.onload = function() {
 	// localStorage.clear();
 
 	// define game
-   var game = new Phaser.Game(800, 900, Phaser.AUTO, 'phaser');
+   game = new Phaser.Game(800, 900, Phaser.AUTO, 'phaser');
 
 	// define states
 	//game.state.add('Boot', Boot);

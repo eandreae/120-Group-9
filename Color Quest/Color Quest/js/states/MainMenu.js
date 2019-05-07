@@ -11,9 +11,9 @@ MainMenu.prototype = {
    },
 
    update: function() {
-
-       if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
-           game.state.start('Tutorial');
+      console.log('MainMenu: update');
+      if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
+         game.state.start('Tutorial');
       }
    }
 };

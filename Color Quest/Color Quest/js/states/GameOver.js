@@ -17,6 +17,7 @@ GameOver.prototype = {
    },
 
    update: function() {
+      console.log('GameOver: update');
       // GameOver logic
       if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
           game.state.start('MainMenu');
