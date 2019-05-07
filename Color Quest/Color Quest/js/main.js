@@ -1,143 +1,29 @@
-var game = new Phaser.Game(800, 900, Phaser.AUTO, 'phaser');
+// Eric Hu
+// Eric Andreae
+// Dylan Deardorff
+// Group 9
+// Color Quest
 
-// Main Menu state
-var MainMenu = function(game) {};
-MainMenu.prototype = {
-   preload: function() {
+"use strict";
 
-   },
+// define globals
 
-   create: function() {
-      console.log('MainMenu: create');
+// wait for browser to load before creating Phaser game
+window.onload = function() {
+	// uncomment the following line if you need to purge local storage data
+	// localStorage.clear();
 
-   },
+	// define game
+   var game = new Phaser.Game(800, 900, Phaser.AUTO, 'phaser');
 
-   update: function() {
-
-      }
-   }
+	// define states
+	//game.state.add('Boot', Boot);
+	game.state.add('Load', Load);   // Used to load the assets and stuff
+	game.state.add('MainMenu', MainMenu);
+	game.state.add('Tutorial', Tutorial);
+   game.state.add('Red', Red);
+   game.state.add('Yellow', Yellow);
+   game.state.add('Blue', Blue);
+	game.state.add('GameOver', GameOver);
+	game.state.start('Load');
 }
-
-// Play state
-// the first level of the game.
-var Play = function(game) {};
-Play.prototype = {
-
-   // Variables used in Play
-   init: function() {
-
-   },
-
-   preload: function() {
-      console.log('Play: preload');
-   },
-
-   create: function() {
-      console.log('Play: create');
-
-   },
-
-   update: function() {
-
-   }
-}
-
-// Red color state
-var Red = function(game) {};
-Red.prototype = {
-
-   // Variables used in Red
-   init: function() {
-
-   },
-
-   preload: function() {
-      console.log('Play: preload');
-   },
-
-   create: function() {
-      console.log('Play: create');
-
-   },
-
-   update: function() {
-
-   }
-}
-
-// Yellow color state
-var Yellow = function(game) {};
-Yellow.prototype = {
-
-   // Variables used in Yellow
-   init: function() {
-
-   },
-
-   preload: function() {
-      console.log('Play: preload');
-   },
-
-   create: function() {
-      console.log('Play: create');
-
-   },
-
-   update: function() {
-
-   }
-}
-
-// Blue color state
-var Blue = function(game) {};
-Blue.prototype = {
-
-   // Variables used in Blue
-   init: function() {
-
-   },
-
-   preload: function() {
-      console.log('Play: preload');
-   },
-
-   create: function() {
-      console.log('Play: create');
-
-   },
-
-   update: function() {
-
-   }
-}
-
-// GameOver state
-var GameOver = function(game) {};
-GameOver.prototype = {
-
-   // Gets the score from the previous state
-   init: function(s) {
-   },
-
-   preload: function() {
-      console.log('GameOver: preload');
-   },
-
-   create: function() {
-      console.log('GameOver: create');
-
-
-   },
-
-   update: function() {
-      // GameOver logic
-
-   }
-}
-
-
-
-game.state.add('MainMenu', MainMenu);
-game.state.add('Play', Play);
-game.state.add('GameOver', GameOver);
-game.state.start('MainMenu');
