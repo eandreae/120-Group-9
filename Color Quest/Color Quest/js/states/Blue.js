@@ -17,6 +17,15 @@ Blue.prototype = {
    },
 
    update: function() {
+       if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
+           game.state.start('GameOver');
+       }
+       if(game.input.keyboard.isDown(Phaser.Keyboard.R)){
+           game.state.start('Red');
+       }
+       if(game.input.keyboard.isDown(Phaser.Keyboard.Y)){
+           game.state.start('Yellow');
+       }
 
    }
 };
