@@ -15,7 +15,7 @@ window.onload = function() {
 	// localStorage.clear();
 
 	// define game
-   game = new Phaser.Game(800, 900, Phaser.AUTO, 'phaser');
+   game = new Phaser.Game(900, 600, Phaser.AUTO, 'phaser');
 
 	// define states
 	//game.state.add('Boot', Boot);
