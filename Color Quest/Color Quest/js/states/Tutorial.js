@@ -28,9 +28,25 @@ Tutorial.prototype = {
       // Ground
       this.ground = this.platforms.create(0, game.height - 64, 'ground');
       this.ground.scale.setTo(30, 2);
-      // this.ground.scale.x = 0.05;
-      // this.ground.scale.y = 0.05;
       this.ground.body.immovable = true;  // Prevents it from moving
+
+      // Red square
+      bmd = game.add.bitmapData(100, 100);
+      bmd.fill(255, 0, 0, 1);
+      this.red = game.add.sprite(500, 450, bmd);
+      game.physics.arcade.enable(this.red);
+
+      // Red square
+      bmd = game.add.bitmapData(100, 100);
+      bmd.fill(255, 255, 0, 1);
+      this.yellow = game.add.sprite(800, 450, bmd);
+      game.physics.arcade.enable(this.yellow);
+
+      // Red square
+      bmd = game.add.bitmapData(100, 100);
+      bmd.fill(0, 0, 255, 1);
+      this.blue = game.add.sprite(1100, 450, bmd);
+      game.physics.arcade.enable(this.blue);
 
       // Adds the player into the state
       this.player = new Player(game, this.platforms);
@@ -46,24 +62,14 @@ Tutorial.prototype = {
        if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
            game.state.start('GameOver');
        }
-       if(game.input.keyboard.isDown(Phaser.Keyboard.R)){
+       if(game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.red)){
            game.state.start('Red');
        }
-       if(game.input.keyboard.isDown(Phaser.Keyboard.Y)){
+       if(game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.yellow)){
            game.state.start('Yellow');
        }
-       if(game.input.keyboard.isDown(Phaser.Keyboard.B)){
+       if(game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.blue)){
            game.state.start('Blue');
        }
-
-       // if(game.input.keyboard.isDown(Phaser.Keyboard.X)){
-       //     this.shootBullet(this.player.x, this.player.y);
-       // }
    },
-
-   // // construct new Bullet object, add it to the game world, and add it to the group
-   // shootBullet: function(x, y) {
-	// 	var bullet = new Bullet(game, x, y, true);
-	// 	game.add.existing(bullet);
-	// },
 };

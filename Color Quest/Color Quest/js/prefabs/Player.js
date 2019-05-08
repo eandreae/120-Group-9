@@ -12,17 +12,10 @@ function Player(game, objects, red, yellow, blue) {
    // new Sprite(game, x, y, key, frame)
    Phaser.Sprite.call(this, game, 64, 400, 'player');
 
-   // add custom properties
-   //this.anchor.set(0.5);
-   //this.scale.x = 0.03;
-   //this.scale.y = 0.01;
-   //this.rotation = rotation;
-
-   // put some physics on it
+   // Gives the player physics
    game.physics.arcade.enable(this);
    this.body.collideWorldBounds = true;
    this.body.gravity.y = 300;
-   //this.body.angularVelocity = game.rnd.integerInRange(-180,180);
 }
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor (Player)
@@ -40,7 +33,6 @@ Player.prototype.update = function() {
 
    // Reset player velocity
    this.body.velocity.x = 0;
-   //this.body.velocity.y = 0;
 
    // Moving Left
    if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
@@ -59,6 +51,7 @@ Player.prototype.update = function() {
       this.body.velocity.y = -225;
    }
 
+   // Player shoots a bullet for each key press
    if (game.input.keyboard.justPressed(Phaser.Keyboard.X)) {
       var bullet = new Bullet(game, this.x, this.y, direction);
       game.add.existing(bullet);
