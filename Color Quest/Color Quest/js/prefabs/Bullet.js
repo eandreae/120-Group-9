@@ -18,7 +18,7 @@ function Bullet(game, x, y, d) {
    else xDir = -1;              // Moving left
 
    // Sets the velocities of the bullet, depending on which side they spawned from
-   this.body.velocity.x = 100 * xDir;
+   this.body.velocity.x = 1000 * xDir;
    //this.body.velocity.y = 0;
    this.body.immovable = true;
 }

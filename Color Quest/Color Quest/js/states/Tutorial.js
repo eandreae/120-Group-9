@@ -56,14 +56,14 @@ Tutorial.prototype = {
            game.state.start('Blue');
        }
 
-       if(game.input.keyboard.isDown(Phaser.Keyboard.X)){
-           this.shootBullet(this.player.x, this.player.y);
-       }
+       // if(game.input.keyboard.isDown(Phaser.Keyboard.X)){
+       //     this.shootBullet(this.player.x, this.player.y);
+       // }
    },
 
-   // construct new Bullet object, add it to the game world, and add it to the group
-   shootBullet: function(x, y) {
-		var bullet = new Bullet(game, x, y, true);
-		game.add.existing(bullet);
-	},
+   // // construct new Bullet object, add it to the game world, and add it to the group
+   // shootBullet: function(x, y) {
+	// 	var bullet = new Bullet(game, x, y, true);
+	// 	game.add.existing(bullet);
+	// },
 };

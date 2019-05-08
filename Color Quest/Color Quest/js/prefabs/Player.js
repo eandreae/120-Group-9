@@ -1,4 +1,5 @@
 var platforms;
+var direction = true; // true (facing right), false (facing left)
 
 // objects: The things the player can collide with
 // red: True if the player has collected red
@@ -23,6 +24,7 @@ function Player(game, objects, red, yellow, blue) {
    this.body.gravity.y = 300;
    //this.body.angularVelocity = game.rnd.integerInRange(-180,180);
 }
+
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor (Player)
 Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
@@ -43,11 +45,13 @@ Player.prototype.update = function() {
    // Moving Left
    if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
       this.body.velocity.x = -200;
+      direction = false;
    }
 
    // Moving Right
    if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
       this.body.velocity.x = 200;
+      direction = true;
    }
 
    // Player can jump only if they're touching the Ground
@@ -55,4 +59,8 @@ Player.prototype.update = function() {
       this.body.velocity.y = -225;
    }
 
+   if (game.input.keyboard.justPressed(Phaser.Keyboard.X)) {
+      var bullet = new Bullet(game, this.x, this.y, direction);
+      game.add.existing(bullet);
+   }
 }
