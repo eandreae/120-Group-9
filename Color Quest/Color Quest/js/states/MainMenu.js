@@ -8,6 +8,11 @@ MainMenu.prototype = {
    create: function() {
       console.log('MainMenu: create');
 
+      // Background
+      game.stage.backgroundColor = "#0c4196";
+
+      game.add.text(game.world.centerX - 200, game.world.centerY, "Press [SPACE] to go to tutorial")
+
    },
 
    update: function() {
