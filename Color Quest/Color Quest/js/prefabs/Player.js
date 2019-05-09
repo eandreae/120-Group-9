@@ -2,6 +2,7 @@ var platforms;
 var direction = 1; // 1 (facing right), -1 (facing left)
 var y = false;
 var jumps = 1;
+var dash = 0;
 
 // objects: The things the player can collide with
 // red: True if the player has collected red
@@ -11,7 +12,7 @@ var jumps = 1;
 function Player(game, objects, red, yellow, blue) {
    platforms = objects;
    if (blue) jumps = 2;
-   y = yellow;
+   if (yellow) dash = 1;
 
    // call to Phaser.Sprite
    // new Sprite(game, x, y, key, frame)
@@ -32,12 +33,15 @@ Player.prototype.constructor = Player;
 // x to shoot
 // c to dash
 var tempJumps = 0;
+var tempDash = 0;
 Player.prototype.update = function() {
 
    // If player is colliding with a platform
    var hitPlatform = game.physics.arcade.collide(this, platforms);
 
    if (this.body.touching.down && hitPlatform) tempJumps = jumps;
+
+   if (this.body.touching.down && hitPlatform) tempDash = dash;
 
    // Reset player velocity
    this.body.velocity.x = 0;
@@ -57,9 +61,7 @@ Player.prototype.update = function() {
    // Player can jump only if they're touching the Ground
    if (game.input.keyboard.justPressed(Phaser.Keyboard.Z) && tempJumps != 0) {
       this.body.velocity.y = -250;
-      tempJumps--;
-      // console.log(tempJumps);
-      // console.log('-----');
+      tempJumps--
    }
 
    // Player shoots a bullet for each key press
@@ -68,7 +70,8 @@ Player.prototype.update = function() {
       game.add.existing(bullet);
    }
 
-   if (game.input.keyboard.justPressed(Phaser.Keyboard.C) && y) {
+   if (game.input.keyboard.justPressed(Phaser.Keyboard.C) && tempDash != 0) {
       this.x += 150 * direction;
+      tempDash--;
    }
 }

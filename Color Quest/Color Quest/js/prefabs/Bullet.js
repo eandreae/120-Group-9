@@ -14,9 +14,6 @@ function Bullet(game, x, y, dir, scale, speed) {
 
    game.physics.enable(this);
 
-   // if (direction) xDir = 1;     // Moving right
-   // else xDir = -1;              // Moving left
-
    // Sets the velocities of the bullet, depending on which side they spawned from
    this.body.velocity.x = speed * dir;
    //this.body.velocity.y = 0;
@@ -29,16 +26,13 @@ Bullet.prototype.constructor = Bullet;
 
 Bullet.prototype.update = function() {
    // Destroys the bullet if it goes off screen
-   if (this.x < -50)
-   {
-      this.kill();
-      this.x = 0;
-      //console.log("bullet destroyed on left");
-   }
-   else if (this.x > game.world.width + 100)
-   {
-      this.kill();
-      this.x = 0;
+   if (this.x < -50) {
+      this.destroy();
+      //this.x = 0;
+      console.log("bullet destroyed on left");
+   } else if (this.x > game.world.width + 100) {
+      this.destroy();
+      //this.x = 0;
       console.log("bullet destroyed on right");
    }
 }
