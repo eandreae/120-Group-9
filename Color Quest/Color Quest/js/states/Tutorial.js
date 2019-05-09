@@ -49,7 +49,7 @@ Tutorial.prototype = {
       game.physics.arcade.enable(this.blue);
 
       // Adds the player into the state
-      this.player = new Player(game, this.platforms);
+      this.player = new Player(game, this.platforms, true, true, true);
       game.add.existing(this.player);
 
       // Camera follows player

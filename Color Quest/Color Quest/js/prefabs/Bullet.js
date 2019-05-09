@@ -1,24 +1,24 @@
-var direction;
+//var direction;
 
 // x: x position
 // y: y position
 // d: true (going right) or false (going left)
-function Bullet(game, x, y, d) {
-   direction = d;
+function Bullet(game, x, y, dir, scale, speed) {
+   //direction = dir;
 
    // Inherits Phaser.Sprite and puts the sprite in a position on the screen
    Phaser.Sprite.call(this, game, x, y, 'bullet');
-   this.scale.x = .4;
-   this.scale.y = .4;
+   this.scale.x = scale;
+   this.scale.y = scale;
    //this.anchor.set(0.5);
 
    game.physics.enable(this);
 
-   if (direction) xDir = 1;     // Moving right
-   else xDir = -1;              // Moving left
+   // if (direction) xDir = 1;     // Moving right
+   // else xDir = -1;              // Moving left
 
    // Sets the velocities of the bullet, depending on which side they spawned from
-   this.body.velocity.x = 1000 * xDir;
+   this.body.velocity.x = speed * dir;
    //this.body.velocity.y = 0;
    this.body.immovable = true;
 }

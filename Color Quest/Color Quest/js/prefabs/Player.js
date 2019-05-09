@@ -1,5 +1,7 @@
 var platforms;
-var direction = true; // true (facing right), false (facing left)
+var direction = 1; // 1 (facing right), -1 (facing left)
+var y = false;
+var jumps = 1;
 
 // objects: The things the player can collide with
 // red: True if the player has collected red
@@ -8,6 +10,9 @@ var direction = true; // true (facing right), false (facing left)
 
 function Player(game, objects, red, yellow, blue) {
    platforms = objects;
+   if (blue) jumps = 2;
+   y = yellow;
+
    // call to Phaser.Sprite
    // new Sprite(game, x, y, key, frame)
    Phaser.Sprite.call(this, game, 64, 400, 'player');
@@ -26,10 +31,13 @@ Player.prototype.constructor = Player;
 // z to jump
 // x to shoot
 // c to dash
+var tempJumps = 0;
 Player.prototype.update = function() {
 
    // If player is colliding with a platform
    var hitPlatform = game.physics.arcade.collide(this, platforms);
+
+   if (this.body.touching.down && hitPlatform) tempJumps = jumps;
 
    // Reset player velocity
    this.body.velocity.x = 0;
@@ -37,23 +45,30 @@ Player.prototype.update = function() {
    // Moving Left
    if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
       this.body.velocity.x = -200;
-      direction = false;
+      direction = -1;
    }
 
    // Moving Right
    if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
       this.body.velocity.x = 200;
-      direction = true;
+      direction = 1;
    }
 
    // Player can jump only if they're touching the Ground
-   if (game.input.keyboard.isDown(Phaser.Keyboard.Z) && this.body.touching.down && hitPlatform) {
-      this.body.velocity.y = -225;
+   if (game.input.keyboard.justPressed(Phaser.Keyboard.Z) && tempJumps != 0) {
+      this.body.velocity.y = -250;
+      tempJumps--;
+      // console.log(tempJumps);
+      // console.log('-----');
    }
 
    // Player shoots a bullet for each key press
    if (game.input.keyboard.justPressed(Phaser.Keyboard.X)) {
-      var bullet = new Bullet(game, this.x, this.y, direction);
+      var bullet = new Bullet(game, this.x, this.y, direction, .4, 1500);
       game.add.existing(bullet);
+   }
+
+   if (game.input.keyboard.justPressed(Phaser.Keyboard.C) && y) {
+      this.x += 150 * direction;
    }
 }
