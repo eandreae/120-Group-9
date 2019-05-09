@@ -9,9 +9,10 @@ var dash = 0;
 // yellow: True if the player has collected red
 // blue: True if the player has collected red
 
-function Player(game, objects, red, yellow, blue) {
+function Player(game, objects, red, yellow, blue, green, purple, orange) {
    platforms = objects;
    if (blue) jumps = 2;
+   if (purple) jumps = 3;
    if (yellow) dash = 1;
 
    // call to Phaser.Sprite
