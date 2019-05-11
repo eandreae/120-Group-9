@@ -1,6 +1,6 @@
 var platforms;
 var direction = 1; // 1 (facing right), -1 (facing left)
-var y = false;
+var r = false;
 var jumps = 1;
 var dash = 0;
 
@@ -9,15 +9,16 @@ var dash = 0;
 // yellow: True if the player has collected red
 // blue: True if the player has collected red
 
-function Player(game, objects, red, yellow, blue, green, purple, orange) {
+function Player(game, x, y, objects, red, yellow, blue, green, purple, orange) {
    platforms = objects;
    if (blue) jumps = 2;
    if (purple) jumps = 3;
    if (yellow) dash = 1;
+   r = red;
 
    // call to Phaser.Sprite
    // new Sprite(game, x, y, key, frame)
-   Phaser.Sprite.call(this, game, 64, 400, 'player');
+   Phaser.Sprite.call(this, game, x, y, 'player');
 
    // Gives the player physics
    game.physics.arcade.enable(this);
@@ -66,7 +67,7 @@ Player.prototype.update = function() {
    }
 
    // Player shoots a bullet for each key press
-   if (game.input.keyboard.justPressed(Phaser.Keyboard.X)) {
+   if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && r) {
       var bullet = new Bullet(game, this.x, this.y, direction, .4, 1500);
       game.add.existing(bullet);
    }
