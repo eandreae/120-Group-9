@@ -11,7 +11,7 @@ MainMenu.prototype = {
       // Background
       game.stage.backgroundColor = "#0c4196";
 
-      game.add.text(game.world.centerX - 200, game.world.centerY, "Press [SPACE] to go to tutorial")
+      game.add.text(450, 450, "Press [SPACE] to go to tutorial")
 
    },
 

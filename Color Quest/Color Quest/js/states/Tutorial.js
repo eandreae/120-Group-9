@@ -70,16 +70,19 @@ Tutorial.prototype = {
       this.player = new Player(game, 64, 400, this.platforms, hasRed, hasYellow, hasBlue);
       game.add.existing(this.player);
 
+
       this.enemies = game.add.group();
       this.enemies.enableBody = true;
+      this.shootingEnemies = game.add.group();
+      this.shootingEnemies.enableBody = true;
 
-      var enemy = new Enemy(game, 500, 300);
-      game.add.existing(enemy);
-      this.enemies.add(enemy);
+      var e1 = new Enemy(game, 500, 300, -20);
+      game.add.existing(e1);
+      this.enemies.add(e1);
 
-      enemy = new Enemy(game, 900, 300);
-      game.add.existing(enemy);
-      this.enemies.add(enemy);
+      var e2 = new Enemy(game, 900, 300, 0);
+      game.add.existing(e2);
+      this.shootingEnemies.add(e2);
 
       // Bullet groups
       this.playerBullets = game.add.group();
@@ -96,9 +99,7 @@ Tutorial.prototype = {
 
    update: function() {
       //console.log('Tutorial: update');
-      if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-         game.state.start('GameOver');
-      }
+
       if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.redPortal)) {
          game.state.start('Red');
       }
@@ -117,10 +118,12 @@ Tutorial.prototype = {
       }
 
       game.physics.arcade.collide(this.enemies, this.platforms);
-      if (game.physics.arcade.collide(this.enemies, this.player)) {
-         this.player.destroy();
+      game.physics.arcade.collide(this.shootingEnemies, this.platforms);
+      if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
+         this.playerDies(this.player);
       }
       game.physics.arcade.collide(this.playerBullets, this.enemies, bulletHitsEnemy, null, this)
+      game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this)
       game.physics.arcade.collide(this.enemyBullets, this.player, bulletHitsPlayer, null, this)
 
       this.physics.arcade.overlap(this.player, this.red, collectRed, null, this);
@@ -134,7 +137,7 @@ Tutorial.prototype = {
 
       function bulletHitsPlayer(bullet, player) {
          bullet.destroy();
-         player.destroy();
+         this.playerDies(player);
       }
 
       function collectRed(player, color) {
@@ -151,15 +154,51 @@ Tutorial.prototype = {
          hasBlue = true;
          color.destroy();
       }
+
+      function playerDies(player) {
+
+         bmd = game.add.bitmapData(18, 18);
+         bmd.fill(255, 0, 0, 1);
+
+         deathEmitter = game.add.emitter(player.x, player.y, 200);
+         deathEmitter.makeParticles(bmd);		        // red squares used as particles
+         deathEmitter.gravity = 0;
+         deathEmitter.setScale(.25, .8, .25, .8, 0);
+         deathEmitter.setAlpha(.8, 0, 1800); 	      // .8 to .3 alpha
+   		deathEmitter.setXSpeed(-100,100);			   // horizontal speed range
+   		deathEmitter.setYSpeed(-100,100);			   // vertical speed range
+   		deathEmitter.start(true, 2000, null, 50);	   // (explode, lifespan, freq, quantity)
+
+         player.destroy();
+         game.time.events.add(Phaser.Timer.SECOND * 2, function() { game.state.start('GameOver')});
+      }
    },
 
    enemyGroup: function() {
-      this.enemies.forEach(this.enemyShoot, this, true);
+      this.shootingEnemies.forEach(this.enemyShoot, this, true);
    },
 
    enemyShoot: function(enemy) {
       var bullet = new Bullet(game, enemy.x, enemy.y, -1, .4, 1500);
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
+   },
+
+   playerDies: function(player) {
+
+      bmd = game.add.bitmapData(18, 18);
+      bmd.fill(255, 0, 0, 1);
+
+      deathEmitter = game.add.emitter(player.x, player.y, 200);
+      deathEmitter.makeParticles(bmd);		        // red squares used as particles
+      deathEmitter.gravity = 0;
+      deathEmitter.setScale(.25, .8, .25, .8, 0);
+      deathEmitter.setAlpha(.8, 0, 1800); 	      // .8 to .3 alpha
+      deathEmitter.setXSpeed(-100,100);			   // horizontal speed range
+      deathEmitter.setYSpeed(-100,100);			   // vertical speed range
+      deathEmitter.start(true, 2000, null, 50);	   // (explode, lifespan, freq, quantity)
+
+      player.destroy();
+      game.time.events.add(Phaser.Timer.SECOND * 2, function() { game.state.start('GameOver')});
    }
 };
