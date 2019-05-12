@@ -88,6 +88,10 @@ Tutorial.prototype = {
       // Camera follows player
       game.camera.follow(this.player);
       game.camera.deadzone = new Phaser.Rectangle(325, 0, 50, game.height); // (x,y,width,height)
+
+      timer = game.time.create(false);
+      timer.loop(2000, this.enemyGroup, this);
+      timer.start();
    },
 
    update: function() {
@@ -117,6 +121,7 @@ Tutorial.prototype = {
          this.player.destroy();
       }
       game.physics.arcade.collide(this.playerBullets, this.enemies, bulletHitsEnemy, null, this)
+      game.physics.arcade.collide(this.enemyBullets, this.player, bulletHitsPlayer, null, this)
 
       this.physics.arcade.overlap(this.player, this.red, collectRed, null, this);
       this.physics.arcade.overlap(this.player, this.yellow, collectYellow, null, this);
@@ -125,6 +130,11 @@ Tutorial.prototype = {
       function bulletHitsEnemy(bullet, enemy) {
          bullet.destroy();
          enemy.destroy();
+      }
+
+      function bulletHitsPlayer(bullet, player) {
+         bullet.destroy();
+         player.destroy();
       }
 
       function collectRed(player, color) {
@@ -142,4 +152,14 @@ Tutorial.prototype = {
          color.destroy();
       }
    },
+
+   enemyGroup: function() {
+      this.enemies.forEach(this.enemyShoot, this, true);
+   },
+
+   enemyShoot: function(enemy) {
+      var bullet = new Bullet(game, enemy.x, enemy.y, -1, .4, 1500);
+      game.add.existing(bullet);
+      this.enemyBullets.add(bullet);
+   }
 };
