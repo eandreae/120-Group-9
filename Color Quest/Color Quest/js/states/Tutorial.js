@@ -70,16 +70,19 @@ Tutorial.prototype = {
       this.player = new Player(game, 64, 400, this.platforms, hasRed, hasYellow, hasBlue);
       game.add.existing(this.player);
 
+
       this.enemies = game.add.group();
       this.enemies.enableBody = true;
+      this.shootingEnemies = game.add.group();
+      this.shootingEnemies.enableBody = true;
 
-      var enemy = new Enemy(game, 500, 300);
-      game.add.existing(enemy);
-      this.enemies.add(enemy);
+      var e1 = new Enemy(game, 500, 300, -20);
+      game.add.existing(e1);
+      this.enemies.add(e1);
 
-      enemy = new Enemy(game, 900, 300);
-      game.add.existing(enemy);
-      this.enemies.add(enemy);
+      var e2 = new Enemy(game, 900, 300, 0);
+      game.add.existing(e2);
+      this.shootingEnemies.add(e2);
 
       // Bullet groups
       this.playerBullets = game.add.group();
@@ -117,10 +120,12 @@ Tutorial.prototype = {
       }
 
       game.physics.arcade.collide(this.enemies, this.platforms);
+      game.physics.arcade.collide(this.shootingEnemies, this.platforms);
       if (game.physics.arcade.collide(this.enemies, this.player)) {
          this.player.destroy();
       }
       game.physics.arcade.collide(this.playerBullets, this.enemies, bulletHitsEnemy, null, this)
+      game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this)
       game.physics.arcade.collide(this.enemyBullets, this.player, bulletHitsPlayer, null, this)
 
       this.physics.arcade.overlap(this.player, this.red, collectRed, null, this);
@@ -154,7 +159,7 @@ Tutorial.prototype = {
    },
 
    enemyGroup: function() {
-      this.enemies.forEach(this.enemyShoot, this, true);
+      this.shootingEnemies.forEach(this.enemyShoot, this, true);
    },
 
    enemyShoot: function(enemy) {
