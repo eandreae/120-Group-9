@@ -10,7 +10,7 @@ Purple.prototype = {
    preload: function() {
       console.log('Purple: preload');
 
-      game.load.tilemap('layout', 'assets/TileMaps/RedMap.json', null, Phaser.Tilemap.TILED_JSON);
+      game.load.tilemap('layout', 'assets/TileMaps/PurpleMap.json', null, Phaser.Tilemap.TILED_JSON);
       game.load.spritesheet('tilesheet', 'assets/TileSheets/tilesheet_1.png', 32, 32);
    },
 
