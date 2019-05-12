@@ -36,7 +36,7 @@ Green.prototype = {
       this.mapLayer.resizeWorld();
 
       // Adds the player into the state
-      this.player = new Player(game, 64, 400, this.mapLayer, hasRed, hasYellow, hasBlue);
+      this.player = new Player(game, 64, 400, this.mapLayer);
       game.add.existing(this.player);
 
       // Bullet groups
@@ -44,7 +44,7 @@ Green.prototype = {
 
       // Camera follows player
       game.camera.follow(this.player);
-      game.camera.deadzone = new Phaser.Rectangle(325, 0, 50, game.height); // (x,y,width,height)
+      game.camera.deadzone = new Phaser.Rectangle(325, 200, 50, 300); // (x,y,width,height)
    },
 
    update: function() {

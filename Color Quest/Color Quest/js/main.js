@@ -34,6 +34,8 @@ window.onload = function() {
    game.state.add('Yellow', Yellow);
    game.state.add('Blue', Blue);
    game.state.add('Purple', Purple);
+   game.state.add('Orange', Orange);
+   game.state.add('Green', Green);
    game.state.add('GameOver', GameOver);
    game.state.start('Load');
 }
