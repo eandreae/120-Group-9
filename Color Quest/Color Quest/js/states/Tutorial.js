@@ -120,7 +120,7 @@ Tutorial.prototype = {
       game.physics.arcade.collide(this.enemies, this.platforms);
       game.physics.arcade.collide(this.shootingEnemies, this.platforms);
       if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
-         this.playerDies(this.player);
+         playerDies(game, this.player);
       }
       game.physics.arcade.collide(this.playerBullets, this.enemies, bulletHitsEnemy, null, this)
       game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this)
@@ -137,7 +137,7 @@ Tutorial.prototype = {
 
       function bulletHitsPlayer(bullet, player) {
          bullet.destroy();
-         this.playerDies(player);
+         playerDies(game, player);
       }
 
       function collectRed(player, color) {
@@ -154,24 +154,6 @@ Tutorial.prototype = {
          hasBlue = true;
          color.destroy();
       }
-
-      function playerDies(player) {
-
-         bmd = game.add.bitmapData(18, 18);
-         bmd.fill(255, 0, 0, 1);
-
-         deathEmitter = game.add.emitter(player.x, player.y, 200);
-         deathEmitter.makeParticles(bmd);		        // red squares used as particles
-         deathEmitter.gravity = 0;
-         deathEmitter.setScale(.25, .8, .25, .8, 0);
-         deathEmitter.setAlpha(.8, 0, 1800); 	      // .8 to .3 alpha
-   		deathEmitter.setXSpeed(-100,100);			   // horizontal speed range
-   		deathEmitter.setYSpeed(-100,100);			   // vertical speed range
-   		deathEmitter.start(true, 2000, null, 50);	   // (explode, lifespan, freq, quantity)
-
-         player.destroy();
-         game.time.events.add(Phaser.Timer.SECOND * 2, function() { game.state.start('GameOver')});
-      }
    },
 
    enemyGroup: function() {
@@ -183,22 +165,4 @@ Tutorial.prototype = {
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
    },
-
-   playerDies: function(player) {
-
-      bmd = game.add.bitmapData(18, 18);
-      bmd.fill(255, 0, 0, 1);
-
-      deathEmitter = game.add.emitter(player.x, player.y, 200);
-      deathEmitter.makeParticles(bmd);		        // red squares used as particles
-      deathEmitter.gravity = 0;
-      deathEmitter.setScale(.25, .8, .25, .8, 0);
-      deathEmitter.setAlpha(.8, 0, 1800); 	      // .8 to .3 alpha
-      deathEmitter.setXSpeed(-100,100);			   // horizontal speed range
-      deathEmitter.setYSpeed(-100,100);			   // vertical speed range
-      deathEmitter.start(true, 2000, null, 50);	   // (explode, lifespan, freq, quantity)
-
-      player.destroy();
-      game.time.events.add(Phaser.Timer.SECOND * 2, function() { game.state.start('GameOver')});
-   }
 };
