@@ -15,6 +15,9 @@ Tutorial.prototype = {
    create: function() {
       console.log('Tutorial: create');
 
+      song = game.add.audio('song');
+      song.play('', 0, 1, true);
+
       // Background
       game.stage.backgroundColor = backgroundColor;
 
@@ -108,7 +111,7 @@ Tutorial.prototype = {
       if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.bluePortal)) {
          game.state.start('Blue');
       }
-      
+
       if(game.input.keyboard.justPressed(Phaser.Keyboard.P)){
           game.state.start('Purple');
       }

@@ -8,6 +8,7 @@ Load.prototype = {
 		game.load.image('bullet', 'assets/img/bullet.png');
 
 		game.load.audio('jump', 'assets/audio/Jump.mp3');
+		game.load.audio('song', 'assets/audio/Delicate.mp3');
 	},
 	create: function() {
 		console.log('Load: create');
@@ -19,7 +20,7 @@ Load.prototype = {
       //console.log('Load: update');
       // GameOver logic
       if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
-          game.state.start('Purple');
+          game.state.start('Tutorial');
       }
    }
 };
