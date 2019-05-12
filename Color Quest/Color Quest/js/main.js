@@ -15,6 +15,7 @@ var hasGreen = false;
 var hasPurple = false;
 var hasOrange = false;
 var direction = 1; // 1 (facing right), -1 (facing left)
+var backgroundColor = "#D3D3D3" // light gray.
 
 // wait for browser to load before creating Phaser game
 window.onload = function() {

@@ -14,7 +14,12 @@ function Player(game, x, y, objects) {
 
    // call to Phaser.Sprite
    // new Sprite(game, x, y, key, frame)
-   Phaser.Sprite.call(this, game, x, y, 'player');
+   Phaser.Sprite.call(this, game, x, y, 'atlas', 'player_walk05');
+
+   // Add the animations to the player.
+   this.animations.add('idle', ['player_walk05'], 10, true);
+   this.animations.add('right', ['player_walk01', 'player_walk02', 'player_walk03', 'player_walk04'], 10, true);
+   this.animations.add('left', ['player_walk06', 'player_walk07', 'player_walk08', 'player_walk09'], 10, true);
 
    // Gives the player physics
    game.physics.arcade.enable(this);
@@ -52,13 +57,19 @@ Player.prototype.update = function() {
    // Moving Left
    if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
       this.body.velocity.x = -200;
+      this.animations.play('left');
       direction = -1;
-   }
+  }
 
    // Moving Right
-   if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+   else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
       this.body.velocity.x = 200;
+      this.animations.play('right');
       direction = 1;
+   }
+
+   else {
+       this.animations.play('idle');
    }
 
    // Player can jump only if they're touching the Ground

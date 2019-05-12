@@ -16,7 +16,7 @@ Tutorial.prototype = {
       console.log('Tutorial: create');
 
       // Background
-      game.stage.backgroundColor = "#000000";
+      game.stage.backgroundColor = backgroundColor;
 
       // Setting the world bounds
       game.world.setBounds(0, 0, 1800, 600);
@@ -33,37 +33,37 @@ Tutorial.prototype = {
       // Red square
       bmd = game.add.bitmapData(100, 100);
       bmd.fill(255, 0, 0, 1);
-      this.redPortal = game.add.sprite(500, 450, bmd);
+      this.redPortal = game.add.sprite(500, 450, 'atlas', 'red_color');
       game.physics.arcade.enable(this.redPortal);
 
       // Yellow square
       bmd = game.add.bitmapData(100, 100);
       bmd.fill(255, 255, 0, 1);
-      this.yellowPortal = game.add.sprite(800, 450, bmd);
+      this.yellowPortal = game.add.sprite(800, 450, 'atlas', 'yellow_color');
       game.physics.arcade.enable(this.yellowPortal);
 
       // Blue square
       bmd = game.add.bitmapData(100, 100);
       bmd.fill(0, 0, 255, 1);
-      this.bluePortal = game.add.sprite(1100, 450, bmd);
+      this.bluePortal = game.add.sprite(1100, 450, 'atlas', 'blue_color');
       game.physics.arcade.enable(this.bluePortal);
 
       // Red collectable
       bmd = game.add.bitmapData(75, 75);
       bmd.fill(255, 0, 0, 1);
-      this.red = game.add.sprite(1200, 450, bmd);
+      this.red = game.add.sprite(1200, 450, 'atlas', 'red_color');
       game.physics.arcade.enable(this.red);
 
       // Yellow collectable
       bmd = game.add.bitmapData(75, 75);
       bmd.fill(255, 255, 0, 1);
-      this.yellow = game.add.sprite(1400, 450, bmd);
+      this.yellow = game.add.sprite(1400, 450, 'atlas', 'yellow_color');
       game.physics.arcade.enable(this.yellow);
 
       // Blue collectable
       bmd = game.add.bitmapData(75, 75);
       bmd.fill(0, 0, 255, 1);
-      this.blue = game.add.sprite(400, 450, bmd);
+      this.blue = game.add.sprite(400, 450, 'atlas', 'blue_color');
       game.physics.arcade.enable(this.blue);
 
       // Adds the player into the state

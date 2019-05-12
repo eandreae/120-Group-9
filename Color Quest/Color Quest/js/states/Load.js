@@ -3,8 +3,8 @@ var Load = function(game) {};
 Load.prototype = {
 	preload: function() {
 		game.load.path = 'assets/img/';
+        game.load.atlas('atlas', 'atlas.png', 'atlas.json');
 		game.load.image('ground', 'platform.png');
-		game.load.image('player', 'diamond.png');
 		game.load.image('bullet', 'bullet.png');
 
 		game.load.path = 'assets/audio/';
