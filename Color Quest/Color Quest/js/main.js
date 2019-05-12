@@ -8,6 +8,12 @@
 
 // define globals
 var game;
+var hasRed = false;
+var hasYellow = false;
+var hasBlue = false;
+var hasGreen = false;
+var hasPurple = false;
+var hasOrange = false;
 
 // wait for browser to load before creating Phaser game
 window.onload = function() {

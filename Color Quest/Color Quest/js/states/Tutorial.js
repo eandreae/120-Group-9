@@ -5,9 +5,6 @@ Tutorial.prototype = {
 
    // Variables used in Tutorial
    init: function() {
-      this.hasRed = false;
-      this.hasYellow = false;
-      this.hasBlue = false;
 
    },
 
@@ -19,7 +16,7 @@ Tutorial.prototype = {
       console.log('Tutorial: create');
 
       // Background
-      game.stage.backgroundColor = "#0c4196";
+      game.stage.backgroundColor = "#000000";
 
       // Setting the world bounds
       game.world.setBounds(0, 0, 1800, 600);
@@ -39,26 +36,38 @@ Tutorial.prototype = {
       this.redPortal = game.add.sprite(500, 450, bmd);
       game.physics.arcade.enable(this.redPortal);
 
-      // Red square
+      // Yellow square
       bmd = game.add.bitmapData(100, 100);
       bmd.fill(255, 255, 0, 1);
       this.yellowPortal = game.add.sprite(800, 450, bmd);
       game.physics.arcade.enable(this.yellowPortal);
 
-      // Red square
+      // Blue square
       bmd = game.add.bitmapData(100, 100);
       bmd.fill(0, 0, 255, 1);
       this.bluePortal = game.add.sprite(1100, 450, bmd);
       game.physics.arcade.enable(this.bluePortal);
 
-      var bmd = game.add.bitmapData(75, 75);
-      //bmd.circle(150, 150, 150, 'rgb(255,0,0)');   // (x, y, radius)
+      // Red collectable
+      bmd = game.add.bitmapData(75, 75);
       bmd.fill(255, 0, 0, 1);
-      this.red = game.add.sprite(100, 450, bmd);
+      this.red = game.add.sprite(1200, 450, bmd);
       game.physics.arcade.enable(this.red);
 
+      // Yellow collectable
+      bmd = game.add.bitmapData(75, 75);
+      bmd.fill(255, 255, 0, 1);
+      this.yellow = game.add.sprite(1400, 450, bmd);
+      game.physics.arcade.enable(this.yellow);
+
+      // Blue collectable
+      bmd = game.add.bitmapData(75, 75);
+      bmd.fill(0, 0, 255, 1);
+      this.blue = game.add.sprite(400, 450, bmd);
+      game.physics.arcade.enable(this.blue);
+
       // Adds the player into the state
-      this.player = new Player(game, 64, 400, this.platforms, this.hasRed, this.hasYellow, this.hasBlue);
+      this.player = new Player(game, 64, 400, this.platforms, hasRed, hasYellow, hasBlue);
       game.add.existing(this.player);
 
       // Camera follows player
@@ -80,19 +89,24 @@ Tutorial.prototype = {
       if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.bluePortal)) {
          game.state.start('Blue');
       }
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.red)) {
-         this.physics.arcade.overlap(this.player, this.red, collectRed, null, this);
-      }
+
+      this.physics.arcade.overlap(this.player, this.red, collectRed, null, this);
+      this.physics.arcade.overlap(this.player, this.yellow, collectYellow, null, this);
+      this.physics.arcade.overlap(this.player, this.blue, collectBlue, null, this);
 
       function collectRed(player, color) {
-         this.hasRed = true;
+         hasRed = true;
          color.destroy();
-         this.respawnPlayer(player.x, player.y);
+      }
+
+      function collectYellow(player, color) {
+         hasYellow = true;
+         color.destroy();
+      }
+
+      function collectBlue(player, color) {
+         hasBlue = true;
+         color.destroy();
       }
    },
-
-   respawnPlayer: function(x, y) {
-      //this.player.destroy();
-      this.player = new Player(game, x, y, this.platforms, this.hasRed, this.hasYellow, this.hasBlue);
-   }
 };
