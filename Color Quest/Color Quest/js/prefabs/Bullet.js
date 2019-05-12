@@ -29,10 +29,10 @@ Bullet.prototype.update = function() {
    if (this.x < -50) {
       this.destroy();
       //this.x = 0;
-      console.log("bullet destroyed on left");
+      //console.log("bullet destroyed on left");
    } else if (this.x > game.world.width + 100) {
       this.destroy();
       //this.x = 0;
-      console.log("bullet destroyed on right");
+      //console.log("bullet destroyed on right");
    }
 }
