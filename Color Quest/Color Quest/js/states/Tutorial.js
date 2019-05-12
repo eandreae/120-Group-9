@@ -92,7 +92,7 @@ Tutorial.prototype = {
 
       // Camera follows player
       game.camera.follow(this.player);
-      game.camera.deadzone = new Phaser.Rectangle(325, 0, 50, game.height); // (x,y,width,height)
+      game.camera.deadzone = new Phaser.Rectangle(325, 200, 50, 300); // (x,y,width,height)
 
       timer = game.time.create(false);
       timer.loop(2000, this.enemyGroup, this);
