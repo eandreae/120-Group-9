@@ -6,6 +6,9 @@ Load.prototype = {
 		game.load.image('ground', 'platform.png');
 		game.load.image('player', 'diamond.png');
 		game.load.image('bullet', 'bullet.png');
+
+		game.load.path = 'assets/audio/';
+		game.load.audio('jump', 'Jump.mp3');
 	},
 	create: function() {
 		console.log('Load: create');

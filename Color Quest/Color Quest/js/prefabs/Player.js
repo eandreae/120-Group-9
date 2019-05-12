@@ -1,6 +1,7 @@
 var platforms;
 var jumps = 0;
 var dash = 0;
+var jumpSFX;
 
 // objects: The things the player can collide with
 // red: True if the player has collected red
@@ -9,6 +10,7 @@ var dash = 0;
 
 function Player(game, x, y, objects) {
    platforms = objects;
+   jumpSFX = game.add.audio('jump');
 
    // call to Phaser.Sprite
    // new Sprite(game, x, y, key, frame)
@@ -61,6 +63,7 @@ Player.prototype.update = function() {
 
    // Player can jump only if they're touching the Ground
    if (game.input.keyboard.justPressed(Phaser.Keyboard.Z) && jumps != 0) {
+      jumpSFX.play('', 0, 1, false);
       this.body.velocity.y = -250;
       jumps--;
    }
