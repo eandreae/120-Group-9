@@ -16,14 +16,9 @@ Purple.prototype = {
 
    create: function() {
       console.log('Purple: create');
-      game.physics.startSystem(Phaser.Physics.ARCADE);
-      //game.physics.arcade.gravity.y = this.GRAVITY;
-
-      // set 32-pixel buffer around tiles to avoid collision tunneling
-      game.physics.arcade.TILE_BIAS = 32;
 
       // Background
-      game.stage.backgroundColor = "#D3D3D3";
+      game.stage.backgroundColor = backgroundColor;
 
       // Setting the world bounds
       game.world.setBounds(0, 0, 1024, 1024);
@@ -34,6 +29,9 @@ Purple.prototype = {
       this.map.setCollisionByExclusion([]);
       this.mapLayer = this.map.createLayer('Tile Layer 1');
       this.mapLayer.resizeWorld();
+
+      // set 32-pixel buffer around tiles to avoid collision tunneling
+      game.physics.arcade.TILE_BIAS = 32;
 
       // Adds the player into the state
       this.player = new Player(game, 64, 400, this.mapLayer);

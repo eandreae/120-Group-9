@@ -9,43 +9,30 @@ Blue.prototype = {
 
    preload: function() {
       console.log('Blue: preload');
+
+      game.load.tilemap('layout', 'assets/TileMaps/BlueMap.json', null, Phaser.Tilemap.TILED_JSON);
+      game.load.spritesheet('tilesheet', 'assets/TileSheets/tilesheet_1.png', 32, 32);
    },
 
    create: function() {
       console.log('Blue: create');
+
+
       // Background
       game.stage.backgroundColor = backgroundColor;
 
       // Setting the world bounds
-      game.world.setBounds(0, 0, 1800, 600);
+      game.world.setBounds(0, 0, 1024, 1024);
 
-      // Group contains the ground and platforms
-      this.platforms = game.add.group();
-      this.platforms.enableBody = true; // Enables physics for platform objects
+      // Create new tilemap
+      this.map = game.add.tilemap('layout');
+      this.map.addTilesetImage('ColorQuestTileSheet_1', 'tilesheet');
+      this.map.setCollisionByExclusion([]);
+      this.mapLayer = this.map.createLayer('Tile Layer 1');
+      this.mapLayer.resizeWorld();
 
-      // Ground
-      this.ground = this.platforms.create(0, game.height - 64, 'ground');
-      this.ground.scale.setTo(30, 2);
-      this.ground.body.immovable = true; // Prevents it from moving
-
-      // Red square
-      bmd = game.add.bitmapData(100, 100);
-      bmd.fill(255, 0, 0, 1);
-      this.redPortal = game.add.sprite(500, 450, bmd);
-      game.physics.arcade.enable(this.redPortal);
-
-      // Yellow square
-      bmd = game.add.bitmapData(100, 100);
-      bmd.fill(255, 255, 0, 1);
-      this.yellowPortal = game.add.sprite(800, 450, bmd);
-      game.physics.arcade.enable(this.yellowPortal);
-
-      // Blue square
-      bmd = game.add.bitmapData(100, 100);
-      bmd.fill(0, 0, 255, 1);
-      this.bluePortal = game.add.sprite(1100, 450, bmd);
-      game.physics.arcade.enable(this.bluePortal);
-
+      // set 32-pixel buffer around tiles to avoid collision tunneling
+      game.physics.arcade.TILE_BIAS = 32;
 
       // Adds the player into the state
       this.player = new Player(game, 64, 400, this.platforms, hasRed, hasYellow, hasBlue);
