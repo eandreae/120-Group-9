@@ -70,7 +70,6 @@ Tutorial.prototype = {
       this.player = new Player(game, 64, 400, this.platforms, hasRed, hasYellow, hasBlue);
       game.add.existing(this.player);
 
-
       this.enemies = game.add.group();
       this.enemies.enableBody = true;
       this.shootingEnemies = game.add.group();

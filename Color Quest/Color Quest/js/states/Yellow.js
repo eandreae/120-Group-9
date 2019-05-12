@@ -64,13 +64,13 @@ Yellow.prototype = {
       if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
          game.state.start('GameOver');
       }
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.red)) {
+      if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.redPortal)) {
          game.state.start('Red');
       }
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.yellow)) {
+      if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.yellowPortal)) {
          game.state.start('Yellow');
       }
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.blue)) {
+      if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.bluePortal)) {
          game.state.start('Blue');
       }
 
