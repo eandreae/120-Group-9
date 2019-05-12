@@ -33,6 +33,7 @@ window.onload = function() {
    game.state.add('Red', Red);
    game.state.add('Yellow', Yellow);
    game.state.add('Blue', Blue);
+   game.state.add('Purple', Purple);
    game.state.add('GameOver', GameOver);
    game.state.start('Load');
 }

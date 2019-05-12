@@ -9,51 +9,36 @@ Purple.prototype = {
 
    preload: function() {
       console.log('Purple: preload');
-      // load tilesheet sprite
-      game.load.spritesheet('tilesheet', 'assets/TileSheets/tilesheet_1.png', 32, 32);
       // load tilemap data
       game.load.tilemap('layout', 'assets/TileMaps/PurpleMap.json', null, Phaser.Tilemap.TILED_JSON);
+      // load tilesheet sprite
+      game.load.spritesheet('tilesheet', 'assets/TileSheets/tilesheet_1.png', 32, 32);
       
    },
 
    create: function() {
       console.log('Purple: create');
+      game.physics.startSystem(Phaser.Physics.ARCADE);
+      game.physics.arcade.gravity.y = this.GRAVITY;
+      
+      // set 32-pixel buffer around tiles to avoid collision tunneling
+      game.physics.arcade.TILE_BIAS = 32;
+      
       // Background
-      game.stage.backgroundColor = "#";
+      game.stage.backgroundColor = "#D3D3D3";
 
       // Setting the world bounds
-      game.world.setBounds(0, 0, 1800, 600);
+      game.world.setBounds(0, 0, 1024, 1024);
 
-      // Group contains the ground and platforms
-      this.platforms = game.add.group();
-      this.platforms.enableBody = true; // Enables physics for platform objects
-
-      // Ground
-      this.ground = this.platforms.create(0, game.height - 64, 'ground');
-      this.ground.scale.setTo(30, 2);
-      this.ground.body.immovable = true; // Prevents it from moving
-
-      // Red square
-      bmd = game.add.bitmapData(100, 100);
-      bmd.fill(255, 0, 0, 1);
-      this.redPortal = game.add.sprite(500, 450, bmd);
-      game.physics.arcade.enable(this.redPortal);
-
-      // Yellow square
-      bmd = game.add.bitmapData(100, 100);
-      bmd.fill(255, 255, 0, 1);
-      this.yellowPortal = game.add.sprite(800, 450, bmd);
-      game.physics.arcade.enable(this.yellowPortal);
-
-      // Blue square
-      bmd = game.add.bitmapData(100, 100);
-      bmd.fill(0, 0, 255, 1);
-      this.bluePortal = game.add.sprite(1100, 450, bmd);
-      game.physics.arcade.enable(this.bluePortal);
-
+      // Create new tilemap
+      this.map = game.add.tilemap('layout');
+      this.map.addTilesetImage('ColorQuestTileSheet_1', 'tilesheet');
+      this.map.setCollisionByExclusion([]);
+      this.mapLayer = this.map.createLayer('Tile Layer 1');
+      this.mapLayer.resizeWorld();
 
       // Adds the player into the state
-      this.player = new Player(game, 64, 400, this.platforms, hasRed, hasYellow, hasBlue);
+      this.player = new Player(game, 64, 400, this.mapLayer, hasRed, hasYellow, hasBlue);
       game.add.existing(this.player);
 
       // Bullet groups
@@ -69,16 +54,6 @@ Purple.prototype = {
       if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
          game.state.start('GameOver');
       }
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.redPortal)) {
-         game.state.start('Red');
-      }
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.yellowPortal)) {
-         game.state.start('Yellow');
-      }
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.bluePortal)) {
-         game.state.start('Blue');
-      }
-
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, .4, 1500);
