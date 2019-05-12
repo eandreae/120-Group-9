@@ -17,9 +17,6 @@ Purple.prototype = {
    create: function() {
       console.log('Purple: create');
 
-      // set 32-pixel buffer around tiles to avoid collision tunneling
-      game.physics.arcade.TILE_BIAS = 32;
-
       // Background
       game.stage.backgroundColor = backgroundColor;
 
@@ -32,6 +29,9 @@ Purple.prototype = {
       this.map.setCollisionByExclusion([]);
       this.mapLayer = this.map.createLayer('Tile Layer 1');
       this.mapLayer.resizeWorld();
+
+      // set 32-pixel buffer around tiles to avoid collision tunneling
+      game.physics.arcade.TILE_BIAS = 32;
 
       // set 32-pixel buffer around tiles to avoid collision tunneling
       game.physics.arcade.TILE_BIAS = 32;
