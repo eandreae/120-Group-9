@@ -1,27 +1,27 @@
-// Purple color state
-var Purple = function(game) {};
-Purple.prototype = {
+// Orange color state
+var Orange = function(game) {};
+Orange.prototype = {
 
-   // Variables used in Purple
+   // Variables used in Orange
    init: function() {
 
    },
 
    preload: function() {
-      console.log('Purple: preload');
+      console.log('Orange: preload');
 
-      game.load.tilemap('layout', 'assets/TileMaps/PurpleMap.json', null, Phaser.Tilemap.TILED_JSON);
+      game.load.tilemap('layout', 'assets/TileMaps/OrangeMap.json', null, Phaser.Tilemap.TILED_JSON);
       game.load.spritesheet('tilesheet', 'assets/TileSheets/tilesheet_1.png', 32, 32);
    },
 
    create: function() {
-      console.log('Purple: create');
+      console.log('Orange: create');
 
       // set 32-pixel buffer around tiles to avoid collision tunneling
       game.physics.arcade.TILE_BIAS = 32;
 
       // Background
-      game.stage.backgroundColor = backgroundColor;
+      game.stage.backgroundColor = "#D3D3D3";
 
       // Setting the world bounds
       game.world.setBounds(0, 0, 1024, 1024);
@@ -32,9 +32,6 @@ Purple.prototype = {
       this.map.setCollisionByExclusion([]);
       this.mapLayer = this.map.createLayer('Tile Layer 1');
       this.mapLayer.resizeWorld();
-
-      // set 32-pixel buffer around tiles to avoid collision tunneling
-      game.physics.arcade.TILE_BIAS = 32;
 
       // Adds the player into the state
       this.player = new Player(game, 64, 400, this.mapLayer);
