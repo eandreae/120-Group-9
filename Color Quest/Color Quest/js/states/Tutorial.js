@@ -108,6 +108,10 @@ Tutorial.prototype = {
       if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.bluePortal)) {
          game.state.start('Blue');
       }
+      
+      if(game.input.keyboard.justPressed(Phaser.Keyboard.P)){
+          game.state.start('Purple');
+      }
 
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
