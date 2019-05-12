@@ -70,6 +70,21 @@ Tutorial.prototype = {
       this.player = new Player(game, 64, 400, this.platforms, hasRed, hasYellow, hasBlue);
       game.add.existing(this.player);
 
+      this.enemies = game.add.group();
+      this.enemies.enableBody = true;
+
+      var enemy = new Enemy(game, 500, 300);
+      game.add.existing(enemy);
+      this.enemies.add(enemy);
+
+      enemy = new Enemy(game, 900, 300);
+      game.add.existing(enemy);
+      this.enemies.add(enemy);
+
+      // Bullet groups
+      this.playerBullets = game.add.group();
+      this.enemyBullets = game.add.group();
+
       // Camera follows player
       game.camera.follow(this.player);
       game.camera.deadzone = new Phaser.Rectangle(325, 0, 50, game.height); // (x,y,width,height)
@@ -90,9 +105,27 @@ Tutorial.prototype = {
          game.state.start('Blue');
       }
 
+      // Player shoots a bullet for each key press
+      if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
+         var bullet = new Bullet(game, this.player.x, this.player.y, direction, .4, 1500);
+         game.add.existing(bullet);
+         this.playerBullets.add(bullet);
+      }
+
+      game.physics.arcade.collide(this.enemies, this.platforms);
+      if (game.physics.arcade.collide(this.enemies, this.player)) {
+         this.player.destroy();
+      }
+      game.physics.arcade.collide(this.playerBullets, this.enemies, bulletHitsEnemy, null, this)
+
       this.physics.arcade.overlap(this.player, this.red, collectRed, null, this);
       this.physics.arcade.overlap(this.player, this.yellow, collectYellow, null, this);
       this.physics.arcade.overlap(this.player, this.blue, collectBlue, null, this);
+
+      function bulletHitsEnemy(bullet, enemy) {
+         bullet.destroy();
+         enemy.destroy();
+      }
 
       function collectRed(player, color) {
          hasRed = true;

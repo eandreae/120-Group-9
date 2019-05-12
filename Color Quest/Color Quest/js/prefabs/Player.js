@@ -1,5 +1,4 @@
 var platforms;
-var direction = 1; // 1 (facing right), -1 (facing left)
 var jumps = 0;
 var dash = 0;
 
@@ -64,12 +63,6 @@ Player.prototype.update = function() {
    if (game.input.keyboard.justPressed(Phaser.Keyboard.Z) && jumps != 0) {
       this.body.velocity.y = -250;
       jumps--;
-   }
-
-   // Player shoots a bullet for each key press
-   if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
-      var bullet = new Bullet(game, this.x, this.y, direction, .4, 1500);
-      game.add.existing(bullet);
    }
 
    if (game.input.keyboard.justPressed(Phaser.Keyboard.C) && dash != 0) {
