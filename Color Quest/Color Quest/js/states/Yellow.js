@@ -14,7 +14,7 @@ Yellow.prototype = {
    create: function() {
       console.log('Yellow: create');
       // Background
-      game.stage.backgroundColor = "#000000";
+      game.stage.backgroundColor = backgroundColor;
 
       // Setting the world bounds
       game.world.setBounds(0, 0, 1800, 600);
