@@ -57,8 +57,17 @@
  "tileheight":32,
  "tilesets":[
         {
+         "columns":32,
          "firstgid":1,
-         "source":"ColorQuestTileSheet_1.tsx"
+         "image":"tilesheet_1.png",
+         "imageheight":1024,
+         "imagewidth":1024,
+         "margin":0,
+         "name":"ColorQuestTileSheet_1",
+         "spacing":0,
+         "tilecount":1024,
+         "tileheight":32,
+         "tilewidth":32
         }],
  "tilewidth":32,
  "type":"map",
