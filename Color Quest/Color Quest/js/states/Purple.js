@@ -9,21 +9,19 @@ Purple.prototype = {
 
    preload: function() {
       console.log('Purple: preload');
-      // load tilemap data
+
       game.load.tilemap('layout', 'assets/TileMaps/PurpleMap.json', null, Phaser.Tilemap.TILED_JSON);
-      // load tilesheet sprite
       game.load.spritesheet('tilesheet', 'assets/TileSheets/tilesheet_1.png', 32, 32);
-      
    },
 
    create: function() {
       console.log('Purple: create');
       game.physics.startSystem(Phaser.Physics.ARCADE);
-      game.physics.arcade.gravity.y = this.GRAVITY;
-      
+      //game.physics.arcade.gravity.y = this.GRAVITY;
+
       // set 32-pixel buffer around tiles to avoid collision tunneling
       game.physics.arcade.TILE_BIAS = 32;
-      
+
       // Background
       game.stage.backgroundColor = "#D3D3D3";
 

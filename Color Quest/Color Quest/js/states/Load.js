@@ -2,13 +2,12 @@
 var Load = function(game) {};
 Load.prototype = {
 	preload: function() {
-		game.load.path = 'assets/img/';
-        game.load.atlas('atlas', 'atlas.png', 'atlas.json');
-		game.load.image('ground', 'platform.png');
-		game.load.image('bullet', 'bullet.png');
 
-		game.load.path = 'assets/audio/';
-		game.load.audio('jump', 'Jump.mp3');
+      game.load.atlas('atlas', 'assets/img/atlas.png', 'assets/img/atlas.json');
+		game.load.image('ground', 'assets/img/platform.png');
+		game.load.image('bullet', 'assets/img/bullet.png');
+
+		game.load.audio('jump', 'assets/audio/Jump.mp3');
 	},
 	create: function() {
 		console.log('Load: create');
@@ -20,7 +19,7 @@ Load.prototype = {
       //console.log('Load: update');
       // GameOver logic
       if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
-          game.state.start('MainMenu');
+          game.state.start('Purple');
       }
    }
 };
