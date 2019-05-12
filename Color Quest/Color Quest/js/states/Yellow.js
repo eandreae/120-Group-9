@@ -14,7 +14,7 @@ Yellow.prototype = {
    create: function() {
       console.log('Yellow: create');
       // Background
-      game.stage.backgroundColor = "#0c4196";
+      game.stage.backgroundColor = "#000000";
 
       // Setting the world bounds
       game.world.setBounds(0, 0, 1800, 600);
@@ -31,24 +31,28 @@ Yellow.prototype = {
       // Red square
       bmd = game.add.bitmapData(100, 100);
       bmd.fill(255, 0, 0, 1);
-      this.red = game.add.sprite(500, 450, bmd);
-      game.physics.arcade.enable(this.red);
+      this.redPortal = game.add.sprite(500, 450, bmd);
+      game.physics.arcade.enable(this.redPortal);
 
-      // Red square
+      // Yellow square
       bmd = game.add.bitmapData(100, 100);
       bmd.fill(255, 255, 0, 1);
-      this.yellow = game.add.sprite(800, 450, bmd);
-      game.physics.arcade.enable(this.yellow);
+      this.yellowPortal = game.add.sprite(800, 450, bmd);
+      game.physics.arcade.enable(this.yellowPortal);
 
-      // Red square
+      // Blue square
       bmd = game.add.bitmapData(100, 100);
       bmd.fill(0, 0, 255, 1);
-      this.blue = game.add.sprite(1100, 450, bmd);
-      game.physics.arcade.enable(this.blue);
+      this.bluePortal = game.add.sprite(1100, 450, bmd);
+      game.physics.arcade.enable(this.bluePortal);
+
 
       // Adds the player into the state
-      this.player = new Player(game, this.platforms, true, true, true);
+      this.player = new Player(game, 64, 400, this.platforms, hasRed, hasYellow, hasBlue);
       game.add.existing(this.player);
+
+      // Bullet groups
+      this.playerBullets = game.add.group();
 
       // Camera follows player
       game.camera.follow(this.player);
@@ -70,5 +74,11 @@ Yellow.prototype = {
          game.state.start('Blue');
       }
 
+      // Player shoots a bullet for each key press
+      if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
+         var bullet = new Bullet(game, this.player.x, this.player.y, direction, .4, 1500);
+         game.add.existing(bullet);
+         this.playerBullets.add(bullet);
+      }
    }
 };
