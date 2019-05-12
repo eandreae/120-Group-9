@@ -16,8 +16,6 @@ Green.prototype = {
 
    create: function() {
       console.log('Green: create');
-      game.physics.startSystem(Phaser.Physics.ARCADE);
-      //game.physics.arcade.gravity.y = this.GRAVITY;
 
       // set 32-pixel buffer around tiles to avoid collision tunneling
       game.physics.arcade.TILE_BIAS = 32;
