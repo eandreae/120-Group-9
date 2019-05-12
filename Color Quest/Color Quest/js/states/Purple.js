@@ -10,7 +10,7 @@ Purple.prototype = {
    preload: function() {
       console.log('Purple: preload');
 
-      game.load.tilemap('layout', 'assets/TileMaps/RedMap.json', null, Phaser.Tilemap.TILED_JSON);
+      game.load.tilemap('layout', 'assets/TileMaps/PurpleMap.json', null, Phaser.Tilemap.TILED_JSON);
       game.load.spritesheet('tilesheet', 'assets/TileSheets/tilesheet_1.png', 32, 32);
    },
 
@@ -36,7 +36,7 @@ Purple.prototype = {
       this.mapLayer.resizeWorld();
 
       // Adds the player into the state
-      this.player = new Player(game, 64, 400, this.mapLayer, hasRed, hasYellow, hasBlue);
+      this.player = new Player(game, 64, 400, this.mapLayer);
       game.add.existing(this.player);
 
       // Bullet groups
