@@ -121,6 +121,10 @@ Tutorial.prototype = {
       if(game.input.keyboard.justPressed(Phaser.Keyboard.W)){
           game.state.start('ColorWall');
       }
+      
+      if(game.input.keyboard.justPressed(Phaser.Keyboard.B)){
+          game.state.start('BossMap');
+      }
 
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
