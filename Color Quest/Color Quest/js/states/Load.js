@@ -1,6 +1,8 @@
 // Load state
 var Load = function(game) {};
 Load.prototype = {
+
+	// Loads all the assets needed
 	preload: function() {
       game.load.atlas('atlas', 'assets/img/atlas.png', 'assets/img/atlas.json');
 		game.load.image('ground', 'assets/img/platform.png');

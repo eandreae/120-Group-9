@@ -146,14 +146,21 @@ Tutorial.prototype = {
          this.playerBullets.add(bullet);
       }
 
-      game.physics.arcade.collide(this.enemies, this.mapLayer);
-      game.physics.arcade.collide(this.shootingEnemies, this.mapLayer);
+      // All the collisions needed
+      game.physics.arcade.collide(this.enemies, this.mapLayer);   // Enemies with platforms
+      game.physics.arcade.collide(this.shootingEnemies, this.mapLayer); // Shooting enemies with platforms
+
+      // Player with enemies
       if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
          song.stop();
          playerDies(game, this.player);
       }
+
+      // Player bullet with enemies
       game.physics.arcade.collide(this.playerBullets, this.enemies, bulletHitsEnemy, null, this)
       game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this)
+
+      // Enemy bullets with player
       game.physics.arcade.collide(this.enemyBullets, this.player, bulletHitsPlayer, null, this)
 
       function bulletHitsEnemy(bullet, enemy) {
@@ -168,6 +175,7 @@ Tutorial.prototype = {
       }
    },
 
+   // Called every 2 seconds by the timer to have the enemies shoot
    enemyGroup: function() {
       this.shootingEnemies.forEach(this.enemyShoot, this, true);
    },

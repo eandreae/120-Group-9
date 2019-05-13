@@ -66,12 +66,15 @@ Red.prototype = {
 
       this.physics.arcade.overlap(this.player, this.red, collectRed, null, this);
 
+      // When the player collects the color
       function collectRed(player, color) {
          hasRed = true;
 
+         // Red bdm
          bmd = game.add.bitmapData(18, 18);
          bmd.fill(255, 0, 0, 1);
 
+         // Particles when color is collected
          colorEmitter = game.add.emitter(color.x, color.y, 200);
          colorEmitter.makeParticles(bmd);		        // red squares used as particles
          colorEmitter.gravity = 0;
