@@ -37,7 +37,7 @@ window.onload = function() {
    game.state.add('Purple', Purple);
    game.state.add('Orange', Orange);
    game.state.add('Green', Green);
-   game.state.add('Boss', Boss);
+   game.state.add('BossMap', BossMap);
    game.state.add('GameOver', GameOver);
    game.state.add('ColorWall', ColorWall);
    game.state.start('Load');

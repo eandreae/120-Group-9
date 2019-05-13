@@ -1,6 +1,6 @@
-// Boss room state
-var Boss = function(game) {};
-Boss.prototype = {
+// BossMap state
+var BossMap = function(game) {};
+BossMap.prototype = {
 
    // Variables used in Boss
    init: function() {
@@ -8,14 +8,14 @@ Boss.prototype = {
    },
 
    preload: function() {
-      console.log('Boss: preload');
+      console.log('BossMap: preload');
 
       game.load.tilemap('layout', 'assets/TileMaps/BossMap.json', null, Phaser.Tilemap.TILED_JSON);
       game.load.spritesheet('tilesheet', 'assets/TileSheets/tilesheet_1.png', 32, 32);
    },
 
    create: function() {
-      console.log('Boss: create');
+      console.log('BossMap: create');
 
       // Background
       game.stage.backgroundColor = backgroundColor;
@@ -50,7 +50,7 @@ Boss.prototype = {
    },
 
    update: function() {
-      //console.log('Boss: update');
+      //console.log('BossMap: update');
       if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
          game.state.start('GameOver');
       }
