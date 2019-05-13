@@ -28,13 +28,22 @@ ColorWall.prototype = {
        this.map = game.add.tilemap('layout');
        this.map.addTilesetImage('tilesheet_1', 'tilesheet');
        this.map.setCollisionByExclusion([]);
-       this.mapLayer = this.map.createLayer('Ground');
-       this.mapLayer = this.map.createLayer('Red_Barrier');
-       this.mapLayer = this.map.createLayer('Orange_Barrier');
-       this.mapLayer = this.map.createLayer('Yellow_Barrier');
-       this.mapLayer = this.map.createLayer('Green_Barrier');
-       this.mapLayer = this.map.createLayer('Blue_Barrier');
-       this.mapLayer = this.map.createLayer('Purple_Barrier');
+       this.tilemap = game.add.tilemap('tilesheet_1');
+       var groundLayer = this.tilemap.createLayer('Ground');
+       game.physics.arcade.enable(groundLayer);
+       var redLayer = this.tilemap.createLayer('Red_Barrier');
+       game.physics.arcade.enable(redLayer);
+       var orangeLayer = this.tilemap.createLayer('Orange_Barrier');
+       game.physics.arcade.enable(orangeLayer);
+       var yellowLayer = this.tilemap.createLayer('Yellow_Barrier');
+       game.physics.arcade.enable(yellowLayer);
+       var greenLayer = this.tilemap.createLayer('Green_Barrier');
+       game.physics.arcade.enable(greenLayer);
+       var blueLayer = this.tilemap.createLayer('Blue_Barrier');
+       game.physics.arcade.enable(blueLayer);
+       var purpleLayer = this.tilemap.createLayer('Purple_Barrier');
+       game.physics.arcade.enable(purpleLayer);
+
        this.mapLayer.resizeWorld();
 
        // set 32-pixel buffer around tiles to avoid collision tunneling
