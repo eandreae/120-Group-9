@@ -117,7 +117,7 @@ Tutorial.prototype = {
       if(game.input.keyboard.justPressed(Phaser.Keyboard.W)){
           game.state.start('ColorWall');
       }
-      
+
       if(game.input.keyboard.justPressed(Phaser.Keyboard.B)){
           game.state.start('BossMap');
       }
@@ -138,8 +138,6 @@ Tutorial.prototype = {
       game.physics.arcade.collide(this.playerBullets, this.enemies, bulletHitsEnemy, null, this)
       game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this)
       game.physics.arcade.collide(this.enemyBullets, this.player, bulletHitsPlayer, null, this)
-
-
 
       function bulletHitsEnemy(bullet, enemy) {
          bullet.destroy();
