@@ -18,7 +18,6 @@ Tutorial.prototype = {
    create: function() {
       console.log('Tutorial: create');
 
-      song = game.add.audio('song');
       song.play('', 0, 1, true);
 
       // Background
@@ -37,29 +36,26 @@ Tutorial.prototype = {
       // set 32-pixel buffer around tiles to avoid collision tunneling
       game.physics.arcade.TILE_BIAS = 32;
 
-      // Red square
-      bmd = game.add.bitmapData(100, 100);
-      bmd.fill(255, 0, 0, 1);
-      this.redPortal = game.add.sprite(500, 450, 'atlas', 'red_color');
-      game.physics.arcade.enable(this.redPortal);
+      // Red portal
+      if (!hasRed)
+      {
+         bmd = game.add.bitmapData(100, 100);
+         bmd.fill(255, 0, 0, 1);
+         this.redPortal = game.add.sprite(300, 825, 'atlas', 'red_color');
+         game.physics.arcade.enable(this.redPortal);
+      }
 
-      // Yellow square
+      // Yellow portal
       bmd = game.add.bitmapData(100, 100);
       bmd.fill(255, 255, 0, 1);
-      this.yellowPortal = game.add.sprite(800, 450, 'atlas', 'yellow_color');
+      this.yellowPortal = game.add.sprite(500, 825, 'atlas', 'yellow_color');
       game.physics.arcade.enable(this.yellowPortal);
 
-      // Blue square
+      // Blue portal
       bmd = game.add.bitmapData(100, 100);
       bmd.fill(0, 0, 255, 1);
-      this.bluePortal = game.add.sprite(1100, 450, 'atlas', 'blue_color');
+      this.bluePortal = game.add.sprite(700, 825, 'atlas', 'blue_color');
       game.physics.arcade.enable(this.bluePortal);
-
-      // Red collectable
-      bmd = game.add.bitmapData(75, 75);
-      bmd.fill(255, 0, 0, 1);
-      this.red = game.add.sprite(1200, 450, 'atlas', 'red_color');
-      game.physics.arcade.enable(this.red);
 
       // Yellow collectable
       bmd = game.add.bitmapData(75, 75);
@@ -74,7 +70,7 @@ Tutorial.prototype = {
       game.physics.arcade.enable(this.blue);
 
       // Adds the player into the state
-      this.player = new Player(game, 64, 400, this.mapLayer);
+      this.player = new Player(game, 64, 825, this.mapLayer);
       game.add.existing(this.player);
 
       this.enemies = game.add.group();
@@ -96,7 +92,7 @@ Tutorial.prototype = {
 
       // Camera follows player
       game.camera.follow(this.player);
-      game.camera.deadzone = new Phaser.Rectangle(325, 200, 50, 300); // (x,y,width,height)
+      game.camera.deadzone = new Phaser.Rectangle(325, 200, 50, 150); // (x,y,width,height)
 
       timer = game.time.create(false);
       timer.loop(2000, this.enemyGroup, this);
@@ -105,10 +101,12 @@ Tutorial.prototype = {
 
    update: function() {
       //console.log('Tutorial: update');
-
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.redPortal)) {
-         game.state.start('Red');
+      if (!hasRed) {
+         if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.redPortal)) {
+            game.state.start('Red');
+         }
       }
+
       if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.yellowPortal)) {
          game.state.start('Yellow');
       }
@@ -137,7 +135,6 @@ Tutorial.prototype = {
       game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this)
       game.physics.arcade.collide(this.enemyBullets, this.player, bulletHitsPlayer, null, this)
 
-      this.physics.arcade.overlap(this.player, this.red, collectRed, null, this);
       this.physics.arcade.overlap(this.player, this.yellow, collectYellow, null, this);
       this.physics.arcade.overlap(this.player, this.blue, collectBlue, null, this);
 
@@ -150,11 +147,6 @@ Tutorial.prototype = {
          bullet.destroy();
          song.stop();
          playerDies(game, player);
-      }
-
-      function collectRed(player, color) {
-         hasRed = true;
-         color.destroy();
       }
 
       function collectYellow(player, color) {

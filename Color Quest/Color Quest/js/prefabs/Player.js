@@ -75,7 +75,7 @@ Player.prototype.update = function() {
    // Player can jump only if they're touching the Ground
    if (game.input.keyboard.justPressed(Phaser.Keyboard.Z) && jumps != 0) {
       jumpSFX.play('', 0, .5, false);
-      this.body.velocity.y = -250;
+      this.body.velocity.y = -450;
       jumps--;
    }
 

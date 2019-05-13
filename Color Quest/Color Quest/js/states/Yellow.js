@@ -33,7 +33,7 @@ Yellow.prototype = {
       game.physics.arcade.TILE_BIAS = 32;
 
       // Adds the player into the state
-      this.player = new Player(game, 64, 400, this.mapLayer);
+      this.player = new Player(game, 64, 825, this.mapLayer);
       game.add.existing(this.player);
 
       // Bullet groups
@@ -41,7 +41,7 @@ Yellow.prototype = {
 
       // Camera follows player
       game.camera.follow(this.player);
-      game.camera.deadzone = new Phaser.Rectangle(325, 200, 50, 200); // (x,y,width,height)
+      game.camera.deadzone = new Phaser.Rectangle(325, 200, 50, 150); // (x,y,width,height)
    },
 
    update: function() {
