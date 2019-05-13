@@ -40,13 +40,13 @@ Player.prototype.update = function() {
    // If player is colliding with a platform
    var hitPlatform = game.physics.arcade.collide(this, platforms);
 
-   if (this.body.blocked.down && hitPlatform) {
+   if (this.body.blocked.down || this.body.touching.down && hitPlatform) {
       jumps = 1;
       if (hasBlue) jumps = 2;
       if (hasPurple) jumps = 3;
    }
 
-   if (this.body.blocked.down && hitPlatform) {
+   if (this.body.blocked.down || this.body.touching.down && hitPlatform) {
       dash = 0;
       if (hasYellow) dash = 1;
    }
