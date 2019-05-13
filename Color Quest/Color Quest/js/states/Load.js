@@ -13,15 +13,12 @@ Load.prototype = {
 	},
 	create: function() {
 		console.log('Load: create');
-
 		song = game.add.audio('song');
+
+		 game.state.start('MainMenu');
 	},
 
 	update: function() {
       //console.log('Load: update');
-      // GameOver logic
-      if(game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
-          game.state.start('Tutorial');
-      }
    }
 };

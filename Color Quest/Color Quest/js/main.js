@@ -20,25 +20,21 @@ var song;
 
 // wait for browser to load before creating Phaser game
 window.onload = function() {
-   // uncomment the following line if you need to purge local storage data
-   // localStorage.clear();
-
    // define game
    game = new Phaser.Game(1000, 700, Phaser.AUTO, 'phaser');
 
    // define states
-   //game.state.add('Boot', Boot);
-   game.state.add('Load', Load); // Used to load the assets and stuff
-   game.state.add('MainMenu', MainMenu);
-   game.state.add('Tutorial', Tutorial);
-   game.state.add('Red', Red);
-   game.state.add('Yellow', Yellow);
-   game.state.add('Blue', Blue);
-   game.state.add('Purple', Purple);
-   game.state.add('Orange', Orange);
-   game.state.add('Green', Green);
-   game.state.add('BossMap', BossMap);
-   game.state.add('GameOver', GameOver);
-   game.state.add('ColorWall', ColorWall);
+   game.state.add('Load', Load);          // Used to load the assets and stuff
+   game.state.add('MainMenu', MainMenu);  // Main menu
+   game.state.add('Tutorial', Tutorial);  // Tutorial state
+   game.state.add('Red', Red);            // Red state
+   game.state.add('Yellow', Yellow);      // Yellow state
+   game.state.add('Blue', Blue);          // Blue state
+   game.state.add('Purple', Purple);      // Purple state
+   game.state.add('Orange', Orange);      // Orange state
+   game.state.add('Green', Green);        // Green state
+   game.state.add('BossMap', BossMap);    // Final boss area
+   game.state.add('GameOver', GameOver);  // Game over state
+   game.state.add('ColorWall', ColorWall);// Color wall state
    game.state.start('Load');
 }
