@@ -63,7 +63,7 @@ BossMap.prototype = {
       }
 
       // Bullet collision for CK
-      game.physics.arcade.collide(this.playerBullets, this.boss, bulletHitsBoss, null, this);
+      game.physics.arcade.collide(this.playerBullets, boss, bulletHitsBoss, null, this);
 
       function bulletHitsBoss(bullet, boss) {
          bullet.destroy();
