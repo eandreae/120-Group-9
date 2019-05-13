@@ -70,15 +70,18 @@ Tutorial.prototype = {
       this.player = new Player(game, 64, 825, this.mapLayer);
       game.add.existing(this.player);
 
+      // The enemy groups
       this.enemies = game.add.group();
       this.enemies.enableBody = true;
       this.shootingEnemies = game.add.group();
       this.shootingEnemies.enableBody = true;
 
-      var e1 = new Enemy(game, 500, 300, -20);
+      // Place a moving enemy
+      var e1 = new Enemy(game, 500, 300, -50);
       game.add.existing(e1);
       this.enemies.add(e1);
 
+      // Place a shooting enemy
       var e2 = new Enemy(game, 900, 300, 0);
       game.add.existing(e2);
       this.shootingEnemies.add(e2);
@@ -91,6 +94,7 @@ Tutorial.prototype = {
       game.camera.follow(this.player);
       game.camera.deadzone = new Phaser.Rectangle(325, 200, 50, 150); // (x,y,width,height)
 
+      // Timer for how often the enemies shoot
       timer = game.time.create(false);
       timer.loop(2000, this.enemyGroup, this);
       timer.start();
@@ -98,38 +102,41 @@ Tutorial.prototype = {
 
    update: function() {
       //console.log('Tutorial: update');
+
+      // Go into the red state
       if (!hasRed) {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.redPortal)) {
             game.state.start('Red');
          }
       }
 
+      // Go into the yellow state
       if (!hasYellow) {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.yellowPortal)) {
             game.state.start('Yellow');
          }
       }
 
+      // Go into the blue state
       if (!hasBlue) {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.bluePortal)) {
             game.state.start('Blue');
          }
       }
 
+      // Go into the boss room
       if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.bossPortal)) {
          game.state.start('BossMap');
       }
 
+      // Go to purple state
       if (game.input.keyboard.justPressed(Phaser.Keyboard.P)) {
          game.state.start('Purple');
       }
 
+      // Go to the color wall
       if(game.input.keyboard.justPressed(Phaser.Keyboard.W)){
           game.state.start('ColorWall');
-      }
-
-      if(game.input.keyboard.justPressed(Phaser.Keyboard.B)){
-          game.state.start('BossMap');
       }
 
       // Player shoots a bullet for each key press
