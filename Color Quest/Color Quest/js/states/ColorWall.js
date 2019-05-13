@@ -28,7 +28,13 @@ ColorWall.prototype = {
        this.map = game.add.tilemap('layout');
        this.map.addTilesetImage('ColorQuestTileSheet_1', 'tilesheet');
        this.map.setCollisionByExclusion([]);
-       this.mapLayer = this.map.createLayer('Tile Layer 1');
+       this.mapLayer = this.map.createLayer('Ground');
+       this.mapLayer = this.map.createLayer('Red');
+       this.mapLayer = this.map.createLayer('Orange');
+       this.mapLayer = this.map.createLayer('Yellow');
+       this.mapLayer = this.map.createLayer('Green');
+       this.mapLayer = this.map.createLayer('Blue');
+       this.mapLayer = this.map.createLayer('Purple');
        this.mapLayer.resizeWorld();
 
        // set 32-pixel buffer around tiles to avoid collision tunneling
