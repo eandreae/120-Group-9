@@ -26,7 +26,7 @@ ColorWall.prototype = {
 
        // Create new tilemap
        this.map = game.add.tilemap('layout');
-       this.map.addTilesetImage('ColorQuestTileSheet_1', 'tilesheet');
+       this.map.addTilesetImage('tilesheet_1', 'tilesheet');
        this.map.setCollisionByExclusion([]);
        this.mapLayer = this.map.createLayer('Ground');
        this.mapLayer = this.map.createLayer('Red_Barrier');
