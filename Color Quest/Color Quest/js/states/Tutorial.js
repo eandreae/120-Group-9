@@ -60,6 +60,12 @@ Tutorial.prototype = {
          game.physics.arcade.enable(this.bluePortal);
       }
 
+      if (hasRed && hasYellow && hasBlue)
+      {
+         this.bossPortal = game.add.sprite(900, 825, 'bPortal');
+         game.physics.arcade.enable(this.bossPortal);
+      }
+
       // Adds the player into the state
       this.player = new Player(game, 64, 825, this.mapLayer);
       game.add.existing(this.player);
@@ -108,6 +114,10 @@ Tutorial.prototype = {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.bluePortal)) {
             game.state.start('Blue');
          }
+      }
+
+      if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.bossPortal)) {
+         game.state.start('BossMap');
       }
 
       if (game.input.keyboard.justPressed(Phaser.Keyboard.P)) {
