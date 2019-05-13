@@ -43,10 +43,14 @@ Boss.prototype = {
       // Camera follows player
       game.camera.follow(this.player);
       game.camera.deadzone = new Phaser.Rectangle(325, 200, 50, 150); // (x,y,width,height)
+      
+      // Add KC
+      var boss = new Boss(game, 0, 0);
+      boss.enableBody = true;
    },
 
    update: function() {
-      //console.log('Red: update');
+      //console.log('Boss: update');
       if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
          game.state.start('GameOver');
       }
@@ -55,6 +59,14 @@ Boss.prototype = {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, .4, 1500);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
+      }
+      
+      // Bullet collision for CK
+      game.physics.arcade.collide(this.playerBullets, this.boss, bulletHitsBoss, null, this);
+      
+      function bulletHitsBoss(bullet, boss) {
+         bullet.destroy();
+         boss.destroy();
       }
    }
 };
