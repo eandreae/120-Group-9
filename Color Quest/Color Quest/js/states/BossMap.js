@@ -46,7 +46,7 @@ BossMap.prototype = {
 
       // Add KC
       this.boss = new Boss(game, 800, 800);
-      game.add.existing(boss);
+      game.add.existing(this.boss);
       this.boss.enableBody = true;
    },
 
