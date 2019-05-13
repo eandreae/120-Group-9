@@ -70,7 +70,7 @@ Blue.prototype = {
          hasBlue = true;
 
          bmd = game.add.bitmapData(18, 18);
-         bmd.fill(255, 0, 0, 1);
+         bmd.fill(0, 0, 255, 1);
 
          colorEmitter = game.add.emitter(color.x, color.y, 200);
          colorEmitter.makeParticles(bmd);		        // red squares used as particles

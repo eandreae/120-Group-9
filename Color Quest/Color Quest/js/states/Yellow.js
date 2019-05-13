@@ -29,22 +29,24 @@ Yellow.prototype = {
       this.map.myLayers = [];
 
       this.mapLayer = this.map.createLayer('Ground');
-      game.physics.arcade.enable(this.mapLayer);
+      // game.physics.arcade.enable(this.mapLayer);
+      this.map.setCollisionByExclusion([], this.mapLayer);
       this.map.myLayers[0] = this.mapLayer;
 
       this.mapLayer = this.map.createLayer('Yellow_1');
-      game.physics.arcade.enable(this.mapLayer);
+      // game.physics.arcade.enable(this.mapLayer);
+      this.map.setCollisionByExclusion([], this.mapLayer);
       this.map.myLayers[1] = this.mapLayer;
 
       this.mapLayer = this.map.createLayer('Yellow_2');
-      game.physics.arcade.enable(this.mapLayer);
+      // game.physics.arcade.enable(this.mapLayer);
+      this.map.setCollisionByExclusion([], this.mapLayer);
       this.map.myLayers[2] = this.mapLayer;
 
       this.mapLayer = this.map.createLayer('Yellow_3');
-      game.physics.arcade.enable(this.mapLayer);
+      // game.physics.arcade.enable(this.mapLayer);
+      this.map.setCollisionByExclusion([], this.mapLayer);
       this.map.myLayers[3] = this.mapLayer;
-
-      this.map.setCollisionByExclusion([]);
 
       this.mapLayer.resizeWorld();
 
@@ -54,11 +56,11 @@ Yellow.prototype = {
       // Yellow collectable
       bmd = game.add.bitmapData(75, 75);
       bmd.fill(255, 255, 0, 1);
-      this.yellow = game.add.sprite(600, 10, 'atlas', 'yellow_color');
+      this.yellow = game.add.sprite(600, 800, 'atlas', 'yellow_color');
       game.physics.arcade.enable(this.yellow);
 
       // Adds the player into the state
-      this.player = new Player(game, 64, 825, this.map.myLayers);
+      this.player = new Player(game, 64, 825, null, this.map.myLayers);
       game.add.existing(this.player);
 
       // Bullet groups

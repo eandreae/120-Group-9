@@ -1,4 +1,5 @@
 var platforms;
+var layers;
 var jumps = 0;
 var dash = 0;
 var jumpSFX;
@@ -8,8 +9,9 @@ var jumpSFX;
 // yellow: True if the player has collected red
 // blue: True if the player has collected red
 
-function Player(game, x, y, objects) {
+function Player(game, x, y, objects, tilemap) {
    platforms = objects;
+   layers = tilemap;
    jumpSFX = game.add.audio('jump');
 
    // call to Phaser.Sprite
@@ -35,10 +37,22 @@ Player.prototype.constructor = Player;
 // z to jump
 // x to shoot
 // c to dash
+var hitPlatform;
 Player.prototype.update = function() {
 
    // If player is colliding with a platform
-   var hitPlatform = game.physics.arcade.collide(this, platforms);
+   var hitPlatform;
+
+   if (platforms != null) {
+      hitPlatform = game.physics.arcade.collide(this, platforms);
+   }
+   else {
+      for (var i = 0; i < layers.length; i++) {
+         //console.log(i);
+         var temp = game.physics.arcade.collide(layers[i], this);
+         if (temp) hitPlatform = temp;
+      }
+   }
 
    if (this.body.blocked.down || this.body.touching.down && hitPlatform) {
       jumps = 1;
