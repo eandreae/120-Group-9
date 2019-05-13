@@ -117,6 +117,10 @@ Tutorial.prototype = {
       if(game.input.keyboard.justPressed(Phaser.Keyboard.P)){
           game.state.start('Purple');
       }
+      
+      if(game.input.keyboard.justPressed(Phaser.Keyboard.B)){
+          game.state.start('Boss');
+      }
 
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
