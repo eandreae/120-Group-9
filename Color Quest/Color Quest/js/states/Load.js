@@ -5,7 +5,8 @@ Load.prototype = {
       game.load.atlas('atlas', 'assets/img/atlas.png', 'assets/img/atlas.json');
 		game.load.image('ground', 'assets/img/platform.png');
 		game.load.image('bullet', 'assets/img/bullet.png');
-        game.load.image('boss', 'assets/img/kingcolor.png');
+      game.load.image('boss', 'assets/img/kingcolor.png');
+		game.load.image('bPortal', 'assets/img/KingColorButton.png')
 
 		game.load.audio('jump', 'assets/audio/Jump.mp3');
 		game.load.audio('song', 'assets/audio/Delicate.mp3');
