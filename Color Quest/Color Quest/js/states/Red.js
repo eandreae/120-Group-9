@@ -16,6 +16,7 @@ Red.prototype = {
 
    create: function() {
       console.log('Red: create');
+      
       // Background
       game.stage.backgroundColor = backgroundColor;
 
@@ -33,7 +34,7 @@ Red.prototype = {
       game.physics.arcade.TILE_BIAS = 32;
 
       // Adds the player into the state
-      this.player = new Player(game, 64, 400, this.platforms, hasRed, hasYellow, hasBlue);
+      this.player = new Player(game, 64, 400, this.mapLayer);
       game.add.existing(this.player);
 
       // Bullet groups
@@ -41,7 +42,7 @@ Red.prototype = {
 
       // Camera follows player
       game.camera.follow(this.player);
-      game.camera.deadzone = new Phaser.Rectangle(325, 0, 50, game.height); // (x,y,width,height)
+      game.camera.deadzone = new Phaser.Rectangle(325, 200, 50, 200); // (x,y,width,height)
    },
 
    update: function() {
