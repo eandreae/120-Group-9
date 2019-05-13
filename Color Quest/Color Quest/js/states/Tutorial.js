@@ -10,6 +10,9 @@ Tutorial.prototype = {
 
    preload: function() {
       console.log('Tutorial: preload');
+
+      game.load.tilemap('layout', 'assets/TileMaps/TutorialMap.json', null, Phaser.Tilemap.TILED_JSON);
+      game.load.spritesheet('tilesheet', 'assets/TileSheets/tilesheet_1.png', 32, 32);
    },
 
    create: function() {
@@ -22,16 +25,17 @@ Tutorial.prototype = {
       game.stage.backgroundColor = backgroundColor;
 
       // Setting the world bounds
-      game.world.setBounds(0, 0, 1800, 600);
+      game.world.setBounds(0, 0, 1024, 1024);
 
-      // Group contains the ground and platforms
-      this.platforms = game.add.group();
-      this.platforms.enableBody = true; // Enables physics for platform objects
+      // Create new tilemap
+      this.map = game.add.tilemap('layout');
+      this.map.addTilesetImage('ColorQuestTileSheet_1', 'tilesheet');
+      this.map.setCollisionByExclusion([]);
+      this.mapLayer = this.map.createLayer('Tile Layer 1');
+      this.mapLayer.resizeWorld();
 
-      // Ground
-      this.ground = this.platforms.create(0, game.height - 64, 'ground');
-      this.ground.scale.setTo(30, 2);
-      this.ground.body.immovable = true; // Prevents it from moving
+      // set 32-pixel buffer around tiles to avoid collision tunneling
+      game.physics.arcade.TILE_BIAS = 32;
 
       // Red square
       bmd = game.add.bitmapData(100, 100);
@@ -70,7 +74,7 @@ Tutorial.prototype = {
       game.physics.arcade.enable(this.blue);
 
       // Adds the player into the state
-      this.player = new Player(game, 64, 400, this.platforms, hasRed, hasYellow, hasBlue);
+      this.player = new Player(game, 64, 400, this.mapLayer);
       game.add.existing(this.player);
 
       this.enemies = game.add.group();
@@ -123,9 +127,10 @@ Tutorial.prototype = {
          this.playerBullets.add(bullet);
       }
 
-      game.physics.arcade.collide(this.enemies, this.platforms);
-      game.physics.arcade.collide(this.shootingEnemies, this.platforms);
+      game.physics.arcade.collide(this.enemies, this.mapLayer);
+      game.physics.arcade.collide(this.shootingEnemies, this.mapLayer);
       if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
+         song.stop();
          playerDies(game, this.player);
       }
       game.physics.arcade.collide(this.playerBullets, this.enemies, bulletHitsEnemy, null, this)
@@ -143,6 +148,7 @@ Tutorial.prototype = {
 
       function bulletHitsPlayer(bullet, player) {
          bullet.destroy();
+         song.stop();
          playerDies(game, player);
       }
 

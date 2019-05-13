@@ -95,6 +95,19 @@
         {
          "columns":32,
          "firstgid":1,
+         "image":"ColorQuest Assets\/tilesheet_1.png",
+         "imageheight":1024,
+         "imagewidth":1024,
+         "margin":0,
+         "name":"ColorQuestTileSheet_1",
+         "spacing":0,
+         "tilecount":0,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "columns":32,
+         "firstgid":1,
          "image":"tilesheet_1.png",
          "imageheight":1024,
          "imagewidth":1024,

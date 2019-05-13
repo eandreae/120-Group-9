@@ -17,11 +17,8 @@ Purple.prototype = {
    create: function() {
       console.log('Purple: create');
 
-      // set 32-pixel buffer around tiles to avoid collision tunneling
-      game.physics.arcade.TILE_BIAS = 32;
-
       // Background
-      game.stage.backgroundColor = "#D3D3D3";
+      game.stage.backgroundColor = backgroundColor;
 
       // Setting the world bounds
       game.world.setBounds(0, 0, 1024, 1024);
@@ -33,6 +30,9 @@ Purple.prototype = {
       this.mapLayer = this.map.createLayer('Tile Layer 1');
       this.mapLayer.resizeWorld();
 
+      // set 32-pixel buffer around tiles to avoid collision tunneling
+      game.physics.arcade.TILE_BIAS = 32;
+
       // Adds the player into the state
       this.player = new Player(game, 64, 400, this.mapLayer);
       game.add.existing(this.player);
@@ -42,7 +42,7 @@ Purple.prototype = {
 
       // Camera follows player
       game.camera.follow(this.player);
-      game.camera.deadzone = new Phaser.Rectangle(325, 200, 50, 300); // (x,y,width,height)
+      game.camera.deadzone = new Phaser.Rectangle(325, 200, 50, 200); // (x,y,width,height)
    },
 
    update: function() {
