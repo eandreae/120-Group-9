@@ -12,8 +12,8 @@ Load.prototype = {
 	},
 	create: function() {
 		console.log('Load: create');
-		// check for local storage browser support
 
+		song = game.add.audio('song');
 	},
 
 	update: function() {
