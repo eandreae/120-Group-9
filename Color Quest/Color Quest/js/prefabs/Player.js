@@ -54,12 +54,14 @@ Player.prototype.update = function() {
       }
    }
 
+   // Jumps depending on how many jumps it has. Refreshed when touching the ground
    if (this.body.blocked.down || this.body.touching.down && hitPlatform) {
       jumps = 1;
       if (hasBlue) jumps = 2;
       if (hasPurple) jumps = 3;
    }
 
+   // Player dash count. Refreshed when touching the ground
    if (this.body.blocked.down || this.body.touching.down && hitPlatform) {
       dash = 0;
       if (hasYellow) dash = 1;
@@ -93,6 +95,7 @@ Player.prototype.update = function() {
       jumps--;
    }
 
+   // Player can only dash once in the air
    if (game.input.keyboard.justPressed(Phaser.Keyboard.C) && dash != 0) {
       this.x += 150 * direction;
       dash--;
