@@ -37,8 +37,7 @@ Tutorial.prototype = {
       game.physics.arcade.TILE_BIAS = 32;
 
       // Red portal
-      if (!hasRed)
-      {
+      if (!hasRed) {
          bmd = game.add.bitmapData(100, 100);
          bmd.fill(255, 0, 0, 1);
          this.redPortal = game.add.sprite(300, 825, 'atlas', 'red_color');
@@ -46,28 +45,20 @@ Tutorial.prototype = {
       }
 
       // Yellow portal
-      bmd = game.add.bitmapData(100, 100);
-      bmd.fill(255, 255, 0, 1);
-      this.yellowPortal = game.add.sprite(500, 825, 'atlas', 'yellow_color');
-      game.physics.arcade.enable(this.yellowPortal);
+      if (!hasYellow) {
+         bmd = game.add.bitmapData(100, 100);
+         bmd.fill(255, 255, 0, 1);
+         this.yellowPortal = game.add.sprite(500, 825, 'atlas', 'yellow_color');
+         game.physics.arcade.enable(this.yellowPortal);
+      }
 
       // Blue portal
-      bmd = game.add.bitmapData(100, 100);
-      bmd.fill(0, 0, 255, 1);
-      this.bluePortal = game.add.sprite(700, 825, 'atlas', 'blue_color');
-      game.physics.arcade.enable(this.bluePortal);
-
-      // Yellow collectable
-      bmd = game.add.bitmapData(75, 75);
-      bmd.fill(255, 255, 0, 1);
-      this.yellow = game.add.sprite(1400, 450, 'atlas', 'yellow_color');
-      game.physics.arcade.enable(this.yellow);
-
-      // Blue collectable
-      bmd = game.add.bitmapData(75, 75);
-      bmd.fill(0, 0, 255, 1);
-      this.blue = game.add.sprite(400, 450, 'atlas', 'blue_color');
-      game.physics.arcade.enable(this.blue);
+      if (!hasBlue) {
+         bmd = game.add.bitmapData(100, 100);
+         bmd.fill(0, 0, 255, 1);
+         this.bluePortal = game.add.sprite(700, 825, 'atlas', 'blue_color');
+         game.physics.arcade.enable(this.bluePortal);
+      }
 
       // Adds the player into the state
       this.player = new Player(game, 64, 825, this.mapLayer);
@@ -107,15 +98,20 @@ Tutorial.prototype = {
          }
       }
 
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.yellowPortal)) {
-         game.state.start('Yellow');
-      }
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.bluePortal)) {
-         game.state.start('Blue');
+      if (!hasYellow) {
+         if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.yellowPortal)) {
+            game.state.start('Yellow');
+         }
       }
 
-      if(game.input.keyboard.justPressed(Phaser.Keyboard.P)){
-          game.state.start('Purple');
+      if (!hasBlue) {
+         if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.bluePortal)) {
+            game.state.start('Blue');
+         }
+      }
+
+      if (game.input.keyboard.justPressed(Phaser.Keyboard.P)) {
+         game.state.start('Purple');
       }
 
       // Player shoots a bullet for each key press
@@ -135,8 +131,7 @@ Tutorial.prototype = {
       game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this)
       game.physics.arcade.collide(this.enemyBullets, this.player, bulletHitsPlayer, null, this)
 
-      this.physics.arcade.overlap(this.player, this.yellow, collectYellow, null, this);
-      this.physics.arcade.overlap(this.player, this.blue, collectBlue, null, this);
+
 
       function bulletHitsEnemy(bullet, enemy) {
          bullet.destroy();
@@ -147,16 +142,6 @@ Tutorial.prototype = {
          bullet.destroy();
          song.stop();
          playerDies(game, player);
-      }
-
-      function collectYellow(player, color) {
-         hasYellow = true;
-         color.destroy();
-      }
-
-      function collectBlue(player, color) {
-         hasBlue = true;
-         color.destroy();
       }
    },
 

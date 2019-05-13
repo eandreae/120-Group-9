@@ -17,7 +17,6 @@ Blue.prototype = {
    create: function() {
       console.log('Blue: create');
 
-
       // Background
       game.stage.backgroundColor = backgroundColor;
 
@@ -33,6 +32,12 @@ Blue.prototype = {
 
       // set 32-pixel buffer around tiles to avoid collision tunneling
       game.physics.arcade.TILE_BIAS = 32;
+
+      // Blue collectable
+      bmd = game.add.bitmapData(75, 75);
+      bmd.fill(0, 0, 255, 1);
+      this.blue = game.add.sprite(600, 10, 'atlas', 'blue_color');
+      game.physics.arcade.enable(this.blue);
 
       // Adds the player into the state
       this.player = new Player(game, 64, 825, this.mapLayer);
@@ -51,21 +56,34 @@ Blue.prototype = {
       if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
          game.state.start('GameOver');
       }
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.redPortal)) {
-         game.state.start('Red');
-      }
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.yellowPortal)) {
-         game.state.start('Yellow');
-      }
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.bluePortal)) {
-         game.state.start('Blue');
-      }
 
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, .4, 1500);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
+      }
+
+      this.physics.arcade.overlap(this.player, this.blue, collectBlue, null, this);
+
+      function collectBlue(player, color) {
+         hasBlue = true;
+
+         bmd = game.add.bitmapData(18, 18);
+         bmd.fill(255, 0, 0, 1);
+
+         colorEmitter = game.add.emitter(color.x, color.y, 200);
+         colorEmitter.makeParticles(bmd);		        // red squares used as particles
+         colorEmitter.gravity = 0;
+         colorEmitter.setScale(.25, .8, .25, .8, 0);
+         colorEmitter.setAlpha(.8, 0, 1800); 	      // .8 to .3 alpha
+         colorEmitter.setXSpeed(-100,100);			   // horizontal speed range
+         colorEmitter.setYSpeed(-100,100);			   // vertical speed range
+         colorEmitter.start(true, 2000, null, 50);	   // (explode, lifespan, freq, quantity)
+
+         color.destroy();
+         song.stop();
+         game.time.events.add(Phaser.Timer.SECOND * 2, function() { game.state.start('Tutorial')});
       }
    }
 };
