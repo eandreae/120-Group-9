@@ -39,5 +39,6 @@ window.onload = function() {
    game.state.add('Green', Green);
    game.state.add('Boss', Boss);
    game.state.add('GameOver', GameOver);
+   game.state.add('ColorWall', ColorWall);
    game.state.start('Load');
 }
