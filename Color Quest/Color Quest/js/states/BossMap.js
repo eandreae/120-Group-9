@@ -45,7 +45,7 @@ BossMap.prototype = {
       game.camera.deadzone = new Phaser.Rectangle(325, 200, 50, 150); // (x,y,width,height)
 
       // Add KC
-      this.boss = new Boss(game, 800, 800);
+      this.boss = new Boss(game, 800, 224);
       game.add.existing(this.boss);
       this.boss.enableBody = true;
    },
