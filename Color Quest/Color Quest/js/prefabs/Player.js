@@ -100,7 +100,7 @@ Player.prototype.update = function() {
    }
 
    if (dashing && Math.abs(oldPos - this.x) < 150) {
-      this.body.velocity.x = 1000 * direction;
+      this.body.velocity.x = 700 * direction;
    }
    else dashing = false;
 }

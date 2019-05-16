@@ -76,15 +76,15 @@ Tutorial.prototype = {
       this.shootingEnemies = game.add.group();
       this.shootingEnemies.enableBody = true;
 
-      // Place a moving enemy
-      var e1 = new Enemy(game, 500, 300, -50);
-      game.add.existing(e1);
-      this.enemies.add(e1);
-
-      // Place a shooting enemy
-      var e2 = new Enemy(game, 900, 300, 0);
-      game.add.existing(e2);
-      this.shootingEnemies.add(e2);
+      // // Place a moving enemy
+      // var e1 = new Enemy(game, 500, 300, -50);
+      // game.add.existing(e1);
+      // this.enemies.add(e1);
+      //
+      // // Place a shooting enemy
+      // var e2 = new Enemy(game, 900, 300, 0);
+      // game.add.existing(e2);
+      // this.shootingEnemies.add(e2);
 
       // Bullet groups
       this.playerBullets = game.add.group();
@@ -105,27 +105,27 @@ Tutorial.prototype = {
 
       // Go into the red state
       if (!hasRed) {
-         if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.redPortal)) {
+         if (game.input.keyboard.justPressed(Phaser.Keyboard.Z) && this.physics.arcade.overlap(this.player, this.redPortal)) {
             game.state.start('Red');
          }
       }
 
       // Go into the yellow state
       if (!hasYellow) {
-         if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.yellowPortal)) {
+         if (game.input.keyboard.justPressed(Phaser.Keyboard.Z) && this.physics.arcade.overlap(this.player, this.yellowPortal)) {
             game.state.start('Yellow');
          }
       }
 
       // Go into the blue state
       if (!hasBlue) {
-         if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.bluePortal)) {
+         if (game.input.keyboard.justPressed(Phaser.Keyboard.Z) && this.physics.arcade.overlap(this.player, this.bluePortal)) {
             game.state.start('Blue');
          }
       }
 
       // Go into the boss room
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.physics.arcade.overlap(this.player, this.bossPortal)) {
+      if (game.input.keyboard.justPressed(Phaser.Keyboard.Z) && this.physics.arcade.overlap(this.player, this.bossPortal)) {
          game.state.start('BossMap');
       }
 
@@ -189,6 +189,6 @@ Tutorial.prototype = {
    render: function() {
        game.debug.bodyInfo(this.player, 100, 100, 'black');
        game.debug.body(this.player);
-       game.debug.text('Player y value: '+this.y, 100, 100, 'black');
+       //game.debug.text('Player y value: '+this.y, 100, 100, 'black');
    }
 };
