@@ -29,7 +29,7 @@ function Player(game, x, y, objects) {
    // Gives the player physics
    game.physics.arcade.enable(this);
    this.body.collideWorldBounds = true;
-   this.body.gravity.y = 300;
+   this.body.gravity.y = 600;
 }
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor (Player)
@@ -88,7 +88,7 @@ Player.prototype.update = function() {
    // Player can jump only if they're touching the Ground
    if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && jumps != 0) {
       jumpSFX.play('', 0, .5, false);
-      this.body.velocity.y = -250;
+      this.body.velocity.y = -350;
       jumps--;
    }
 
