@@ -1,7 +1,8 @@
 var platforms;
-var layers;
 var jumps = 0;
 var dash = 0;
+var dashing;
+var oldPos;
 var jumpSFX;
 
 // objects: The things the player can collide with
@@ -9,19 +10,21 @@ var jumpSFX;
 // yellow: True if the player has collected red
 // blue: True if the player has collected red
 
-function Player(game, x, y, objects, tilemap) {
+function Player(game, x, y, objects) {
    platforms = objects;
-   layers = tilemap;
+   // layers = tilemap;
    jumpSFX = game.add.audio('jump');
 
    // call to Phaser.Sprite
    // new Sprite(game, x, y, key, frame)
-   Phaser.Sprite.call(this, game, x, y, 'atlas', 'player_walk05');
+   Phaser.Sprite.call(this, game, x, y, 'bucky');
+   this.scale.x = 0.015;
+   this.scale.y = 0.015;
 
-   // Add the animations to the player.
-   this.animations.add('idle', ['player_walk05'], 10, true);
-   this.animations.add('right', ['player_walk01', 'player_walk02', 'player_walk03', 'player_walk04'], 10, true);
-   this.animations.add('left', ['player_walk06', 'player_walk07', 'player_walk08', 'player_walk09'], 10, true);
+   // // Add the animations to the player.
+   // this.animations.add('idle', ['player_walk05'], 10, true);
+   // this.animations.add('right', ['player_walk01', 'player_walk02', 'player_walk03', 'player_walk04'], 10, true);
+   // this.animations.add('left', ['player_walk06', 'player_walk07', 'player_walk08', 'player_walk09'], 10, true);
 
    // Gives the player physics
    game.physics.arcade.enable(this);
@@ -43,22 +46,16 @@ Player.prototype.update = function() {
    // If player is colliding with a platform
    var hitPlatform;
 
-   if (platforms != null) {
-      hitPlatform = game.physics.arcade.collide(this, platforms);
-   }
-   else {
-      for (var i = 0; i < layers.length; i++) {
-         //console.log(i);
-         var temp = game.physics.arcade.collide(layers[i], this);
-         if (temp) hitPlatform = temp;
-      }
+   hitPlatform = game.physics.arcade.collide(this, platforms);
+
+   if (this.body.blocked.left || this.body.blocked.right) {
+      dashing = false;
    }
 
    // Jumps depending on how many jumps it has. Refreshed when touching the ground
    if (this.body.blocked.down || this.body.touching.down && hitPlatform) {
       jumps = 1;
       if (hasBlue) jumps = 2;
-      if (hasPurple) jumps = 3;
    }
 
    // Player dash count. Refreshed when touching the ground
@@ -97,7 +94,13 @@ Player.prototype.update = function() {
 
    // Player can only dash once in the air
    if (game.input.keyboard.justPressed(Phaser.Keyboard.C) && dash != 0) {
-      this.x += 150 * direction;
+      dashing = true;
+      oldPos = this.x;
       dash--;
    }
+
+   if (dashing && Math.abs(oldPos - this.x) < 150) {
+      this.body.velocity.x = 1000 * direction;
+   }
+   else dashing = false;
 }

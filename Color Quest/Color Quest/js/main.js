@@ -10,11 +10,8 @@
 // define globals
 var game;
 var hasRed = false;
-var hasYellow = false;
+var hasYellow = true;
 var hasBlue = false;
-var hasGreen = false;
-var hasPurple = false;
-var hasOrange = false;
 var direction = 1; // 1 (facing right), -1 (facing left)
 var backgroundColor = "#D3D3D3" // light gray.
 var song;
