@@ -11,9 +11,9 @@ MainMenu.prototype = {
       // Background
       game.stage.backgroundColor = "#0c4196";
 
-      game.add.text(325, 250, "Press [SPACE] to go to tutorial");
-      game.add.text(375, 350, "Arrow keys to move");
-      game.add.text(300, 450, "Z to jump, X to shoot, C to dash");
+      game.add.text(300, 250, "Press [SPACE] to go to tutorial");
+      game.add.text(300, 350, "Arrow keys ⬅➡ to move");
+      game.add.text(300, 450, "UP ⬆ to jump");
    },
 
    update: function() {

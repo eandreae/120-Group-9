@@ -28,9 +28,6 @@ window.onload = function() {
    game.state.add('Red', Red);            // Red state
    game.state.add('Yellow', Yellow);      // Yellow state
    game.state.add('Blue', Blue);          // Blue state
-   game.state.add('Purple', Purple);      // Purple state
-   game.state.add('Orange', Orange);      // Orange state
-   game.state.add('Green', Green);        // Green state
    game.state.add('BossMap', BossMap);    // Final boss area
    game.state.add('GameOver', GameOver);  // Game over state
    game.state.add('ColorWall', ColorWall);// Color wall state
