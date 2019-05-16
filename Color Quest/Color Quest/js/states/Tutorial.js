@@ -185,4 +185,10 @@ Tutorial.prototype = {
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
    },
+
+   render: function() {
+       game.debug.bodyInfo(this.player, 100, 100, 'black');
+       game.debug.body(this.player);
+       game.debug.text('Player y value: '+this.y, 100, 100, 'black');
+   }
 };
