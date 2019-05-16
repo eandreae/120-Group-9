@@ -28,7 +28,7 @@ Tutorial.prototype = {
 
       // Create new tilemap
       this.map = game.add.tilemap('layout');
-      this.map.addTilesetImage('tilesheet_1', 'tilesheet');
+      this.map.addTilesetImage('ColorQuestTileSheet_1', 'tilesheet');
       this.map.setCollisionByExclusion([]);
       this.mapLayer = this.map.createLayer('Tile Layer 1');
       this.mapLayer.resizeWorld();
@@ -60,11 +60,49 @@ Tutorial.prototype = {
          game.physics.arcade.enable(this.bluePortal);
       }
 
-      if (hasRed && hasYellow && hasBlue)
-      {
+      if (hasRed && hasYellow && hasBlue) {
          this.bossPortal = game.add.sprite(900, 825, 'bPortal');
          game.physics.arcade.enable(this.bossPortal);
       }
+
+      this.npcs = game.add.group();
+      this.npcs.enableBody = true;
+
+      this.n1 = new NPC(game, 500, 800);
+      game.add.existing(this.n1);
+      this.npcs.add(this.n1);
+
+      this.textPos = 0;
+
+      var styleDescription = {
+         font: '18px Arial',
+         fill: '#ffffff',
+         align: 'center',
+         fontWeight: 'bold',
+         stroke: '#ffffff',
+         strokeThickness: 0
+      };
+
+      this.textArea = this.add.text(this.n1.x + 10, this.n1.y + 20, "", styleDescription);
+      this.textArea.anchor.set(0.5);
+      this.textArea.fixedToCamera = false;
+      this.textArea.cameraOffset.x = 470;
+      this.textArea.cameraOffset.y = 560;
+      this.world.bringToTop(this.textArea);
+
+      //The array for the text
+      this.n1Text = new Array();
+
+      // The text is from Shakespeare's "As You Like It"
+      this.n1Text[0] = "Go apart, Adam, and thou shalt\n hear how he will shake me up.";
+      this.n1Text[1] = "Now, sir! what make you here?";
+      this.n1Text[2] = "Nothing: I am not taught to make any thing.";
+      this.n1Text[3] = "What mar you then, sir?";
+      this.n1Text[4] = "Marry, sir, I am helping you to mar\n that which God made, a poor unworthy brother\n of yours, with idleness.";
+      this.n1Text[5] = "Marry, sir, be better employed, and be naught awhile.";
+      this.n1Text[6] = "Shall I keep your hogs and eat husks\n with them? What prodigal portion have I spent,\n that I should come to such penury?";
+      this.n1Text[7] = "Know you where your are, sir?";
+      this.n1Text[8] = "O, sir, very well; here in your orchard.";
 
       // Adds the player into the state
       this.player = new Player(game, 64, 825, this.mapLayer);
@@ -98,6 +136,8 @@ Tutorial.prototype = {
       timer = game.time.create(false);
       timer.loop(2000, this.enemyGroup, this);
       timer.start();
+
+      npcText = game.time.create(false);
    },
 
    update: function() {
@@ -129,14 +169,9 @@ Tutorial.prototype = {
          game.state.start('BossMap');
       }
 
-      // Go to purple state
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.P)) {
-         game.state.start('Purple');
-      }
-
       // Go to the color wall
-      if(game.input.keyboard.justPressed(Phaser.Keyboard.W)){
-          game.state.start('ColorWall');
+      if (game.input.keyboard.justPressed(Phaser.Keyboard.W)) {
+         game.state.start('ColorWall');
       }
 
       // Player shoots a bullet for each key press
@@ -146,9 +181,19 @@ Tutorial.prototype = {
          this.playerBullets.add(bullet);
       }
 
+      if (game.physics.arcade.overlap(this.player, this.n1)) {
+         // Somehow tell the player to press Z to interact
+         if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
+            // Timer for npc text
+            npcText.loop(3000, this.goThroughText, this, this.n1Text);
+            npcText.start();
+         }
+      }
+
       // All the collisions needed
-      game.physics.arcade.collide(this.enemies, this.mapLayer);   // Enemies with platforms
+      game.physics.arcade.collide(this.enemies, this.mapLayer); // Enemies with platforms
       game.physics.arcade.collide(this.shootingEnemies, this.mapLayer); // Shooting enemies with platforms
+      game.physics.arcade.collide(this.npcs, this.mapLayer);
 
       // Player with enemies
       if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
@@ -186,8 +231,23 @@ Tutorial.prototype = {
       this.enemyBullets.add(bullet);
    },
 
+   goThroughText: function(text) {
+      //The text change with the step
+      this.textArea.text = text[this.textPos];
+
+      //The step increase
+      this.textPos = Math.abs(this.textPos + 1);
+
+      //The text is on top (on Z axis)
+      this.world.bringToTop(this.textArea);
+
+      if (this.textPos == text.length) {
+         npcText.stop();
+      }
+   },
+
    render: function() {
-       game.debug.bodyInfo(this.player, 100, 100, 'black');
-       game.debug.body(this.player);
+      game.debug.bodyInfo(this.player, 100, 100, 'black');
+      game.debug.body(this.player);
    }
 };
