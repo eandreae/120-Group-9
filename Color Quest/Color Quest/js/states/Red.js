@@ -10,8 +10,8 @@ Red.prototype = {
    preload: function() {
       console.log('Red: preload');
 
-      game.load.tilemap('layout', 'assets/TileMaps/RedMap.json', null, Phaser.Tilemap.TILED_JSON);
-      game.load.spritesheet('tilesheet', 'assets/TileSheets/tilesheet_1.png', 32, 32);
+      game.load.tilemap('layout', 'assets/TileMaps/Red.json', null, Phaser.Tilemap.TILED_JSON);
+      game.load.spritesheet('tilesheet', 'assets/TileSheets/color_tiles.png', 32, 32);
    },
 
    create: function() {
@@ -25,9 +25,9 @@ Red.prototype = {
 
       // Create new tilemap
       this.map = game.add.tilemap('layout');
-      this.map.addTilesetImage('ColorQuestTileSheet_1', 'tilesheet');
+      this.map.addTilesetImage('color_tiles_tileset', 'tilesheet');
       this.map.setCollisionByExclusion([]);
-      this.mapLayer = this.map.createLayer('Tile Layer 1');
+      this.mapLayer = this.map.createLayer('Ground');
       this.mapLayer.resizeWorld();
 
       // set 32-pixel buffer around tiles to avoid collision tunneling
@@ -49,6 +49,34 @@ Red.prototype = {
       // Camera follows player
       game.camera.follow(this.player);
       game.camera.deadzone = new Phaser.Rectangle(325, 200, 50, 150); // (x,y,width,height)
+
+
+      // Bullet groups
+      this.playerBullets = game.add.group();
+      this.enemyBullets = game.add.group();
+
+      // Place the shooting enemies.
+      // The group of shooting enemies.
+      this.shootingEnemies = game.add.group();
+      this.shootingEnemies.enableBody = true;
+
+      // enemies 1, 2, 3, first half of red.
+      var e1 = new Enemy(game, 2465, 832, 0);
+      game.add.existing(e1);
+      this.shootingEnemies.add(e1);
+
+      var e2 = new Enemy(game, 2465, 704, 0);
+      game.add.existing(e2);
+      this.shootingEnemies.add(e2);
+
+      var e3 = new Enemy(game, 2465, 576, 0);
+      game.add.existing(e3);
+      this.shootingEnemies.add(e3);
+
+      // Timer for how often the enemies shoot
+      timer = game.time.create(false);
+      timer.loop(2000, this.enemyGroup, this);
+      timer.start();
    },
 
    update: function() {
@@ -87,6 +115,18 @@ Red.prototype = {
          color.destroy();
          song.stop();
          game.time.events.add(Phaser.Timer.SECOND * 2, function() { game.state.start('Tutorial')});
-      }
-   }
+     }
+    },
+    enemyGroup: function() {
+       this.shootingEnemies.forEach(this.enemyShoot, this, true);
+    },
+    enemyShoot: function(enemy) {
+       var bullet = new Bullet(game, enemy.x, enemy.y, -1, .4, 1500);
+       game.add.existing(bullet);
+       this.enemyBullets.add(bullet);
+    },
+     render: function() {
+         game.debug.bodyInfo(this.player, 100, 100, 'black');
+         game.debug.body(this.player);
+     }
 };
