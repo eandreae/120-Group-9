@@ -11,8 +11,8 @@ Tutorial.prototype = {
    preload: function() {
       console.log('Tutorial: preload');
 
-      game.load.tilemap('layout', 'assets/TileMaps/TutorialMap.json', null, Phaser.Tilemap.TILED_JSON);
-      game.load.spritesheet('tilesheet', 'assets/TileSheets/tilesheet_1.png', 32, 32);
+      game.load.tilemap('layout', 'assets/TileMaps/Tutorial.json', null, Phaser.Tilemap.TILED_JSON);
+      game.load.spritesheet('tilesheet', 'assets/TileSheets/color_tiles.png', 32, 32);
    },
 
    create: function() {
@@ -28,9 +28,9 @@ Tutorial.prototype = {
 
       // Create new tilemap
       this.map = game.add.tilemap('layout');
-      this.map.addTilesetImage('ColorQuestTileSheet_1', 'tilesheet');
+      this.map.addTilesetImage('color_tiles_tileset', 'tilesheet');
       this.map.setCollisionByExclusion([]);
-      this.mapLayer = this.map.createLayer('Tile Layer 1');
+      this.mapLayer = this.map.createLayer('Ground');
       this.mapLayer.resizeWorld();
 
       // set 32-pixel buffer around tiles to avoid collision tunneling
@@ -40,7 +40,7 @@ Tutorial.prototype = {
       if (!hasRed) {
          bmd = game.add.bitmapData(100, 100);
          bmd.fill(255, 0, 0, 1);
-         this.redPortal = game.add.sprite(300, 825, 'atlas', 'red_color');
+         this.redPortal = game.add.sprite(2656, 129, 'atlas', 'red_color');
          game.physics.arcade.enable(this.redPortal);
       }
 
@@ -141,7 +141,9 @@ Tutorial.prototype = {
    },
 
    update: function() {
-      //console.log('Tutorial: update');
+
+       // Add the collsions for the TileMaps
+
 
       // Go into the red state
       if (!hasRed) {
