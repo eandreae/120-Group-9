@@ -20,7 +20,13 @@ function Enemy(game, x, y, speed) {
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
 Enemy.prototype.constructor = Enemy;
 
+var hitPlatform;
 Enemy.prototype.update = function() {
+
+    var hitPlatform;
+
+     hitPlatform = game.physics.arcade.collide(this, platforms);
+
    this.body.velocity.x = this.v;
    // if moving to the right.
    if( this.body.velocity.x > 0 ){
