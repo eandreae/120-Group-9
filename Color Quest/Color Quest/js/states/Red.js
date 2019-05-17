@@ -49,18 +49,6 @@ Red.prototype = {
       this.player = new Player(game, 64, 825, this.mapLayer);
       game.add.existing(this.player);
 
-      // Bullet groups
-      this.playerBullets = game.add.group();
-
-      // Camera follows player
-      game.camera.follow(this.player);
-      game.camera.deadzone = new Phaser.Rectangle(325, 200, 50, 150); // (x,y,width,height)
-
-
-      // Bullet groups
-      this.playerBullets = game.add.group();
-      this.enemyBullets = game.add.group();
-
       // Place the shooting enemies.
       // The group of shooting enemies.
       this.shootingEnemies = game.add.group();
@@ -79,6 +67,14 @@ Red.prototype = {
       game.add.existing(e3);
       this.shootingEnemies.add(e3);
 
+      // Bullet groups
+      this.playerBullets = game.add.group();
+      this.enemyBullets = game.add.group();
+
+      // Camera follows player
+      game.camera.follow(this.player);
+      game.camera.deadzone = new Phaser.Rectangle(325, 200, 50, 150); // (x,y,width,height)
+
       // Timer for how often the enemies shoot
       timer = game.time.create(false);
       timer.loop(2000, this.enemyGroup, this);
@@ -87,6 +83,7 @@ Red.prototype = {
 
    update: function() {
       //console.log('Red: update');
+      //console.log(this.enemyBullets.length)
       if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
          game.state.start('GameOver');
       }
@@ -98,32 +95,49 @@ Red.prototype = {
          this.playerBullets.add(bullet);
       }
 
-      // Overlap check to check collision between Player and Red Upgrade.
-      this.physics.arcade.overlap(this.player, this.red, collectRed, null, this);
-      // Overlap check to check collision between Player and the Go Home button.
-      this.physics.arcade.overlap(this.player, this.home, goHome, null, this);
+      // All the collisions needed
+      game.physics.arcade.collide(this.enemies, this.mapLayer); // Enemies with platforms
+      game.physics.arcade.collide(this.shootingEnemies, this.mapLayer); // Shooting enemies with platforms
+      game.physics.arcade.collide(this.npcs, this.mapLayer);
 
-      // Collision detection for Player bullets on the Shooting enemies.
-      game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this)
-
-      // Collision detection for enemy bullets with the Player.
-      game.physics.arcade.collide(this.enemyBullets, this.player, bulletHitsPlayer, null, this)
-
-      // Collision detection
+      // Player with enemies
       if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
          song.stop();
          playerDies(game, this.player);
       }
 
+      // Player bullet with enemies
+      game.physics.arcade.collide(this.playerBullets, this.enemies, bulletHitsEnemy, null, this)
+      game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this)
+
+      // Enemy bullets with player
+      game.physics.arcade.collide(this.enemyBullets, this.player, bulletHitsPlayer, null, this)
+
+      // // Overlap check to check collision between Player and Red Upgrade.
+      // this.physics.arcade.overlap(this.player, this.red, collectRed, null, this);
+      // // Overlap check to check collision between Player and the Go Home button.
+      // this.physics.arcade.overlap(this.player, this.home, goHome, null, this);
+      //
+      // // Collision detection for Player bullets on the Shooting enemies.
+      // game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this);
+      //
+      // // Collision detection for enemy bullets with the Player.
+      // game.physics.arcade.collide(this.enemyBullets, this.player, bulletHitsPlayer, null, this);
+
+      // Collision detection
+      // if (game.physics.arcade.collide(this.shootingEnemies, this.player)) {
+      //    song.stop();
+      //    playerDies(game, this.player);
+      // }
+
       // Function for if the Player's bullets hit the enemy.
       function bulletHitsEnemy(bullet, enemy) {
-         bullet.destroy();
-         enemy.destroy();
+         bullet.kill();
+         enemy.kill();
       }
 
-      // Function for if the Enemy's bullets hit the Player.
       function bulletHitsPlayer(bullet, player) {
-         bullet.destroy();
+         bullet.kill();
          song.stop();
          playerDies(game, player);
       }
@@ -138,48 +152,52 @@ Red.prototype = {
 
          // Particles when color is collected
          colorEmitter = game.add.emitter(color.x, color.y, 200);
-         colorEmitter.makeParticles(bmd);		        // red squares used as particles
+         colorEmitter.makeParticles(bmd); // red squares used as particles
          colorEmitter.gravity = 0;
          colorEmitter.setScale(.25, .8, .25, .8, 0);
-         colorEmitter.setAlpha(.8, 0, 1800); 	      // .8 to .3 alpha
-         colorEmitter.setXSpeed(-100,100);			   // horizontal speed range
-         colorEmitter.setYSpeed(-100,100);			   // vertical speed range
-         colorEmitter.start(true, 2000, null, 50);	   // (explode, lifespan, freq, quantity)
+         colorEmitter.setAlpha(.8, 0, 1800); // .8 to .3 alpha
+         colorEmitter.setXSpeed(-100, 100); // horizontal speed range
+         colorEmitter.setYSpeed(-100, 100); // vertical speed range
+         colorEmitter.start(true, 2000, null, 50); // (explode, lifespan, freq, quantity)
 
-         color.destroy();
+         color.kill();
+      }
 
-
-     }
-     function goHome(player, color) {
+      function goHome(player, color) {
          // Red bdm
          bmd = game.add.bitmapData(18, 18);
          bmd.fill(255, 0, 0, 1);
 
          // Particles when color is collected
          colorEmitter = game.add.emitter(color.x, color.y, 200);
-         colorEmitter.makeParticles(bmd);		        // red squares used as particles
+         colorEmitter.makeParticles(bmd); // red squares used as particles
          colorEmitter.gravity = 0;
          colorEmitter.setScale(.25, .8, .25, .8, 0);
-         colorEmitter.setAlpha(.8, 0, 1800); 	      // .8 to .3 alpha
-         colorEmitter.setXSpeed(-100,100);			   // horizontal speed range
-         colorEmitter.setYSpeed(-100,100);			   // vertical speed range
-         colorEmitter.start(true, 2000, null, 50);	   // (explode, lifespan, freq, quantity)
+         colorEmitter.setAlpha(.8, 0, 1800); // .8 to .3 alpha
+         colorEmitter.setXSpeed(-100, 100); // horizontal speed range
+         colorEmitter.setYSpeed(-100, 100); // vertical speed range
+         colorEmitter.start(true, 2000, null, 50); // (explode, lifespan, freq, quantity)
 
-         color.destroy();
+         color.kill();
          song.stop();
-         game.time.events.add(Phaser.Timer.SECOND * 2, function() { game.state.start('Tutorial')});
-     }
-    },
-    enemyGroup: function() {
-       this.shootingEnemies.forEach(this.enemyShoot, this, true);
-    },
-    enemyShoot: function(enemy) {
-       var bullet = new Bullet(game, enemy.x, enemy.y, -1, .4, 150);
-       game.add.existing(bullet);
-       this.enemyBullets.add(bullet);
-    },
-     render: function() {
-         game.debug.bodyInfo(this.player, 100, 100, 'black');
-         game.debug.body(this.player);
-     }
+         game.time.events.add(Phaser.Timer.SECOND * 2, function() {
+            game.state.start('Tutorial')
+         });
+      }
+   },
+   // Called every 2 seconds by the timer to have the enemies shoot
+   enemyGroup: function() {
+      this.shootingEnemies.forEach(this.enemyShoot, this, true);
+   },
+
+   enemyShoot: function(enemy) {
+      var bullet = new Bullet(game, enemy.x, enemy.y, -1, .4, 350);
+      game.add.existing(bullet);
+      this.enemyBullets.add(bullet);
+   },
+
+   render: function() {
+      game.debug.bodyInfo(this.player, 100, 100, 'black');
+      game.debug.body(this.player);
+   }
 };
