@@ -36,8 +36,14 @@ Red.prototype = {
       // Red collectable
       bmd = game.add.bitmapData(75, 75);
       bmd.fill(255, 0, 0, 1);
-      this.red = game.add.sprite(500, 10, 'atlas', 'red_color');
+      this.red = game.add.sprite(2464, 416, 'atlas', 'red_color');
       game.physics.arcade.enable(this.red);
+
+      // Home collectable
+      bmd2 = game.add.bitmapData(75, 75);
+      bmd.fill(255, 0, 0, 1);
+      this.home = game.add.sprite(4002, 800, 'atlas', 'red_color');
+      game.physics.arcade.enable(this.home);
 
       // Adds the player into the state
       this.player = new Player(game, 64, 825, this.mapLayer);
@@ -92,12 +98,34 @@ Red.prototype = {
          this.playerBullets.add(bullet);
       }
 
+      // Overlap check to check collision between Player and Red Upgrade.
       this.physics.arcade.overlap(this.player, this.red, collectRed, null, this);
+      // Overlap check to check collision between Player and the Go Home button.
+      this.physics.arcade.overlap(this.player, this.home, goHome, null, this);
 
       // When the player collects the color
       function collectRed(player, color) {
          hasRed = true;
 
+         // Red bdm
+         bmd = game.add.bitmapData(18, 18);
+         bmd.fill(255, 0, 0, 1);
+
+         // Particles when color is collected
+         colorEmitter = game.add.emitter(color.x, color.y, 200);
+         colorEmitter.makeParticles(bmd);		        // red squares used as particles
+         colorEmitter.gravity = 0;
+         colorEmitter.setScale(.25, .8, .25, .8, 0);
+         colorEmitter.setAlpha(.8, 0, 1800); 	      // .8 to .3 alpha
+         colorEmitter.setXSpeed(-100,100);			   // horizontal speed range
+         colorEmitter.setYSpeed(-100,100);			   // vertical speed range
+         colorEmitter.start(true, 2000, null, 50);	   // (explode, lifespan, freq, quantity)
+
+         color.destroy();
+
+
+     }
+     function goHome(player, color) {
          // Red bdm
          bmd = game.add.bitmapData(18, 18);
          bmd.fill(255, 0, 0, 1);
