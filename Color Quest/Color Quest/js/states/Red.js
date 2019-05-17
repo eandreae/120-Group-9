@@ -103,6 +103,31 @@ Red.prototype = {
       // Overlap check to check collision between Player and the Go Home button.
       this.physics.arcade.overlap(this.player, this.home, goHome, null, this);
 
+      // Collision detection for Player bullets on the Shooting enemies.
+      game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this)
+
+      // Collision detection for enemy bullets with the Player.
+      game.physics.arcade.collide(this.enemyBullets, this.player, bulletHitsPlayer, null, this)
+
+      // Collision detection
+      if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
+         song.stop();
+         playerDies(game, this.player);
+      }
+
+      // Function for if the Player's bullets hit the enemy.
+      function bulletHitsEnemy(bullet, enemy) {
+         bullet.destroy();
+         enemy.destroy();
+      }
+
+      // Function for if the Enemy's bullets hit the Player.
+      function bulletHitsPlayer(bullet, player) {
+         bullet.destroy();
+         song.stop();
+         playerDies(game, player);
+      }
+
       // When the player collects the color
       function collectRed(player, color) {
          hasRed = true;
@@ -149,7 +174,7 @@ Red.prototype = {
        this.shootingEnemies.forEach(this.enemyShoot, this, true);
     },
     enemyShoot: function(enemy) {
-       var bullet = new Bullet(game, enemy.x, enemy.y, -1, .4, 1500);
+       var bullet = new Bullet(game, enemy.x, enemy.y, -1, .4, 150);
        game.add.existing(bullet);
        this.enemyBullets.add(bullet);
     },

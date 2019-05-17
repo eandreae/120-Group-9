@@ -228,7 +228,7 @@ Tutorial.prototype = {
    },
 
    enemyShoot: function(enemy) {
-      var bullet = new Bullet(game, enemy.x, enemy.y, -1, .4, 1500);
+      var bullet = new Bullet(game, enemy.x, enemy.y, -1, .4, 350);
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
    },
