@@ -109,7 +109,7 @@ Red.prototype = {
       // Collision detection for enemy bullets with the Player.
       game.physics.arcade.collide(this.enemyBullets, this.player, bulletHitsPlayer, null, this)
 
-      // Collision detection
+      // Collision detection player with enemies.
       if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
          song.stop();
          playerDies(game, this.player);
