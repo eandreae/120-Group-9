@@ -88,7 +88,7 @@ Player.prototype.update = function() {
    // Player can jump only if they're touching the Ground
    if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && jumps != 0) {
       jumpSFX.play('', 0, .5, false);
-      this.body.velocity.y = -350;
+      this.body.velocity.y = -375;
       jumps--;
    }
 
@@ -101,6 +101,7 @@ Player.prototype.update = function() {
 
    if (dashing && Math.abs(oldPos - this.x) < 150) {
       this.body.velocity.x = 700 * direction;
+      this.body.velocity.y = 0;
    }
    else dashing = false;
 }

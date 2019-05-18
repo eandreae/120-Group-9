@@ -10,7 +10,8 @@ Load.prototype = {
 		game.load.image('ground', 'assets/img/platform.png');
 		game.load.image('bullet', 'assets/img/bullet.png');
       game.load.image('boss', 'assets/img/kingcolor.png');
-		game.load.image('bPortal', 'assets/img/KingColorButton.png')
+		game.load.image('bPortal', 'assets/img/KingColorButton.png');
+		game.load.image('title', 'assets/img/TitleScreen.png');
 
 		game.load.audio('jump', 'assets/audio/Jump.mp3');
 		game.load.audio('song', 'assets/audio/Delicate.mp3');
@@ -19,7 +20,7 @@ Load.prototype = {
 		console.log('Load: create');
 		song = game.add.audio('song');
 
-		 game.state.start('MainMenu');
+		game.state.start('MainMenu');
 	},
 
 	update: function() {
