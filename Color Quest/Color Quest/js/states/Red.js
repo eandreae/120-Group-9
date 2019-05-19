@@ -54,18 +54,31 @@ Red.prototype = {
       this.shootingEnemies = game.add.group();
       this.shootingEnemies.enableBody = true;
 
-      // enemies 1, 2, 3, first half of red.
+      // enemies 1 and 2 for the first half of red.
       var e1 = new Enemy(game, 2465, 832, 0);
       game.add.existing(e1);
       this.shootingEnemies.add(e1);
 
-      var e2 = new Enemy(game, 2465, 704, 0);
+      var e2 = new Enemy(game, 2465, 576, 0);
       game.add.existing(e2);
       this.shootingEnemies.add(e2);
 
-      var e3 = new Enemy(game, 2465, 576, 0);
+      // enemies 3, 4, 5, and 6 for the second half of red.
+      var e3 = new Enemy(game, 3809, 417, 0);
       game.add.existing(e3);
       this.shootingEnemies.add(e3);
+
+      var e4 = new Enemy(game, 3809, 576, 0);
+      game.add.existing(e4);
+      this.shootingEnemies.add(e4);
+
+      var e5 = new Enemy(game, 3809, 703, 0);
+      game.add.existing(e5);
+      this.shootingEnemies.add(e5);
+
+      var e6 = new Enemy(game, 3809, 832, 0);
+      game.add.existing(e6);
+      this.shootingEnemies.add(e6);
 
       // Bullet groups
       this.playerBullets = game.add.group();
@@ -77,7 +90,7 @@ Red.prototype = {
 
       // Timer for how often the enemies shoot
       timer = game.time.create(false);
-      timer.loop(2000, this.enemyGroup, this);
+      timer.loop(3500, this.enemyGroup, this);
       timer.start();
    },
 
@@ -109,6 +122,12 @@ Red.prototype = {
       // Player bullet with enemies
       game.physics.arcade.collide(this.playerBullets, this.enemies, bulletHitsEnemy, null, this)
       game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this)
+
+      // Player with the Red Upgrade.
+      this.physics.arcade.overlap(this.player, this.red, collectRed, null, this);
+
+      // Player with the GoHome red button.
+      this.physics.arcade.overlap(this.player, this.home, goHome, null, this);
 
       // Enemy bullets with player
       game.physics.arcade.collide(this.enemyBullets, this.player, bulletHitsPlayer, null, this)
@@ -175,7 +194,7 @@ Red.prototype = {
    },
 
    enemyShoot: function(enemy) {
-      var bullet = new Bullet(game, enemy.x, enemy.y, -1, .4, 350);
+      var bullet = new Bullet(game, enemy.x, enemy.y, -1, .4, 300);
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
    },
