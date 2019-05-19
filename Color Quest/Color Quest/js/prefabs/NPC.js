@@ -3,6 +3,8 @@ function NPC(game, x, y) {
    // Inherits Phaser.Sprite and puts the sprite in a position on the screen
    Phaser.Sprite.call(this, game, x, y, 'npc');
 
+   this.anchor.set(0.5);
+
    game.physics.arcade.enable(this);
    this.body.collideWorldBounds = true;
    this.body.gravity.y = 300;
