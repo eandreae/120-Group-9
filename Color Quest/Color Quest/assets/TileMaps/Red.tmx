@@ -42,7 +42,6 @@
  <objectgroup id="2" name="Object Layer 1">
   <object id="1" name="PlayerSpawn" x="64" y="800.333" width="64" height="63.3333"/>
   <object id="2" name="ShootingEnemy" x="2465" y="832" width="64" height="63"/>
-  <object id="3" name="ShootingEnemy" x="2464.5" y="704" width="64" height="63.3333"/>
   <object id="4" name="ShootingEnemy" x="2464" y="576" width="64" height="63.3333"/>
   <object id="5" name="RedUpgrade" x="2464" y="416" width="64" height="63.3333"/>
   <object id="6" name="RedHome" x="4002" y="800" width="64" height="63.3333"/>

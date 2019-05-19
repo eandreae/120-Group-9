@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="128" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="5">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="128" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="7">
  <tileset firstgid="1" name="color_tiles_tileset" tilewidth="32" tileheight="32" tilecount="5" columns="1">
   <image source="color_tiles.png" width="32" height="160"/>
  </tileset>
@@ -42,6 +42,8 @@
  <objectgroup id="4" name="Object Layer 1">
   <object id="2" name="PlayerSpawn" x="64" y="832" width="64" height="63.3333"/>
   <object id="3" name="NPC1" x="256" y="832" width="64" height="63.3333"/>
-  <object id="4" name="PlayerSpawn" x="2656" y="129" width="64" height="63.3333"/>
+  <object id="4" name="Red" x="2656" y="129" width="64" height="63.3333"/>
+  <object id="5" name="Blue" x="3935.33" y="128.333" width="64" height="63.3333"/>
+  <object id="6" name="Yellow" x="1665" y="225.333" width="64" height="63.3333"/>
  </objectgroup>
 </map>

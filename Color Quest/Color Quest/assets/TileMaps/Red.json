@@ -27,7 +27,7 @@
                  "visible":true,
                  "width":64,
                  "x":64,
-                 "y":800.33335
+                 "y":800.333
                 }, 
                 {
                  "height":63,
@@ -39,17 +39,6 @@
                  "width":64,
                  "x":2465,
                  "y":832
-                }, 
-                {
-                 "height":63.3333,
-                 "id":3,
-                 "name":"ShootingEnemy",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":2464.5,
-                 "y":704
                 }, 
                 {
                  "height":63.3333,
@@ -126,7 +115,7 @@
                  "visible":true,
                  "width":64,
                  "x":3809,
-                 "y":416.33335
+                 "y":416.333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -144,7 +133,7 @@
         {
          "columns":1,
          "firstgid":1,
-         "image":"..\/TileSheets\/color_tiles.png",
+         "image":"color_tiles.png",
          "imageheight":160,
          "imagewidth":32,
          "margin":0,
