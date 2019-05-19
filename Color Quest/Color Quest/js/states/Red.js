@@ -134,18 +134,18 @@ Red.prototype = {
          }
       }
 
-      // Player bullet with enemies
-      game.physics.arcade.collide(this.playerBullets, this.enemies, bulletHitsEnemy, null, this)
-      game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this)
-
       // Player with the Red Upgrade.
       this.physics.arcade.overlap(this.player, this.red, collectRed, null, this);
 
       // Player with the GoHome red button.
       this.physics.arcade.overlap(this.player, this.home, goHome, null, this);
 
+      // Player bullet with enemies
+      game.physics.arcade.collide(this.playerBullets, this.enemies, bulletHitsEnemy, null, this)
+      game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this)
+
       // Enemy bullets with player
-      game.physics.arcade.collide(this.enemyBullets, this.player, bulletHitsPlayer, null, this)
+      game.physics.arcade.collide(this.player, this.enemyBullets, bulletHitsPlayer, null, this);
 
       // Bullets hitting a wall
       game.physics.arcade.collide(this.enemyBullets, this.mapLayer, bulletHitsWall, null, this);
@@ -159,14 +159,12 @@ Red.prototype = {
          enemy.kill();
       }
 
-      function bulletHitsPlayer(bullet, player) {
-         console.log("uhoh");
+      function bulletHitsPlayer(player, bullet) {
          bulletDestroyed(game, bullet);
-
          health--;
          if (health == 0) {
-            song.stop();
             playerDies(game, player);
+            song.stop();
          }
       }
 

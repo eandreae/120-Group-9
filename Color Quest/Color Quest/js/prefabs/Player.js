@@ -15,8 +15,8 @@ var injured = false;
 
 function Player(game, x, y, objects) {
    platforms = objects;
-   // layers = tilemap;
    jumpSFX = game.add.audio('jump');
+   hp = health;
 
    // call to Phaser.Sprite
    // new Sprite(game, x, y, key, frame)
@@ -121,7 +121,6 @@ Player.prototype.update = function() {
       injured = true;
       hp = health;
       oldPos = this.x;
-      //this.enableBody = false;
    }
 
    if (injured && Math.abs(oldPos - this.x) < 75) {

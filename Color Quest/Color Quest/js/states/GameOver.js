@@ -10,8 +10,9 @@ GameOver.prototype = {
       console.log('GameOver: create');
       // Background
       game.stage.backgroundColor = "#0c4196";
-
       game.add.text(450, 450, "You Died!")
+
+      health = 5;
 
    },
 
