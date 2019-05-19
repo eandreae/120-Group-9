@@ -40,11 +40,20 @@ Yellow.prototype = {
       game.physics.arcade.enable(this.yellow);
 
       // Adds the player into the state
-      this.player = new Player(game, 64, 800, this.mapLayer);
+      this.player = new Player(game, 416, 800, this.mapLayer);
       game.add.existing(this.player);
 
       // Bullet groups
       this.playerBullets = game.add.group();
+
+      // Add the enemy that chases you.
+      // The group handling. No shooting.
+      this.enemies = game.add.group();
+      this.enemies.enableBody = true;
+      // The enemy that chases you.
+      var enemy = new Enemy(game, 64, 800, 190);
+      game.add.existing(enemy);
+      this.enemies.add(enemy);
 
       // Camera follows player
       game.camera.follow(this.player);
@@ -53,9 +62,23 @@ Yellow.prototype = {
 
    update: function() {
       //console.log('Yellow: update');
-      if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-         game.state.start('GameOver');
-      }
+
+      // Making it so the enemy will follow the Player.
+      // If player is on the enemy's left.
+      // if( this.enemy.body.x < this.player.body.x ){
+      //     // Make the Enemy chase after the Player.
+      //     this.enemy.body.velocity.x = 190;
+      // }
+      // // If player is on the enemy's right.
+      // if( this.enemy.body.x > this.player.body.x ){
+      //     // Make the Enemy chase after the Player.
+      //     this.enemy.body.velocity.x = -190;
+      // }
+      // // if player is directly above/below the enemy.
+      // if( this.enemy.body.x == this.player.body.x ){
+      //     // Make the Enemy stand still.
+      //     this.enemy.body.velocity.x = 0;
+      // }
 
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
