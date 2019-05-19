@@ -11,7 +11,7 @@ Blue.prototype = {
       console.log('Blue: preload');
 
       game.load.tilemap('layout', 'assets/TileMaps/BlueMap.json', null, Phaser.Tilemap.TILED_JSON);
-      game.load.spritesheet('tilesheet', 'assets/TileSheets/tilesheet_1.png', 32, 32);
+      game.load.spritesheet('tilesheet', 'assets/TileSheets/color_tiles.png', 32, 32);
    },
 
    create: function() {
@@ -25,9 +25,9 @@ Blue.prototype = {
 
       // Create new tilemap
       this.map = game.add.tilemap('layout');
-      this.map.addTilesetImage('ColorQuestTileSheet_1', 'tilesheet');
+      this.map.addTilesetImage('color_tiles_tileset', 'tilesheet');
       this.map.setCollisionByExclusion([]);
-      this.mapLayer = this.map.createLayer('Tile Layer 1');
+      this.mapLayer = this.map.createLayer('Ground');
       this.mapLayer.resizeWorld();
 
       // set 32-pixel buffer around tiles to avoid collision tunneling
@@ -73,7 +73,7 @@ Blue.prototype = {
          // Blue bdm
          bmd = game.add.bitmapData(18, 18);
          bmd.fill(0, 0, 255, 1);
-         
+
          // Particles when color is collected
          colorEmitter = game.add.emitter(color.x, color.y, 200);
          colorEmitter.makeParticles(bmd);		        // red squares used as particles
