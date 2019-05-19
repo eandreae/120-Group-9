@@ -11,7 +11,7 @@ Yellow.prototype = {
       console.log('Yellow: preload');
 
       game.load.tilemap('layout', 'assets/TileMaps/YellowMap.json', null, Phaser.Tilemap.TILED_JSON);
-      game.load.spritesheet('tilesheet', 'assets/TileSheets/tilesheet_1.png', 32, 32);
+      game.load.spritesheet('tilesheet', 'assets/TileSheets/color_tiles.png', 32, 32);
    },
 
    create: function() {
@@ -25,7 +25,7 @@ Yellow.prototype = {
 
       // Create new tilemap
       this.map = game.add.tilemap('layout');
-      this.map.addTilesetImage('ColorQuestTileSheet_1', 'tilesheet');
+      this.map.addTilesetImage('color_tiles_tileset', 'tilesheet');
       this.map.myLayers = [];
 
       this.mapLayer = this.map.createLayer('Ground');
@@ -56,7 +56,7 @@ Yellow.prototype = {
       // Yellow collectable
       bmd = game.add.bitmapData(75, 75);
       bmd.fill(255, 255, 0, 1);
-      this.yellow = game.add.sprite(600, 800, 'atlas', 'yellow_color');
+      this.yellow = game.add.sprite(450, 800, 'atlas', 'yellow_color');
       game.physics.arcade.enable(this.yellow);
 
       // Adds the player into the state
