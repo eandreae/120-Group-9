@@ -132,17 +132,24 @@ Red.prototype = {
       // Enemy bullets with player
       game.physics.arcade.collide(this.enemyBullets, this.player, bulletHitsPlayer, null, this)
 
+      // Bullets hitting a wall
+      game.physics.arcade.collide(this.enemyBullets, this.mapLayer, bulletHitsWall, null, this);
+      game.physics.arcade.collide(this.playerBullets, this.mapLayer, bulletHitsWall, null, this);
 
       // Function for if the Player's bullets hit the enemy.
       function bulletHitsEnemy(bullet, enemy) {
-         bullet.kill();
+         bulletDestroyed(game, bullet);
          enemy.kill();
       }
 
       function bulletHitsPlayer(bullet, player) {
-         bullet.kill();
+         bulletDestroyed(game, bullet);
          song.stop();
          playerDies(game, player);
+      }
+
+      function bulletHitsWall(bullet, walls) {
+         bulletDestroyed(game, bullet);
       }
 
       // When the player collects the color
