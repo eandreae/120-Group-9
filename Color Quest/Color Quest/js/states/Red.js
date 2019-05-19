@@ -45,6 +45,18 @@ Red.prototype = {
       this.home = game.add.sprite(4002, 800, 'atlas', 'red_color');
       game.physics.arcade.enable(this.home);
 
+      var styleDescription = {
+         font: '18px Arial',
+         fill: '#000000',
+         align: 'center',
+         fontWeight: 'bold',
+         stroke: '#000000',
+         strokeThickness: 0
+      };
+
+      this.healthText = this.add.text(10, 10, "", styleDescription);
+      this.healthText.fixedToCamera = true;
+
       // Adds the player into the state
       this.player = new Player(game, 64, 825, this.mapLayer);
       game.add.existing(this.player);
@@ -115,8 +127,11 @@ Red.prototype = {
 
       // Player with enemies
       if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
-         song.stop();
-         playerDies(game, this.player);
+         health--;
+         if (health == 0) {
+            song.stop();
+            playerDies(game, player);
+         }
       }
 
       // Player bullet with enemies
@@ -136,6 +151,8 @@ Red.prototype = {
       game.physics.arcade.collide(this.enemyBullets, this.mapLayer, bulletHitsWall, null, this);
       game.physics.arcade.collide(this.playerBullets, this.mapLayer, bulletHitsWall, null, this);
 
+      this.healthText.text = health;
+
       // Function for if the Player's bullets hit the enemy.
       function bulletHitsEnemy(bullet, enemy) {
          bulletDestroyed(game, bullet);
@@ -143,9 +160,14 @@ Red.prototype = {
       }
 
       function bulletHitsPlayer(bullet, player) {
+         console.log("uhoh");
          bulletDestroyed(game, bullet);
-         song.stop();
-         playerDies(game, player);
+
+         health--;
+         if (health == 0) {
+            song.stop();
+            playerDies(game, player);
+         }
       }
 
       function bulletHitsWall(bullet, walls) {

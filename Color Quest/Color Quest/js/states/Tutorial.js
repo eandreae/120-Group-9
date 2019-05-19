@@ -76,6 +76,9 @@ Tutorial.prototype = {
          strokeThickness: 0
       };
 
+      this.healthText = this.add.text(10, 10, "", styleDescription);
+      this.healthText.fixedToCamera = true;
+
       this.interactText = this.add.text(0, 0, "Press Z to interact", styleDescription);
       this.interactText.visible = false;
       this.interactText.anchor.set(0.5);
@@ -118,7 +121,6 @@ Tutorial.prototype = {
       this.n2Text[3] = "asfoadnspoasbhgupoifuads\nasdifjpadfnspubpasfas\nhhhhhhhhhhhhhhhhhhhhhh 2";
       this.n2Text[4] = "";
 
-
       // Adds the player into the state
       this.player = new Player(game, 64, 825, this.mapLayer);
       game.add.existing(this.player);
@@ -135,9 +137,9 @@ Tutorial.prototype = {
       // this.enemies.add(e1);
       //
       // // Place a shooting enemy
-      // var e2 = new Enemy(game, 900, 300, 0);
-      // game.add.existing(e2);
-      // this.shootingEnemies.add(e2);
+      var e2 = new Enemy(game, 900, 300, 0);
+      game.add.existing(e2);
+      this.shootingEnemies.add(e2);
 
       // Bullet groups
       this.playerBullets = game.add.group();
@@ -235,8 +237,11 @@ Tutorial.prototype = {
 
       // Player with enemies
       if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
-         song.stop();
-         playerDies(game, this.player);
+         health--;
+         if (health == 0) {
+            song.stop();
+            playerDies(game, this.player);
+         }
       }
 
       // Player bullet with enemies
@@ -244,21 +249,26 @@ Tutorial.prototype = {
       game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this);
 
       // Enemy bullets with player
-      game.physics.arcade.collide(this.enemyBullets, this.player, bulletHitsPlayer, null, this);
+      game.physics.arcade.collide(this.player, this.enemyBullets, bulletHitsPlayer, null, this);
 
       // Bullets hitting a wall
       game.physics.arcade.collide(this.enemyBullets, this.mapLayer, bulletHitsWall, null, this);
       game.physics.arcade.collide(this.playerBullets, this.mapLayer, bulletHitsWall, null, this);
+
+      this.healthText.text = health;
 
       function bulletHitsEnemy(bullet, enemy) {
          bulletDestroyed(game, bullet);
          enemy.destroy();
       }
 
-      function bulletHitsPlayer(bullet, player) {
+      function bulletHitsPlayer(player, bullet) {
          bulletDestroyed(game, bullet);
-         song.stop();
-         playerDies(game, player);
+         health--;
+         if (health == 0) {
+            playerDies(game, player);
+            song.stop();
+         }
       }
 
       function bulletHitsWall(bullet, walls) {

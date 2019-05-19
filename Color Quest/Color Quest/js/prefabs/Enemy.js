@@ -1,5 +1,5 @@
 this.v = 0;
-function Enemy(game, x, y, speed) {
+function Enemy(game, x, y, speed, dashing = false, jumping = false) {
    this.v = speed;
    //console.log(velocity);
    // Inherits Phaser.Sprite and puts the sprite in a position on the screen

@@ -1,9 +1,12 @@
 var platforms;
 var jumps = 0;
+var offPlatform = false;
 var dash = 0;
 var dashing;
 var oldPos;
 var jumpSFX;
+var hp = health;
+var injured = false;
 
 // objects: The things the player can collide with
 // red: True if the player has collected red
@@ -55,8 +58,13 @@ Player.prototype.update = function() {
 
    // Jumps depending on how many jumps it has. Refreshed when touching the ground
    if (this.body.blocked.down || this.body.touching.down && hitPlatform) {
+      offPlatform = false;
       jumps = 1;
       if (hasBlue) jumps = 2;
+   }
+   else if (!offPlatform) {
+      offPlatform = true;
+      jumps--;
    }
 
    // Player dash count. Refreshed when touching the ground
@@ -67,16 +75,17 @@ Player.prototype.update = function() {
 
    // Reset player velocity
    this.body.velocity.x = 0;
+   this.body.gravity.y = 600;
 
    // Moving Left
-   if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
+   if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && !dashing && !injured) {
       this.body.velocity.x = -200;
       this.animations.play('left');
       direction = -1;
   }
 
    // Moving Right
-   else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+   else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && !dashing && !injured) {
       this.body.velocity.x = 200;
       this.animations.play('right');
       direction = 1;
@@ -87,8 +96,9 @@ Player.prototype.update = function() {
    }
 
    // Player can jump only if they're touching the Ground
-   if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && jumps != 0) {
+   if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && jumps >= 1) {
       jumpSFX.play('', 0, .5, false);
+      offPlatform = true;
       this.body.velocity.y = -375;
       jumps--;
    }
@@ -103,6 +113,22 @@ Player.prototype.update = function() {
    if (dashing && Math.abs(oldPos - this.x) < 150) {
       this.body.velocity.x = 700 * direction;
       this.body.velocity.y = 0;
+      this.body.gravity.y = 0;
    }
    else dashing = false;
+
+   if (health < hp) {
+      injured = true;
+      hp = health;
+      oldPos = this.x;
+      //this.enableBody = false;
+   }
+
+   if (injured && Math.abs(oldPos - this.x) < 75) {
+      this.body.velocity.x = 300 * -direction;
+      this.body.velocity.y = -175;
+      dashing = false;
+   }
+   else injured = false;
+
 }
