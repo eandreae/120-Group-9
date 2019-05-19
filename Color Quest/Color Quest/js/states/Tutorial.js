@@ -5,7 +5,7 @@ Tutorial.prototype = {
 
    // Variables used in Tutorial
    init: function() {
-
+      this.talking = false;
    },
 
    preload: function() {
@@ -76,33 +76,33 @@ Tutorial.prototype = {
 
       var styleDescription = {
          font: '18px Arial',
-         fill: '#ffffff',
+         fill: '#000000',
          align: 'center',
          fontWeight: 'bold',
-         stroke: '#ffffff',
+         stroke: '#000000',
          strokeThickness: 0
       };
 
-      this.textArea = this.add.text(this.n1.x + 10, this.n1.y + 20, "", styleDescription);
+      this.interactText = this.add.text(0, 0, "Press Z to interact", styleDescription);
+      this.interactText.visible = false;
+      this.interactText.anchor.set(0.5);
+      this.interactText.fixedToCamera = false;
+      this.world.bringToTop(this.interactText);
+
+      this.textArea = this.add.text(this.n1.x, this.n1.y, "", styleDescription);
       this.textArea.anchor.set(0.5);
       this.textArea.fixedToCamera = false;
-      this.textArea.cameraOffset.x = 470;
-      this.textArea.cameraOffset.y = 560;
       this.world.bringToTop(this.textArea);
 
       //The array for the text
       this.n1Text = new Array();
 
       // The text is from Shakespeare's "As You Like It"
-      this.n1Text[0] = "Go apart, Adam, and thou shalt\n hear how he will shake me up.";
-      this.n1Text[1] = "Now, sir! what make you here?";
-      this.n1Text[2] = "Nothing: I am not taught to make any thing.";
-      this.n1Text[3] = "What mar you then, sir?";
-      this.n1Text[4] = "Marry, sir, I am helping you to mar\n that which God made, a poor unworthy brother\n of yours, with idleness.";
-      this.n1Text[5] = "Marry, sir, be better employed, and be naught awhile.";
-      this.n1Text[6] = "Shall I keep your hogs and eat husks\n with them? What prodigal portion have I spent,\n that I should come to such penury?";
-      this.n1Text[7] = "Know you where your are, sir?";
-      this.n1Text[8] = "O, sir, very well; here in your orchard.";
+      this.n1Text[0] = "Eric was here";
+      this.n1Text[1] = "Dlyan was heren't";
+      this.n1Text[2] = "Other Eric was heren't";
+      this.n1Text[3] = "asfoadnspoasbhgupoifuads\nasdifjpadfnspubpasfas\nhhhhhhhhhhhhhhhhhhhhhh";
+      this.n1Text[4] = "";
 
       // Adds the player into the state
       this.player = new Player(game, 64, 825, this.mapLayer);
@@ -141,10 +141,6 @@ Tutorial.prototype = {
    },
 
    update: function() {
-
-       // Add the collsions for the TileMaps
-
-
       // Go into the red state
       if (!hasRed) {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z) && this.physics.arcade.overlap(this.player, this.redPortal)) {
@@ -183,14 +179,20 @@ Tutorial.prototype = {
          this.playerBullets.add(bullet);
       }
 
-      if (game.physics.arcade.overlap(this.player, this.n1)) {
-         // Somehow tell the player to press Z to interact
+      if (game.physics.arcade.overlap(this.player, this.n1) && !this.talking) {
+         // Display interact text
+         this.setTextPosition(this.interactText, this.n1);
+         this.interactText.visible = true;
+
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
+            this.talking = true;
+            this.setTextPosition(this.textArea, this.n1);
             npcText.loop(3000, this.goThroughText, this, this.n1Text);
             npcText.start();
          }
       }
+      else this.interactText.visible = false;
 
       // All the collisions needed
       game.physics.arcade.collide(this.enemies, this.mapLayer); // Enemies with platforms
@@ -241,6 +243,12 @@ Tutorial.prototype = {
       this.enemyBullets.add(bullet);
    },
 
+   setTextPosition: function(text, object) {
+      text.x = object.x;
+      text.y = object.y - 75;
+      this.world.bringToTop(text);
+   },
+
    goThroughText: function(text) {
       //The text change with the step
       this.textArea.text = text[this.textPos];
@@ -253,6 +261,8 @@ Tutorial.prototype = {
 
       if (this.textPos == text.length) {
          npcText.stop();
+         this.talking = false;
+         this.textPos = 0;
       }
    },
 

@@ -20,6 +20,7 @@ function Player(game, x, y, objects) {
    Phaser.Sprite.call(this, game, x, y, 'bucky');
    this.scale.x = 0.015;
    this.scale.y = 0.015;
+   //this.anchor.set(0.5);
 
    // // Add the animations to the player.
    // this.animations.add('idle', ['player_walk05'], 10, true);
