@@ -204,21 +204,29 @@ Tutorial.prototype = {
       }
 
       // Player bullet with enemies
-      game.physics.arcade.collide(this.playerBullets, this.enemies, bulletHitsEnemy, null, this)
-      game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this)
+      game.physics.arcade.collide(this.playerBullets, this.enemies, bulletHitsEnemy, null, this);
+      game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this);
 
       // Enemy bullets with player
-      game.physics.arcade.collide(this.enemyBullets, this.player, bulletHitsPlayer, null, this)
+      game.physics.arcade.collide(this.enemyBullets, this.player, bulletHitsPlayer, null, this);
+
+      // Bullets hitting a wall
+      game.physics.arcade.collide(this.enemyBullets, this.mapLayer, bulletHitsWall, null, this);
+      game.physics.arcade.collide(this.playerBullets, this.mapLayer, bulletHitsWall, null, this);
 
       function bulletHitsEnemy(bullet, enemy) {
-         bullet.destroy();
+         bulletDestroyed(game, bullet);
          enemy.destroy();
       }
 
       function bulletHitsPlayer(bullet, player) {
-         bullet.destroy();
+         bulletDestroyed(game, bullet);
          song.stop();
          playerDies(game, player);
+      }
+
+      function bulletHitsWall(bullet, walls) {
+         bulletDestroyed(game, bullet);
       }
    },
 
