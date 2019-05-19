@@ -1,7 +1,10 @@
 this.v = 0;
-function Enemy(game, x, y, speed, dashing = false, jumping = false) {
+var dashing;
+
+function Enemy(game, x, y, speed, d = false, j = false) {
    this.v = speed;
-   //console.log(velocity);
+   dashing = d;
+
    // Inherits Phaser.Sprite and puts the sprite in a position on the screen
    Phaser.Sprite.call(this, game, x, y, 'atlas', 'badguy01');
 
@@ -29,12 +32,13 @@ Enemy.prototype.update = function() {
 
    this.body.velocity.x = this.v;
    // if moving to the right.
-   if( this.body.velocity.x > 0 ){
+   if(this.body.velocity.x > 0 ){
        this.animations.play('right');
    }
    // if moving to the right.
-   if( this.body.velocity.x < 0 ){
+   if(this.body.velocity.x < 0 ){
        this.animations.play('left');
    }
+
 
 }
