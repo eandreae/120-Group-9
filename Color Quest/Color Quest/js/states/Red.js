@@ -11,7 +11,7 @@ Red.prototype = {
       console.log('Red: preload');
 
       game.load.tilemap('layout', 'assets/TileMaps/Red.json', null, Phaser.Tilemap.TILED_JSON);
-      game.load.spritesheet('tilesheet', 'assets/TileSheets/color_tiles.png', 32, 32);
+      game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles.png', 32, 32);
    },
 
    create: function() {
@@ -46,7 +46,7 @@ Red.prototype = {
       game.physics.arcade.enable(this.home);
 
       // Adds the player into the state
-      this.player = new Player(game, 64, 825, this.mapLayer);
+      this.player = new Player(game, 64, 800, this.mapLayer);
       game.add.existing(this.player);
 
       // Place the shooting enemies.

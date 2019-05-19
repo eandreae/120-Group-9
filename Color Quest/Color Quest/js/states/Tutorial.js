@@ -48,7 +48,7 @@ Tutorial.prototype = {
       if (!hasYellow) {
          bmd = game.add.bitmapData(100, 100);
          bmd.fill(255, 255, 0, 1);
-         this.yellowPortal = game.add.sprite(500, 825, 'atlas', 'yellow_color');
+         this.yellowPortal = game.add.sprite(1695, 255, 'atlas', 'yellow_color');
          game.physics.arcade.enable(this.yellowPortal);
       }
 
@@ -56,12 +56,12 @@ Tutorial.prototype = {
       if (!hasBlue) {
          bmd = game.add.bitmapData(100, 100);
          bmd.fill(0, 0, 255, 1);
-         this.bluePortal = game.add.sprite(700, 825, 'atlas', 'blue_color');
+         this.bluePortal = game.add.sprite(3935, 128, 'atlas', 'blue_color');
          game.physics.arcade.enable(this.bluePortal);
       }
 
       if (hasRed && hasYellow && hasBlue) {
-         this.bossPortal = game.add.sprite(900, 825, 'bPortal');
+         this.bossPortal = game.add.sprite(1120, 672, 'bPortal');
          game.physics.arcade.enable(this.bossPortal);
       }
 
