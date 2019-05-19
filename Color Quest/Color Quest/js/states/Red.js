@@ -130,7 +130,7 @@ Red.prototype = {
          health--;
          if (health == 0) {
             song.stop();
-            playerDies(game, player);
+            playerDies(game, player, 'Red');
          }
       }
 
@@ -163,7 +163,7 @@ Red.prototype = {
          bulletDestroyed(game, bullet);
          health--;
          if (health == 0) {
-            playerDies(game, player);
+            playerDies(game, player, 'Red');
             song.stop();
          }
       }

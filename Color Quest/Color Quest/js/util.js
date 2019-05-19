@@ -1,7 +1,7 @@
 // File that contains useful functions that any state can use
 
 // Called when the player dies
-function playerDies(game, player) {
+function playerDies(game, player, state) {
 
    // Red square bit map data
    bmd = game.add.bitmapData(18, 18);
@@ -16,9 +16,8 @@ function playerDies(game, player) {
    deathEmitter.setXSpeed(-100,100);			   // horizontal speed range
    deathEmitter.setYSpeed(-100,100);			   // vertical speed range
    deathEmitter.start(true, 2000, null, 50);	   // (explode, lifespan, freq, quantity)
-
-   player.destroy();
-   game.time.events.add(Phaser.Timer.SECOND * 2, function() { game.state.start('GameOver')});
+   player.kill();
+   game.time.events.add(Phaser.Timer.SECOND * 2, function() { game.state.start('GameOver', true, false, state)});
 }
 
 function bulletDestroyed(game, bullet) {
