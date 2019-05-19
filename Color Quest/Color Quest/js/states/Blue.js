@@ -10,7 +10,7 @@ Blue.prototype = {
    preload: function() {
       console.log('Blue: preload');
 
-      game.load.tilemap('layout', 'assets/TileMaps/BlueMap.json', null, Phaser.Tilemap.TILED_JSON);
+      game.load.tilemap('layout', 'assets/TileMaps/Blue.json', null, Phaser.Tilemap.TILED_JSON);
       game.load.spritesheet('tilesheet', 'assets/TileSheets/color_tiles.png', 32, 32);
    },
 
@@ -36,11 +36,11 @@ Blue.prototype = {
       // Blue collectable
       bmd = game.add.bitmapData(75, 75);
       bmd.fill(0, 0, 255, 1);
-      this.blue = game.add.sprite(600, 10, 'atlas', 'blue_color');
+      this.blue = game.add.sprite(351, 3873, 'atlas', 'blue_color');
       game.physics.arcade.enable(this.blue);
 
       // Adds the player into the state
-      this.player = new Player(game, 64, 825, this.mapLayer);
+      this.player = new Player(game, 64, 800, this.mapLayer);
       game.add.existing(this.player);
 
       // Bullet groups
@@ -88,5 +88,9 @@ Blue.prototype = {
          song.stop();
          game.time.events.add(Phaser.Timer.SECOND * 2, function() { game.state.start('Tutorial')});
       }
-   }
+  },
+  render: function() {
+     game.debug.bodyInfo(this.player, 100, 100, 'black');
+     game.debug.body(this.player);
+  }
 };
