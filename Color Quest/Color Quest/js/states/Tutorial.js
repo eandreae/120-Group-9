@@ -65,13 +65,6 @@ Tutorial.prototype = {
          game.physics.arcade.enable(this.bossPortal);
       }
 
-      this.npcs = game.add.group();
-      this.npcs.enableBody = true;
-
-      this.n1 = new NPC(game, 500, 800);
-      game.add.existing(this.n1);
-      this.npcs.add(this.n1);
-
       this.textPos = 0;
 
       var styleDescription = {
@@ -89,10 +82,17 @@ Tutorial.prototype = {
       this.interactText.fixedToCamera = false;
       this.world.bringToTop(this.interactText);
 
-      this.textArea = this.add.text(this.n1.x, this.n1.y, "", styleDescription);
+      this.textArea = this.add.text(0, 0, "", styleDescription);
       this.textArea.anchor.set(0.5);
       this.textArea.fixedToCamera = false;
       this.world.bringToTop(this.textArea);
+
+      this.npcs = game.add.group();
+      this.npcs.enableBody = true;
+
+      this.n1 = new NPC(game, 500, 800);
+      game.add.existing(this.n1);
+      this.npcs.add(this.n1);
 
       //The array for the text
       this.n1Text = new Array();
@@ -103,6 +103,21 @@ Tutorial.prototype = {
       this.n1Text[2] = "Other Eric was heren't";
       this.n1Text[3] = "asfoadnspoasbhgupoifuads\nasdifjpadfnspubpasfas\nhhhhhhhhhhhhhhhhhhhhhh";
       this.n1Text[4] = "";
+
+      this.n2 = new NPC(game, 800, 500);
+      game.add.existing(this.n2);
+      this.npcs.add(this.n2);
+
+      //The array for the text
+      this.n2Text = new Array();
+
+      // The text is from Shakespeare's "As You Like It"
+      this.n2Text[0] = "Eric was here 2";
+      this.n2Text[1] = "Dlyan was heren't 2";
+      this.n2Text[2] = "Other Eric was heren't 2";
+      this.n2Text[3] = "asfoadnspoasbhgupoifuads\nasdifjpadfnspubpasfas\nhhhhhhhhhhhhhhhhhhhhhh 2";
+      this.n2Text[4] = "";
+
 
       // Adds the player into the state
       this.player = new Player(game, 64, 825, this.mapLayer);
@@ -179,6 +194,10 @@ Tutorial.prototype = {
          this.playerBullets.add(bullet);
       }
 
+      if (!game.physics.arcade.overlap(this.player, this.npcs) && !this.talking) {
+         this.interactText.visible = false;
+      }
+
       if (game.physics.arcade.overlap(this.player, this.n1) && !this.talking) {
          // Display interact text
          this.setTextPosition(this.interactText, this.n1);
@@ -187,12 +206,27 @@ Tutorial.prototype = {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
             this.talking = true;
+            this.interactText.visible = false;
             this.setTextPosition(this.textArea, this.n1);
             npcText.loop(3000, this.goThroughText, this, this.n1Text);
             npcText.start();
          }
       }
-      else this.interactText.visible = false;
+
+      if (game.physics.arcade.overlap(this.player, this.n2) && !this.talking) {
+         // Display interact text
+         this.setTextPosition(this.interactText, this.n2);
+         this.interactText.visible = true;
+
+         if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
+            // Timer for npc text
+            this.talking = true;
+            this.interactText.visible = false;
+            this.setTextPosition(this.textArea, this.n2);
+            npcText.loop(3000, this.goThroughText, this, this.n2Text);
+            npcText.start();
+         }
+      }
 
       // All the collisions needed
       game.physics.arcade.collide(this.enemies, this.mapLayer); // Enemies with platforms
