@@ -110,12 +110,6 @@ Red.prototype = {
    },
 
    update: function() {
-      //console.log('Red: update');
-      //console.log(this.enemyBullets.length)
-      if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-         game.state.start('GameOver');
-      }
-
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRedUpgrade) {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, .4, 1500);

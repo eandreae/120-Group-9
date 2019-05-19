@@ -58,10 +58,6 @@ Blue.prototype = {
    },
 
    update: function() {
-       //console.log('Blue: update');
-      if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-         game.state.start('GameOver');
-      }
 
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
