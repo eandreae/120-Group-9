@@ -240,7 +240,7 @@ Tutorial.prototype = {
          health--;
          if (health == 0) {
             song.stop();
-            playerDies(game, this.player);
+            playerDies(game, this.player, 'Tutorial');
          }
       }
 
@@ -266,7 +266,7 @@ Tutorial.prototype = {
          bulletDestroyed(game, bullet);
          health--;
          if (health == 0) {
-            playerDies(game, player);
+            playerDies(game, player, 'Tutorial');
             song.stop();
          }
       }
