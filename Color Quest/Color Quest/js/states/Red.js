@@ -11,7 +11,7 @@ Red.prototype = {
       console.log('Red: preload');
 
       game.load.tilemap('layout', 'assets/TileMaps/Red.json', null, Phaser.Tilemap.TILED_JSON);
-      game.load.spritesheet('tilesheet', 'assets/TileSheets/color_tiles.png', 32, 32);
+      game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles.png', 32, 32);
    },
 
    create: function() {
@@ -39,14 +39,29 @@ Red.prototype = {
       this.red = game.add.sprite(2464, 416, 'atlas', 'red_color');
       game.physics.arcade.enable(this.red);
 
+      // Creates a temporary Red Upgrade
+      var hasRedUpgrade = false;
+
       // Home collectable
       bmd2 = game.add.bitmapData(75, 75);
       bmd.fill(255, 0, 0, 1);
       this.home = game.add.sprite(4002, 800, 'atlas', 'red_color');
       game.physics.arcade.enable(this.home);
 
+      var styleDescription = {
+         font: '18px Arial',
+         fill: '#000000',
+         align: 'center',
+         fontWeight: 'bold',
+         stroke: '#000000',
+         strokeThickness: 0
+      };
+
+      this.healthText = this.add.text(10, 10, "", styleDescription);
+      this.healthText.fixedToCamera = true;
+
       // Adds the player into the state
-      this.player = new Player(game, 64, 825, this.mapLayer);
+      this.player = new Player(game, 64, 800, this.mapLayer);
       game.add.existing(this.player);
 
       // Place the shooting enemies.
@@ -95,14 +110,8 @@ Red.prototype = {
    },
 
    update: function() {
-      //console.log('Red: update');
-      //console.log(this.enemyBullets.length)
-      if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-         game.state.start('GameOver');
-      }
-
       // Player shoots a bullet for each key press
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
+      if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRedUpgrade) {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, .4, 1500);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
@@ -115,13 +124,12 @@ Red.prototype = {
 
       // Player with enemies
       if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
-         song.stop();
-         playerDies(game, this.player);
+         health--;
+         if (health == 0) {
+            song.stop();
+            playerDies(game, player, 'Red');
+         }
       }
-
-      // Player bullet with enemies
-      game.physics.arcade.collide(this.playerBullets, this.enemies, bulletHitsEnemy, null, this)
-      game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this)
 
       // Player with the Red Upgrade.
       this.physics.arcade.overlap(this.player, this.red, collectRed, null, this);
@@ -129,12 +137,18 @@ Red.prototype = {
       // Player with the GoHome red button.
       this.physics.arcade.overlap(this.player, this.home, goHome, null, this);
 
+      // Player bullet with enemies
+      game.physics.arcade.collide(this.playerBullets, this.enemies, bulletHitsEnemy, null, this)
+      game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this)
+
       // Enemy bullets with player
-      game.physics.arcade.collide(this.enemyBullets, this.player, bulletHitsPlayer, null, this)
+      game.physics.arcade.collide(this.player, this.enemyBullets, bulletHitsPlayer, null, this);
 
       // Bullets hitting a wall
       game.physics.arcade.collide(this.enemyBullets, this.mapLayer, bulletHitsWall, null, this);
       game.physics.arcade.collide(this.playerBullets, this.mapLayer, bulletHitsWall, null, this);
+
+      this.healthText.text = health;
 
       // Function for if the Player's bullets hit the enemy.
       function bulletHitsEnemy(bullet, enemy) {
@@ -142,10 +156,13 @@ Red.prototype = {
          enemy.kill();
       }
 
-      function bulletHitsPlayer(bullet, player) {
+      function bulletHitsPlayer(player, bullet) {
          bulletDestroyed(game, bullet);
-         song.stop();
-         playerDies(game, player);
+         health--;
+         if (health == 0) {
+            playerDies(game, player, 'Red');
+            song.stop();
+         }
       }
 
       function bulletHitsWall(bullet, walls) {
@@ -154,7 +171,7 @@ Red.prototype = {
 
       // When the player collects the color
       function collectRed(player, color) {
-         hasRed = true;
+         hasRedUpgrade = true;
 
          // Red bdm
          bmd = game.add.bitmapData(18, 18);
@@ -174,6 +191,7 @@ Red.prototype = {
       }
 
       function goHome(player, color) {
+          hasRed = true;
          // Red bdm
          bmd = game.add.bitmapData(18, 18);
          bmd.fill(255, 0, 0, 1);

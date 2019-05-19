@@ -48,7 +48,7 @@ Tutorial.prototype = {
       if (!hasYellow) {
          bmd = game.add.bitmapData(100, 100);
          bmd.fill(255, 255, 0, 1);
-         this.yellowPortal = game.add.sprite(500, 825, 'atlas', 'yellow_color');
+         this.yellowPortal = game.add.sprite(1695, 255, 'atlas', 'yellow_color');
          game.physics.arcade.enable(this.yellowPortal);
       }
 
@@ -56,12 +56,12 @@ Tutorial.prototype = {
       if (!hasBlue) {
          bmd = game.add.bitmapData(100, 100);
          bmd.fill(0, 0, 255, 1);
-         this.bluePortal = game.add.sprite(700, 825, 'atlas', 'blue_color');
+         this.bluePortal = game.add.sprite(3935, 128, 'atlas', 'blue_color');
          game.physics.arcade.enable(this.bluePortal);
       }
 
       if (hasRed && hasYellow && hasBlue) {
-         this.bossPortal = game.add.sprite(900, 825, 'bPortal');
+         this.bossPortal = game.add.sprite(1120, 672, 'bPortal');
          game.physics.arcade.enable(this.bossPortal);
       }
 
@@ -75,6 +75,9 @@ Tutorial.prototype = {
          stroke: '#000000',
          strokeThickness: 0
       };
+
+      this.healthText = this.add.text(10, 10, "", styleDescription);
+      this.healthText.fixedToCamera = true;
 
       this.interactText = this.add.text(0, 0, "Press Z to interact", styleDescription);
       this.interactText.visible = false;
@@ -118,7 +121,6 @@ Tutorial.prototype = {
       this.n2Text[3] = "asfoadnspoasbhgupoifuads\nasdifjpadfnspubpasfas\nhhhhhhhhhhhhhhhhhhhhhh 2";
       this.n2Text[4] = "";
 
-
       // Adds the player into the state
       this.player = new Player(game, 64, 825, this.mapLayer);
       game.add.existing(this.player);
@@ -135,9 +137,9 @@ Tutorial.prototype = {
       // this.enemies.add(e1);
       //
       // // Place a shooting enemy
-      // var e2 = new Enemy(game, 900, 300, 0);
-      // game.add.existing(e2);
-      // this.shootingEnemies.add(e2);
+      var e2 = new Enemy(game, 900, 300, 0);
+      game.add.existing(e2);
+      this.shootingEnemies.add(e2);
 
       // Bullet groups
       this.playerBullets = game.add.group();
@@ -235,8 +237,11 @@ Tutorial.prototype = {
 
       // Player with enemies
       if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
-         song.stop();
-         playerDies(game, this.player);
+         health--;
+         if (health == 0) {
+            song.stop();
+            playerDies(game, this.player, 'Tutorial');
+         }
       }
 
       // Player bullet with enemies
@@ -244,21 +249,26 @@ Tutorial.prototype = {
       game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this);
 
       // Enemy bullets with player
-      game.physics.arcade.collide(this.enemyBullets, this.player, bulletHitsPlayer, null, this);
+      game.physics.arcade.collide(this.player, this.enemyBullets, bulletHitsPlayer, null, this);
 
       // Bullets hitting a wall
       game.physics.arcade.collide(this.enemyBullets, this.mapLayer, bulletHitsWall, null, this);
       game.physics.arcade.collide(this.playerBullets, this.mapLayer, bulletHitsWall, null, this);
+
+      this.healthText.text = health;
 
       function bulletHitsEnemy(bullet, enemy) {
          bulletDestroyed(game, bullet);
          enemy.destroy();
       }
 
-      function bulletHitsPlayer(bullet, player) {
+      function bulletHitsPlayer(player, bullet) {
          bulletDestroyed(game, bullet);
-         song.stop();
-         playerDies(game, player);
+         health--;
+         if (health == 0) {
+            playerDies(game, player, 'Tutorial');
+            song.stop();
+         }
       }
 
       function bulletHitsWall(bullet, walls) {

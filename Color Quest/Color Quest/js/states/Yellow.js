@@ -10,7 +10,7 @@ Yellow.prototype = {
    preload: function() {
       console.log('Yellow: preload');
 
-      game.load.tilemap('layout', 'assets/TileMaps/YellowMap.json', null, Phaser.Tilemap.TILED_JSON);
+      game.load.tilemap('layout', 'assets/TileMaps/Yellow.json', null, Phaser.Tilemap.TILED_JSON);
       game.load.spritesheet('tilesheet', 'assets/TileSheets/color_tiles.png', 32, 32);
    },
 
@@ -26,28 +26,8 @@ Yellow.prototype = {
       // Create new tilemap
       this.map = game.add.tilemap('layout');
       this.map.addTilesetImage('color_tiles_tileset', 'tilesheet');
-      this.map.myLayers = [];
-
+      this.map.setCollisionByExclusion([]);
       this.mapLayer = this.map.createLayer('Ground');
-      // game.physics.arcade.enable(this.mapLayer);
-      this.map.setCollisionByExclusion([], this.mapLayer);
-      this.map.myLayers[0] = this.mapLayer;
-
-      this.mapLayer = this.map.createLayer('Yellow_1');
-      // game.physics.arcade.enable(this.mapLayer);
-      this.map.setCollisionByExclusion([], this.mapLayer);
-      this.map.myLayers[1] = this.mapLayer;
-
-      this.mapLayer = this.map.createLayer('Yellow_2');
-      // game.physics.arcade.enable(this.mapLayer);
-      this.map.setCollisionByExclusion([], this.mapLayer);
-      this.map.myLayers[2] = this.mapLayer;
-
-      this.mapLayer = this.map.createLayer('Yellow_3');
-      // game.physics.arcade.enable(this.mapLayer);
-      this.map.setCollisionByExclusion([], this.mapLayer);
-      this.map.myLayers[3] = this.mapLayer;
-
       this.mapLayer.resizeWorld();
 
       // set 32-pixel buffer around tiles to avoid collision tunneling
@@ -56,11 +36,11 @@ Yellow.prototype = {
       // Yellow collectable
       bmd = game.add.bitmapData(75, 75);
       bmd.fill(255, 255, 0, 1);
-      this.yellow = game.add.sprite(450, 800, 'atlas', 'yellow_color');
+      this.yellow = game.add.sprite(4000, 800, 'atlas', 'yellow_color');
       game.physics.arcade.enable(this.yellow);
 
       // Adds the player into the state
-      this.player = new Player(game, 64, 825, null, this.map.myLayers);
+      this.player = new Player(game, 64, 800, this.mapLayer);
       game.add.existing(this.player);
 
       // Bullet groups
@@ -72,10 +52,6 @@ Yellow.prototype = {
    },
 
    update: function() {
-      //console.log('Yellow: update');
-      if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-         game.state.start('GameOver');
-      }
 
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
@@ -108,5 +84,9 @@ Yellow.prototype = {
          song.stop();
          game.time.events.add(Phaser.Timer.SECOND * 2, function() { game.state.start('Tutorial')});
       }
-   }
+  },
+  render: function() {
+     game.debug.bodyInfo(this.player, 100, 100, 'black');
+     game.debug.body(this.player);
+  }
 };
