@@ -39,6 +39,12 @@ Blue.prototype = {
       this.blue = game.add.sprite(929, 2752, 'atlas', 'blue_color');
       game.physics.arcade.enable(this.blue);
 
+      // Home collectable - allows the player to go back to the Hub.
+      bmd2 = game.add.bitmapData(75, 75);
+      bmd.fill(255, 0, 0, 1);
+      this.home = game.add.sprite(32, 32, 'atlas', 'blue_color');
+      game.physics.arcade.enable(this.home);
+
       // Adds the player into the state
       this.player = new Player(game, 64, 3870, this.mapLayer);
       game.add.existing(this.player);
@@ -52,7 +58,7 @@ Blue.prototype = {
    },
 
    update: function() {
-      //console.log('Yellow: update');
+       //console.log('Blue: update');
       if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
          game.state.start('GameOver');
       }
@@ -64,11 +70,33 @@ Blue.prototype = {
          this.playerBullets.add(bullet);
       }
 
+      // For when the player collects the blue upgrade.
       this.physics.arcade.overlap(this.player, this.blue, collectBlue, null, this);
+      // For when the player collects the second blue upgrade, the home teleport.
+      this.physics.arcade.overlap(this.player, this.home, goHome, null, this);
 
       // When the player collects the color
       function collectBlue(player, color) {
          hasBlue = true;
+
+         // Blue bdm
+         bmd = game.add.bitmapData(18, 18);
+         bmd.fill(0, 0, 255, 1);
+
+         // Particles when color is collected
+         colorEmitter = game.add.emitter(color.x, color.y, 200);
+         colorEmitter.makeParticles(bmd);		        // red squares used as particles
+         colorEmitter.gravity = 0;
+         colorEmitter.setScale(.25, .8, .25, .8, 0);
+         colorEmitter.setAlpha(.8, 0, 1800); 	      // .8 to .3 alpha
+         colorEmitter.setXSpeed(-100,100);			   // horizontal speed range
+         colorEmitter.setYSpeed(-100,100);			   // vertical speed range
+         colorEmitter.start(true, 2000, null, 50);	   // (explode, lifespan, freq, quantity)
+
+         color.destroy();
+      }
+
+      function goHome(player, color) {
 
          // Blue bdm
          bmd = game.add.bitmapData(18, 18);

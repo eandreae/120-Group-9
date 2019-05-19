@@ -36,7 +36,7 @@ Yellow.prototype = {
       // Yellow collectable
       bmd = game.add.bitmapData(75, 75);
       bmd.fill(255, 255, 0, 1);
-      this.yellow = game.add.sprite(450, 800, 'atlas', 'yellow_color');
+      this.yellow = game.add.sprite(4000, 800, 'atlas', 'yellow_color');
       game.physics.arcade.enable(this.yellow);
 
       // Adds the player into the state
