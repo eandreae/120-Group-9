@@ -92,6 +92,7 @@ Yellow.prototype = {
       // When the player collects the color
       function collectYellow(player, color) {
          hasYellow = true;
+         colorCount++;
 
          // Yellow bdm
          bmd = game.add.bitmapData(18, 18);

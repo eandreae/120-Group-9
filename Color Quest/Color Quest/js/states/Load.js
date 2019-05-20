@@ -24,7 +24,12 @@ Load.prototype = {
 	},
 	create: function() {
 		console.log('Load: create');
-		sad1 = game.add.audio('sad1');
+        if( colorCount == 0 ){
+            song = game.add.audio('sad1');
+        }
+        else {
+            song = game.add.audio('sad1');
+        }
 
 		game.state.start('MainMenu');
 	},

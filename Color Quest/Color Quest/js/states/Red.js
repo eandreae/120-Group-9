@@ -39,9 +39,6 @@ Red.prototype = {
       this.red = game.add.sprite(2464, 416, 'atlas', 'red_color');
       game.physics.arcade.enable(this.red);
 
-      // Creates a temporary Red Upgrade
-      var hasRedUpgrade = false;
-
       // Home collectable
       bmd2 = game.add.bitmapData(75, 75);
       bmd.fill(255, 0, 0, 1);
@@ -111,7 +108,7 @@ Red.prototype = {
 
    update: function() {
       // Player shoots a bullet for each key press
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRedUpgrade) {
+      if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, .4, 1500);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
@@ -171,7 +168,7 @@ Red.prototype = {
 
       // When the player collects the color
       function collectRed(player, color) {
-         hasRedUpgrade = true;
+         hasRed = true;
 
          // Red bdm
          bmd = game.add.bitmapData(18, 18);
@@ -192,6 +189,7 @@ Red.prototype = {
 
       function goHome(player, color) {
           hasRed = true;
+          colorCount++;
          // Red bdm
          bmd = game.add.bitmapData(18, 18);
          bmd.fill(255, 0, 0, 1);

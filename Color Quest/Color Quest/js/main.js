@@ -12,6 +12,7 @@ var game;
 var hasRed = false;
 var hasYellow = false;
 var hasBlue = false;
+var colorCount = 0;
 var direction = 1; // 1 (facing right), -1 (facing left)
 var backgroundColor = "#D3D3D3" // light gray.
 var health = 5;

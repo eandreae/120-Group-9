@@ -18,7 +18,7 @@ Tutorial.prototype = {
    create: function() {
       console.log('Tutorial: create');
 
-      sad1.play('', 0, 1, true);
+      song.play('', 0, 1, true);
 
       // Background
       game.stage.backgroundColor = backgroundColor;
@@ -29,9 +29,27 @@ Tutorial.prototype = {
       // Create new tilemap
       this.map = game.add.tilemap('layout');
       this.map.addTilesetImage('color_tiles_tileset', 'tilesheet');
-      this.mapLayer = this.map.createLayer('Ground_0');
-      this.map.setCollisionBetween(0, 999, true, 'Ground_0');
-      this.backGroundLayer = this.map.createLayer('Background_0');
+      if( colorCount == 0 ){
+          this.mapLayer = this.map.createLayer('Ground_0');
+          this.map.setCollisionBetween(0, 999, true, 'Ground_0');
+          this.backGroundLayer = this.map.createLayer('Background_0');
+      }
+      else if( colorCount == 1 ){
+          this.mapLayer = this.map.createLayer('Ground_1');
+          this.map.setCollisionBetween(0, 999, true, 'Ground_1');
+          this.backGroundLayer = this.map.createLayer('Background_1');
+      }
+      else if( colorCount == 2 ){
+          this.mapLayer = this.map.createLayer('Ground_2');
+          this.map.setCollisionBetween(0, 999, true, 'Ground_2');
+          this.backGroundLayer = this.map.createLayer('Background_2');
+      }
+      else if( colorCount == 3 ){
+          this.mapLayer = this.map.createLayer('Ground_3');
+          this.map.setCollisionBetween(0, 999, true, 'Ground_3');
+          this.backGroundLayer = this.map.createLayer('Background_3');
+      }
+
       this.mapLayer.resizeWorld();
 
       // Create the window in the background of the game.
@@ -45,7 +63,7 @@ Tutorial.prototype = {
       if (!hasRed) {
          bmd = game.add.bitmapData(100, 100);
          bmd.fill(255, 0, 0, 1);
-         this.redPortal = game.add.sprite(2656, 129, 'atlas', 'red_color');
+         this.redPortal = game.add.sprite(1408, 768, 'atlas', 'red_color');
          game.physics.arcade.enable(this.redPortal);
       }
 
@@ -53,7 +71,7 @@ Tutorial.prototype = {
       if (!hasYellow) {
          bmd = game.add.bitmapData(100, 100);
          bmd.fill(255, 255, 0, 1);
-         this.yellowPortal = game.add.sprite(1695, 255, 'atlas', 'yellow_color');
+         this.yellowPortal = game.add.sprite(1696, 768, 'atlas', 'yellow_color');
          game.physics.arcade.enable(this.yellowPortal);
       }
 
@@ -61,7 +79,7 @@ Tutorial.prototype = {
       if (!hasBlue) {
          bmd = game.add.bitmapData(100, 100);
          bmd.fill(0, 0, 255, 1);
-         this.bluePortal = game.add.sprite(3935, 128, 'atlas', 'blue_color');
+         this.bluePortal = game.add.sprite(1984, 768, 'atlas', 'blue_color');
          game.physics.arcade.enable(this.bluePortal);
       }
 
@@ -324,7 +342,7 @@ Tutorial.prototype = {
    },
 
    render: function() {
-      game.debug.bodyInfo(this.player, 100, 100, 'black');
-      game.debug.body(this.player);
+      //game.debug.bodyInfo(this.player, 100, 100, 'black');
+      //game.debug.body(this.player);
    }
 };
