@@ -12,13 +12,13 @@ Tutorial.prototype = {
       console.log('Tutorial: preload');
 
       game.load.tilemap('layout', 'assets/TileMaps/Tutorial.json', null, Phaser.Tilemap.TILED_JSON);
-      game.load.spritesheet('tilesheet', 'assets/TileSheets/color_tiles.png', 32, 32);
+      game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles.png', 32, 32);
    },
 
    create: function() {
       console.log('Tutorial: create');
 
-      song.play('', 0, 1, true);
+      sad1.play('', 0, 1, true);
 
       // Background
       game.stage.backgroundColor = backgroundColor;
@@ -29,9 +29,14 @@ Tutorial.prototype = {
       // Create new tilemap
       this.map = game.add.tilemap('layout');
       this.map.addTilesetImage('color_tiles_tileset', 'tilesheet');
-      this.map.setCollisionByExclusion([]);
-      this.mapLayer = this.map.createLayer('Ground');
+      this.mapLayer = this.map.createLayer('Ground_0');
+      this.map.setCollisionBetween(0, 999, true, 'Ground_0');
+      this.backGroundLayer = this.map.createLayer('Background_0');
       this.mapLayer.resizeWorld();
+
+      // Create the window in the background of the game.
+      this.window = game.add.sprite(192, 512, 'window');
+      this.window.animations.add('rain', ['window_01', 'window_02', 'window_03'], 10, true);
 
       // set 32-pixel buffer around tiles to avoid collision tunneling
       game.physics.arcade.TILE_BIAS = 32;
@@ -122,7 +127,7 @@ Tutorial.prototype = {
       this.n2Text[4] = "";
 
       // Adds the player into the state
-      this.player = new Player(game, 64, 825, this.mapLayer);
+      this.player = new Player(game, 64, 736, this.mapLayer);
       game.add.existing(this.player);
 
       // The enemy groups
@@ -155,9 +160,17 @@ Tutorial.prototype = {
       timer.start();
 
       npcText = game.time.create(false);
+
    },
 
    update: function() {
+
+       // Set the collisions of the game.
+      // this.game.physics.arcade.collide(this.player, 'Ground');
+
+      // Play the animation of the window.
+      this.window.animations.play('rain');
+
       // Go into the red state
       if (!hasRed) {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z) && this.physics.arcade.overlap(this.player, this.redPortal)) {
