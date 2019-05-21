@@ -33,7 +33,9 @@ function Player(game, x, y, objects) {
    // Gives the player physics
    game.physics.arcade.enable(this);
    this.body.collideWorldBounds = true;
-   this.body.gravity.y = 600;
+   this.body.gravity.y = 850;
+   this.body.maxVelocity.setTo(300, 99999);
+   this.body.drag.setTo(900, 0);
 }
 
 // explicitly define prefab's prototype (Phaser.Sprite) and constructor (Player)
@@ -74,19 +76,19 @@ Player.prototype.update = function() {
    }
 
    // Reset player velocity
-   this.body.velocity.x = 0;
-   this.body.gravity.y = 600;
+   this.body.acceleration.x = 0;
+   this.body.gravity.y = 850;
 
    // Moving Left
    if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && !dashing && !injured) {
-      this.body.velocity.x = -200;
+      this.body.acceleration.x = -1500;
       this.animations.play('left');
       direction = -1;
   }
 
    // Moving Right
    else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && !dashing && !injured) {
-      this.body.velocity.x = 200;
+      this.body.acceleration.x = 1500;
       this.animations.play('right');
       direction = 1;
    }
@@ -99,7 +101,7 @@ Player.prototype.update = function() {
    if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && jumps >= 1) {
       jumpSFX.play('', 0, .5, false);
       offPlatform = true;
-      this.body.velocity.y = -375;
+      this.body.velocity.y = -450;
       jumps--;
    }
 
