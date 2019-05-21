@@ -43,7 +43,7 @@ Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
 // Arrow keys to move
-// z to jump
+// UP to jump
 // x to shoot
 // c to dash
 var hitPlatform;
@@ -131,6 +131,7 @@ Player.prototype.update = function() {
       this.body.velocity.x = 300 * -direction;
       this.body.velocity.y = -175;
       dashing = false;
+      if (this.body.blocked.right || this.body.blocked.left) injured = false;
    }
    else injured = false;
 

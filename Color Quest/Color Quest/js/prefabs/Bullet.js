@@ -1,16 +1,16 @@
-//var direction;
+this.direction;
 
 // x: x position
 // y: y position
 // d: true (going right) or false (going left)
 function Bullet(game, x, y, dir, scale, speed) {
-   //direction = dir;
+   this.direction = dir;
 
    // Inherits Phaser.Sprite and puts the sprite in a position on the screen
    Phaser.Sprite.call(this, game, x, y, 'bullet');
    this.scale.x = scale;
    this.scale.y = scale;
-   //this.anchor.set(0.5);
+   this.anchor.set(0.5);
 
    game.physics.enable(this);
 
