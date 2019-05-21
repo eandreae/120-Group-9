@@ -55,33 +55,43 @@ Tutorial.prototype = {
       // set 32-pixel buffer around tiles to avoid collision tunneling
       game.physics.arcade.TILE_BIAS = 32;
 
+      this.portals = game.add.group();
+      this.portals.enableBody = true;
+
       // Red portal
       if (!hasRed) {
          bmd = game.add.bitmapData(100, 100);
          bmd.fill(255, 0, 0, 1);
          this.redPortal = game.add.sprite(2720, 736, 'atlas', 'red_color');
+         this.redPortal.anchor.set(0.5);
          game.physics.arcade.enable(this.redPortal);
+         this.portals.add(this.redPortal);
       }
 
       // Yellow portal
       if (!hasYellow) {
          bmd = game.add.bitmapData(2976, 736);
          bmd.fill(255, 255, 0, 1);
-         this.yellowPortal = game.add.sprite(1696, 768, 'atlas', 'yellow_color');
+         this.yellowPortal = game.add.sprite(1696, 850, 'atlas', 'yellow_color');
+         this.yellowPortal.anchor.set(0.5);
          game.physics.arcade.enable(this.yellowPortal);
+         this.portals.add(this.yellowPortal);
       }
 
       // Blue portal
       if (!hasBlue) {
          bmd = game.add.bitmapData(3232, 736);
          bmd.fill(0, 0, 255, 1);
-         this.bluePortal = game.add.sprite(1984, 768, 'atlas', 'blue_color');
+         this.bluePortal = game.add.sprite(1984, 850, 'atlas', 'blue_color');
+         this.bluePortal.anchor.set(0.5);
          game.physics.arcade.enable(this.bluePortal);
+         this.portals.add(this.bluePortal);
       }
 
       if (hasRed && hasYellow && hasBlue) {
          this.bossPortal = game.add.sprite(1120, 672, 'bPortal');
          game.physics.arcade.enable(this.bossPortal);
+         this.portals.add(this.bossPortal);
       }
 
       this.textPos = 1;
@@ -182,30 +192,56 @@ Tutorial.prototype = {
        // Set the collisions of the game.
       // this.game.physics.arcade.collide(this.player, 'Ground');
 
+
+
       // Go into the red state
       if (!hasRed) {
-         if (game.input.keyboard.justPressed(Phaser.Keyboard.Z) && this.physics.arcade.overlap(this.player, this.redPortal)) {
-            game.state.start('Red');
+         if (this.physics.arcade.overlap(this.player, this.redPortal)) {
+            // Display interact text
+            this.setTextPosition(this.interactText, this.redPortal);
+            this.interactText.visible = true;
+
+            if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
+               game.state.start('Red');
+            }
          }
       }
 
       // Go into the yellow state
       if (!hasYellow) {
-         if (game.input.keyboard.justPressed(Phaser.Keyboard.Z) && this.physics.arcade.overlap(this.player, this.yellowPortal)) {
-            game.state.start('Yellow');
+         if (this.physics.arcade.overlap(this.player, this.yellowPortal)) {
+            // Display interact text
+            this.setTextPosition(this.interactText, this.yellowPortal);
+            this.interactText.visible = true;
+
+            if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
+               game.state.start('Yellow');
+            }
          }
       }
 
       // Go into the blue state
       if (!hasBlue) {
-         if (game.input.keyboard.justPressed(Phaser.Keyboard.Z) && this.physics.arcade.overlap(this.player, this.bluePortal)) {
-            game.state.start('Blue');
+         if (this.physics.arcade.overlap(this.player, this.bluePortal)) {
+            // Display interact text
+            this.setTextPosition(this.interactText, this.bluePortal);
+            this.interactText.visible = true;
+
+            if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
+               game.state.start('Blue');
+            }
          }
       }
 
       // Go into the boss room
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.Z) && this.physics.arcade.overlap(this.player, this.bossPortal)) {
-         game.state.start('BossMap');
+      if (this.physics.arcade.overlap(this.player, this.bossPortal)) {
+         // Display interact text
+         this.setTextPosition(this.interactText, this.bossPortal);
+         this.interactText.visible = true;
+
+         if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
+            game.state.start('BossMap');
+         }
       }
 
       // Go to the color wall
@@ -220,7 +256,7 @@ Tutorial.prototype = {
          this.playerBullets.add(bullet);
       }
 
-      if (!game.physics.arcade.overlap(this.player, this.npcs) && !this.talking) {
+      if (!game.physics.arcade.overlap(this.player, this.npcs) && !game.physics.arcade.overlap(this.player, this.portals) && !this.talking) {
          this.interactText.visible = false;
       }
 

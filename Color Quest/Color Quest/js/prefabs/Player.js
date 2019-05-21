@@ -78,6 +78,7 @@ Player.prototype.update = function() {
    // Reset player velocity
    this.body.acceleration.x = 0;
    this.body.gravity.y = 850;
+   this.body.maxVelocity.setTo(300, 99999);
 
    // Moving Left
    if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && !dashing && !injured) {
@@ -113,6 +114,7 @@ Player.prototype.update = function() {
    }
 
    if (dashing && Math.abs(oldPos - this.x) < 150) {
+      this.body.maxVelocity.setTo(700, 99999);
       this.body.velocity.x = 700 * direction;
       this.body.velocity.y = 0;
       this.body.gravity.y = 0;
