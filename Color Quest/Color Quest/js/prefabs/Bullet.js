@@ -10,7 +10,7 @@ function Bullet(game, x, y, dir, scale, speed) {
    Phaser.Sprite.call(this, game, x, y, 'bullet');
    this.scale.x = scale;
    this.scale.y = scale;
-   //this.anchor.set(0.5);
+   this.anchor.set(0.5);
 
    game.physics.enable(this);
 
