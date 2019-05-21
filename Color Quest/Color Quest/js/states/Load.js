@@ -10,8 +10,7 @@ Load.prototype = {
 	preload: function() {
 
       game.load.atlas('atlas', 'assets/img/atlas.png', 'assets/img/atlas.json');
-		game.load.image('bucky', 'assets/img/Bucky.png');
-        game.load.image('bucky2', 'assets/img/Bucky2.png');
+		game.load.image('bucky', 'assets/img/Bucky2.png');
 		game.load.image('ground', 'assets/img/platform.png');
 		game.load.image('bullet', 'assets/img/bullet.png');
       game.load.image('boss', 'assets/img/kingcolor.png');
