@@ -59,30 +59,30 @@ Tutorial.prototype = {
       this.portals.enableBody = true;
 
       // Red portal
-      if (!hasRed) {
+      if (!hasRed && metKingColor == true ) {
          bmd = game.add.bitmapData(64, 64);
          bmd.fill(255, 0, 0, 1);
-         this.redPortal = game.add.sprite(2720, 736, 'atlas', 'red_color');
+         this.redPortal = game.add.sprite(3456, 832, 'atlas', 'red_color');
          this.redPortal.anchor.set(0.5);
          game.physics.arcade.enable(this.redPortal);
          this.portals.add(this.redPortal);
       }
 
       // Yellow portal
-      if (!hasYellow) {
+      if (!hasYellow && metKingColor == true ) {
          bmd = game.add.bitmapData(64, 64);
          bmd.fill(255, 255, 0, 1);
-         this.yellowPortal = game.add.sprite(2976, 736, 'atlas', 'yellow_color');
+         this.yellowPortal = game.add.sprite(3744, 832, 'atlas', 'yellow_color');
          this.yellowPortal.anchor.set(0.5);
          game.physics.arcade.enable(this.yellowPortal);
          this.portals.add(this.yellowPortal);
       }
 
       // Blue portal
-      if (!hasBlue) {
+      if (!hasBlue && metKingColor == true ) {
          bmd = game.add.bitmapData(64, 64);
          bmd.fill(0, 0, 255, 1);
-         this.bluePortal = game.add.sprite(3232, 736, 'atlas', 'blue_color');
+         this.bluePortal = game.add.sprite(4000, 832, 'atlas', 'blue_color');
          this.bluePortal.anchor.set(0.5);
          game.physics.arcade.enable(this.bluePortal);
          this.portals.add(this.bluePortal);
@@ -91,14 +91,14 @@ Tutorial.prototype = {
       if( metKingColor == false ){
           bmd = game.add.bitmapData(64, 64);
           bmd.fill(0, 0, 255, 1);
-          this.kingColorPortal = game.add.sprite(2848, 800, 'bPortal');
+          this.kingColorPortal = game.add.sprite(2880, 832, 'bPortal');
           this.kingColorPortal.anchor.set(0.5);
           game.physics.enable(this.kingColorPortal);
           this.portals.add(this.kingColorPortal);
       }
       // Fighting King Color
       if (hasRed && hasYellow && hasBlue) {
-         this.bossPortal = game.add.sprite(1120, 672, 'bPortal');
+         this.bossPortal = game.add.sprite(3136, 832, 'bPortal');
          this.bossPortal.anchor.set(0.5);
          game.physics.arcade.enable(this.bossPortal);
          this.portals.add(this.bossPortal);

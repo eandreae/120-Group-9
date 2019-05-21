@@ -114,25 +114,14 @@
                 }, 
                 {
                  "height":63.3333,
-                 "id":10,
-                 "name":"KingColor Cutscene Trigger",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":2848,
-                 "y":800
-                }, 
-                {
-                 "height":63.3333,
                  "id":14,
                  "name":"Red",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":3424,
-                 "y":800
+                 "x":3456,
+                 "y":832
                 }, 
                 {
                  "height":63.3333,
@@ -142,8 +131,8 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":3712,
-                 "y":800
+                 "x":3744,
+                 "y":832
                 }, 
                 {
                  "height":63.3333,
@@ -153,8 +142,8 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":3968,
-                 "y":800
+                 "x":4000,
+                 "y":832
                 }, 
                 {
                  "height":63.3333,
@@ -164,8 +153,19 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":3104,
-                 "y":800
+                 "x":3136,
+                 "y":832
+                }, 
+                {
+                 "height":63.3333,
+                 "id":18,
+                 "name":"KingColor Cutscene Trigger",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":2880,
+                 "y":832
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -174,7 +174,7 @@
          "y":0
         }],
  "nextlayerid":34,
- "nextobjectid":18,
+ "nextobjectid":19,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.4",
