@@ -90,6 +90,7 @@ Tutorial.prototype = {
 
       if (hasRed && hasYellow && hasBlue) {
          this.bossPortal = game.add.sprite(1120, 672, 'bPortal');
+         this.bossPortal.anchor.set(0.5);
          game.physics.arcade.enable(this.bossPortal);
          this.portals.add(this.bossPortal);
       }
