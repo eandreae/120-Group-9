@@ -17,7 +17,6 @@ Load.prototype = {
       game.load.image('boss', 'assets/img/kingcolor.png');
 		game.load.image('bPortal', 'assets/img/KingColorButton.png');
 		game.load.image('title', 'assets/img/TitleScreen.png');
-        game.load.atlas('window', 'assets/img/windowSheet.png', 'assets/img/window.json');
 
 		game.load.audio('jump', 'assets/audio/Jump.mp3');
 		game.load.audio('sad1', 'assets/audio/sad1.mp3');
