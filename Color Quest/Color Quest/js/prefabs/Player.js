@@ -101,7 +101,7 @@ Player.prototype.update = function() {
    if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && jumps >= 1) {
       jumpSFX.play('', 0, .5, false);
       offPlatform = true;
-      this.body.velocity.y = -450;
+      this.body.velocity.y = -500;
       jumps--;
    }
 
