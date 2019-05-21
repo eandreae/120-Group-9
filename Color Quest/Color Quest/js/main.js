@@ -9,7 +9,7 @@
 
 // define globals
 var game;
-var hasRed = true;
+var hasRed = false;
 var hasYellow = false;
 var hasBlue = false;
 var colorCount = 0;

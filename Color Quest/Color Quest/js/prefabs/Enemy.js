@@ -1,16 +1,20 @@
 this.v = 0;
-var dashing;
+this.dashing;
+this.jumping;
+this.player;
 
-function Enemy(game, x, y, speed, d = false, j = false) {
+function Enemy(game, x, y, speed, d = false, j = false, p) {
    this.v = speed;
-   dashing = d;
+   this.dashing = d;
+   this.jumping = j;
+   this.player = p;
 
    // Inherits Phaser.Sprite and puts the sprite in a position on the screen
    Phaser.Sprite.call(this, game, x, y, 'atlas', 'badguy01');
 
    game.physics.arcade.enable(this);
    this.body.collideWorldBounds = true;
-   this.body.velocity.x = this.v;
+   //this.body.velocity.x = this.v;
    //this.body.immovable = true;
    this.body.gravity.y = 300;
 
@@ -26,19 +30,18 @@ Enemy.prototype.constructor = Enemy;
 var hitPlatform;
 Enemy.prototype.update = function() {
 
-    var hitPlatform;
+   var hitPlatform;
+   hitPlatform = game.physics.arcade.collide(this, platforms);
 
-     hitPlatform = game.physics.arcade.collide(this, platforms);
+   if (this.body.blocked.left || this.body.blocked.right) this.v = -this.v;
 
    this.body.velocity.x = this.v;
    // if moving to the right.
-   if(this.body.velocity.x > 0 ){
-       this.animations.play('right');
+   if (this.body.velocity.x > 0) {
+      this.animations.play('left');
    }
    // if moving to the right.
-   if(this.body.velocity.x < 0 ){
-       this.animations.play('left');
+   if (this.body.velocity.x < 0) {
+      this.animations.play('right');
    }
-
-
 }
