@@ -22,14 +22,13 @@ function playerDies(game, player, state) {
 
 function bulletDestroyed(game, bullet) {
    // Red square bit map data
-   bulVelocity = bullet.body.velocity.x;
-   if (bulVelocity > 0) {
-      minVelocity = -100;
-      maxVelocity = 400;
-   }
-   else {
+   if (bullet.direction > 0) {
       minVelocity = -400;
       maxVelocity = 100;
+   }
+   else {
+      minVelocity = -100;
+      maxVelocity = 400;
    }
 
    // Emitter used when player dies
