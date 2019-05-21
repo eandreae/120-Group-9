@@ -29,32 +29,28 @@ Tutorial.prototype = {
       // Create new tilemap
       this.map = game.add.tilemap('layout');
       this.map.addTilesetImage('color_tiles_tileset', 'tilesheet');
-      if( colorCount == 0 ){
+      //if( colorCount == 0 ){
           this.mapLayer = this.map.createLayer('Ground_0');
           this.map.setCollisionBetween(0, 999, true, 'Ground_0');
           this.backGroundLayer = this.map.createLayer('Background_0');
-      }
-      else if( colorCount == 1 ){
-          this.mapLayer = this.map.createLayer('Ground_1');
-          this.map.setCollisionBetween(0, 999, true, 'Ground_1');
-          this.backGroundLayer = this.map.createLayer('Background_1');
-      }
-      else if( colorCount == 2 ){
-          this.mapLayer = this.map.createLayer('Ground_2');
-          this.map.setCollisionBetween(0, 999, true, 'Ground_2');
-          this.backGroundLayer = this.map.createLayer('Background_2');
-      }
-      else if( colorCount == 3 ){
-          this.mapLayer = this.map.createLayer('Ground_3');
-          this.map.setCollisionBetween(0, 999, true, 'Ground_3');
-          this.backGroundLayer = this.map.createLayer('Background_3');
-      }
+      //}
+      // else if( colorCount == 1 ){
+      //     this.mapLayer = this.map.createLayer('Ground_1');
+      //     this.map.setCollisionBetween(0, 999, true, 'Ground_1');
+      //     this.backGroundLayer = this.map.createLayer('Background_1');
+      // }
+      // else if( colorCount == 2 ){
+      //     this.mapLayer = this.map.createLayer('Ground_2');
+      //     this.map.setCollisionBetween(0, 999, true, 'Ground_2');
+      //     this.backGroundLayer = this.map.createLayer('Background_2');
+      // }
+      // else if( colorCount == 3 ){
+      //     this.mapLayer = this.map.createLayer('Ground_3');
+      //     this.map.setCollisionBetween(0, 999, true, 'Ground_3');
+      //     this.backGroundLayer = this.map.createLayer('Background_3');
+      // }
 
       this.mapLayer.resizeWorld();
-
-      // Create the window in the background of the game.
-      this.window = game.add.sprite(192, 512, 'window');
-      this.window.animations.add('rain', ['window_01', 'window_02', 'window_03'], 10, true);
 
       // set 32-pixel buffer around tiles to avoid collision tunneling
       game.physics.arcade.TILE_BIAS = 32;
@@ -185,9 +181,6 @@ Tutorial.prototype = {
 
        // Set the collisions of the game.
       // this.game.physics.arcade.collide(this.player, 'Ground');
-
-      // Play the animation of the window.
-      this.window.animations.play('rain');
 
       // Go into the red state
       if (!hasRed) {
