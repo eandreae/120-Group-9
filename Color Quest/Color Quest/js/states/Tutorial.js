@@ -84,7 +84,7 @@ Tutorial.prototype = {
          game.physics.arcade.enable(this.bossPortal);
       }
 
-      this.textPos = 0;
+      this.textPos = 1;
 
       var styleDescription = {
          font: '18px Arial',
@@ -120,10 +120,10 @@ Tutorial.prototype = {
       this.n1Text = new Array();
 
       // The text is from Shakespeare's "As You Like It"
-      this.n1Text[0] = "Eric was here";
-      this.n1Text[1] = "Dlyan was heren't";
-      this.n1Text[2] = "Other Eric was heren't";
-      this.n1Text[3] = "asfoadnspoasbhgupoifuads\nasdifjpadfnspubpasfas\nhhhhhhhhhhhhhhhhhhhhhh";
+      this.n1Text[0] = "Hi";
+      this.n1Text[1] = "I'm NPC1";
+      this.n1Text[2] = "Tell the other NPC I said hi";
+      this.n1Text[3] = "asdfadsfasfas\nasdifjpadfnspubpasfas\nhhhhhhhhhhhhhhhhhhhhhh";
       this.n1Text[4] = "";
 
       this.n2 = new NPC(game, 800, 500);
@@ -134,9 +134,9 @@ Tutorial.prototype = {
       this.n2Text = new Array();
 
       // The text is from Shakespeare's "As You Like It"
-      this.n2Text[0] = "Eric was here 2";
-      this.n2Text[1] = "Dlyan was heren't 2";
-      this.n2Text[2] = "Other Eric was heren't 2";
+      this.n2Text[0] = "Hi";
+      this.n2Text[1] = "I'm NPC2";
+      this.n2Text[2] = "Tell the other NPC I said hi";
       this.n2Text[3] = "asfoadnspoasbhgupoifuads\nasdifjpadfnspubpasfas\nhhhhhhhhhhhhhhhhhhhhhh 2";
       this.n2Text[4] = "";
 
@@ -234,6 +234,7 @@ Tutorial.prototype = {
             this.talking = true;
             this.interactText.visible = false;
             this.setTextPosition(this.textArea, this.n1);
+            this.textArea.text = this.n1Text[0];
             npcText.loop(3000, this.goThroughText, this, this.n1Text);
             npcText.start();
          }
@@ -249,6 +250,7 @@ Tutorial.prototype = {
             this.talking = true;
             this.interactText.visible = false;
             this.setTextPosition(this.textArea, this.n2);
+            this.textArea.text = this.n2Text[0];
             npcText.loop(3000, this.goThroughText, this, this.n2Text);
             npcText.start();
          }
@@ -330,7 +332,7 @@ Tutorial.prototype = {
       if (this.textPos == text.length) {
          npcText.stop();
          this.talking = false;
-         this.textPos = 0;
+         this.textPos = 1;
       }
    },
 
