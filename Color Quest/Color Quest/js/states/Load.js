@@ -23,7 +23,7 @@ Load.prototype = {
 	},
 	create: function() {
 		console.log('Load: create');
-        if( colorCount == 0 ){
+        if( metKingColor == false ){
             song = game.add.audio('sad1');
         }
         else {

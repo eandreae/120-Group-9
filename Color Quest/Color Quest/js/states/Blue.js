@@ -93,8 +93,6 @@ Blue.prototype = {
       }
 
       function goHome(player, color) {
-          colorCount++;
-
          // Blue bdm
          bmd = game.add.bitmapData(18, 18);
          bmd.fill(0, 0, 255, 1);

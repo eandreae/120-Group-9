@@ -29,27 +29,27 @@ Tutorial.prototype = {
       // Create new tilemap
       this.map = game.add.tilemap('layout');
       this.map.addTilesetImage('color_tiles_tileset', 'tilesheet');
-      //if( colorCount == 0 ){
+      if( metKingColor == false ){
           this.mapLayer = this.map.createLayer('Ground_0');
           this.map.setCollisionBetween(0, 999, true, 'Ground_0');
           this.backGroundLayer = this.map.createLayer('Background_0');
-      //}
-      // else if( colorCount == 1 ){
-      //     this.mapLayer = this.map.createLayer('Ground_1');
-      //     this.map.setCollisionBetween(0, 999, true, 'Ground_1');
-      //     this.backGroundLayer = this.map.createLayer('Background_1');
-      // }
-      // else if( colorCount == 2 ){
-      //     this.mapLayer = this.map.createLayer('Ground_2');
-      //     this.map.setCollisionBetween(0, 999, true, 'Ground_2');
-      //     this.backGroundLayer = this.map.createLayer('Background_2');
-      // }
-      // else if( colorCount == 3 ){
-      //     this.mapLayer = this.map.createLayer('Ground_3');
-      //     this.map.setCollisionBetween(0, 999, true, 'Ground_3');
-      //     this.backGroundLayer = this.map.createLayer('Background_3');
-      // }
-
+      }
+      else { // they have met King Color. Check if they have any of the colors.
+          // Set up the world without colors.
+          this.mapLayer = this.map.createLayer('Ground_1');
+          this.map.setCollisionBetween(0, 999, true, 'Ground_1');
+          this.noColorBackground = this.map.createLayer('Background_1');
+          // Check if they have colors.
+          if( hasRed ){
+              this.redLayer = this.map.createLayer('Red');
+          }
+          if( hasYellow ){
+              this.yellowLayer = this.map.createLayer('Yellow');
+          }
+          if( hasBlue ){
+              this.blueLayer = this.map.createLayer('Blue');
+          }
+      }
       this.mapLayer.resizeWorld();
 
       // set 32-pixel buffer around tiles to avoid collision tunneling
@@ -87,7 +87,16 @@ Tutorial.prototype = {
          game.physics.arcade.enable(this.bluePortal);
          this.portals.add(this.bluePortal);
       }
-
+      // Meeting King Color
+      if( metKingColor == false ){
+          bmd = game.add.bitmapData(64, 64);
+          bmd.fill(0, 0, 255, 1);
+          this.kingColorPortal = game.add.sprite(2848, 800, 'bPortal');
+          this.kingColorPortal.anchor.set(0.5);
+          game.physics.enable(this.kingColorPortal);
+          this.portals.add(this.kingColorPortal);
+      }
+      // Fighting King Color
       if (hasRed && hasYellow && hasBlue) {
          this.bossPortal = game.add.sprite(1120, 672, 'bPortal');
          this.bossPortal.anchor.set(0.5);
@@ -232,6 +241,20 @@ Tutorial.prototype = {
                game.state.start('Blue');
             }
          }
+      }
+
+      // Meet King Color.
+      if( metKingColor == false ){
+          if( this.physics.arcade.overlap(this.player, this.kingColorPortal) ){
+              // Display interact text.
+              this.setTextPosition(this.interactText, this.kingColorPortal);
+              this.interactText.visible = true;
+
+              if( game.input.keyboard.justPressed(Phaser.Keyboard.Z) ){
+                  metKingColor = true;
+                  game.state.start('Tutorial');
+              }
+          }
       }
 
       // Go into the boss room

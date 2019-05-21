@@ -189,7 +189,6 @@ Red.prototype = {
 
       function goHome(player, color) {
           hasRed = true;
-          colorCount++;
          // Red bdm
          bmd = game.add.bitmapData(18, 18);
          bmd.fill(255, 0, 0, 1);
