@@ -10,7 +10,7 @@
 // define globals
 var game;
 var hasRed = false;
-var hasYellow = false;
+var hasYellow = true;
 var hasBlue = false;
 var metKingColor = false;
 var direction = 1; // 1 (facing right), -1 (facing left)

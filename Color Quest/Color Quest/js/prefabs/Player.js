@@ -32,6 +32,8 @@ function Player(game, x, y, objects) {
    this.animations.add('idle_right', [3], 10, true);
    this.animations.add('left', [4, 5, 6, 7, 8, 9], 10, true);
    this.animations.add('right', [10, 11, 12, 13, 14, 15], 10, true);
+   this.animations.add('dash_left', [128], 10, true);
+   this.animations.add('dash_right', [129], 10, true);
 
    // Gives the player physics
    game.physics.arcade.enable(this);
@@ -108,6 +110,11 @@ Player.prototype.update = function() {
          if (this.body.blocked.down) this.animations.play('idle_left');
          else this.animations.play('jump_left');
       }
+   }
+
+   if (dashing) {
+      if (direction == 1) this.animations.play('dash_right');
+      else if (direction == -1) this.animations.play('dash_left');
    }
 
    // Player can jump only if they're touching the Ground
