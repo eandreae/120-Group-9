@@ -20,15 +20,18 @@ function Player(game, x, y, objects) {
 
    // call to Phaser.Sprite
    // new Sprite(game, x, y, key, frame)
-   Phaser.Sprite.call(this, game, x, y, 'bucky');
+   Phaser.Sprite.call(this, game, x, y, 'bucky', 'bucky_stand_right');
    this.scale.x = 1;
    this.scale.y = 1;
    //this.anchor.set(0.5);
 
    // // Add the animations to the player.
-   // this.animations.add('idle', ['player_walk05'], 10, true);
-   // this.animations.add('right', ['player_walk01', 'player_walk02', 'player_walk03', 'player_walk04'], 10, true);
-   // this.animations.add('left', ['player_walk06', 'player_walk07', 'player_walk08', 'player_walk09'], 10, true);
+   this.animations.add('jump_left', [0], 10, true);
+   this.animations.add('jump_right', [1], 10, true);
+   this.animations.add('idle_left', [2], 10, true);
+   this.animations.add('idle_right', [3], 10, true);
+   this.animations.add('left', [4, 5, 6, 7, 8, 9], 10, true);
+   this.animations.add('right', [10, 11, 12, 13, 14, 15], 10, true);
 
    // Gives the player physics
    game.physics.arcade.enable(this);
@@ -83,19 +86,28 @@ Player.prototype.update = function() {
    // Moving Left
    if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && !dashing && !injured) {
       this.body.acceleration.x = -1500;
-      this.animations.play('left');
+      if (this.body.blocked.down) this.animations.play('left');
+      else this.animations.play('jump_left');
       direction = -1;
   }
 
    // Moving Right
    else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && !dashing && !injured) {
       this.body.acceleration.x = 1500;
-      this.animations.play('right');
+      if (this.body.blocked.down) this.animations.play('right');
+      else this.animations.play('jump_right');
       direction = 1;
    }
 
    else {
-       this.animations.play('idle');
+      if (direction == 1) {
+         if (this.body.blocked.down) this.animations.play('idle_right');
+         else this.animations.play('jump_right');
+      }
+      else if (direction == -1) {
+         if (this.body.blocked.down) this.animations.play('idle_left');
+         else this.animations.play('jump_left');
+      }
    }
 
    // Player can jump only if they're touching the Ground
