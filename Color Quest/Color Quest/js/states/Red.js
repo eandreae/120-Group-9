@@ -26,8 +26,25 @@ Red.prototype = {
       // Create new tilemap
       this.map = game.add.tilemap('layout');
       this.map.addTilesetImage('color_tiles_tileset', 'tilesheet');
-      this.map.setCollisionByExclusion([]);
-      this.mapLayer = this.map.createLayer('Ground');
+      if( redLevel == 0 ){
+          // The player has just entered the Red level, load Level 0.
+          this.backGroundLayer = this.map.createLayer('Background_0');
+          this.mapLayer = this.map.createLayer('Ground_0');
+          this.map.setCollisionBetween(0, 999, true, 'Ground_0');
+      }
+      else if( redLevel == 1 ){
+          // The player has just entered the Red level 1, load level 1.
+          this.backGroundLayer = this.map.createLayer('Background_1');
+          this.mapLayer = this.map.createLayer('Ground_1');
+          this.map.setCollisionBetween(0, 999, true, 'Ground_1');
+      }
+      else if( redLevel == 2 ){
+          // The player has just entered the Red level 2, load level 2.
+          this.backGroundLayer = this.map.createLayer('Background_2');
+          this.mapLayer = this.map.createLayer('Ground_2');
+          this.map.setCollisionBetween(0, 999, true, 'Ground_2');
+      }
+
       this.mapLayer.resizeWorld();
 
       // set 32-pixel buffer around tiles to avoid collision tunneling
