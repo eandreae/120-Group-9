@@ -156,6 +156,7 @@ Player.prototype.update = function() {
       dashing = true;
       oldPos = this.x;
       dash--;
+      dashParticle(game, this);
    }
 
    if (dashing && Math.abs(oldPos - this.x) < 150) {
