@@ -172,9 +172,9 @@ Tutorial.prototype = {
       this.shootingEnemies.enableBody = true;
 
       // // Place a moving enemy
-      var e1 = new Enemy(game, 500, 300, -100, false, true, this.player);
-      game.add.existing(e1);
-      this.enemies.add(e1);
+      // var e1 = new Enemy(game, 500, 300, -100, true, false, this.player);
+      // game.add.existing(e1);
+      // this.enemies.add(e1);
       //
       // // Place a shooting enemy
       // var e2 = new Enemy(game, 900, 300, 0);
@@ -243,8 +243,8 @@ Tutorial.prototype = {
       }
 
       // Meet King Color.
-      if( metKingColor == false ){
-          if( this.physics.arcade.overlap(this.player, this.kingColorPortal) ){
+      if (metKingColor == false ){
+          if (this.physics.arcade.overlap(this.player, this.kingColorPortal) ){
               // Display interact text.
               this.setTextPosition(this.interactText, this.kingColorPortal);
               this.interactText.visible = true;
@@ -265,11 +265,6 @@ Tutorial.prototype = {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             game.state.start('BossMap');
          }
-      }
-
-      // Go to the color wall
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.W)) {
-         game.state.start('ColorWall');
       }
 
       // Player shoots a bullet for each key press
@@ -359,6 +354,11 @@ Tutorial.prototype = {
       function bulletHitsWall(bullet, walls) {
          bulletDestroyed(game, bullet);
       }
+   },
+
+   shutdown: function() {
+      this.enemies.destroy(true);
+      this.shootingEnemies.destroy(true);
    },
 
    // Called every 2 seconds by the timer to have the enemies shoot

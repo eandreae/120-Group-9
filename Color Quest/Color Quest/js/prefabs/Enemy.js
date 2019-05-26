@@ -1,8 +1,13 @@
 this.v = 0;
+this.direction;
 this.dashing;
 this.jumping;
 this.player;
 this.sprite;
+this.dash = false;
+this.oldPos;
+this.timerJump;
+this.timerDash;
 
 function Enemy(game, x, y, speed, d = false, j = false, p) {
    this.v = speed;
@@ -38,9 +43,15 @@ function Enemy(game, x, y, speed, d = false, j = false, p) {
 
    // Blue jumping enemies
    if (j) {
-      timer = game.time.create(false);
-      timer.loop(2000, jumping, this, this);
-      timer.start();
+      timerJump = game.time.create(false);
+      timerJump.loop(2000, jumping, this, this);
+      timerJump.start();
+   }
+
+   if (d) {
+      timerDash = game.time.create(false);
+      timerDash.loop(2000, dashing, this, this);
+      timerDash.start();
    }
 }
 
@@ -51,22 +62,40 @@ Enemy.prototype.constructor = Enemy;
 var hitPlatform;
 Enemy.prototype.update = function() {
 
-   var hitPlatform;
-   hitPlatform = game.physics.arcade.collide(this, platforms);
+   if (this.v > 0) this.direction = 1;
+   else if (this.v < 0) this.direction = -1;
 
-   if (this.body.blocked.left || this.body.blocked.right) this.v = -this.v;
+   if (this.body.blocked.left || this.body.blocked.right) {
+      this.v = -this.v;
+      this.dash = false;
+   }
 
    this.body.velocity.x = this.v;
-   // if moving to the right.
+
+   // If moving to the right.
    if (this.body.velocity.x > 0) {
       this.animations.play('right');
    }
-   // if moving to the right.
+   // If moving to the right.
    if (this.body.velocity.x < 0) {
       this.animations.play('left');
    }
+
+   if (this.dash && Math.abs(this.oldPos - this.x) < 150) {
+      this.body.velocity.x = 700 * this.direction;
+      this.body.velocity.y = 0;
+      this.body.gravity.y = 0;
+   }
+   else this.dash = false;
 }
 
 function jumping(enemy) {
    enemy.body.velocity.y = -500;
+   jumpParticle(game, enemy);
+}
+
+function dashing(enemy) {
+   console.log("dash");
+   this.dash = true;
+   this.oldPos = enemy.x;
 }
