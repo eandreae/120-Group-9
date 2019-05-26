@@ -21,6 +21,7 @@ Tutorial.prototype = {
       song.play('', 0, 1, true);
 
       // Background
+      backgroundColor = "#D3D3D3"
       game.stage.backgroundColor = backgroundColor;
 
       // Setting the world bounds

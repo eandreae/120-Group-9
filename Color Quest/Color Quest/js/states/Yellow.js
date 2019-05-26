@@ -11,13 +11,14 @@ Yellow.prototype = {
       console.log('Yellow: preload');
 
       game.load.tilemap('layout', 'assets/TileMaps/Yellow.json', null, Phaser.Tilemap.TILED_JSON);
-      game.load.spritesheet('tilesheet', 'assets/TileSheets/color_tiles.png', 32, 32);
+      game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles.png', 32, 32);
    },
 
    create: function() {
       console.log('Yellow: create');
 
       // Background
+      backgroundColor = "#FFEE99"
       game.stage.backgroundColor = backgroundColor;
 
       // Setting the world bounds
@@ -26,8 +27,8 @@ Yellow.prototype = {
       // Create new tilemap
       this.map = game.add.tilemap('layout');
       this.map.addTilesetImage('color_tiles_tileset', 'tilesheet');
-      this.map.setCollisionByExclusion([]);
-      this.mapLayer = this.map.createLayer('Ground');
+      this.mapLayer = this.map.createLayer('Ground_0');
+      this.map.setCollisionBetween(0, 999, true, 'Ground_0');
       this.mapLayer.resizeWorld();
 
       // set 32-pixel buffer around tiles to avoid collision tunneling
@@ -50,10 +51,10 @@ Yellow.prototype = {
       // The group handling. No shooting.
       this.enemies = game.add.group();
       this.enemies.enableBody = true;
-      // The enemy that chases you.
-      var enemy = new Enemy(game, 64, 800, 190);
-      game.add.existing(enemy);
-      this.enemies.add(enemy);
+      // // The enemy that chases you.
+      // var enemy = new Enemy(game, 64, 800, 190);
+      // game.add.existing(enemy);
+      // this.enemies.add(enemy);
 
       // Camera follows player
       game.camera.follow(this.player);
