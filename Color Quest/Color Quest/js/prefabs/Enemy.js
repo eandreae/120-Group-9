@@ -44,13 +44,14 @@ function Enemy(game, x, y, speed, d = false, j = false, p) {
    // Blue jumping enemies
    if (j) {
       timerJump = game.time.create(false);
-      timerJump.loop(2000, jumping, this, this);
+      timerJump.loop(2000, enemyJumping, this, this);
       timerJump.start();
    }
 
+   // Yellow dashing enemies
    if (d) {
       timerDash = game.time.create(false);
-      timerDash.loop(2000, dashing, this, this);
+      timerDash.loop(2000, enemyDashing, this, this);
       timerDash.start();
    }
 }
@@ -89,13 +90,12 @@ Enemy.prototype.update = function() {
    else this.dash = false;
 }
 
-function jumping(enemy) {
+function enemyJumping(enemy) {
    enemy.body.velocity.y = -500;
    jumpParticle(game, enemy);
 }
 
-function dashing(enemy) {
-   console.log("dash");
-   this.dash = true;
-   this.oldPos = enemy.x;
+function enemyDashing(enemy) {
+   enemy.dash = true;
+   enemy.oldPos = enemy.x;
 }

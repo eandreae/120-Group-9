@@ -56,6 +56,17 @@ Yellow.prototype = {
       // game.add.existing(enemy);
       // this.enemies.add(enemy);
 
+      // Red square bit map data
+      bmd = game.add.bitmapData(10, 10000);
+      this.x = game.add.sprite(1350, 0, bmd);
+      game.physics.arcade.enable(this.x);
+
+      bmd = game.add.bitmapData(10000, 1000);
+      bmd.fill(127, 106, 0, 1);
+      this.wall = game.add.sprite(-10100, 200, bmd);
+      game.physics.arcade.enable(this.wall);
+      this.wall.body.immovable = true;
+
       // Camera follows player
       game.camera.follow(this.player);
       game.camera.deadzone = new Phaser.Rectangle(325, 200, 50, 150); // (x,y,width,height)
@@ -90,6 +101,12 @@ Yellow.prototype = {
 
       this.physics.arcade.overlap(this.player, this.yellow, collectYellow, null, this);
 
+      this.physics.arcade.overlap(this.player, this.x, startWall, null, this);
+
+      if (this.physics.arcade.collide(this.player, this.wall)) {
+         playerDies(this, this.player, 'Yellow');
+      }
+
       // When the player collects the color
       function collectYellow(player, color) {
          hasYellow = true;
@@ -110,11 +127,18 @@ Yellow.prototype = {
 
          color.destroy();
          song.stop();
+         this.wall.body.velocity.x = 0;
          game.time.events.add(Phaser.Timer.SECOND * 2, function() { game.state.start('Tutorial')});
+      }
+
+      function startWall(player, x) {
+         x.destroy();
+         this.wall.body.velocity.x = 300;
       }
   },
   render: function() {
      game.debug.bodyInfo(this.player, 100, 100, 'black');
      game.debug.body(this.player);
+     game.debug.body(this.x);
   }
 };
