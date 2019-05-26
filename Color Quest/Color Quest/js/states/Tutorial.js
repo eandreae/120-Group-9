@@ -18,7 +18,15 @@ Tutorial.prototype = {
    create: function() {
       console.log('Tutorial: create');
 
-      song.play('', 0, 1, true);
+      song.stop();
+      if( metKingColor == false ){
+          song = game.add.audio('happy');
+      } else if( hasRed && hasYellow && hasBlue ){
+          song = game.add.audio('motivational');
+      } else {
+          song = game.add.audio('sad1');
+      }
+      song.play('', 0, 0.5, true);
 
       // Background
       backgroundColor = "#D3D3D3"

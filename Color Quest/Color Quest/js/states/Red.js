@@ -17,6 +17,11 @@ Red.prototype = {
    create: function() {
       console.log('Red: create');
 
+      // Music for Red.
+      song.stop();
+      song = game.add.audio('action2');
+      song.play('', 0, 0.5, true);
+
       // Background
       game.stage.backgroundColor = backgroundColor;
 

@@ -1,5 +1,10 @@
-// Music Credits
-// "sad1" = https://www.youtube.com/watch?v=f6bHMLFwJmw
+// Music Credits - bensound.com
+// "sad1" = bensound-november.mp3
+// "happy" = bensound-littleidea.mp3
+// "motivational" = bensound-birthofahero.mp3
+// "title music" = bensound-funkysuspense.mp3
+// "action music" = bensound-dance.mp3
+// "action music2" = bensound-funkyelement.mp3
 
 
 // Load state
@@ -31,16 +36,16 @@ Load.prototype = {
 		game.load.image('particle_b', 'assets/img/particle_blue.png');
 
 		game.load.audio('jump', 'assets/audio/Jump.mp3');
-		game.load.audio('sad1', 'assets/audio/sad1.mp3');
+		game.load.audio('sad1', 'assets/audio/bensound-november.mp3');
+        game.load.audio('happy', 'assets/audio/bensound-littleidea.mp3');
+        game.load.audio('motivational', 'assets/audio/bensound-birthofahero.mp3');
+        game.load.audio('title music', 'assets/audio/bensound-funkysuspense.mp3');
+        game.load.audio('action', 'assets/audio/bensound-dance.mp3');
+        game.load.audio('action2', 'assets/audio/bensound-funkyelement.mp3');
+
 	},
 	create: function() {
 		console.log('Load: create');
-        if( metKingColor == false ){
-            song = game.add.audio('sad1');
-        }
-        else {
-            song = game.add.audio('sad1');
-        }
 
 		game.state.start('MainMenu');
 	},
