@@ -149,11 +149,10 @@ Tutorial.prototype = {
       this.n1Text = new Array();
 
       // NPC1's text
-      this.n1Text[0] = "Howdy! You havin' a good day here in Alvenroux?";
-      this.n1Text[1] = "I see you already know how to move left an' right\nwith the arrow keys. You can jump with\nUp, too!";
-      this.n1Text[2] = "Tell the other NPC I said hi";
-      this.n1Text[3] = "asdfadsfasfas\nasdifjpadfnspubpasfas\nhhhhhhhhhhhhhhhhhhhhhh";
-      this.n1Text[4] = "";
+      this.n1Text[0] = "Howdy! You havin' a good day\nhere in Palette Town?";
+      this.n1Text[1] = "Y'know how to move left 'n' right\nwith the arrow keys already. You can\njump with Up, too!";
+      this.n1Text[2] = "Why don'tcha talk to the other townsfolk?\nPress Z to interact with 'em,\nor anythin' else!";
+      this.n1Text[3] = "";
 
       this.n2 = new NPC(game, 800, 500);
       game.add.existing(this.n2);
@@ -163,10 +162,10 @@ Tutorial.prototype = {
       this.n2Text = new Array();
 
       // NPC2's text
-      this.n2Text[0] = "Hi";
-      this.n2Text[1] = "I'm NPC2";
-      this.n2Text[2] = "Tell the other NPC I said hi";
-      this.n2Text[3] = "asfoadnspoasbhgupoifuads\nasdifjpadfnspubpasfas\nhhhhhhhhhhhhhhhhhhhhhh 2";
+      this.n2Text[0] = "I'm on the ROOF!";
+      this.n2Text[1] = "The SUN! It's RIGHT THERE!";
+      this.n2Text[2] = "PRAISE IT! PRAISE IT FOR ALL YOU'RE WORTH!";
+      this.n2Text[3] = "BY THE POWER OF THE YELLOW LIGHT!";
       this.n2Text[4] = "";
 
       // Adds the player into the state
