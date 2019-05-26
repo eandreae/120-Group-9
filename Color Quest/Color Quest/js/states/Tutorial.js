@@ -149,11 +149,26 @@ Tutorial.prototype = {
       this.n1Text = new Array();
 
       // NPC1's text
-      this.n1Text[0] = "Howdy! You havin' a good day\nhere in Palette Town?";
-      this.n1Text[1] = "Y'know how to move left 'n' right\nwith the arrow keys already. You can\njump with Up, too!";
-      this.n1Text[2] = "Why don'tcha talk to the other townsfolk?\nPress Z to interact with 'em,\nor anythin' else!";
-      this.n1Text[3] = "";
+      if( metKingColor == false ){
+        this.n1Text[0] = "Howdy! You havin' a good day\nhere in Palette Town?";
+        this.n1Text[1] = "Y'know how to move left 'n' right\nwith the arrow keys already. You can\njump with Up, too!";
+        this.n1Text[2] = "Why don'tcha talk to the other townsfolk?\nPress Z to interact with 'em,\nor anythin' else!";
+        this.n1Text[3] = "";
+      }else if( metKingColor == true && !hasRed && !hasYellow && !hasBlue){
+        this.n1Text[0] = "Oh no...what are we gonna do?!";
+        this.n1Text[1] = "The portals...maybe those are the key...";
+        this.n1Text[2] = "";
+      }else if( metKingColor == true && (hasRed || hasYellow || hasBlue) && (!hasRed || !hasYellow || !hasBlue)){
+        this.n1Text[0] = "Yeah, that's it! Keep collectin' the colors!";
+        this.n1Text[1] = "";
+      }else{
+        this.n1Text[0] = "You've got all the colors...y'know what to do.";
+        this.n1Text[1] = "Go beat that tyrant, King Color, an'\nrestore color to our land!";
+        this.n1Text[2] = "You can do it! You're the only one who can!";
+        this.n1Text[3] = "";
+      }
 
+      // NPC2
       this.n2 = new NPC(game, 800, 500);
       game.add.existing(this.n2);
       this.npcs.add(this.n2);
@@ -162,11 +177,95 @@ Tutorial.prototype = {
       this.n2Text = new Array();
 
       // NPC2's text
-      this.n2Text[0] = "I'm on the ROOF!";
-      this.n2Text[1] = "The SUN! It's RIGHT THERE!";
-      this.n2Text[2] = "PRAISE IT! PRAISE IT FOR ALL YOU'RE WORTH!";
-      this.n2Text[3] = "BY THE POWER OF THE YELLOW LIGHT!";
-      this.n2Text[4] = "";
+      if( metKingColor == false ){
+        this.n2Text[0] = "I'm on the ROOF!";
+        this.n2Text[1] = "The SUN! It's RIGHT THERE!";
+        this.n2Text[2] = "PRAISE IT! PRAISE IT FOR ALL YOU'RE WORTH!";
+        this.n2Text[3] = "BY THE POWER OF THE YELLOW LIGHT!";
+        this.n2Text[4] = "";
+      }else if( metKingColor == true && !hasYellow){
+        this.n2Text[0] = "The SUN! NOOOOOOO!";
+        this.n2Text[1] = "OUR YELLOW GLORY MUST BE RESTORED!";
+        this.n2Text[2] = "";
+      }else{
+        this.n2Text[0] = "The SUN! IT HAS RETURNED!";
+        this.n2Text[1] = "HAHAHAHA! With this, we are...UNBEATABLE!\nThat false king will FALL before the SUN!";
+        this.n2Text[2] = "";
+      }
+      
+      // NPC3
+      this.n3 = new NPC(game, 1100, 800);
+      game.add.existing(this.n3);
+      this.npcs.add(this.n3);
+
+      //The array for the text
+      this.n3Text = new Array();
+
+      // NPC3's text
+      if( metKingColor == false ){
+        this.n3Text[0] = "These berries sure are coming along nicely!\nBig, red, and juicy.";
+        this.n3Text[1] = "Their color's really coming through today!";
+        this.n3Text[2] = "";
+      }else if( metKingColor == true && !hasRed){
+        this.n3Text[0] = "The berries...they're withering! Oh, no...";
+        this.n3Text[1] = "Without the power of red to sustain them...";
+        this.n3Text[2] = "";
+      }else{
+        this.n3Text[0] = "You've returned the power of Red!";
+        this.n3Text[1] = "Oh, thank you, thank you!\nYou're a true hero!";
+        this.n3Text[2] = "";
+      }
+      
+      // NPC4
+      this.n4 = new NPC(game, 1800, 700);
+      game.add.existing(this.n4);
+      this.npcs.add(this.n4);
+
+      //The array for the text
+      this.n4Text = new Array();
+
+      // NPC4's text
+      if( metKingColor == false ){
+        this.n4Text[0] = "Zzzz...";
+        this.n4Text[1] = "(He's sleeping pretty soundly.)";
+        this.n4Text[2] = "";
+      }else if( metKingColor == true && (!hasRed || !hasYellow || !hasBlue)){
+        this.n4Text[0] = "Zzzz...";
+        this.n4Text[1] = "(He's STILL sleeping, somehow.)";
+      }else{
+        this.n4Text[0] = "Zzz...snrk...h-huh...?";
+        this.n4Text[1] = "H-how long was I asleep...?\nAw, man, what'd I miss...?";
+        this.n4Text[2] = "";
+      }
+      
+      // NPC5
+      this.n5 = new NPC(game, 1700, 800);
+      game.add.existing(this.n5);
+      this.npcs.add(this.n5);
+
+      //The array for the text
+      this.n5Text = new Array();
+
+      // NPC5's text
+      if( metKingColor == false ){
+        this.n5Text[0] = "Ugh...why's he sleeping there of all places?\nDoesn't he know how sacred those\ncolors are?";
+        this.n5Text[1] = "Red, yellow, and blue! The\ncornerstones of our world!";
+        this.n5Text[2] = "";
+      }else if( metKingColor == true && !hasRed && !hasYellow && !hasBlue){
+        this.n5Text[0] = "No...the colors, t-they're all gone!";
+        this.n5Text[1] = "Y-you have to get them back!\nThose portals, they must lead to the colors!";
+        this.n5Text[2] = "Please, go through those portals,\nget our colors back...";
+        this.n5Text[3] = "The world is counting on you!";
+        this.n5Text[4] = ""
+      }else if( metKingColor == true && (!hasRed || !hasYellow || !hasBlue)){
+        this.n5Text[0] = "Look! The colors, they're\nstarting to come back!";
+        this.n5Text[1] = "Keep it up! You can do this!";
+        this.n5Text[2] = "";
+      }else{
+        this.n5Text[0] = "You've done it...all that's left is the man himself.";
+        this.n5Text[1] = "The door to King Color awaits. Defeat him,\nand you'll surely restore color to\nthe world!";
+        this.n5Text[2] = "";
+      }
 
       // Adds the player into the state
       this.player = new Player(game, 64, 736, this.mapLayer);
@@ -285,6 +384,7 @@ Tutorial.prototype = {
          this.interactText.visible = false;
       }
 
+      // NPC1 text trigger
       if (game.physics.arcade.overlap(this.player, this.n1) && !this.talking) {
          // Display interact text
          this.setTextPosition(this.interactText, this.n1);
@@ -301,6 +401,7 @@ Tutorial.prototype = {
          }
       }
 
+      // NPC2 text trigger
       if (game.physics.arcade.overlap(this.player, this.n2) && !this.talking) {
          // Display interact text
          this.setTextPosition(this.interactText, this.n2);
@@ -313,6 +414,57 @@ Tutorial.prototype = {
             this.setTextPosition(this.textArea, this.n2);
             this.textArea.text = this.n2Text[0];
             npcText.loop(3000, this.goThroughText, this, this.n2Text);
+            npcText.start();
+         }
+      }
+         
+      // NPC3 text trigger
+      if (game.physics.arcade.overlap(this.player, this.n3) && !this.talking) {
+         // Display interact text
+         this.setTextPosition(this.interactText, this.n3);
+         this.interactText.visible = true;
+
+         if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
+            // Timer for npc text
+            this.talking = true;
+            this.interactText.visible = false;
+            this.setTextPosition(this.textArea, this.n3);
+            this.textArea.text = this.n3Text[0];
+            npcText.loop(3000, this.goThroughText, this, this.n3Text);
+            npcText.start();
+         }
+      }
+      
+      // NPC4 text trigger
+      if (game.physics.arcade.overlap(this.player, this.n4) && !this.talking) {
+         // Display interact text
+         this.setTextPosition(this.interactText, this.n4);
+         this.interactText.visible = true;
+
+         if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
+            // Timer for npc text
+            this.talking = true;
+            this.interactText.visible = false;
+            this.setTextPosition(this.textArea, this.n4);
+            this.textArea.text = this.n4Text[0];
+            npcText.loop(3000, this.goThroughText, this, this.n4Text);
+            npcText.start();
+         }
+      }
+      
+      // NPC5 text trigger
+      if (game.physics.arcade.overlap(this.player, this.n5) && !this.talking) {
+         // Display interact text
+         this.setTextPosition(this.interactText, this.n5);
+         this.interactText.visible = true;
+
+         if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
+            // Timer for npc text
+            this.talking = true;
+            this.interactText.visible = false;
+            this.setTextPosition(this.textArea, this.n5);
+            this.textArea.text = this.n5Text[0];
+            npcText.loop(3000, this.goThroughText, this, this.n5Text);
             npcText.start();
          }
       }
