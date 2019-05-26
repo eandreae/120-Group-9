@@ -140,9 +140,9 @@ Tutorial.prototype = {
       //The array for the text
       this.n1Text = new Array();
 
-      // The text is from Shakespeare's "As You Like It"
-      this.n1Text[0] = "Hi";
-      this.n1Text[1] = "I'm NPC1";
+      // NPC1's text
+      this.n1Text[0] = "Howdy! You havin' a good day here in Alvenroux?";
+      this.n1Text[1] = "I see you already know how to move left an' right\nwith the arrow keys. You can jump with\nUp, too!";
       this.n1Text[2] = "Tell the other NPC I said hi";
       this.n1Text[3] = "asdfadsfasfas\nasdifjpadfnspubpasfas\nhhhhhhhhhhhhhhhhhhhhhh";
       this.n1Text[4] = "";
@@ -154,7 +154,7 @@ Tutorial.prototype = {
       //The array for the text
       this.n2Text = new Array();
 
-      // The text is from Shakespeare's "As You Like It"
+      // NPC2's text
       this.n2Text[0] = "Hi";
       this.n2Text[1] = "I'm NPC2";
       this.n2Text[2] = "Tell the other NPC I said hi";
