@@ -46,7 +46,7 @@ function bulletDestroyed(game, bullet) {
 }
 
 function jumpParticle(game, player) {
-   // Emitter used when player dies
+   // Emitter used when player double jumps
    jumpEmitter = game.add.emitter(player.x, player.y + 55, 100);
    jumpEmitter.makeParticles('particle_b');		        // red squares used as particles
    jumpEmitter.gravity = 0;
@@ -55,4 +55,16 @@ function jumpParticle(game, player) {
    jumpEmitter.setXSpeed(-250, 250);	// horizontal speed range
    jumpEmitter.setYSpeed(-20, 150);			         // vertical speed range
    jumpEmitter.start(true, 250, null, 20);	         // (explode, lifespan, freq, quantity)
+}
+
+function dashParticle(game, player) {
+   // Emitter used when player double jumps
+   dashEmitter = game.add.emitter(player.x, player.y + 32, 100);
+   dashEmitter.makeParticles('particle_y');		        // red squares used as particles
+   dashEmitter.gravity = 0;
+   dashEmitter.setScale(.3, .5, .3, .5, 0);
+   dashEmitter.setAlpha(.8, 0, 280); 	            // .8 to 0 alpha
+   dashEmitter.setXSpeed(-250, 250);	// horizontal speed range
+   dashEmitter.setYSpeed(-150, 150);			         // vertical speed range
+   dashEmitter.start(true, 280, null, 25);	         // (explode, lifespan, freq, quantity)
 }
