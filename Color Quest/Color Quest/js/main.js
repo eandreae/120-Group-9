@@ -17,6 +17,9 @@ var direction = 1; // 1 (facing right), -1 (facing left)
 var backgroundColor = "#D3D3D3" // light gray.
 var health = 5;
 var buckyValue = 0;
+var redLevel = 0; // keeps track of the progress in the Red level.
+var yellowLevel = 0; // keeps track of the progress in the Yellow level.
+var blueLevel = 0; // keeps track of the progress in the Blue level.
 var song;
 
 // wait for browser to load before creating Phaser game
