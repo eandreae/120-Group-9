@@ -5,6 +5,7 @@ this.jumping;
 this.player;
 this.sprite;
 this.dash = false;
+this.jump = false;
 this.oldPos;
 this.timerJump;
 this.timerDash;
@@ -84,6 +85,12 @@ Enemy.prototype.update = function() {
       this.animations.play('left');
    }
 
+   if (this.jump) {
+      this.body.velocity.y = -500;
+      jumpParticle(game, this);
+      this.jump = false;
+   }
+
    if (this.dash && Math.abs(this.oldPos - this.x) < 150) {
       this.body.velocity.x = 700 * this.direction;
       this.body.velocity.y = 0;
@@ -93,8 +100,7 @@ Enemy.prototype.update = function() {
 }
 
 function enemyJumping(enemy) {
-   enemy.body.velocity.y = -500;
-   jumpParticle(game, enemy);
+   this.jump = true;
 }
 
 function enemyDashing(enemy) {

@@ -179,7 +179,7 @@ Tutorial.prototype = {
       // // Place a shooting enemy
       var e2 = new Enemy(game, 500, 300, -100, false, true, this.player);
       game.add.existing(e2);
-      this.shootingEnemies.add(e2);
+      this.enemies.add(e2);
 
       // Bullet groups
       this.playerBullets = game.add.group();
