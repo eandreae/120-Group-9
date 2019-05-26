@@ -148,9 +148,9 @@ Tutorial.prototype = {
       //The array for the text
       this.n1Text = new Array();
 
-      // The text is from Shakespeare's "As You Like It"
-      this.n1Text[0] = "Hi";
-      this.n1Text[1] = "I'm NPC1";
+      // NPC1's text
+      this.n1Text[0] = "Howdy! You havin' a good day here in Alvenroux?";
+      this.n1Text[1] = "I see you already know how to move left an' right\nwith the arrow keys. You can jump with\nUp, too!";
       this.n1Text[2] = "Tell the other NPC I said hi";
       this.n1Text[3] = "asdfadsfasfas\nasdifjpadfnspubpasfas\nhhhhhhhhhhhhhhhhhhhhhh";
       this.n1Text[4] = "";
@@ -162,7 +162,7 @@ Tutorial.prototype = {
       //The array for the text
       this.n2Text = new Array();
 
-      // The text is from Shakespeare's "As You Like It"
+      // NPC2's text
       this.n2Text[0] = "Hi";
       this.n2Text[1] = "I'm NPC2";
       this.n2Text[2] = "Tell the other NPC I said hi";
@@ -180,14 +180,14 @@ Tutorial.prototype = {
       this.shootingEnemies.enableBody = true;
 
       // // Place a moving enemy
-      // var e1 = new Enemy(game, 500, 300, -100, true, false, this.player);
-      // game.add.existing(e1);
-      // this.enemies.add(e1);
+      var e1 = new Enemy(game, 500, 300, -100, true, false, this.player);
+      game.add.existing(e1);
+      this.enemies.add(e1);
       //
       // // Place a shooting enemy
-      // var e2 = new Enemy(game, 900, 300, 0);
-      // game.add.existing(e2);
-      // this.shootingEnemies.add(e2);
+      var e2 = new Enemy(game, 500, 300, -100, false, true, this.player);
+      game.add.existing(e2);
+      this.enemies.add(e2);
 
       // Bullet groups
       this.playerBullets = game.add.group();
@@ -324,11 +324,13 @@ Tutorial.prototype = {
       game.physics.arcade.collide(this.npcs, this.mapLayer);
 
       // Player with enemies
-      if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
-         health--;
-         if (health == 0) {
-            song.stop();
-            playerDies(game, this.player, 'Tutorial');
+      if (!injured) {
+         if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
+            health--;
+            if (health == 0) {
+               song.stop();
+               playerDies(game, this.player, 'Tutorial');
+            }
          }
       }
 
@@ -337,7 +339,7 @@ Tutorial.prototype = {
       game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this);
 
       // Enemy bullets with player
-      game.physics.arcade.collide(this.player, this.enemyBullets, bulletHitsPlayer, null, this);
+      if (!injured) game.physics.arcade.collide(this.player, this.enemyBullets, bulletHitsPlayer, null, this);
 
       // Bullets hitting a wall
       game.physics.arcade.collide(this.enemyBullets, this.mapLayer, bulletHitsWall, null, this);
