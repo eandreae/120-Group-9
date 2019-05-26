@@ -17,6 +17,7 @@ function playerDies(game, player, state) {
    deathEmitter.setYSpeed(-100,100);			   // vertical speed range
    deathEmitter.start(true, 2000, null, 50);	   // (explode, lifespan, freq, quantity)
    player.kill();
+
    game.time.events.add(Phaser.Timer.SECOND * 2, function() { game.state.start('GameOver', true, false, state)});
 }
 
@@ -33,7 +34,7 @@ function bulletDestroyed(game, bullet) {
 
    // Emitter used when player dies
    deathEmitter = game.add.emitter(bullet.x, bullet.y, 100);
-   deathEmitter.makeParticles('particle_r');		        // red squares used as particles
+   deathEmitter.makeParticles('particle_r');
    deathEmitter.gravity = 0;
    deathEmitter.setScale(.3, .5, .3, .5, 0);
    deathEmitter.setAlpha(.8, 0, 200); 	            // .8 to 0 alpha
@@ -42,29 +43,28 @@ function bulletDestroyed(game, bullet) {
    deathEmitter.start(true, 200, null, 20);	         // (explode, lifespan, freq, quantity)
 
    bullet.kill();
-   //game.time.events.add(Phaser.Timer.SECOND * 2, function() { game.state.start('GameOver')});
 }
 
-function jumpParticle(game, player) {
-   // Emitter used when player double jumps
-   jumpEmitter = game.add.emitter(player.x, player.y + 55, 100);
-   jumpEmitter.makeParticles('particle_b');		        // red squares used as particles
+function jumpParticle(game, object) {
+   // Emitter used when object double jumps
+   jumpEmitter = game.add.emitter(object.x, object.y + 55, 100);
+   jumpEmitter.makeParticles('particle_b');
    jumpEmitter.gravity = 0;
    jumpEmitter.setScale(.3, .5, .3, .5, 0);
    jumpEmitter.setAlpha(.6, 0, 250); 	            // .8 to 0 alpha
-   jumpEmitter.setXSpeed(-250, 250);	// horizontal speed range
+   jumpEmitter.setXSpeed(-250, 250);            	// horizontal speed range
    jumpEmitter.setYSpeed(-20, 150);			         // vertical speed range
-   jumpEmitter.start(true, 250, null, 20);	         // (explode, lifespan, freq, quantity)
+   jumpEmitter.start(true, 250, null, 20);	      // (explode, lifespan, freq, quantity)
 }
 
-function dashParticle(game, player) {
-   // Emitter used when player double jumps
-   dashEmitter = game.add.emitter(player.x, player.y + 32, 100);
-   dashEmitter.makeParticles('particle_y');		        // red squares used as particles
+function dashParticle(game, object) {
+   // Emitter used when object double jumps
+   dashEmitter = game.add.emitter(object.x, object.y + 32, 100);
+   dashEmitter.makeParticles('particle_y');
    dashEmitter.gravity = 0;
    dashEmitter.setScale(.3, .5, .3, .5, 0);
    dashEmitter.setAlpha(.8, 0, 280); 	            // .8 to 0 alpha
-   dashEmitter.setXSpeed(-250, 250);	// horizontal speed range
-   dashEmitter.setYSpeed(-150, 150);			         // vertical speed range
-   dashEmitter.start(true, 280, null, 25);	         // (explode, lifespan, freq, quantity)
+   dashEmitter.setXSpeed(-250, 250);            	// horizontal speed range
+   dashEmitter.setYSpeed(-150, 150);			      // vertical speed range
+   dashEmitter.start(true, 280, null, 25);	      // (explode, lifespan, freq, quantity)
 }

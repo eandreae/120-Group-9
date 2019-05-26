@@ -171,7 +171,7 @@ Tutorial.prototype = {
       this.shootingEnemies.enableBody = true;
 
       // // Place a moving enemy
-      var e1 = new Enemy(game, 500, 300, -100, false, false, this.player);
+      var e1 = new Enemy(game, 500, 300, -100, false, true, this.player);
       game.add.existing(e1);
       this.enemies.add(e1);
       //
