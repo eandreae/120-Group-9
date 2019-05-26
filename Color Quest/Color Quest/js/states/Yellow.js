@@ -32,8 +32,20 @@ Yellow.prototype = {
       // Create new tilemap
       this.map = game.add.tilemap('layout');
       this.map.addTilesetImage('color_tiles_tileset', 'tilesheet');
-      this.mapLayer = this.map.createLayer('Ground_0');
-      this.map.setCollisionBetween(0, 999, true, 'Ground_0');
+
+      if( yellowLevel == 0 ){
+          this.mapLayer = this.map.createLayer('Ground_0');
+          this.map.setCollisionBetween(0, 999, true, 'Ground_0');
+      }
+      else if ( yellowLevel == 1 ){
+          this.mapLayer = this.map.createLayer('Ground_1');
+          this.map.setCollisionBetween(0, 999, true, 'Ground_1');
+      }
+      else if ( yellowLevel == 2 ){
+          this.mapLayer = this.map.createLayer('Ground_2');
+          this.map.setCollisionBetween(0, 999, true, 'Ground_2');
+      }
+
       this.mapLayer.resizeWorld();
 
       // set 32-pixel buffer around tiles to avoid collision tunneling
@@ -114,7 +126,11 @@ Yellow.prototype = {
 
       // When the player collects the color
       function collectYellow(player, color) {
-         hasYellow = true;
+          // increment the yellowLevel progress.
+          yellowLevel++;
+          if( yellowLevel == 3 ){
+              hasYellow = true;
+          }
 
          // Yellow bdm
          bmd = game.add.bitmapData(18, 18);
@@ -133,7 +149,14 @@ Yellow.prototype = {
          color.destroy();
          song.stop();
          this.wall.body.velocity.x = 0;
-         game.time.events.add(Phaser.Timer.SECOND * 2, function() { game.state.start('Tutorial')});
+         game.time.events.add(Phaser.Timer.SECOND * 2, function() {
+             if( yellowLevel == 3 ){
+                 game.state.start('Tutorial')
+             } else {
+                 game.state.start('Yellow')
+             }
+
+         });
       }
 
       function startWall(player, x) {
