@@ -26,12 +26,12 @@ function Player(game, x, y, objects) {
    //this.anchor.set(0.5);
 
    // // Add the animations to the player.
-   this.animations.add('jump_left', [0], 10, true);
-   this.animations.add('jump_right', [1], 10, true);
-   this.animations.add('idle_left', [2], 10, true);
-   this.animations.add('idle_right', [3], 10, true);
-   this.animations.add('left', [4, 5, 6, 7, 8, 9], 10, true);
-   this.animations.add('right', [10, 11, 12, 13, 14, 15], 10, true);
+   this.animations.add('jump_left', [buckyValue + 0], 10, true);
+   this.animations.add('jump_right', [buckyValue + 1], 10, true);
+   this.animations.add('idle_left', [buckyValue + 2], 10, true);
+   this.animations.add('idle_right', [buckyValue + 3], 10, true);
+   this.animations.add('left', [buckyValue + 4, buckyValue + 5, buckyValue + 6, buckyValue + 7, buckyValue + 8, buckyValue + 9], 10, true);
+   this.animations.add('right', [buckyValue + 10, buckyValue + 11, buckyValue + 12, buckyValue + 13, buckyValue + 14, buckyValue + 15], 10, true);
    this.animations.add('dash_left', [128], 10, true);
    this.animations.add('dash_right', [129], 10, true);
 
@@ -53,6 +53,28 @@ Player.prototype.constructor = Player;
 // c to dash
 var hitPlatform;
 Player.prototype.update = function() {
+
+   if (hasBlue) {
+      buckyValue = 16;
+      if (hasYellow) {
+         buckyValue = 32;
+         if (hasRed) {
+            buckyValue = 80;
+         }
+      }
+      else if (hasRed) {
+         buckyValue = 64;
+      }
+   }
+   else if (hasRed) {
+      buckyValue = 48;
+      if (hasYellow) {
+         buckyValue = 96;
+      }
+   }
+   else if (hasYellow) {
+      buckyValue = 112;
+   }
 
    // If player is colliding with a platform
    var hitPlatform;
