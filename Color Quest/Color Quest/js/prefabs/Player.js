@@ -6,7 +6,6 @@ var dashing;
 var oldPos;
 var jumpSFX;
 var hp = health;
-var injured = false;
 
 // objects: The things the player can collide with
 // red: True if the player has collected red
@@ -23,7 +22,7 @@ function Player(game, x, y, objects) {
    Phaser.Sprite.call(this, game, x, y, 'bucky', 'bucky_stand_right');
    this.scale.x = 1;
    this.scale.y = 1;
-   this.anchor.set(0.5, 0);
+   this.anchor.set(0.5, 0.2);
 
    // // Add the animations to the player.
    this.animations.add('jump_left', [buckyValue + 0], 10, true);

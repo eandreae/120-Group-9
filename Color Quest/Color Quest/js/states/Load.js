@@ -1,5 +1,10 @@
-// Music Credits
-// "sad1" = https://www.youtube.com/watch?v=f6bHMLFwJmw
+// Music Credits - bensound.com
+// "sad1" = bensound-november.mp3
+// "happy" = bensound-littleidea.mp3
+// "motivational" = bensound-birthofahero.mp3
+// "title music" = bensound-funkysuspense.mp3
+// "action music" = bensound-dance.mp3
+// "action music2" = bensound-funkyelement.mp3
 
 
 // Load state
@@ -11,19 +16,14 @@ Load.prototype = {
 
       game.load.atlas('atlas', 'assets/img/atlas.png', 'assets/img/atlas.json');
       game.load.atlas('bucky', 'assets/img/allBucky.png', 'assets/img/allBucky.json');
-		//game.load.atlas('enemies', 'assets/img/enemies.png', 'assets/img/enemies.json');
 		game.load.atlas('enemies_red', 'assets/img/enemy_red.png', 'assets/img/enemy_red.json');
 		game.load.atlas('enemies_yellow', 'assets/img/enemy_yellow.png', 'assets/img/enemy_yellow.json');
 		game.load.atlas('enemies_blue', 'assets/img/enemy_blue.png', 'assets/img/enemy_blue.json');
 
 
-		//game.load.image('bucky', 'assets/img/Bucky2.png');
-		game.load.image('ground', 'assets/img/platform.png');
-		//game.load.image('bullet', 'assets/img/bullet.png');
       game.load.image('boss', 'assets/img/kingcolor.png');
 		game.load.image('bPortal', 'assets/img/KingColorButton.png');
 		game.load.image('title', 'assets/img/TitleScreen.png');
-		//game.load.image('bulletParticle', 'assets/img/BulletParticle.png');
 		game.load.image('bullet_l', 'assets/img/bullet_left.png');
 		game.load.image('bullet_r', 'assets/img/bullet_right.png');
 		game.load.image('particle_r', 'assets/img/particle_red.png');
@@ -31,16 +31,16 @@ Load.prototype = {
 		game.load.image('particle_b', 'assets/img/particle_blue.png');
 
 		game.load.audio('jump', 'assets/audio/Jump.mp3');
-		game.load.audio('sad1', 'assets/audio/sad1.mp3');
+		game.load.audio('sad1', 'assets/audio/bensound-november.mp3');
+        game.load.audio('happy', 'assets/audio/bensound-littleidea.mp3');
+        game.load.audio('motivational', 'assets/audio/bensound-birthofahero.mp3');
+        game.load.audio('title music', 'assets/audio/bensound-funkysuspense.mp3');
+        game.load.audio('action', 'assets/audio/bensound-dance.mp3');
+        game.load.audio('action2', 'assets/audio/bensound-funkyelement.mp3');
+
 	},
 	create: function() {
 		console.log('Load: create');
-        if( metKingColor == false ){
-            song = game.add.audio('sad1');
-        }
-        else {
-            song = game.add.audio('sad1');
-        }
 
 		game.state.start('MainMenu');
 	},

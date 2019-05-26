@@ -17,6 +17,11 @@ Yellow.prototype = {
    create: function() {
       console.log('Yellow: create');
 
+      // Music
+      song.stop();
+      song = game.add.audio('action2');
+      song.play('', 0, 0.5, true);
+
       // Background
       backgroundColor = "#FFEE99"
       game.stage.backgroundColor = backgroundColor;
@@ -132,6 +137,9 @@ Yellow.prototype = {
       }
 
       function startWall(player, x) {
+          song.stop();
+          song = game.add.audio('action');
+          song.play('', 0, 0.5, true);
          x.destroy();
          this.wall.body.velocity.x = 300;
       }
