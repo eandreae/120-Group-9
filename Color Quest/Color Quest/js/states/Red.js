@@ -23,45 +23,10 @@ Red.prototype = {
       // Setting the world bounds
       game.world.setBounds(0, 0, 1024, 1024);
 
-      // Create new tilemap
-      this.map = game.add.tilemap('layout');
-      this.map.addTilesetImage('color_tiles_tileset', 'tilesheet');
-      if( redLevel == 0 ){
-          // The player has just entered the Red level, load Level 0.
-          this.backGroundLayer = this.map.createLayer('Background_0');
-          this.mapLayer = this.map.createLayer('Ground_0');
-          this.map.setCollisionBetween(0, 999, true, 'Ground_0');
-      }
-      else if( redLevel == 1 ){
-          // The player has just entered the Red level 1, load level 1.
-          this.backGroundLayer = this.map.createLayer('Background_1');
-          this.mapLayer = this.map.createLayer('Ground_1');
-          this.map.setCollisionBetween(0, 999, true, 'Ground_1');
-      }
-      else if( redLevel == 2 ){
-          // The player has just entered the Red level 2, load level 2.
-          this.backGroundLayer = this.map.createLayer('Background_2');
-          this.mapLayer = this.map.createLayer('Ground_2');
-          this.map.setCollisionBetween(0, 999, true, 'Ground_2');
-      }
-
-      this.mapLayer.resizeWorld();
-
       // set 32-pixel buffer around tiles to avoid collision tunneling
       game.physics.arcade.TILE_BIAS = 32;
 
-      // Red collectable
-      bmd = game.add.bitmapData(75, 75);
-      bmd.fill(255, 0, 0, 1);
-      this.red = game.add.sprite(2464, 416, 'atlas', 'red_color');
-      game.physics.arcade.enable(this.red);
-
-      // Home collectable
-      bmd2 = game.add.bitmapData(75, 75);
-      bmd.fill(255, 0, 0, 1);
-      this.home = game.add.sprite(4002, 800, 'atlas', 'red_color');
-      game.physics.arcade.enable(this.home);
-
+      // Handle the text customization and health GUI
       var styleDescription = {
          font: '18px Arial',
          fill: '#000000',
@@ -70,48 +35,160 @@ Red.prototype = {
          stroke: '#000000',
          strokeThickness: 0
       };
-
+      // Health GUI
       this.healthText = this.add.text(10, 10, "", styleDescription);
       this.healthText.fixedToCamera = true;
 
-      // Adds the player into the state
-      this.player = new Player(game, 64, 800, this.mapLayer);
-      game.add.existing(this.player);
+      // Create new tilemap
+      this.map = game.add.tilemap('layout');
+      this.map.addTilesetImage('color_tiles_tileset', 'tilesheet');
 
-      // Place the shooting enemies.
+      // Handle the group management before loading the levels.
       // The group of shooting enemies.
       this.shootingEnemies = game.add.group();
       this.shootingEnemies.enableBody = true;
-
-      // enemies 1 and 2 for the first half of red.
-      var e1 = new Enemy(game, 2465, 832, 0);
-      game.add.existing(e1);
-      this.shootingEnemies.add(e1);
-
-      var e2 = new Enemy(game, 2465, 576, 0);
-      game.add.existing(e2);
-      this.shootingEnemies.add(e2);
-
-      // enemies 3, 4, 5, and 6 for the second half of red.
-      var e3 = new Enemy(game, 3809, 417, 0);
-      game.add.existing(e3);
-      this.shootingEnemies.add(e3);
-
-      var e4 = new Enemy(game, 3809, 576, 0);
-      game.add.existing(e4);
-      this.shootingEnemies.add(e4);
-
-      var e5 = new Enemy(game, 3809, 703, 0);
-      game.add.existing(e5);
-      this.shootingEnemies.add(e5);
-
-      var e6 = new Enemy(game, 3809, 832, 0);
-      game.add.existing(e6);
-      this.shootingEnemies.add(e6);
-
       // Bullet groups
       this.playerBullets = game.add.group();
       this.enemyBullets = game.add.group();
+
+      if( redLevel == 0 ){
+          // The player has just entered the Red level, load Level 0.
+          // Load the correct tilemaps for level 0.
+          backgroundColor = "#FF9999";
+          game.stage.backgroundColor = backgroundColor;
+          this.mapLayer = this.map.createLayer('Ground_0');
+          this.map.setCollisionBetween(0, 999, true, 'Ground_0');
+
+          // LOADING MAP -------------------------------------------------------
+          // Now that the correct level has been loaded, do the rest of the level.
+          this.mapLayer.resizeWorld();
+
+          // Load the enemies/NPCs/collectibles for level 0
+
+          // NPCs --------------------------------------------------------------
+
+          // ENEMIES -----------------------------------------------------------
+          // enemies 1, 2, and 3 for level 0 of Red.
+
+          // // enemy 1
+          // var e1 = new Enemy(game, 1376, 704, 0);
+          // game.add.existing(e1);
+          // this.shootingEnemies.add(e1);
+
+          // enemy 2
+          var e2 = new Enemy(game, 2880, 832, 0);
+          game.add.existing(e2);
+          this.shootingEnemies.add(e2);
+
+          // enemy 3
+          var e3 = new Enemy(game, 3392, 832, 0);
+          game.add.existing(e3);
+          this.shootingEnemies.add(e3);
+
+          // COLLECTIBLES ------------------------------------------------------
+
+          // Red collectable
+          bmd = game.add.bitmapData(75, 75);
+          bmd.fill(255, 0, 0, 1);
+          this.red = game.add.sprite(3680, 832, 'atlas', 'red_color');
+          game.physics.arcade.enable(this.red);
+      }
+      else if( redLevel == 1 ){
+          // The player has just entered the Red level 1, load level 1.
+          backgroundColor = "#FF9999";
+          game.stage.backgroundColor = backgroundColor;
+          this.mapLayer = this.map.createLayer('Ground_1');
+          this.map.setCollisionBetween(0, 999, true, 'Ground_1');
+
+          // LOADING MAP -------------------------------------------------------
+          // Now that the correct level has been loaded, do the rest of the level.
+          this.mapLayer.resizeWorld();
+
+          // Load the enemies/NPCs/collectibles for level 1
+
+          // NPCs --------------------------------------------------------------
+
+          // ENEMIES -----------------------------------------------------------
+          // enemies 1, 2, and 3 for level 0 of Red.
+
+          // enemy 1
+          var e1 = new Enemy(game, 1984, 864, 0);
+          game.add.existing(e1);
+          this.shootingEnemies.add(e1);
+
+          // enemy 2
+          var e2 = new Enemy(game, 2080, 704, 0);
+          game.add.existing(e2);
+          this.shootingEnemies.add(e2);
+
+          // enemy 3
+          var e3 = new Enemy(game, 3104, 704, 0);
+          game.add.existing(e3);
+          this.shootingEnemies.add(e3);
+
+          // enemy 4
+          var e4 = new Enemy(game, 3392, 832, 0);
+          game.add.existing(e4);
+          this.shootingEnemies.add(e4);
+
+          // COLLECTIBLES ------------------------------------------------------
+
+          // Red collectable
+          bmd = game.add.bitmapData(75, 75);
+          bmd.fill(255, 0, 0, 1);
+          this.red = game.add.sprite(3680, 832, 'atlas', 'red_color');
+          game.physics.arcade.enable(this.red);
+      }
+      else if( redLevel == 2 ){
+          // The player has just entered the Red level 2, load level 2.
+          backgroundColor = "#FF9999";
+          game.stage.backgroundColor = backgroundColor;
+          this.mapLayer = this.map.createLayer('Ground_2');
+          this.map.setCollisionBetween(0, 999, true, 'Ground_2');
+
+          // LOADING MAP -------------------------------------------------------
+          // Now that the correct level has been loaded, do the rest of the level.
+          this.mapLayer.resizeWorld();
+
+          // Load the enemies/NPCs/collectibles for level 1
+
+          // NPCs --------------------------------------------------------------
+
+          // ENEMIES -----------------------------------------------------------
+          // enemies 1, 2, and 3 for level 0 of Red.
+
+          // enemy 1
+          var e1 = new Enemy(game, 1984, 864, 0);
+          game.add.existing(e1);
+          this.shootingEnemies.add(e1);
+
+          // enemy 2
+          var e2 = new Enemy(game, 2080, 704, 0);
+          game.add.existing(e2);
+          this.shootingEnemies.add(e2);
+
+          // enemy 3
+          var e3 = new Enemy(game, 3104, 704, 0);
+          game.add.existing(e3);
+          this.shootingEnemies.add(e3);
+
+          // enemy 4
+          var e4 = new Enemy(game, 3392, 832, 0);
+          game.add.existing(e4);
+          this.shootingEnemies.add(e4);
+
+          // COLLECTIBLES ------------------------------------------------------
+
+          // Red collectable
+          bmd = game.add.bitmapData(75, 75);
+          bmd.fill(255, 0, 0, 1);
+          this.red = game.add.sprite(3680, 832, 'atlas', 'red_color');
+          game.physics.arcade.enable(this.red);
+      }
+
+      // Adds the player into the level.
+      this.player = new Player(game, 64, 800, this.mapLayer);
+      game.add.existing(this.player);
 
       // Camera follows player
       game.camera.follow(this.player);
@@ -148,9 +225,6 @@ Red.prototype = {
       // Player with the Red Upgrade.
       this.physics.arcade.overlap(this.player, this.red, collectRed, null, this);
 
-      // Player with the GoHome red button.
-      this.physics.arcade.overlap(this.player, this.home, goHome, null, this);
-
       // Player bullet with enemies
       game.physics.arcade.collide(this.playerBullets, this.enemies, bulletHitsEnemy, null, this)
       game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this)
@@ -183,29 +257,17 @@ Red.prototype = {
          bulletDestroyed(game, bullet);
       }
 
-      // When the player collects the color
+      // When the player collects the color at the end of the level.
       function collectRed(player, color) {
-         hasRed = true;
+          // increment the level variable upwards.
+          redLevel++;
 
-         // Red bdm
-         bmd = game.add.bitmapData(18, 18);
-         bmd.fill(255, 0, 0, 1);
+         if( redLevel == 2 ){
+             // If they have reacehd the last Red level, give them the ability
+             // to shoot.
+             hasRed = true;
+         }
 
-         // Particles when color is collected
-         colorEmitter = game.add.emitter(color.x, color.y, 200);
-         colorEmitter.makeParticles(bmd); // red squares used as particles
-         colorEmitter.gravity = 0;
-         colorEmitter.setScale(.25, .8, .25, .8, 0);
-         colorEmitter.setAlpha(.8, 0, 1800); // .8 to .3 alpha
-         colorEmitter.setXSpeed(-100, 100); // horizontal speed range
-         colorEmitter.setYSpeed(-100, 100); // vertical speed range
-         colorEmitter.start(true, 2000, null, 50); // (explode, lifespan, freq, quantity)
-
-         color.kill();
-      }
-
-      function goHome(player, color) {
-          hasRed = true;
          // Red bdm
          bmd = game.add.bitmapData(18, 18);
          bmd.fill(255, 0, 0, 1);
@@ -223,7 +285,12 @@ Red.prototype = {
          color.kill();
          song.stop();
          game.time.events.add(Phaser.Timer.SECOND * 2, function() {
-            game.state.start('Tutorial')
+             if( redLevel == 3 ){
+                 game.state.start('Tutorial')
+             } else {
+                 game.state.start('Red')
+             }
+
          });
       }
    },
