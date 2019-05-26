@@ -35,6 +35,7 @@ function Enemy(game, x, y, speed, d = false, j = false, p) {
    game.physics.arcade.enable(this);
    this.body.collideWorldBounds = true;
    this.body.gravity.y = 850;
+   this.anchor.set(0.15, 0.45);
 
    // Add the animations for the enemies.
 
@@ -44,7 +45,7 @@ function Enemy(game, x, y, speed, d = false, j = false, p) {
    // Blue jumping enemies
    if (j) {
       timerJump = game.time.create(false);
-      timerJump.loop(2000, enemyJumping, this, this);
+      timerJump.loop(1500, enemyJumping, this, this);
       timerJump.start();
    }
 
@@ -71,6 +72,7 @@ Enemy.prototype.update = function() {
       this.dash = false;
    }
 
+   this.body.gravity.y = 850;
    this.body.velocity.x = this.v;
 
    // If moving to the right.

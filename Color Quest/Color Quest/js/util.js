@@ -3,6 +3,8 @@
 // Called when the player dies
 function playerDies(game, player, state) {
 
+   injured = false;
+
    // Red square bit map data
    bmd = game.add.bitmapData(18, 18);
    bmd.fill(255, 0, 0, 1);

@@ -177,9 +177,9 @@ Tutorial.prototype = {
       this.enemies.add(e1);
       //
       // // Place a shooting enemy
-      // var e2 = new Enemy(game, 900, 300, 0);
-      // game.add.existing(e2);
-      // this.shootingEnemies.add(e2);
+      var e2 = new Enemy(game, 500, 300, -100, false, true, this.player);
+      game.add.existing(e2);
+      this.shootingEnemies.add(e2);
 
       // Bullet groups
       this.playerBullets = game.add.group();
@@ -316,11 +316,13 @@ Tutorial.prototype = {
       game.physics.arcade.collide(this.npcs, this.mapLayer);
 
       // Player with enemies
-      if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
-         health--;
-         if (health == 0) {
-            song.stop();
-            playerDies(game, this.player, 'Tutorial');
+      if (!injured) {
+         if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
+            health--;
+            if (health == 0) {
+               song.stop();
+               playerDies(game, this.player, 'Tutorial');
+            }
          }
       }
 
@@ -329,7 +331,7 @@ Tutorial.prototype = {
       game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, bulletHitsEnemy, null, this);
 
       // Enemy bullets with player
-      game.physics.arcade.collide(this.player, this.enemyBullets, bulletHitsPlayer, null, this);
+      if (!injured) game.physics.arcade.collide(this.player, this.enemyBullets, bulletHitsPlayer, null, this);
 
       // Bullets hitting a wall
       game.physics.arcade.collide(this.enemyBullets, this.mapLayer, bulletHitsWall, null, this);
