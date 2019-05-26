@@ -33,14 +33,26 @@ function bulletDestroyed(game, bullet) {
 
    // Emitter used when player dies
    deathEmitter = game.add.emitter(bullet.x, bullet.y, 100);
-   deathEmitter.makeParticles('bulletParticle');		        // red squares used as particles
+   deathEmitter.makeParticles('particle_r');		        // red squares used as particles
    deathEmitter.gravity = 0;
-   deathEmitter.setScale(.01, .05, .01, .05, 0);
-   deathEmitter.setAlpha(.8, 0, 220); 	            // .8 to 0 alpha
+   deathEmitter.setScale(.3, .5, .3, .5, 0);
+   deathEmitter.setAlpha(.8, 0, 200); 	            // .8 to 0 alpha
    deathEmitter.setXSpeed(minVelocity, maxVelocity);	// horizontal speed range
    deathEmitter.setYSpeed(-300,300);			         // vertical speed range
-   deathEmitter.start(true, 220, null, 25);	         // (explode, lifespan, freq, quantity)
+   deathEmitter.start(true, 200, null, 20);	         // (explode, lifespan, freq, quantity)
 
    bullet.kill();
    //game.time.events.add(Phaser.Timer.SECOND * 2, function() { game.state.start('GameOver')});
+}
+
+function jumpParticle(game, player) {
+   // Emitter used when player dies
+   jumpEmitter = game.add.emitter(player.x, player.y + 55, 100);
+   jumpEmitter.makeParticles('particle_b');		        // red squares used as particles
+   jumpEmitter.gravity = 0;
+   jumpEmitter.setScale(.3, .5, .3, .5, 0);
+   jumpEmitter.setAlpha(.6, 0, 250); 	            // .8 to 0 alpha
+   jumpEmitter.setXSpeed(-250, 250);	// horizontal speed range
+   jumpEmitter.setYSpeed(-20, 150);			         // vertical speed range
+   jumpEmitter.start(true, 250, null, 20);	         // (explode, lifespan, freq, quantity)
 }

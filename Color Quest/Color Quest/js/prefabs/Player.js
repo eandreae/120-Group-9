@@ -23,7 +23,7 @@ function Player(game, x, y, objects) {
    Phaser.Sprite.call(this, game, x, y, 'bucky', 'bucky_stand_right');
    this.scale.x = 1;
    this.scale.y = 1;
-   //this.anchor.set(0.5);
+   this.anchor.set(0.5, 0);
 
    // // Add the animations to the player.
    this.animations.add('jump_left', [buckyValue + 0], 10, true);
@@ -88,11 +88,13 @@ Player.prototype.update = function() {
    // Jumps depending on how many jumps it has. Refreshed when touching the ground
    if (this.body.blocked.down || this.body.touching.down && hitPlatform) {
       offPlatform = false;
+      doubleJump = false;
       jumps = 1;
       if (hasBlue) jumps = 2;
    }
    else if (!offPlatform) {
       offPlatform = true;
+      doubleJump = true;
       jumps--;
    }
 
@@ -145,6 +147,8 @@ Player.prototype.update = function() {
       offPlatform = true;
       this.body.velocity.y = -500;
       jumps--;
+      if (doubleJump) jumpParticle(game, this);
+      doubleJump = true;
    }
 
    // Player can only dash once in the air

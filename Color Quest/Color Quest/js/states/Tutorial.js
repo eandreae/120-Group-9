@@ -202,8 +202,6 @@ Tutorial.prototype = {
        // Set the collisions of the game.
       // this.game.physics.arcade.collide(this.player, 'Ground');
 
-
-
       // Go into the red state
       if (!hasRed) {
          if (this.physics.arcade.overlap(this.player, this.redPortal)) {
