@@ -70,18 +70,18 @@ Red.prototype = {
           // ENEMIES -----------------------------------------------------------
           // enemies 1, 2, and 3 for level 0 of Red.
 
-          // // enemy 1
-          // var e1 = new Enemy(game, 1376, 704, 0);
-          // game.add.existing(e1);
-          // this.shootingEnemies.add(e1);
+          // enemy 1
+          var e1 = new Enemy(game, 1376, 704, 0);
+          game.add.existing(e1);
+          this.shootingEnemies.add(e1);
 
           // enemy 2
-          var e2 = new Enemy(game, 2880, 832, 0);
+          var e2 = new Enemy(game, 2880, 864, 0);
           game.add.existing(e2);
           this.shootingEnemies.add(e2);
 
           // enemy 3
-          var e3 = new Enemy(game, 3392, 832, 0);
+          var e3 = new Enemy(game, 3296, 672, 0);
           game.add.existing(e3);
           this.shootingEnemies.add(e3);
 
@@ -112,22 +112,22 @@ Red.prototype = {
           // enemies 1, 2, and 3 for level 0 of Red.
 
           // enemy 1
-          var e1 = new Enemy(game, 1984, 864, 0);
+          var e1 = new Enemy(game, 1824, 864, 0);
           game.add.existing(e1);
           this.shootingEnemies.add(e1);
 
           // enemy 2
-          var e2 = new Enemy(game, 2080, 704, 0);
+          var e2 = new Enemy(game, 2368, 864, 0);
           game.add.existing(e2);
           this.shootingEnemies.add(e2);
 
           // enemy 3
-          var e3 = new Enemy(game, 3104, 704, 0);
+          var e3 = new Enemy(game, 2848, 704, 0);
           game.add.existing(e3);
           this.shootingEnemies.add(e3);
 
           // enemy 4
-          var e4 = new Enemy(game, 3392, 832, 0);
+          var e4 = new Enemy(game, 3264, 704, 0);
           game.add.existing(e4);
           this.shootingEnemies.add(e4);
 
@@ -163,19 +163,24 @@ Red.prototype = {
           this.shootingEnemies.add(e1);
 
           // enemy 2
-          var e2 = new Enemy(game, 2080, 704, 0);
+          var e2 = new Enemy(game, 2240, 768, 0);
           game.add.existing(e2);
           this.shootingEnemies.add(e2);
 
           // enemy 3
-          var e3 = new Enemy(game, 3104, 704, 0);
+          var e3 = new Enemy(game, 2528, 672, 0);
           game.add.existing(e3);
           this.shootingEnemies.add(e3);
 
           // enemy 4
-          var e4 = new Enemy(game, 3392, 832, 0);
+          var e4 = new Enemy(game, 3168, 672, 0);
           game.add.existing(e4);
           this.shootingEnemies.add(e4);
+
+          // enemy 5
+          var e5 = new Enemy(game, 3360, 800, 0);
+          game.add.existing(e5);
+          this.shootingEnemies.add(e5);
 
           // COLLECTIBLES ------------------------------------------------------
 
