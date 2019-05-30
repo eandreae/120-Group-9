@@ -37,7 +37,7 @@ Tutorial.prototype = {
 
       // Create new tilemap
       this.map = game.add.tilemap('layout');
-      this.map.addTilesetImage('color_tiles_tileset', 'tilesheet');
+      this.map.addTilesetImage('color_tiles_2', 'tilesheet');
       if( metKingColor == false ){
           this.mapLayer = this.map.createLayer('Ground_0');
           this.map.setCollisionBetween(0, 999, true, 'Ground_0');
