@@ -128,7 +128,7 @@ Yellow.prototype = {
       function collectYellow(player, color) {
           // increment the yellowLevel progress.
           yellowLevel++;
-          if( yellowLevel == 3 ){
+          if( yellowLevel == 1 ){
               hasYellow = true;
           }
 
