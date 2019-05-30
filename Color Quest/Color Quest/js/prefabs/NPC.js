@@ -5,6 +5,7 @@ function NPC(game, x, y) {
 
    this.anchor.set(0.5);
 
+   // Enable physics for the NPCs
    game.physics.arcade.enable(this);
    this.body.collideWorldBounds = true;
    this.body.gravity.y = 300;

@@ -116,39 +116,12 @@ Yellow.prototype = {
       }
    },
 
-      // When the player collects the color
-      function collectYellow(player, color) {
-          // increment the yellowLevel progress.
-          yellowLevel++;
-          if( yellowLevel == 1 ){
-              hasYellow = true;
-          }
-
-         // Yellow bdm
-         bmd = game.add.bitmapData(18, 18);
-         bmd.fill(255, 255, 0, 1);
-
-         // Particles when color is collected
-         colorEmitter = game.add.emitter(color.x, color.y, 200);
-         colorEmitter.makeParticles(bmd);		        // red squares used as particles
-         colorEmitter.gravity = 0;
-         colorEmitter.setScale(.25, .8, .25, .8, 0);
-         colorEmitter.setAlpha(.8, 0, 1800); 	      // .8 to .3 alpha
-         colorEmitter.setXSpeed(-100,100);			   // horizontal speed range
-         colorEmitter.setYSpeed(-100,100);			   // vertical speed range
-         colorEmitter.start(true, 2000, null, 50);	   // (explode, lifespan, freq, quantity)
-
-         color.destroy();
-         song.stop();
-         this.wall.body.velocity.x = 0;
-         game.time.events.add(Phaser.Timer.SECOND * 2, function() {
-             if( yellowLevel == 3 ){
-                 game.state.start('Tutorial')
-             } else {
-                 game.state.start('Yellow')
-             }
-
-         });
+   // When the player collects the color
+   collectYellow: function(player, color) {
+      // increment the yellowLevel progress.
+      yellowLevel++;
+      if (yellowLevel == 1) {
+         hasYellow = true;
       }
 
       // Yellow bdm
@@ -174,6 +147,7 @@ Yellow.prototype = {
          } else {
             game.state.start('Yellow')
          }
+
       });
    },
 
