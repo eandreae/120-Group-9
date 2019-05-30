@@ -205,7 +205,7 @@ Red.prototype = {
    update: function() {
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
-         var bullet = new Bullet(game, this.player.x, this.player.y, direction, .4, 1500);
+         var bullet = new Bullet(game, this.player.x, this.player.y, direction, 1500);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
       }
@@ -311,7 +311,7 @@ Red.prototype = {
    },
 
    enemyShoot: function(enemy) {
-      var bullet = new Bullet(game, enemy.x, enemy.y, -1, .4, 300);
+      var bullet = new Bullet(game, enemy.x, enemy.y, -1, 300);
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
    },
