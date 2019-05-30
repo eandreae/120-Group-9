@@ -15,7 +15,6 @@ Tutorial.prototype = {
    },
 
    create: function() {
-
       // Choose the song depending how far you've progressed in the game
       song.stop();
       if (metKingColor == false) {
@@ -490,7 +489,7 @@ Tutorial.prototype = {
       // All the collisions needed
       game.physics.arcade.collide(this.enemies, this.mapLayer); // Enemies with platforms
       game.physics.arcade.collide(this.shootingEnemies, this.mapLayer); // Shooting enemies with platforms
-      game.physics.arcade.collide(this.npcs, this.mapLayer);   // NPCs with the platforms
+      game.physics.arcade.collide(this.npcs, this.mapLayer); // NPCs with the platforms
 
       // Player with enemies
       if (!injured) {
