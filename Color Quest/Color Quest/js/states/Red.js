@@ -250,7 +250,7 @@ Red.prototype = {
       // increment the level variable upwards.
       redLevel++;
 
-      if (redLevel == 2) {
+      if (redLevel == 1) {
          // If they have reacehd the last Red level, give them the ability
          // to shoot.
          hasRed = true;

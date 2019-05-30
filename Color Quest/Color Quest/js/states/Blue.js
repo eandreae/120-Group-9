@@ -69,17 +69,18 @@ Blue.prototype = {
 
          // COLLECTIBLES ------------------------------------------------------
 
-         // Blue collectable
-         bmd = game.add.bitmapData(75, 75);
-         bmd.fill(0, 0, 255, 1);
-         this.blue = game.add.sprite(32, 3456, 'atlas', 'blue_color');
-         game.physics.arcade.enable(this.blue);
-      } else if (blueLevel == 1) {
-         // Loading the correct TileMap.
-         backgroundColor = "#72C4FF";
-         game.stage.backgroundColor = backgroundColor;
-         this.mapLayer = this.map.createLayer('Ground_1');
-         this.map.setCollisionBetween(0, 999, true, 'Ground_1');
+           // Blue collectable
+           bmd = game.add.bitmapData(75, 75);
+           bmd.fill(0, 0, 255, 1);
+           this.blue = game.add.sprite(3968, 832, 'atlas', 'blue_color');
+           game.physics.arcade.enable(this.blue);
+      }
+      else if( blueLevel == 1 ){
+          // Loading the correct TileMap.
+          backgroundColor = "#72C4FF";
+          game.stage.backgroundColor = backgroundColor;
+          this.mapLayer = this.map.createLayer('Ground_1');
+          this.map.setCollisionBetween(0, 999, true, 'Ground_1');
 
          // LOADING MAP -------------------------------------------------------
          // Now that the correct level has been loaded, do the rest of the level.
@@ -93,17 +94,18 @@ Blue.prototype = {
 
          // COLLECTIBLES ------------------------------------------------------
 
-         // Blue collectable
-         bmd = game.add.bitmapData(75, 75);
-         bmd.fill(0, 0, 255, 1);
-         this.blue = game.add.sprite(32, 2944, 'atlas', 'blue_color');
-         game.physics.arcade.enable(this.blue);
-      } else if (blueLevel == 2) {
-         // Loading the correct TileMap.
-         backgroundColor = "#72C4FF";
-         game.stage.backgroundColor = backgroundColor;
-         this.mapLayer = this.map.createLayer('Ground_2');
-         this.map.setCollisionBetween(0, 999, true, 'Ground_2');
+           // Blue collectable
+           bmd = game.add.bitmapData(75, 75);
+           bmd.fill(0, 0, 255, 1);
+           this.blue = game.add.sprite(3968, 832, 'atlas', 'blue_color');
+           game.physics.arcade.enable(this.blue);
+      }
+      else if( blueLevel == 2 ){
+          // Loading the correct TileMap.
+          backgroundColor = "#72C4FF";
+          game.stage.backgroundColor = backgroundColor;
+          this.mapLayer = this.map.createLayer('Ground_2');
+          this.map.setCollisionBetween(0, 999, true, 'Ground_2');
 
          // LOADING MAP -------------------------------------------------------
          // Now that the correct level has been loaded, do the rest of the level.
@@ -117,15 +119,15 @@ Blue.prototype = {
 
          // COLLECTIBLES ------------------------------------------------------
 
-         // Blue collectable
-         bmd = game.add.bitmapData(75, 75);
-         bmd.fill(0, 0, 255, 1);
-         this.blue = game.add.sprite(896, 2048, 'atlas', 'blue_color');
-         game.physics.arcade.enable(this.blue);
+           // Blue collectable
+           bmd = game.add.bitmapData(75, 75);
+           bmd.fill(0, 0, 255, 1);
+           this.blue = game.add.sprite(3776, 320, 'atlas', 'blue_color');
+           game.physics.arcade.enable(this.blue);
       }
 
       // Adds the player into the state
-      this.player = new Player(game, 64, 3870, this.mapLayer);
+      this.player = new Player(game, 64, 832, this.mapLayer);
       game.add.existing(this.player);
 
       // Camera follows player
