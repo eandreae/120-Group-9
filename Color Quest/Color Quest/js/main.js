@@ -9,9 +9,9 @@
 
 // define globals
 var game;
-var hasRed = false; // If the player has collected Red
-var hasYellow = false; // If the player has collected Yellow
-var hasBlue = false; // If the player has collected Blue
+var hasRed = true; // If the player has collected Red
+var hasYellow = true; // If the player has collected Yellow
+var hasBlue = true; // If the player has collected Blue
 var metKingColor = false; // If we've seen the beginning cutscene
 var direction = 1; // Player direction. 1 (facing right), -1 (facing left)
 var backgroundColor = "#72C4FF" // light blue.

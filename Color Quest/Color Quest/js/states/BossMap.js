@@ -34,22 +34,48 @@ BossMap.prototype = {
 
       // set 32-pixel buffer around tiles to avoid collision tunneling
       game.physics.arcade.TILE_BIAS = 32;
+      
+      // Health GUI
+      this.healthText = this.add.text(10, 10, "", styleDescription);
+      this.healthText.fixedToCamera = true;
 
+      // Handle the group management before loading the levels.
+      // The group of shooting enemies.
+      this.shootingEnemies = game.add.group();
+      this.shootingEnemies.enableBody = true;
+      
       // Adds the player into the state
       this.player = new Player(game, 64, 825, this.mapLayer);
       game.add.existing(this.player);
 
       // Bullet groups
       this.playerBullets = game.add.group();
+      this.enemyBullets = game.add.group();
 
       // Camera follows player
       game.camera.follow(this.player);
       game.camera.deadzone = new Phaser.Rectangle(325, 200, 50, 150); // (x,y,width,height)
 
+      // NPCs --------------------------------------------------------------
+
+      // ENEMIES -----------------------------------------------------------
+      // Shooting enemies for the final level.
+      
+      // Enemy 1
+      var e1 = new Enemy(game, 2496, 576, 0);
+      game.add.existing(e1);
+      this.shootingEnemies.add(e1);
+
+      
       // Add KC
       this.boss = new Boss(game, 800, 224);
       game.add.existing(this.boss);
       this.boss.enableBody = true;
+      
+      // Timer for how often the enemies shoot
+      enemyShootTimer = game.time.create(false);
+      enemyShootTimer.loop(3500, this.enemyGroup, this);
+      enemyShootTimer.start();
    },
 
    update: function() {
@@ -63,7 +89,38 @@ BossMap.prototype = {
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
       }
+      
+      // All the collisions needed
+      game.physics.arcade.collide(this.enemies, this.mapLayer); // Enemies with platforms
+      game.physics.arcade.collide(this.shootingEnemies, this.mapLayer); // Shooting enemies with platforms
+      game.physics.arcade.collide(this.npcs, this.mapLayer); // NPCs with the platforms
 
+      // Player with enemies
+      if (!injured) {
+         if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
+            health--;
+
+            // If player health reaches 0, they die
+            if (health == 0) {
+               song.stop();
+               playerDies(game, this.player, 'Tutorial');
+            }
+         }
+      }
+      
+      // Player bullet with enemies
+      game.physics.arcade.collide(this.playerBullets, this.enemies, this.bulletHitsEnemy, null, this);
+      game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, this.bulletHitsEnemy, null, this);
+
+      // Enemy bullets with player
+      if (!injured) game.physics.arcade.collide(this.player, this.enemyBullets, this.bulletHitsPlayer, null, this);
+
+      // Bullets hitting a wall
+      game.physics.arcade.collide(this.enemyBullets, this.mapLayer, this.bulletHitsWall, null, this);
+      game.physics.arcade.collide(this.playerBullets, this.mapLayer, this.bulletHitsWall, null, this);
+
+      this.healthText.text = health;
+      
       // Bullet collision for CK
       game.physics.arcade.collide(this.playerBullets, this.boss, bulletHitsBoss, null, this);
 
@@ -71,5 +128,45 @@ BossMap.prototype = {
          bullet.destroy();
          boss.destroy();
       }
+   },
+   
+   // Called with a player bullet hits an enemy
+   bulletHitsEnemy: function(bullet, enemy) {
+      bulletDestroyed(game, bullet);
+      enemy.destroy();
+   },
+
+   // Called with an enemy bullet hits the player
+   bulletHitsPlayer: function(player, bullet) {
+      bulletDestroyed(game, bullet);
+      health--;
+
+      // If player health reaches 0, they die
+      if (health == 0) {
+         playerDies(game, player, 'Tutorial');
+         song.stop();
+      }
+   },
+
+   // Called when any bullet hits the platforms
+   bulletHitsWall: function(bullet, walls) {
+      bulletDestroyed(game, bullet);
+   },
+
+   // Called every 2 seconds by the timer to have the enemies shoot
+   enemyGroup: function() {
+      this.shootingEnemies.forEach(this.enemyShoot, this, true);
+   },
+
+   enemyShoot: function(enemy) {
+      var bullet = new Bullet(game, enemy.x, enemy.y, -1, 300);
+      game.add.existing(bullet);
+      this.enemyBullets.add(bullet);
+   },
+
+   render: function() {
+      game.debug.bodyInfo(this.player, 100, 100, 'black');
+      game.debug.body(this.player);
    }
+   
 };
