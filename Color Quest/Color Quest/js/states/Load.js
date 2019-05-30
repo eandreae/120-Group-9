@@ -13,14 +13,14 @@ Load.prototype = {
 
    // Loads all the assets needed
    preload: function() {
-
+		// Atlas for the player and enemies
       game.load.atlas('atlas', 'assets/img/atlas.png', 'assets/img/atlas.json');
       game.load.atlas('bucky', 'assets/img/allBucky.png', 'assets/img/allBucky.json');
       game.load.atlas('enemies_red', 'assets/img/enemy_red.png', 'assets/img/enemy_red.json');
       game.load.atlas('enemies_yellow', 'assets/img/enemy_yellow.png', 'assets/img/enemy_yellow.json');
       game.load.atlas('enemies_blue', 'assets/img/enemy_blue.png', 'assets/img/enemy_blue.json');
 
-
+		// Loading images
       game.load.image('boss', 'assets/img/kingcolor.png');
       game.load.image('bPortal', 'assets/img/KingColorButton.png');
       game.load.image('title', 'assets/img/TitleScreen.png');
@@ -30,6 +30,7 @@ Load.prototype = {
       game.load.image('particle_y', 'assets/img/particle_yellow.png');
       game.load.image('particle_b', 'assets/img/particle_blue.png');
 
+		// Loading audio
       game.load.audio('jump', 'assets/audio/Jump.mp3');
       game.load.audio('sad1', 'assets/audio/bensound-november.mp3');
       game.load.audio('happy', 'assets/audio/bensound-littleidea.mp3');
@@ -40,12 +41,6 @@ Load.prototype = {
 
    },
    create: function() {
-      console.log('Load: create');
-
       game.state.start('MainMenu');
    },
-
-   update: function() {
-      //console.log('Load: update');
-   }
 };

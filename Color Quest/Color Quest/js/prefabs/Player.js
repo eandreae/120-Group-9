@@ -1,30 +1,25 @@
-var platforms;
-var jumps = 0;
-var offPlatform = false;
-var dash = 0;
-var dashing;
-var oldPos;
-var jumpSFX;
-var hp = health;
+var platforms; // The platforms in the state
+var jumps = 0; // The # of jumps the player gets
+var offPlatform = false; // If the player has gone off the platform
+var dash = 0; // The # of dashes the player gets
+var dashing; // If the player is currently dashing
+var oldPos; // Old position of the player. Used for dashing and knockback
+var jumpSFX; // The jumping sound effect
+var hp = health; // Player health
 
 // objects: The things the player can collide with
-// red: True if the player has collected red
-// yellow: True if the player has collected red
-// blue: True if the player has collected red
-
 function Player(game, x, y, objects) {
    platforms = objects;
    jumpSFX = game.add.audio('jump');
    hp = health;
 
    // call to Phaser.Sprite
-   // new Sprite(game, x, y, key, frame)
    Phaser.Sprite.call(this, game, x, y, 'bucky', 'bucky_stand_right');
    this.scale.x = 1;
    this.scale.y = 1;
    this.anchor.set(0.5, 0.2);
 
-   // // Add the animations to the player.
+   // Add the animations to the player. Bucky sprites depends on the Bucky value
    this.animations.add('jump_left', [buckyValue + 0], 10, true);
    this.animations.add('jump_right', [buckyValue + 1], 10, true);
    this.animations.add('idle_left', [buckyValue + 2], 10, true);
@@ -53,6 +48,7 @@ Player.prototype.constructor = Player;
 var hitPlatform;
 Player.prototype.update = function() {
 
+   // Determines which Bucky sprite we will be using
    if (hasBlue) {
       buckyValue = 16;
       if (hasYellow) {
@@ -60,26 +56,23 @@ Player.prototype.update = function() {
          if (hasRed) {
             buckyValue = 80;
          }
-      }
-      else if (hasRed) {
+      } else if (hasRed) {
          buckyValue = 64;
       }
-   }
-   else if (hasRed) {
+   } else if (hasRed) {
       buckyValue = 48;
       if (hasYellow) {
          buckyValue = 96;
       }
-   }
-   else if (hasYellow) {
+   } else if (hasYellow) {
       buckyValue = 112;
    }
 
    // If player is colliding with a platform
    var hitPlatform;
-
    hitPlatform = game.physics.arcade.collide(this, platforms);
 
+   // If the player hits an obstacle while dashing, stop their dash
    if (this.body.blocked.left || this.body.blocked.right) {
       dashing = false;
    }
@@ -91,6 +84,8 @@ Player.prototype.update = function() {
       jumps = 1;
       if (hasBlue) jumps = 2;
    }
+   // If the player just walks off a platform, they cannot jump unless they have
+   // the double jump
    else if (!offPlatform) {
       offPlatform = true;
       doubleJump = true;
@@ -114,7 +109,7 @@ Player.prototype.update = function() {
       if (this.body.blocked.down) this.animations.play('left');
       else this.animations.play('jump_left');
       direction = -1;
-  }
+   }
 
    // Moving Right
    else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && !dashing && !injured) {
@@ -124,17 +119,18 @@ Player.prototype.update = function() {
       direction = 1;
    }
 
+   // Idle animations
    else {
       if (direction == 1) {
          if (this.body.blocked.down) this.animations.play('idle_right');
          else this.animations.play('jump_right');
-      }
-      else if (direction == -1) {
+      } else if (direction == -1) {
          if (this.body.blocked.down) this.animations.play('idle_left');
          else this.animations.play('jump_left');
       }
    }
 
+   // Dashing animations
    if (dashing) {
       if (direction == 1) this.animations.play('dash_right');
       else if (direction == -1) this.animations.play('dash_left');
@@ -146,6 +142,8 @@ Player.prototype.update = function() {
       offPlatform = true;
       this.body.velocity.y = -500;
       jumps--;
+
+      // Makes particles for double jumping
       if (doubleJump) jumpParticle(game, this);
       doubleJump = true;
    }
@@ -155,29 +153,31 @@ Player.prototype.update = function() {
       dashing = true;
       oldPos = this.x;
       dash--;
+
+      // Makes particles for dashing
       dashParticle(game, this);
    }
 
+   // Dashes the player forward a certain amount
    if (dashing && Math.abs(oldPos - this.x) < 150) {
       this.body.maxVelocity.setTo(700, 99999);
       this.body.velocity.x = 700 * direction;
       this.body.velocity.y = 0;
       this.body.gravity.y = 0;
-   }
-   else dashing = false;
+   } else dashing = false;
 
+   // If the player has taken damage
    if (health < hp) {
       injured = true;
       hp = health;
       oldPos = this.x;
    }
 
+   // Player knockback when injured. They cannot be hit again during this
    if (injured && Math.abs(oldPos - this.x) < 75) {
       this.body.velocity.x = 300 * -direction;
       this.body.velocity.y = -175;
       dashing = false;
       if (this.body.blocked.right || this.body.blocked.left) injured = false;
-   }
-   else injured = false;
-
+   } else injured = false;
 }
