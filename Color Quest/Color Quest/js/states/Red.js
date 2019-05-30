@@ -228,7 +228,7 @@ Red.prototype = {
          health--;
          if (health == 0) {
             song.stop();
-            playerDies(game, player, 'Red');
+            playerDies(game, this.player, 'Red');
          }
       }
 
