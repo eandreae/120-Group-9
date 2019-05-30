@@ -66,6 +66,25 @@ Blue.prototype = {
          // NPCs --------------------------------------------------------------
 
          // ENEMIES -----------------------------------------------------------
+         // Adding the enemies for Level 0.
+         // There are 4 jumping enemies in level 0.
+         // Represented with e1, e2, e3, e4.
+
+         var e1 = new Enemy(game, 1504, 832, 0, false, true);
+         game.add.existing(e1);
+         this.shootingEnemies.add(e1);
+
+         var e2 = new Enemy(game, 2464, 704, 0, false, true);
+         game.add.existing(e2);
+         this.shootingEnemies.add(e2);
+
+         var e3 = new Enemy(game, 2944, 576, 0, false, true);
+         game.add.existing(e3);
+         this.shootingEnemies.add(e3);
+
+         var e4 = new Enemy(game, 3680, 832, 0, false, true);
+         game.add.existing(e4);
+         this.shootingEnemies.add(e4);
 
          // COLLECTIBLES ------------------------------------------------------
 
@@ -91,6 +110,37 @@ Blue.prototype = {
          // NPCs --------------------------------------------------------------
 
          // ENEMIES -----------------------------------------------------------
+         // Adding the enemies for Level 1.
+         // There are 7 jumping enemies in level 1.
+         // Represented with e1, e2, e3, e4, e5, e6, e7.
+
+         var e1 = new Enemy(game, 1248, 832, 0, false, true);
+         game.add.existing(e1);
+         this.shootingEnemies.add(e1);
+
+         var e2 = new Enemy(game, 1504, 832, 0, false, true);
+         game.add.existing(e2);
+         this.shootingEnemies.add(e2);
+
+         var e3 = new Enemy(game, 1760, 832, 0, false, true);
+         game.add.existing(e3);
+         this.shootingEnemies.add(e3);
+
+         var e4 = new Enemy(game, 2144, 672, 0, false, true);
+         game.add.existing(e4);
+         this.shootingEnemies.add(e4);
+
+         var e5 = new Enemy(game, 2400, 672, 0, false, true);
+         game.add.existing(e5);
+         this.shootingEnemies.add(e5);
+
+         var e6 = new Enemy(game, 2656, 672, 0, false, true);
+         game.add.existing(e6);
+         this.shootingEnemies.add(e6);
+
+         var e7 = new Enemy(game, 3584, 832, 0, false, true);
+         game.add.existing(e7);
+         this.shootingEnemies.add(e7);
 
          // COLLECTIBLES ------------------------------------------------------
 
@@ -116,6 +166,41 @@ Blue.prototype = {
          // NPCs --------------------------------------------------------------
 
          // ENEMIES -----------------------------------------------------------
+         // Adding the enemies for Level 2.
+         // There are 8 jumping enemies in level 2.
+         // Represented with e1, e2, e3, e4, e5, e6, e7, e8.
+
+         var e1 = new Enemy(game, 1088, 832, 0, false, true);
+         game.add.existing(e1);
+         this.shootingEnemies.add(e1);
+
+         var e2 = new Enemy(game, 1728, 832, 0, false, true);
+         game.add.existing(e2);
+         this.shootingEnemies.add(e2);
+
+         var e3 = new Enemy(game, 1760, 320, 0, false, true);
+         game.add.existing(e3);
+         this.shootingEnemies.add(e3);
+
+         var e4 = new Enemy(game, 2304, 832, 0, false, true);
+         game.add.existing(e4);
+         this.shootingEnemies.add(e4);
+
+         var e5 = new Enemy(game, 2592, 832, 0, false, true);
+         game.add.existing(e5);
+         this.shootingEnemies.add(e5);
+
+         var e6 = new Enemy(game, 3040, 320, 0, false, true);
+         game.add.existing(e6);
+         this.shootingEnemies.add(e6);
+
+         var e7 = new Enemy(game, 3424, 320, 0, false, true);
+         game.add.existing(e7);
+         this.shootingEnemies.add(e7);
+
+         var e8 = new Enemy(game, 3968, 832, 0, false, true);
+         game.add.existing(e8);
+         this.shootingEnemies.add(e8);
 
          // COLLECTIBLES ------------------------------------------------------
 
