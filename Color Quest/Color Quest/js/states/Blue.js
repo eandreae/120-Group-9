@@ -86,13 +86,13 @@ Blue.prototype = {
 
          // Particles when color is collected
          colorEmitter = game.add.emitter(color.x, color.y, 200);
-         colorEmitter.makeParticles(bmd);		        // red squares used as particles
+         colorEmitter.makeParticles(bmd); // red squares used as particles
          colorEmitter.gravity = 0;
          colorEmitter.setScale(.25, .8, .25, .8, 0);
-         colorEmitter.setAlpha(.8, 0, 1800); 	      // .8 to .3 alpha
-         colorEmitter.setXSpeed(-100,100);			   // horizontal speed range
-         colorEmitter.setYSpeed(-100,100);			   // vertical speed range
-         colorEmitter.start(true, 2000, null, 50);	   // (explode, lifespan, freq, quantity)
+         colorEmitter.setAlpha(.8, 0, 1800); // .8 to .3 alpha
+         colorEmitter.setXSpeed(-100, 100); // horizontal speed range
+         colorEmitter.setYSpeed(-100, 100); // vertical speed range
+         colorEmitter.start(true, 2000, null, 50); // (explode, lifespan, freq, quantity)
 
          color.destroy();
       }
@@ -104,21 +104,23 @@ Blue.prototype = {
 
          // Particles when color is collected
          colorEmitter = game.add.emitter(color.x, color.y, 200);
-         colorEmitter.makeParticles(bmd);		        // red squares used as particles
+         colorEmitter.makeParticles(bmd); // red squares used as particles
          colorEmitter.gravity = 0;
          colorEmitter.setScale(.25, .8, .25, .8, 0);
-         colorEmitter.setAlpha(.8, 0, 1800); 	      // .8 to .3 alpha
-         colorEmitter.setXSpeed(-100,100);			   // horizontal speed range
-         colorEmitter.setYSpeed(-100,100);			   // vertical speed range
-         colorEmitter.start(true, 2000, null, 50);	   // (explode, lifespan, freq, quantity)
+         colorEmitter.setAlpha(.8, 0, 1800); // .8 to .3 alpha
+         colorEmitter.setXSpeed(-100, 100); // horizontal speed range
+         colorEmitter.setYSpeed(-100, 100); // vertical speed range
+         colorEmitter.start(true, 2000, null, 50); // (explode, lifespan, freq, quantity)
 
          color.destroy();
          song.stop();
-         game.time.events.add(Phaser.Timer.SECOND * 2, function() { game.state.start('Tutorial')});
+         game.time.events.add(Phaser.Timer.SECOND * 2, function() {
+            game.state.start('Tutorial')
+         });
       }
-  },
-  render: function() {
-     game.debug.bodyInfo(this.player, 100, 100, 'black');
-     game.debug.body(this.player);
-  }
+   },
+   render: function() {
+      game.debug.bodyInfo(this.player, 100, 100, 'black');
+      game.debug.body(this.player);
+   }
 };
