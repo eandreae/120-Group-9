@@ -34,7 +34,7 @@ BossMap.prototype = {
 
       // set 32-pixel buffer around tiles to avoid collision tunneling
       game.physics.arcade.TILE_BIAS = 32;
-      
+
       // Health GUI
       this.healthText = this.add.text(10, 10, "", styleDescription);
       this.healthText.fixedToCamera = true;
@@ -43,7 +43,7 @@ BossMap.prototype = {
       // The group of shooting enemies.
       this.shootingEnemies = game.add.group();
       this.shootingEnemies.enableBody = true;
-      
+
       // Adds the player into the state
       this.player = new Player(game, 64, 825, this.mapLayer);
       game.add.existing(this.player);
@@ -60,18 +60,18 @@ BossMap.prototype = {
 
       // ENEMIES -----------------------------------------------------------
       // Shooting enemies for the final level.
-      
+
       // Enemy 1
       var e1 = new Enemy(game, 2496, 576, 0);
       game.add.existing(e1);
       this.shootingEnemies.add(e1);
 
-      
+
       // Add KC
       this.boss = new Boss(game, 800, 224);
       game.add.existing(this.boss);
       this.boss.enableBody = true;
-      
+
       // Timer for how often the enemies shoot
       enemyShootTimer = game.time.create(false);
       enemyShootTimer.loop(3500, this.enemyGroup, this);
@@ -89,7 +89,7 @@ BossMap.prototype = {
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
       }
-      
+
       // All the collisions needed
       game.physics.arcade.collide(this.enemies, this.mapLayer); // Enemies with platforms
       game.physics.arcade.collide(this.shootingEnemies, this.mapLayer); // Shooting enemies with platforms
@@ -103,11 +103,11 @@ BossMap.prototype = {
             // If player health reaches 0, they die
             if (health == 0) {
                song.stop();
-               playerDies(game, this.player, 'Tutorial');
+               playerDies(game, this.player, 'BossMap');
             }
          }
       }
-      
+
       // Player bullet with enemies
       game.physics.arcade.collide(this.playerBullets, this.enemies, this.bulletHitsEnemy, null, this);
       game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, this.bulletHitsEnemy, null, this);
@@ -120,7 +120,7 @@ BossMap.prototype = {
       game.physics.arcade.collide(this.playerBullets, this.mapLayer, this.bulletHitsWall, null, this);
 
       this.healthText.text = health;
-      
+
       // Bullet collision for CK
       game.physics.arcade.collide(this.playerBullets, this.boss, bulletHitsBoss, null, this);
 
@@ -129,7 +129,7 @@ BossMap.prototype = {
          boss.destroy();
       }
    },
-   
+
    // Called with a player bullet hits an enemy
    bulletHitsEnemy: function(bullet, enemy) {
       bulletDestroyed(game, bullet);
@@ -143,7 +143,7 @@ BossMap.prototype = {
 
       // If player health reaches 0, they die
       if (health == 0) {
-         playerDies(game, player, 'Tutorial');
+         playerDies(game, player, 'BossMap');
          song.stop();
       }
    },
@@ -168,5 +168,5 @@ BossMap.prototype = {
       game.debug.bodyInfo(this.player, 100, 100, 'black');
       game.debug.body(this.player);
    }
-   
+
 };

@@ -88,7 +88,7 @@ Blue.prototype = {
          // Load the enemies/NPCs/collectibles for level 0
 
          // NPCs --------------------------------------------------------------
-         this.n1 = new NPC(game, 500, 900);
+         this.n1 = new NPC(game, 400, 900);
          game.add.existing(this.n1);
          this.npcs.add(this.n1);
 
@@ -140,7 +140,7 @@ Blue.prototype = {
          // Load the enemies/NPCs/collectibles for level 0
 
          // NPCs --------------------------------------------------------------
-         this.n2 = new NPC(game, 500, 900);
+         this.n2 = new NPC(game, 400, 900);
          game.add.existing(this.n2);
          this.npcs.add(this.n2);
 
@@ -314,6 +314,10 @@ Blue.prototype = {
       game.physics.arcade.collide(this.jumpingEnemies, this.mapLayer); // Enemies with platforms
       game.physics.arcade.collide(this.npcs, this.mapLayer); // NPCs with the platforms
 
+      // Player bullet with enemies
+      game.physics.arcade.collide(this.playerBullets, this.enemies, this.bulletHitsEnemy, null, this);
+      game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, this.bulletHitsEnemy, null, this);
+
       // Bullets hitting a wall
       game.physics.arcade.collide(this.enemyBullets, this.mapLayer, this.bulletHitsWall, null, this);
       game.physics.arcade.collide(this.playerBullets, this.mapLayer, this.bulletHitsWall, null, this);
@@ -326,7 +330,7 @@ Blue.prototype = {
             // If player health reaches 0, they die
             if (health == 0) {
                song.stop();
-               playerDies(game, this.player, 'Tutorial');
+               playerDies(game, this.player, 'Blue');
             }
          }
       }

@@ -223,7 +223,7 @@ Yellow.prototype = {
             // If player health reaches 0, they die
             if (health == 0) {
                song.stop();
-               playerDies(game, this.player, 'Tutorial');
+               playerDies(game, this.player, 'Yellow');
             }
          }
       }

@@ -278,6 +278,23 @@ Red.prototype = {
          }
       }
 
+      // NPC1 text trigger
+      if (game.physics.arcade.overlap(this.player, this.n2) && !this.talking) {
+         // Display interact text
+         this.setTextPosition(this.interactText, this.n2);
+         this.interactText.visible = true;
+
+         if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
+            // Timer for npc text
+            this.talking = true;
+            this.interactText.visible = false;
+            this.setTextPosition(this.textArea, this.n2);
+            this.textArea.text = this.n2Text[0];
+            npcText.loop(3000, this.goThroughText, this, this.n2Text);
+            npcText.start();
+         }
+      }
+
       // All the collisions needed
       game.physics.arcade.collide(this.enemies, this.mapLayer); // Enemies with platforms
       game.physics.arcade.collide(this.shootingEnemies, this.mapLayer); // Shooting enemies with platforms
@@ -291,7 +308,7 @@ Red.prototype = {
             // If player health reaches 0, they die
             if (health == 0) {
                song.stop();
-               playerDies(game, this.player, 'Tutorial');
+               playerDies(game, this.player, 'Red');
             }
          }
       }
@@ -363,7 +380,7 @@ Red.prototype = {
 
       // If player health reaches 0, they die
       if (health == 0) {
-         playerDies(game, player, 'Tutorial');
+         playerDies(game, player, 'Red');
          song.stop();
       }
    },
