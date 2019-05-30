@@ -12,7 +12,7 @@ Tutorial.prototype = {
       console.log('Tutorial: preload');
 
       game.load.tilemap('layout', 'assets/TileMaps/Tutorial.json', null, Phaser.Tilemap.TILED_JSON);
-      game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles.png', 32, 32);
+      game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles_2.png', 32, 32);
    },
 
    create: function() {
@@ -192,7 +192,7 @@ Tutorial.prototype = {
         this.n2Text[1] = "HAHAHAHA! With this, we are...UNBEATABLE!\nThat false king will FALL before the SUN!";
         this.n2Text[2] = "";
       }
-      
+
       // NPC3
       this.n3 = new NPC(game, 1100, 800);
       game.add.existing(this.n3);
@@ -215,7 +215,7 @@ Tutorial.prototype = {
         this.n3Text[1] = "Oh, thank you, thank you!\nYou're a true hero!";
         this.n3Text[2] = "";
       }
-      
+
       // NPC4
       this.n4 = new NPC(game, 1800, 700);
       game.add.existing(this.n4);
@@ -237,7 +237,7 @@ Tutorial.prototype = {
         this.n4Text[1] = "H-how long was I asleep...?\nAw, man, what'd I miss...?";
         this.n4Text[2] = "";
       }
-      
+
       // NPC5
       this.n5 = new NPC(game, 1700, 800);
       game.add.existing(this.n5);
@@ -417,7 +417,7 @@ Tutorial.prototype = {
             npcText.start();
          }
       }
-         
+
       // NPC3 text trigger
       if (game.physics.arcade.overlap(this.player, this.n3) && !this.talking) {
          // Display interact text
@@ -434,7 +434,7 @@ Tutorial.prototype = {
             npcText.start();
          }
       }
-      
+
       // NPC4 text trigger
       if (game.physics.arcade.overlap(this.player, this.n4) && !this.talking) {
          // Display interact text
@@ -451,7 +451,7 @@ Tutorial.prototype = {
             npcText.start();
          }
       }
-      
+
       // NPC5 text trigger
       if (game.physics.arcade.overlap(this.player, this.n5) && !this.talking) {
          // Display interact text
