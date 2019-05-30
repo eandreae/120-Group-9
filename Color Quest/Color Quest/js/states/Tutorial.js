@@ -28,10 +28,6 @@ Tutorial.prototype = {
       }
       song.play('', 0, 0.5, true);
 
-      // Background
-      backgroundColor = "#D3D3D3"
-      game.stage.backgroundColor = backgroundColor;
-
       // Setting the world bounds
       game.world.setBounds(0, 0, 1024, 1024);
 
@@ -39,12 +35,18 @@ Tutorial.prototype = {
       this.map = game.add.tilemap('layout');
       this.map.addTilesetImage('color_tiles_2', 'tilesheet');
       if( metKingColor == false ){
+          // Background
+          backgroundColor = "#72C4FF"
+          game.stage.backgroundColor = backgroundColor;
+          // level
           this.mapLayer = this.map.createLayer('Ground_0');
           this.map.setCollisionBetween(0, 999, true, 'Ground_0');
           this.backGroundLayer = this.map.createLayer('Background_0');
       }
       else { // they have met King Color. Check if they have any of the colors.
           // Set up the world without colors.
+          backgroundColor = "#D3D3D3"
+          game.stage.backgroundColor = backgroundColor;
           this.mapLayer = this.map.createLayer('Ground_1');
           this.map.setCollisionBetween(0, 999, true, 'Ground_1');
           this.noColorBackground = this.map.createLayer('Background_1');
@@ -56,6 +58,8 @@ Tutorial.prototype = {
               this.yellowLayer = this.map.createLayer('Yellow');
           }
           if( hasBlue ){
+              backgroundColor = "#72C4FF"
+              game.stage.backgroundColor = backgroundColor;
               this.blueLayer = this.map.createLayer('Blue');
           }
       }
@@ -277,15 +281,15 @@ Tutorial.prototype = {
       this.shootingEnemies = game.add.group();
       this.shootingEnemies.enableBody = true;
 
-      // // Place a moving enemy
-      var e1 = new Enemy(game, 500, 300, -100, true, false, this.player);
-      game.add.existing(e1);
-      this.enemies.add(e1);
-      //
-      // // Place a shooting enemy
-      var e2 = new Enemy(game, 500, 300, -100, false, true, this.player);
-      game.add.existing(e2);
-      this.enemies.add(e2);
+      // // // Place a moving enemy
+      // var e1 = new Enemy(game, 500, 300, -100, true, false, this.player);
+      // game.add.existing(e1);
+      // this.enemies.add(e1);
+      // //
+      // // // Place a shooting enemy
+      // var e2 = new Enemy(game, 500, 300, -100, false, true, this.player);
+      // game.add.existing(e2);
+      // this.enemies.add(e2);
 
       // Bullet groups
       this.playerBullets = game.add.group();

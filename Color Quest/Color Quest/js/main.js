@@ -9,12 +9,12 @@
 
 // define globals
 var game;
-var hasRed = true;
+var hasRed = false;
 var hasYellow = false;
 var hasBlue = false;
 var metKingColor = false;
 var direction = 1; // 1 (facing right), -1 (facing left)
-var backgroundColor = "#D3D3D3" // light gray.
+var backgroundColor = "#72C4FF" // light blue.
 var health = 5;
 var injured = false;
 var buckyValue = 0;
