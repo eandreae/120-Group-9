@@ -35,6 +35,16 @@ BossMap.prototype = {
       // set 32-pixel buffer around tiles to avoid collision tunneling
       game.physics.arcade.TILE_BIAS = 32;
       
+      // Handle the text customization and health GUI
+      var styleDescription = {
+         font: '18px Arial',
+         fill: '#000000',
+         align: 'center',
+         fontWeight: 'bold',
+         stroke: '#000000',
+         strokeThickness: 0
+      };
+      
       // Health GUI
       this.healthText = this.add.text(10, 10, "", styleDescription);
       this.healthText.fixedToCamera = true;
@@ -66,6 +76,30 @@ BossMap.prototype = {
       game.add.existing(e1);
       this.shootingEnemies.add(e1);
 
+      // Enemy 2
+      var e2 = new Enemy(game, 2704, 672, 0);
+      game.add.existing(e2);
+      this.shootingEnemies.add(e2);
+
+      // Enemy 3
+      var e3 = new Enemy(game, 2672, 448, 0);
+      game.add.existing(e3);
+      this.shootingEnemies.add(e3);
+      
+      // Enemy 4
+      var e4 = new Enemy(game, 3152, 448, 0);
+      game.add.existing(e4);
+      this.shootingEnemies.add(e4);
+      
+      // Enemy 5
+      var e5 = new Enemy(game, 3024, 672, 0);
+      game.add.existing(e5);
+      this.shootingEnemies.add(e5);
+      
+      // Enemy 6
+      var e6 = new Enemy(game, 5920, 320, 0);
+      game.add.existing(e6);
+      this.shootingEnemies.add(e6);
       
       // Add KC
       this.boss = new Boss(game, 800, 224);
