@@ -52,6 +52,20 @@ Yellow.prototype = {
       this.player = new Player(game, 416, 800, this.mapLayer);
       game.add.existing(this.player);
 
+      // Handle the text customization and health GUI
+      var styleDescription = {
+         font: '18px Arial',
+         fill: '#000000',
+         align: 'center',
+         fontWeight: 'bold',
+         stroke: '#000000',
+         strokeThickness: 0
+      };
+
+      // Health GUI
+      this.healthText = this.add.text(10, 10, "", styleDescription);
+      this.healthText.fixedToCamera = true;
+
       // Bullet groups
       this.playerBullets = game.add.group();
 

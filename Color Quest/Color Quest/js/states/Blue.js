@@ -23,32 +23,17 @@ Blue.prototype = {
       // set 32-pixel buffer around tiles to avoid collision tunneling
       game.physics.arcade.TILE_BIAS = 32;
 
-      // Handle the text customization and health GUI
-      var styleDescription = {
-         font: '18px Arial',
-         fill: '#000000',
-         align: 'center',
-         fontWeight: 'bold',
-         stroke: '#000000',
-         strokeThickness: 0
-      };
-
-      // Health GUI
-      this.healthText = this.add.text(10, 10, "", styleDescription);
-      this.healthText.fixedToCamera = true;
-
       // Create new tilemap
       this.map = game.add.tilemap('layout');
       this.map.addTilesetImage('color_tiles', 'tilesheet');
 
       // Handle the group management before loading the levels.
       // The group of shooting enemies.
-      this.shootingEnemies = game.add.group();
-      this.shootingEnemies.enableBody = true;
+      this.jumpingEnemies = game.add.group();
+      this.jumpingEnemies.enableBody = true;
 
       // Bullet groups
       this.playerBullets = game.add.group();
-      this.enemyBullets = game.add.group();;
 
       if (blueLevel == 0) {
          // Loading the correct TileMap.
@@ -72,19 +57,19 @@ Blue.prototype = {
 
          var e1 = new Enemy(game, 1504, 832, 0, false, true);
          game.add.existing(e1);
-         this.shootingEnemies.add(e1);
+         this.jumpingEnemies.add(e1);
 
          var e2 = new Enemy(game, 2464, 704, 0, false, true);
          game.add.existing(e2);
-         this.shootingEnemies.add(e2);
+         this.jumpingEnemies.add(e2);
 
          var e3 = new Enemy(game, 2944, 576, 0, false, true);
          game.add.existing(e3);
-         this.shootingEnemies.add(e3);
+         this.jumpingEnemies.add(e3);
 
          var e4 = new Enemy(game, 3680, 832, 0, false, true);
          game.add.existing(e4);
-         this.shootingEnemies.add(e4);
+         this.jumpingEnemies.add(e4);
 
          // COLLECTIBLES ------------------------------------------------------
 
@@ -113,33 +98,33 @@ Blue.prototype = {
          // There are 7 jumping enemies in level 1.
          // Represented with e1, e2, e3, e4, e5, e6, e7.
 
-         var e1 = new Enemy(game, 1248, 832, 0, false, true);
+         var e1 = new Enemy(game, 1216, 832, 0, false, true);
          game.add.existing(e1);
-         this.shootingEnemies.add(e1);
+         this.jumpingEnemies.add(e1);
 
-         var e2 = new Enemy(game, 1504, 832, 0, false, true);
+         var e2 = new Enemy(game, 1472, 832, 0, false, true);
          game.add.existing(e2);
-         this.shootingEnemies.add(e2);
+         this.jumpingEnemies.add(e2);
 
-         var e3 = new Enemy(game, 1760, 832, 0, false, true);
+         var e3 = new Enemy(game, 1728, 832, 0, false, true);
          game.add.existing(e3);
-         this.shootingEnemies.add(e3);
+         this.jumpingEnemies.add(e3);
 
          var e4 = new Enemy(game, 2144, 672, 0, false, true);
          game.add.existing(e4);
-         this.shootingEnemies.add(e4);
+         this.jumpingEnemies.add(e4);
 
          var e5 = new Enemy(game, 2400, 672, 0, false, true);
          game.add.existing(e5);
-         this.shootingEnemies.add(e5);
+         this.jumpingEnemies.add(e5);
 
          var e6 = new Enemy(game, 2656, 672, 0, false, true);
          game.add.existing(e6);
-         this.shootingEnemies.add(e6);
+         this.jumpingEnemies.add(e6);
 
          var e7 = new Enemy(game, 3584, 832, 0, false, true);
          game.add.existing(e7);
-         this.shootingEnemies.add(e7);
+         this.jumpingEnemies.add(e7);
 
          // COLLECTIBLES ------------------------------------------------------
 
@@ -170,35 +155,35 @@ Blue.prototype = {
 
          var e1 = new Enemy(game, 1088, 832, 0, false, true);
          game.add.existing(e1);
-         this.shootingEnemies.add(e1);
+         this.jumpingEnemies.add(e1);
 
          var e2 = new Enemy(game, 1728, 832, 0, false, true);
          game.add.existing(e2);
-         this.shootingEnemies.add(e2);
+         this.jumpingEnemies.add(e2);
 
          var e3 = new Enemy(game, 1760, 320, 0, false, true);
          game.add.existing(e3);
-         this.shootingEnemies.add(e3);
+         this.jumpingEnemies.add(e3);
 
          var e4 = new Enemy(game, 2304, 832, 0, false, true);
          game.add.existing(e4);
-         this.shootingEnemies.add(e4);
+         this.jumpingEnemies.add(e4);
 
          var e5 = new Enemy(game, 2592, 832, 0, false, true);
          game.add.existing(e5);
-         this.shootingEnemies.add(e5);
+         this.jumpingEnemies.add(e5);
 
          var e6 = new Enemy(game, 3040, 320, 0, false, true);
          game.add.existing(e6);
-         this.shootingEnemies.add(e6);
+         this.jumpingEnemies.add(e6);
 
          var e7 = new Enemy(game, 3424, 320, 0, false, true);
          game.add.existing(e7);
-         this.shootingEnemies.add(e7);
+         this.jumpingEnemies.add(e7);
 
          var e8 = new Enemy(game, 3968, 832, 0, false, true);
          game.add.existing(e8);
-         this.shootingEnemies.add(e8);
+         this.jumpingEnemies.add(e8);
 
          // COLLECTIBLES ------------------------------------------------------
 
@@ -208,6 +193,20 @@ Blue.prototype = {
          this.blue = game.add.sprite(3776, 320, 'atlas', 'blue_color');
          game.physics.arcade.enable(this.blue);
       }
+
+      // Handle the text customization and health GUI
+      var styleDescription = {
+         font: '18px Arial',
+         fill: '#000000',
+         align: 'center',
+         fontWeight: 'bold',
+         stroke: '#000000',
+         strokeThickness: 0
+      };
+
+      // Health GUI
+      this.healthText = this.add.text(10, 10, "", styleDescription);
+      this.healthText.fixedToCamera = true;
 
       // Adds the player into the state
       this.player = new Player(game, 64, 832, this.mapLayer);
@@ -224,6 +223,21 @@ Blue.prototype = {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, 1500);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
+      }
+      // Collisions.
+      game.physics.arcade.collide(this.jumpingEnemies, this.mapLayer); // Enemies with platforms
+      game.physics.arcade.collide(this.npcs, this.mapLayer); // NPCs with the platforms
+      // Collision between the player and the enemies.
+      if (!injured) {
+         if (game.physics.arcade.collide(this.jumpingEnemies, this.player)) {
+            health--;
+
+            // If player health reaches 0, they die
+            if (health == 0) {
+               song.stop();
+               playerDies(game, this.player, 'Tutorial');
+            }
+         }
       }
 
       // For when the player collects the blue upgrade.

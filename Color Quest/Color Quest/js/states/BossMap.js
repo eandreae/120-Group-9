@@ -10,8 +10,8 @@ BossMap.prototype = {
    preload: function() {
       console.log('BossMap: preload');
 
-      game.load.tilemap('layout', 'assets/TileMaps/BossMap.json', null, Phaser.Tilemap.TILED_JSON);
-      game.load.spritesheet('tilesheet', 'assets/TileSheets/tilesheet_1.png', 32, 32);
+      game.load.tilemap('layout', 'assets/TileMaps/KingColor.json', null, Phaser.Tilemap.TILED_JSON);
+      game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles_2.png', 32, 32);
    },
 
    create: function() {
@@ -25,9 +25,11 @@ BossMap.prototype = {
 
       // Create new tilemap
       this.map = game.add.tilemap('layout');
-      this.map.addTilesetImage('color_tiles_tileset', 'tilesheet');
-      this.map.setCollisionByExclusion([]);
-      this.mapLayer = this.map.createLayer('Tile Layer 1');
+      this.map.addTilesetImage('color_tiles_2', 'tilesheet');
+
+      this.mapLayer = this.map.createLayer('Ground_0');
+      this.map.setCollisionBetween(0, 999, true, 'Ground_0');
+
       this.mapLayer.resizeWorld();
 
       // set 32-pixel buffer around tiles to avoid collision tunneling
