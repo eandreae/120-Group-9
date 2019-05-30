@@ -11,7 +11,7 @@ Blue.prototype = {
       console.log('Blue: preload');
 
       game.load.tilemap('layout', 'assets/TileMaps/Blue.json', null, Phaser.Tilemap.TILED_JSON);
-      game.load.spritesheet('tilesheet', 'assets/TileSheets/color_tiles.png', 32, 32);
+      game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles.png', 32, 32);
    },
 
    create: function() {
@@ -28,34 +28,113 @@ Blue.prototype = {
       // Setting the world bounds
       game.world.setBounds(0, 0, 1024, 1024);
 
-      // Create new tilemap
-      this.map = game.add.tilemap('layout');
-      this.map.addTilesetImage('color_tiles_tileset', 'tilesheet');
-      this.map.setCollisionByExclusion([]);
-      this.mapLayer = this.map.createLayer('Ground');
-      this.mapLayer.resizeWorld();
-
       // set 32-pixel buffer around tiles to avoid collision tunneling
       game.physics.arcade.TILE_BIAS = 32;
 
-      // Blue collectable
-      bmd = game.add.bitmapData(75, 75);
-      bmd.fill(0, 0, 255, 1);
-      this.blue = game.add.sprite(929, 2752, 'atlas', 'blue_color');
-      game.physics.arcade.enable(this.blue);
+      // Handle the text customization and health GUI
+      var styleDescription = {
+         font: '18px Arial',
+         fill: '#000000',
+         align: 'center',
+         fontWeight: 'bold',
+         stroke: '#000000',
+         strokeThickness: 0
+      };
+      // Health GUI
+      this.healthText = this.add.text(10, 10, "", styleDescription);
+      this.healthText.fixedToCamera = true;
 
-      // Home collectable - allows the player to go back to the Hub.
-      bmd2 = game.add.bitmapData(75, 75);
-      bmd.fill(255, 0, 0, 1);
-      this.home = game.add.sprite(32, 32, 'atlas', 'blue_color');
-      game.physics.arcade.enable(this.home);
+      // Create new tilemap
+      this.map = game.add.tilemap('layout');
+      this.map.addTilesetImage('color_tiles', 'tilesheet');
+
+      // Handle the group management before loading the levels.
+      // The group of shooting enemies.
+      this.shootingEnemies = game.add.group();
+      this.shootingEnemies.enableBody = true;
+      // Bullet groups
+      this.playerBullets = game.add.group();
+      this.enemyBullets = game.add.group();;
+
+      if( blueLevel == 0 ){
+          // Loading the correct TileMap.
+          backgroundColor = "#72C4FF";
+          game.stage.backgroundColor = backgroundColor;
+          this.mapLayer = this.map.createLayer('Ground_0');
+          this.map.setCollisionBetween(0, 999, true, 'Ground_0');
+
+          // LOADING MAP -------------------------------------------------------
+          // Now that the correct level has been loaded, do the rest of the level.
+          this.mapLayer.resizeWorld();
+
+          // Load the enemies/NPCs/collectibles for level 0
+
+          // NPCs --------------------------------------------------------------
+
+          // ENEMIES -----------------------------------------------------------
+
+           // COLLECTIBLES ------------------------------------------------------
+
+           // Blue collectable
+           bmd = game.add.bitmapData(75, 75);
+           bmd.fill(0, 0, 255, 1);
+           this.blue = game.add.sprite(32, 3456, 'atlas', 'blue_color');
+           game.physics.arcade.enable(this.blue);
+      }
+      else if( blueLevel == 1 ){
+          // Loading the correct TileMap.
+          backgroundColor = "#72C4FF";
+          game.stage.backgroundColor = backgroundColor;
+          this.mapLayer = this.map.createLayer('Ground_1');
+          this.map.setCollisionBetween(0, 999, true, 'Ground_1');
+
+          // LOADING MAP -------------------------------------------------------
+          // Now that the correct level has been loaded, do the rest of the level.
+          this.mapLayer.resizeWorld();
+
+          // Load the enemies/NPCs/collectibles for level 0
+
+          // NPCs --------------------------------------------------------------
+
+          // ENEMIES -----------------------------------------------------------
+
+           // COLLECTIBLES ------------------------------------------------------
+
+           // Blue collectable
+           bmd = game.add.bitmapData(75, 75);
+           bmd.fill(0, 0, 255, 1);
+           this.blue = game.add.sprite(32, 2944, 'atlas', 'blue_color');
+           game.physics.arcade.enable(this.blue);
+      }
+      else if( blueLevel == 2 ){
+          // Loading the correct TileMap.
+          backgroundColor = "#72C4FF";
+          game.stage.backgroundColor = backgroundColor;
+          this.mapLayer = this.map.createLayer('Ground_2');
+          this.map.setCollisionBetween(0, 999, true, 'Ground_2');
+
+          // LOADING MAP -------------------------------------------------------
+          // Now that the correct level has been loaded, do the rest of the level.
+          this.mapLayer.resizeWorld();
+
+          // Load the enemies/NPCs/collectibles for level 0
+
+          // NPCs --------------------------------------------------------------
+
+          // ENEMIES -----------------------------------------------------------
+
+           // COLLECTIBLES ------------------------------------------------------
+
+           // Blue collectable
+           bmd = game.add.bitmapData(75, 75);
+           bmd.fill(0, 0, 255, 1);
+           this.blue = game.add.sprite(896, 2048, 'atlas', 'blue_color');
+           game.physics.arcade.enable(this.blue);
+      }
 
       // Adds the player into the state
       this.player = new Player(game, 64, 3870, this.mapLayer);
       game.add.existing(this.player);
-
-      // Bullet groups
-      this.playerBullets = game.add.group();
 
       // Camera follows player
       game.camera.follow(this.player);
@@ -73,12 +152,11 @@ Blue.prototype = {
 
       // For when the player collects the blue upgrade.
       this.physics.arcade.overlap(this.player, this.blue, collectBlue, null, this);
-      // For when the player collects the second blue upgrade, the home teleport.
-      this.physics.arcade.overlap(this.player, this.home, goHome, null, this);
 
       // When the player collects the color
       function collectBlue(player, color) {
          hasBlue = true;
+         blueLevel++;
 
          // Blue bdm
          bmd = game.add.bitmapData(18, 18);
@@ -95,27 +173,12 @@ Blue.prototype = {
          colorEmitter.start(true, 2000, null, 50); // (explode, lifespan, freq, quantity)
 
          color.destroy();
-      }
-
-      function goHome(player, color) {
-         // Blue bdm
-         bmd = game.add.bitmapData(18, 18);
-         bmd.fill(0, 0, 255, 1);
-
-         // Particles when color is collected
-         colorEmitter = game.add.emitter(color.x, color.y, 200);
-         colorEmitter.makeParticles(bmd); // red squares used as particles
-         colorEmitter.gravity = 0;
-         colorEmitter.setScale(.25, .8, .25, .8, 0);
-         colorEmitter.setAlpha(.8, 0, 1800); // .8 to .3 alpha
-         colorEmitter.setXSpeed(-100, 100); // horizontal speed range
-         colorEmitter.setYSpeed(-100, 100); // vertical speed range
-         colorEmitter.start(true, 2000, null, 50); // (explode, lifespan, freq, quantity)
-
-         color.destroy();
-         song.stop();
          game.time.events.add(Phaser.Timer.SECOND * 2, function() {
-            game.state.start('Tutorial')
+             if( blueLevel == 3 ){
+                 game.state.start('Tutorial')
+             } else {
+                 game.state.start('Blue')
+             }
          });
       }
    },
