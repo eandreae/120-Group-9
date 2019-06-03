@@ -82,7 +82,7 @@ Tutorial.prototype = {
       if (!hasRed && metKingColor == true) {
          bmd = game.add.bitmapData(64, 64);
          bmd.fill(255, 0, 0, 1);
-         this.redPortal = game.add.sprite(3456, 832, 'atlas', 'red_color');
+         this.redPortal = game.add.sprite(3456, 832, 'door_r');
          this.redPortal.anchor.set(0.5);
          game.physics.arcade.enable(this.redPortal);
          this.portals.add(this.redPortal);
@@ -92,7 +92,7 @@ Tutorial.prototype = {
       if (!hasYellow && metKingColor == true) {
          bmd = game.add.bitmapData(64, 64);
          bmd.fill(255, 255, 0, 1);
-         this.yellowPortal = game.add.sprite(3744, 832, 'atlas', 'yellow_color');
+         this.yellowPortal = game.add.sprite(3744, 832, 'door_y');
          this.yellowPortal.anchor.set(0.5);
          game.physics.arcade.enable(this.yellowPortal);
          this.portals.add(this.yellowPortal);
@@ -102,7 +102,7 @@ Tutorial.prototype = {
       if (!hasBlue && metKingColor == true) {
          bmd = game.add.bitmapData(64, 64);
          bmd.fill(0, 0, 255, 1);
-         this.bluePortal = game.add.sprite(4000, 832, 'atlas', 'blue_color');
+         this.bluePortal = game.add.sprite(4000, 832, 'door_b');
          this.bluePortal.anchor.set(0.5);
          game.physics.arcade.enable(this.bluePortal);
          this.portals.add(this.bluePortal);
@@ -118,13 +118,16 @@ Tutorial.prototype = {
          this.portals.add(this.kingColorPortal);
       }
 
-      // Portal to King Color
-      if (hasRed && hasYellow && hasBlue) {
-         this.bossPortal = game.add.sprite(3136, 832, 'bPortal');
-         this.bossPortal.anchor.set(0.5);
-         game.physics.arcade.enable(this.bossPortal);
-         this.portals.add(this.bossPortal);
-      }
+      this.bossPortal = game.add.sprite(3136, 832, 'boss_door', [buckyValue / 16]);
+      this.bossPortal.anchor.set(0.5);
+      game.physics.arcade.enable(this.bossPortal);
+      this.portals.add(this.bossPortal);
+
+      this.bossPortalText = new Array();
+
+      this.bossPortalText[0] = "The door is sealed tight.";
+      this.bossPortalText[1] = "Without the power of Red, Yellow, and\nBlue, you cannot hope to open the door.";
+      this.bossPortalText[3] = "";
 
       // Position of the NPC text. Set to 1 because it displays textPos 0 elsewhere
       this.textPos = 1;
@@ -385,7 +388,17 @@ Tutorial.prototype = {
          this.interactText.visible = true;
 
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
-            game.state.start('BossMap');
+            if (hasRed && hasYellow && hasBlue)
+               game.state.start('BossMap');
+            else {
+               // Timer for boss door text
+               this.talking = true;
+               this.interactText.visible = false;
+               this.setTextPosition(this.textArea, this.bossPortal);
+               this.textArea.text = this.bossPortalText[0];
+               npcText.loop(3000, this.goThroughText, this, this.bossPortalText);
+               npcText.start();
+            }
          }
       }
 

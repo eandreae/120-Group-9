@@ -16,17 +16,17 @@ function Enemy(game, x, y, speed, d = false, j = false) {
 
    // If enemy is stationary, they're a shooting red enemy
    if (speed == 0 && !j) {
-      this.sprite = "enemies_red";
+      this.sprite = "enemies_r";
    }
 
    // Yellow moving/dashing enemies
    else if (speed != 0 && !j) {
-      this.sprite = "enemies_yellow";
+      this.sprite = "enemies_y";
    }
 
    // Blue jumping enemies
    if (j) {
-      this.sprite = "enemies_blue";
+      this.sprite = "enemies_b";
    }
 
    // Inherits Phaser.Sprite and puts the sprite in a position on the screen

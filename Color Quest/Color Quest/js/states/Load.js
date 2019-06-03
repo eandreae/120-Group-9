@@ -15,20 +15,33 @@ Load.prototype = {
    preload: function() {
 		// Atlas for the player and enemies
       game.load.atlas('atlas', 'assets/img/atlas.png', 'assets/img/atlas.json');
-      game.load.atlas('bucky', 'assets/img/allBucky.png', 'assets/img/allBucky.json');
-      game.load.atlas('enemies_red', 'assets/img/enemy_red.png', 'assets/img/enemy_red.json');
-      game.load.atlas('enemies_yellow', 'assets/img/enemy_yellow.png', 'assets/img/enemy_yellow.json');
-      game.load.atlas('enemies_blue', 'assets/img/enemy_blue.png', 'assets/img/enemy_blue.json');
+      game.load.atlas('boss_door', 'assets/img/boss_door.png', 'assets/img/boss_door.json');       // No color, b, by, r, rb, rby, ry, y
+      game.load.atlas('bucky', 'assets/img/allBucky.png', 'assets/img/allBucky.json');             // No color, b, by, r, rb, rby, ry, y, dash
+      game.load.atlas('enemies_r', 'assets/img/enemy_red.png', 'assets/img/enemy_red.json');     // [0] is facing left, [1] is facing right
+      game.load.atlas('enemies_y', 'assets/img/enemy_yellow.png', 'assets/img/enemy_yellow.json');
+      game.load.atlas('enemies_b', 'assets/img/enemy_blue.png', 'assets/img/enemy_blue.json');
 
 		// Loading images
       game.load.image('boss', 'assets/img/kingcolor.png');
       game.load.image('bPortal', 'assets/img/KingColorButton.png');
-      game.load.image('title', 'assets/img/TitleScreen.png');
       game.load.image('bullet_l', 'assets/img/bullet_left.png');
       game.load.image('bullet_r', 'assets/img/bullet_right.png');
+      game.load.image('door_b', 'assets/img/door_blue.png');
+      game.load.image('door_r', 'assets/img/door_red.png');
+      game.load.image('door_y', 'assets/img/door_yellow.png');
+      game.load.image('npc_cute', 'assets/img/npc_cute.png');
+      game.load.image('npc_generic_l', 'assets/img/npc_generic_left.png');
+      game.load.image('npc_generic_r', 'assets/img/npc_generic_right.png');
+      game.load.image('npc_smiely', 'assets/img/npc_smiley.png');
+      game.load.image('npc_solaire', 'assets/img/npc_solaire.png');
+      game.load.image('npc_whatever', 'assets/img/npc_whatever.png');
       game.load.image('particle_r', 'assets/img/particle_red.png');
       game.load.image('particle_y', 'assets/img/particle_yellow.png');
       game.load.image('particle_b', 'assets/img/particle_blue.png');
+      game.load.image('title', 'assets/img/TitleScreen.png');
+      game.load.image('upgrade_b', 'assets/img/upgrade_blue.png');
+      game.load.image('upgrade_r', 'assets/img/upgrade_red.png');
+      game.load.image('upgrade_y', 'assets/img/upgrade_yellow.png');
 
 		// Loading audio
       game.load.audio('jump', 'assets/audio/Jump.mp3');

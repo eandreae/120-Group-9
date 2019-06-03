@@ -124,7 +124,7 @@ Blue.prototype = {
          // Blue collectable
          bmd = game.add.bitmapData(75, 75);
          bmd.fill(0, 0, 255, 1);
-         this.blue = game.add.sprite(3968, 832, 'atlas', 'blue_color');
+         this.blue = game.add.sprite(3968, 832, 'upgrade_b');
          game.physics.arcade.enable(this.blue);
       } else if (blueLevel == 1) {
          // Loading the correct TileMap.
@@ -188,7 +188,7 @@ Blue.prototype = {
          // Blue collectable
          bmd = game.add.bitmapData(75, 75);
          bmd.fill(0, 0, 255, 1);
-         this.blue = game.add.sprite(3968, 832, 'atlas', 'blue_color');
+         this.blue = game.add.sprite(3968, 832, 'upgrade_b');
          game.physics.arcade.enable(this.blue);
       } else if (blueLevel == 2) {
          // Loading the correct TileMap.
@@ -247,7 +247,7 @@ Blue.prototype = {
          // Blue collectable
          bmd = game.add.bitmapData(75, 75);
          bmd.fill(0, 0, 255, 1);
-         this.blue = game.add.sprite(3776, 320, 'atlas', 'blue_color');
+         this.blue = game.add.sprite(3776, 320, 'upgrade_b');
          game.physics.arcade.enable(this.blue);
       }
 
