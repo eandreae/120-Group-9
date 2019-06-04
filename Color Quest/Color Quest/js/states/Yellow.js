@@ -5,6 +5,7 @@ Yellow.prototype = {
    // Variables used in Tutorial
    init: function() {
       this.talking = false;
+		this.stoppedWall = false;
    },
 
    // Preload the tilemap
@@ -69,31 +70,30 @@ Yellow.prototype = {
          this.mapLayer = this.map.createLayer('Ground_0');
          this.map.setCollisionBetween(0, 999, true, 'Ground_0');
 
-         this.n1 = new NPC(game, 500, 900);
+         this.n1 = new NPC(game, 500, 800, 'npc_generic_l');
          game.add.existing(this.n1);
          this.npcs.add(this.n1);
 
          this.n1Text = new Array();
 
-         this.n1Text[0] = "Howdy! You havin' a good day\nhere in Palette Town?";
-         this.n1Text[1] = "Y'know how to move left 'n' right\nwith the arrow keys already. You can\njump with Up, too!";
-         this.n1Text[2] = "Why don'tcha talk to the other townsfolk?\nPress Z to interact with 'em,\nor anythin' else!";
-         this.n1Text[3] = "";
+			this.n1Text[0] = "Hey Bucky! It seems the Yellow power is\nbeing kept here, but I sense a trap...";
+         this.n1Text[1] = "You may want to get through this area\nas quickly as possible...";
+         this.n1Text[2] = "";
 
       } else if (yellowLevel == 1) {
          this.mapLayer = this.map.createLayer('Ground_1');
          this.map.setCollisionBetween(0, 999, true, 'Ground_1');
 
-         this.n2 = new NPC(game, 500, 900);
+         this.n2 = new NPC(game, 500, 800, 'npc_generic_r');
          game.add.existing(this.n2);
          this.npcs.add(this.n2);
 
          this.n2Text = new Array();
 
-         this.n2Text[0] = "Howdy! You havin' a good day\nhere in Palette Town?";
-         this.n2Text[1] = "Y'know how to move left 'n' right\nwith the arrow keys already. You can\njump with Up, too!";
-         this.n2Text[2] = "Why don'tcha talk to the other townsfolk?\nPress Z to interact with 'em,\nor anythin' else!";
-         this.n2Text[3] = "";
+         this.n2Text[0] = "You've recovered some of the Yellow power!";
+         this.n2Text[1] = "Press C to dash a short distance foward.";
+         this.n2Text[2] = "You can dash as many times as you want\n, but you can only dash once in the air\nbefore touching the ground again.";
+			this.n2Text[3] = "";
       } else if (yellowLevel == 2) {
          this.mapLayer = this.map.createLayer('Ground_2');
          this.map.setCollisionBetween(0, 999, true, 'Ground_2');
@@ -241,8 +241,10 @@ Yellow.prototype = {
 
       // If the player touches the death wall, they instantly die
       if (this.physics.arcade.collide(this.player, this.wall)) {
-         health = 0;
-         playerDies(this, this.player, 'Yellow');
+			if (!this.stoppedWall) {
+	         health = 0;
+	         playerDies(this, this.player, 'Yellow');
+			}
       }
 
       this.healthText.text = health;
@@ -256,6 +258,7 @@ Yellow.prototype = {
          hasYellow = true;
       }
 
+		this.stoppedWall = true;
       // Yellow bdm
       bmd = game.add.bitmapData(18, 18);
       bmd.fill(255, 255, 0, 1);
@@ -323,7 +326,7 @@ Yellow.prototype = {
       song = game.add.audio('action');
       song.play('', 0, 0.5, true);
       x.destroy();
-      this.wall.body.velocity.x = 300;
+      this.wall.body.velocity.x = 400;
    },
 
    // Debug stuff

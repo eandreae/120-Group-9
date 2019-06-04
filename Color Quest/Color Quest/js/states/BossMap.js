@@ -34,7 +34,7 @@ BossMap.prototype = {
 
       // set 32-pixel buffer around tiles to avoid collision tunneling
       game.physics.arcade.TILE_BIAS = 32;
-      
+
       // Handle the text customization and health GUI
       var styleDescription = {
          font: '18px Arial',
@@ -44,8 +44,8 @@ BossMap.prototype = {
          stroke: '#000000',
          strokeThickness: 0
       };
-      
-      
+
+
       // Health GUI
       this.healthText = this.add.text(10, 10, "", styleDescription);
       this.healthText.fixedToCamera = true;
@@ -86,22 +86,22 @@ BossMap.prototype = {
       var e3 = new Enemy(game, 2672, 448, 0);
       game.add.existing(e3);
       this.shootingEnemies.add(e3);
-      
+
       // Enemy 4
       var e4 = new Enemy(game, 3152, 448, 0);
       game.add.existing(e4);
       this.shootingEnemies.add(e4);
-      
+
       // Enemy 5
       var e5 = new Enemy(game, 3024, 672, 0);
       game.add.existing(e5);
       this.shootingEnemies.add(e5);
-      
+
       // Enemy 6
       var e6 = new Enemy(game, 5920, 320, 0);
       game.add.existing(e6);
       this.shootingEnemies.add(e6);
-      
+
       // Add KC
       this.boss = new Boss(game, 800, 224);
       game.add.existing(this.boss);
@@ -114,10 +114,7 @@ BossMap.prototype = {
    },
 
    update: function() {
-      //console.log('BossMap: update');
-      if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-         game.state.start('GameOver');
-      }
+
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, 1500);

@@ -88,16 +88,15 @@ Blue.prototype = {
          // Load the enemies/NPCs/collectibles for level 0
 
          // NPCs --------------------------------------------------------------
-         this.n1 = new NPC(game, 400, 900);
+         this.n1 = new NPC(game, 350, 800, 'npc_whatever');
          game.add.existing(this.n1);
          this.npcs.add(this.n1);
 
          this.n1Text = new Array();
 
-         this.n1Text[0] = "Howdy! You havin' a good day\nhere in Palette Town?";
-         this.n1Text[1] = "Y'know how to move left 'n' right\nwith the arrow keys already. You can\njump with Up, too!";
-         this.n1Text[2] = "Why don'tcha talk to the other townsfolk?\nPress Z to interact with 'em,\nor anythin' else!";
-         this.n1Text[3] = "";
+         this.n1Text[0] = "This place gives me the Blues :(";
+         this.n1Text[1] = "You better be careful of the platforming\nin here. Also watch out for King Color's cronies\njumping all around the place";
+         this.n1Text[2] = "";
          // ENEMIES -----------------------------------------------------------
          // Adding the enemies for Level 0.
          // There are 4 jumping enemies in level 0.
@@ -140,16 +139,15 @@ Blue.prototype = {
          // Load the enemies/NPCs/collectibles for level 0
 
          // NPCs --------------------------------------------------------------
-         this.n2 = new NPC(game, 400, 900);
+         this.n2 = new NPC(game, 350, 800, 'npc_smiely');
          game.add.existing(this.n2);
          this.npcs.add(this.n2);
 
          this.n2Text = new Array();
 
-         this.n2Text[0] = "Howdy! You havin' a good day\nhere in Palette Town?";
-         this.n2Text[1] = "Y'know how to move left 'n' right\nwith the arrow keys already. You can\njump with Up, too!";
-         this.n2Text[2] = "Why don'tcha talk to the other townsfolk?\nPress Z to interact with 'em,\nor anythin' else!";
-         this.n2Text[3] = "";
+         this.n2Text[0] = "You've recovered some of the Blue power!";
+         this.n2Text[1] = "You can now double jump! Simply press the Z\n key again when you're in the air!";
+         this.n2Text[2] = "";
          // ENEMIES -----------------------------------------------------------
          // Adding the enemies for Level 1.
          // There are 7 jumping enemies in level 1.
@@ -315,11 +313,9 @@ Blue.prototype = {
       game.physics.arcade.collide(this.npcs, this.mapLayer); // NPCs with the platforms
 
       // Player bullet with enemies
-      game.physics.arcade.collide(this.playerBullets, this.enemies, this.bulletHitsEnemy, null, this);
-      game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, this.bulletHitsEnemy, null, this);
+      game.physics.arcade.collide(this.playerBullets, this.jumpingEnemies, this.bulletHitsEnemy, null, this);
 
       // Bullets hitting a wall
-      game.physics.arcade.collide(this.enemyBullets, this.mapLayer, this.bulletHitsWall, null, this);
       game.physics.arcade.collide(this.playerBullets, this.mapLayer, this.bulletHitsWall, null, this);
 
       // Collision between the player and the enemies.

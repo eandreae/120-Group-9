@@ -1,7 +1,7 @@
-function NPC(game, x, y) {
+function NPC(game, x, y, sprite = 'npc') {
 
    // Inherits Phaser.Sprite and puts the sprite in a position on the screen
-   Phaser.Sprite.call(this, game, x, y, 'npc');
+   Phaser.Sprite.call(this, game, x, y, sprite);
 
    this.anchor.set(0.5);
 

@@ -90,15 +90,15 @@ Red.prototype = {
          // Load the enemies/NPCs/collectibles for level 0
 
          // NPCs --------------------------------------------------------------
-         this.n1 = new NPC(game, 500, 900);
+         this.n1 = new NPC(game, 500, 800, 'npc_generic_l');
          game.add.existing(this.n1);
          this.npcs.add(this.n1);
 
          this.n1Text = new Array();
 
-         this.n1Text[0] = "Howdy! You havin' a good day\nhere in Palette Town?";
-         this.n1Text[1] = "Y'know how to move left 'n' right\nwith the arrow keys already. You can\njump with Up, too!";
-         this.n1Text[2] = "Why don'tcha talk to the other townsfolk?\nPress Z to interact with 'em,\nor anythin' else!";
+         this.n1Text[0] = "I can sense the power of the color red here";
+         this.n1Text[1] = "But it seems King Color's cronies have gotten\na hold of it...";
+         this.n1Text[2] = "Watch out for flying bullets! You wouldn't\nwant to get hit by them";
          this.n1Text[3] = "";
          // ENEMIES -----------------------------------------------------------
          // enemies 1, 2, and 3 for level 0 of Red.
@@ -139,15 +139,15 @@ Red.prototype = {
          // Load the enemies/NPCs/collectibles for level 1
 
          // NPCs --------------------------------------------------------------
-         this.n2 = new NPC(game, 500, 900);
+         this.n2 = new NPC(game, 500, 800, 'npc_cute');
          game.add.existing(this.n2);
          this.npcs.add(this.n2);
 
          this.n2Text = new Array();
 
-         this.n2Text[0] = "Howdy! You havin' a good day\nhere in Palette Town?";
-         this.n2Text[1] = "Y'know how to move left 'n' right\nwith the arrow keys already. You can\njump with Up, too!";
-         this.n2Text[2] = "Why don'tcha talk to the other townsfolk?\nPress Z to interact with 'em,\nor anythin' else!";
+         this.n2Text[0] = "Wow! It looks like you've recovered some\nof the red power!";
+         this.n2Text[1] = "Press the X key to shoot a projectile.";
+         this.n2Text[2] = "Show King Color's cronies what they deserve";
          this.n2Text[3] = "";
          // ENEMIES -----------------------------------------------------------
          // enemies 1, 2, and 3 for level 0 of Red.

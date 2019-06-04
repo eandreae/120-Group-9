@@ -87,7 +87,7 @@ Enemy.prototype.update = function() {
    // Makes the enemy jump once
    if (this.jump) {
       this.body.velocity.y = -500;
-      jumpParticle(game, this);
+      //jumpParticle(game, this);
       this.jump = false;
    }
 

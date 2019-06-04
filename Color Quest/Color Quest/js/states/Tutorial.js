@@ -80,8 +80,6 @@ Tutorial.prototype = {
 
       // Red portal
       if (!hasRed && metKingColor == true) {
-         bmd = game.add.bitmapData(64, 64);
-         bmd.fill(255, 0, 0, 1);
          this.redPortal = game.add.sprite(3456, 832, 'door_r');
          this.redPortal.anchor.set(0.5);
          game.physics.arcade.enable(this.redPortal);
@@ -90,8 +88,6 @@ Tutorial.prototype = {
 
       // Yellow portal
       if (!hasYellow && metKingColor == true) {
-         bmd = game.add.bitmapData(64, 64);
-         bmd.fill(255, 255, 0, 1);
          this.yellowPortal = game.add.sprite(3744, 832, 'door_y');
          this.yellowPortal.anchor.set(0.5);
          game.physics.arcade.enable(this.yellowPortal);
@@ -100,8 +96,6 @@ Tutorial.prototype = {
 
       // Blue portal
       if (!hasBlue && metKingColor == true) {
-         bmd = game.add.bitmapData(64, 64);
-         bmd.fill(0, 0, 255, 1);
          this.bluePortal = game.add.sprite(4000, 832, 'door_b');
          this.bluePortal.anchor.set(0.5);
          game.physics.arcade.enable(this.bluePortal);
@@ -110,24 +104,24 @@ Tutorial.prototype = {
 
       // Meeting King Color
       if (metKingColor == false) {
-         bmd = game.add.bitmapData(64, 64);
-         bmd.fill(0, 0, 255, 1);
          this.kingColorPortal = game.add.sprite(2880, 832, 'bPortal');
          this.kingColorPortal.anchor.set(0.5);
          game.physics.enable(this.kingColorPortal);
          this.portals.add(this.kingColorPortal);
       }
+		if (metKingColor) {
+	      this.bossPortal = game.add.sprite(3136, 841, 'boss_door', 'bossdoor_b');
+	      this.bossPortal.anchor.set(0.5);
+			this.bossPortal.animations.add('sprite', [buckyValue / 16], 10, true)
+	      game.physics.arcade.enable(this.bossPortal);
+	      this.portals.add(this.bossPortal);
 
-      this.bossPortal = game.add.sprite(3136, 832, 'boss_door', [buckyValue / 16]);
-      this.bossPortal.anchor.set(0.5);
-      game.physics.arcade.enable(this.bossPortal);
-      this.portals.add(this.bossPortal);
+	      this.bossPortalText = new Array();
 
-      this.bossPortalText = new Array();
-
-      this.bossPortalText[0] = "The door is sealed tight.";
-      this.bossPortalText[1] = "Without the power of Red, Yellow, and\nBlue, you cannot hope to open the door.";
-      this.bossPortalText[3] = "";
+	      this.bossPortalText[0] = "The door is sealed tight.";
+	      this.bossPortalText[1] = "Without the power of Red, Yellow, and\nBlue, you cannot hope to open the door.";
+	      this.bossPortalText[2] = "";
+		}
 
       // Position of the NPC text. Set to 1 because it displays textPos 0 elsewhere
       this.textPos = 1;
@@ -159,12 +153,19 @@ Tutorial.prototype = {
       this.textArea.fixedToCamera = false;
       this.world.bringToTop(this.textArea);
 
+		bmd = game.add.bitmapData(300, 100);
+		bmd.fill(255, 255, 255, 1);
+		this.behindText = game.add.sprite(0, 0, bmd);
+		this.behindText.anchor.set(0.5);
+		this.behindText.visible = false;
+		this.behindText.alpha = 0.5;
+
       // NPC Group
       // All NPCs have different text depending on where you are at the game
       this.npcs = game.add.group();
       this.npcs.enableBody = true;
 
-      this.n1 = new NPC(game, 500, 800);
+      this.n1 = new NPC(game, 500, 800, 'npc_cute');
       game.add.existing(this.n1);
       this.npcs.add(this.n1);
 
@@ -192,7 +193,7 @@ Tutorial.prototype = {
       }
 
       // NPC2
-      this.n2 = new NPC(game, 800, 500);
+      this.n2 = new NPC(game, 800, 500, 'npc_solaire');
       game.add.existing(this.n2);
       this.npcs.add(this.n2);
 
@@ -217,7 +218,7 @@ Tutorial.prototype = {
       }
 
       // NPC3
-      this.n3 = new NPC(game, 1100, 800);
+      this.n3 = new NPC(game, 1100, 800, 'npc_generic_l');
       game.add.existing(this.n3);
       this.npcs.add(this.n3);
 
@@ -240,7 +241,7 @@ Tutorial.prototype = {
       }
 
       // NPC4
-      this.n4 = new NPC(game, 1800, 700);
+      this.n4 = new NPC(game, 1800, 700, 'npc_generic_r');
       game.add.existing(this.n4);
       this.npcs.add(this.n4);
 
@@ -262,7 +263,7 @@ Tutorial.prototype = {
       }
 
       // NPC5
-      this.n5 = new NPC(game, 1700, 800);
+      this.n5 = new NPC(game, 1700, 800, 'npc_whatever');
       game.add.existing(this.n5);
       this.npcs.add(this.n5);
 
@@ -328,12 +329,26 @@ Tutorial.prototype = {
    },
 
    update: function() {
+		// Sets boss door sprite depending on what colors you have
+		if (metKingColor)
+			this.bossPortal.animations.play('sprite')
+
+		// If the player isn't overlapping with anything interactable, the interactText is invisible
+	   if (!game.physics.arcade.overlap(this.player, this.npcs) && !game.physics.arcade.overlap(this.player, this.portals) || this.talking) {
+	      this.interactText.visible = false;
+			if (!this.talking)
+				this.behindText.visible = false;
+	   }
+
       // Go into the red state
       if (!hasRed) {
          if (this.physics.arcade.overlap(this.player, this.redPortal)) {
-            // Display interact text
-            this.setTextPosition(this.interactText, this.redPortal);
-            this.interactText.visible = true;
+
+				if (!this.talking) {
+	            // Display interact text
+	            this.setTextPosition(this.interactText, this.redPortal);
+	            this.interactText.visible = true;
+				}
 
             if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
                game.state.start('Red');
@@ -344,9 +359,12 @@ Tutorial.prototype = {
       // Go into the yellow state
       if (!hasYellow) {
          if (this.physics.arcade.overlap(this.player, this.yellowPortal)) {
-            // Display interact text
-            this.setTextPosition(this.interactText, this.yellowPortal);
-            this.interactText.visible = true;
+
+				if (!this.talking) {
+	            // Display interact text
+	            this.setTextPosition(this.interactText, this.yellowPortal);
+	            this.interactText.visible = true;
+				}
 
             if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
                game.state.start('Yellow');
@@ -357,9 +375,12 @@ Tutorial.prototype = {
       // Go into the blue state
       if (!hasBlue) {
          if (this.physics.arcade.overlap(this.player, this.bluePortal)) {
-            // Display interact text
-            this.setTextPosition(this.interactText, this.bluePortal);
-            this.interactText.visible = true;
+
+				if (!this.talking) {
+	            // Display interact text
+	            this.setTextPosition(this.interactText, this.bluePortal);
+	            this.interactText.visible = true;
+				}
 
             if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
                game.state.start('Blue');
@@ -382,7 +403,7 @@ Tutorial.prototype = {
       }
 
       // Go into the boss room
-      if (this.physics.arcade.overlap(this.player, this.bossPortal)) {
+      if (this.physics.arcade.overlap(this.player, this.bossPortal) && !this.talking) {
          // Display interact text
          this.setTextPosition(this.interactText, this.bossPortal);
          this.interactText.visible = true;
@@ -393,6 +414,7 @@ Tutorial.prototype = {
             else {
                // Timer for boss door text
                this.talking = true;
+					this.behindText.visible = true;
                this.interactText.visible = false;
                this.setTextPosition(this.textArea, this.bossPortal);
                this.textArea.text = this.bossPortalText[0];
@@ -409,10 +431,7 @@ Tutorial.prototype = {
          this.playerBullets.add(bullet);
       }
 
-      // If the player isn't overlapping with anything interactable, the interactText is invisible
-      if (!game.physics.arcade.overlap(this.player, this.npcs) && !game.physics.arcade.overlap(this.player, this.portals) && !this.talking) {
-         this.interactText.visible = false;
-      }
+
 
       // NPC1 text trigger
       if (game.physics.arcade.overlap(this.player, this.n1) && !this.talking) {
@@ -423,6 +442,7 @@ Tutorial.prototype = {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
             this.talking = true;
+				this.behindText.visible = true;
             this.interactText.visible = false;
             this.setTextPosition(this.textArea, this.n1);
             this.textArea.text = this.n1Text[0];
@@ -440,6 +460,7 @@ Tutorial.prototype = {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
             this.talking = true;
+				this.behindText.visible = true;
             this.interactText.visible = false;
             this.setTextPosition(this.textArea, this.n2);
             this.textArea.text = this.n2Text[0];
@@ -457,6 +478,7 @@ Tutorial.prototype = {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
             this.talking = true;
+				this.behindText.visible = true;
             this.interactText.visible = false;
             this.setTextPosition(this.textArea, this.n3);
             this.textArea.text = this.n3Text[0];
@@ -474,6 +496,7 @@ Tutorial.prototype = {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
             this.talking = true;
+				this.behindText.visible = true;
             this.interactText.visible = false;
             this.setTextPosition(this.textArea, this.n4);
             this.textArea.text = this.n4Text[0];
@@ -491,6 +514,7 @@ Tutorial.prototype = {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
             this.talking = true;
+				this.behindText.visible = true;
             this.interactText.visible = false;
             this.setTextPosition(this.textArea, this.n5);
             this.textArea.text = this.n5Text[0];
@@ -571,9 +595,14 @@ Tutorial.prototype = {
       text.x = object.x;
       text.y = object.y - 75;
       this.world.bringToTop(text);
+
+		this.behindText.x = text.x;
+		this.behindText.y = text.y;
+		this.behindText.visible = true;
    },
 
    goThroughText: function(text) {
+
       //The text change with the step
       this.textArea.text = text[this.textPos];
 
@@ -584,6 +613,7 @@ Tutorial.prototype = {
       // When finished through the dialog
       if (this.textPos == text.length) {
          npcText.stop();
+			this.behindText.visible = false;
          this.talking = false;
          this.textPos = 1;
       }
