@@ -143,7 +143,7 @@ Blue.prototype = {
          // Load the enemies/NPCs/collectibles for level 0
 
          // NPCs --------------------------------------------------------------
-         this.n2 = new NPC(game, 350, 800, 'npc_smiely');
+         this.n2 = new NPC(game, 350, 576, 'npc_smiely');
          game.add.existing(this.n2);
          this.npcs.add(this.n2);
 
@@ -157,19 +157,19 @@ Blue.prototype = {
          // There are 7 jumping enemies in level 1.
          // Represented with e1, e2, e3, e4, e5, e6, e7.
 
-         var e1 = new Enemy(game, 1216, 832, 0, false, true);
+         var e1 = new Enemy(game, 1024, 832, 100, false, true);
          game.add.existing(e1);
          this.jumpingEnemies.add(e1);
 
-         var e2 = new Enemy(game, 1472, 832, 0, false, true);
+         var e2 = new Enemy(game, 1344, 832, 100, false, true);
          game.add.existing(e2);
          this.jumpingEnemies.add(e2);
 
-         var e3 = new Enemy(game, 1728, 832, 0, false, true);
+         var e3 = new Enemy(game, 1664, 832, 100, false, true);
          game.add.existing(e3);
          this.jumpingEnemies.add(e3);
 
-         var e4 = new Enemy(game, 2144, 672, 0, false, true);
+         var e4 = new Enemy(game, 1984, 832, 100, false, true);
          game.add.existing(e4);
          this.jumpingEnemies.add(e4);
 
@@ -216,15 +216,15 @@ Blue.prototype = {
          game.add.existing(e1);
          this.jumpingEnemies.add(e1);
 
-         var e2 = new Enemy(game, 608, 832, 100, false, true);
+         var e2 = new Enemy(game, 608, 832, 150, false, true);
          game.add.existing(e2);
          this.jumpingEnemies.add(e2);
 
-         var e3 = new Enemy(game, 1152, 832, 125, false, true);
+         var e3 = new Enemy(game, 1152, 832, 150, false, true);
          game.add.existing(e3);
          this.jumpingEnemies.add(e3);
 
-         var e4 = new Enemy(game, 1696, 832, 175, false, true);
+         var e4 = new Enemy(game, 1696, 832, 150, false, true);
          game.add.existing(e4);
          this.jumpingEnemies.add(e4);
 
@@ -232,11 +232,11 @@ Blue.prototype = {
          game.add.existing(e5);
          this.jumpingEnemies.add(e5);
 
-         var e6 = new Enemy(game, 2784, 832, 125, false, true);
+         var e6 = new Enemy(game, 2784, 832, 150, false, true);
          game.add.existing(e6);
          this.jumpingEnemies.add(e6);
 
-         var e7 = new Enemy(game, 3328, 832, 100, false, true);
+         var e7 = new Enemy(game, 3328, 832, 150, false, true);
          game.add.existing(e7);
          this.jumpingEnemies.add(e7);
 
@@ -256,6 +256,9 @@ Blue.prototype = {
       // Adds the player into the state
       if( blueLevel == 2 ){
           this.player = new Player(game, 64, 256, this.mapLayer);
+      }
+      else if( blueLevel == 1 ){
+          this.player = new Player(game, 64, 576, this.mapLayer);
       }
       else {
           this.player = new Player(game, 64, 832, this.mapLayer);
