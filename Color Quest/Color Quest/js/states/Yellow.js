@@ -331,10 +331,10 @@ Yellow.prototype = {
       else this.wall.body.velocity.x = 400;
    },
 
-   // Debug stuff
-   render: function() {
-      game.debug.bodyInfo(this.player, 100, 100, 'black');
-      game.debug.body(this.player);
-      game.debug.body(this.x);
-   }
+   // // Debug stuff
+   // render: function() {
+   //    game.debug.bodyInfo(this.player, 100, 100, 'black');
+   //    game.debug.body(this.player);
+   //    game.debug.body(this.x);
+   // }
 };

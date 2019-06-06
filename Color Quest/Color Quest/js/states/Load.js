@@ -14,13 +14,12 @@ Load.prototype = {
    // Loads all the assets needed
    preload: function() {
 		// Atlas for the player and enemies
-      game.load.atlas('atlas', 'assets/img/atlas.png', 'assets/img/atlas.json');
+      game.load.atlas('boss', 'assets/img/kingcolor.png', 'assets/img/kingcolor.json');
       game.load.atlas('boss_door', 'assets/img/boss_door.png', 'assets/img/boss_door.json');       // No color, b, by, r, rb, rby, ry, y
       game.load.atlas('bucky', 'assets/img/all_bucky.png', 'assets/img/all_bucky.json');             // No color, b, by, r, rb, rby, ry, y, dash
       game.load.atlas('enemies_r', 'assets/img/enemy_red.png', 'assets/img/enemy_red.json');     // [0] is facing left, [1] is facing right
       game.load.atlas('enemies_y', 'assets/img/enemy_yellow.png', 'assets/img/enemy_yellow.json');
       game.load.atlas('enemies_b', 'assets/img/enemy_blue.png', 'assets/img/enemy_blue.json');
-      game.load.atlas('boss', 'assets/img/kingcolor.png', 'assets/img/kingcolor.json');
 
 		// Background Images
       game.load.image('bg_blue', 'assets/img/bg_blue.png');

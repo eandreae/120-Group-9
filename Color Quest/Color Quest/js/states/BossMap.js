@@ -150,7 +150,7 @@ BossMap.prototype = {
 
       // Bullet collision for CK
       game.physics.arcade.collide(this.playerBullets, this.boss, this.bulletHitsBoss, null, this);
-      
+
       // Player dying when falling into pit
       if(this.player.y >= 1475){
           if(health > 0){
@@ -158,11 +158,9 @@ BossMap.prototype = {
              health = 0;
              song.stop();
           }
-
       }
-   
    },
-   
+
    // Health loss and death for CK upon bullet collision
    bulletHitsBoss: function(boss, bullet) {
       //console.log(bossHealth);
@@ -216,7 +214,7 @@ BossMap.prototype = {
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
    },
-   
+
    bossShoot: function(boss) {
       this.boss.animations.play('shoot');
       var bullet = new Bullet(game, boss.x + 10, boss.y + 30, -1, 300);
@@ -230,9 +228,9 @@ BossMap.prototype = {
       this.enemyBullets.add(bullet);
    },
 
-   render: function() {
-      game.debug.bodyInfo(this.player, 100, 100, 'black');
-      game.debug.body(this.player);
-   }
+   // render: function() {
+   //    game.debug.bodyInfo(this.player, 100, 100, 'black');
+   //    game.debug.body(this.player);
+   // }
 
 };

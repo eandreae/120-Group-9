@@ -413,8 +413,8 @@ Blue.prototype = {
       }
    },
 
-   render: function() {
-      game.debug.bodyInfo(this.player, 100, 100, 'black');
-      game.debug.body(this.player);
-   }
+   // render: function() {
+   //    game.debug.bodyInfo(this.player, 100, 100, 'black');
+   //    game.debug.body(this.player);
+   // }
 };
