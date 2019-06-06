@@ -20,7 +20,8 @@ Blue.prototype = {
       song.play('', 0, 0.5, true);
 
       // Background
-      game.stage.backgroundColor = backgroundColor;
+      background = game.add.image(0, 0, 'bg_blue');
+      background.fixedToCamera = true;
 
       // Setting the world bounds
       game.world.setBounds(0, 0, 1024, 1024);
