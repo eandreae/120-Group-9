@@ -101,7 +101,7 @@ Red.prototype = {
          this.n1Text[2] = "Watch out for flying bullets! You wouldn't\nwant to get hit by them";
          this.n1Text[3] = "";
          // ENEMIES -----------------------------------------------------------
-         // enemies 1, 2, and 3 for level 0 of Red.
+         // enemies 1, 2, and 3 for Red level 0.
 
          // enemy 1
          var e1 = new Enemy(game, 1376, 704, 0);
@@ -151,7 +151,7 @@ Red.prototype = {
          this.n2Text[2] = "Show King Color's cronies what they deserve";
          this.n2Text[3] = "";
          // ENEMIES -----------------------------------------------------------
-         // enemies 1, 2, and 3 for level 0 of Red.
+         // enemies 1, 2, 3, and 4 for Red level 1.
 
          // enemy 1
          var e1 = new Enemy(game, 1824, 864, 0);
@@ -197,7 +197,7 @@ Red.prototype = {
          // NPCs --------------------------------------------------------------
 
          // ENEMIES -----------------------------------------------------------
-         // enemies 1, 2, and 3 for level 0 of Red.
+         // enemies 1, 2, 3, 4, 5, 6, 7, 8, and 9 for Red leve 2.
 
          // enemy 1
          var e1 = new Enemy(game, 704, 480, 0);
