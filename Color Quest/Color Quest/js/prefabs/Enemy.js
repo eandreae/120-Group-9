@@ -15,12 +15,12 @@ function Enemy(game, x, y, speed, d = false, j = false) {
    this.jumping = j;
 
    // If enemy is stationary, they're a shooting red enemy
-   if (speed == 0 && !j) {
+   if (!d && !j) {
       this.sprite = "enemies_r";
    }
 
    // Yellow moving/dashing enemies
-   else if (speed != 0 && !j) {
+   else if (d && !j) {
       this.sprite = "enemies_y";
    }
 

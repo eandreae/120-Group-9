@@ -326,7 +326,9 @@ Yellow.prototype = {
       song = game.add.audio('action');
       song.play('', 0, 0.5, true);
       x.destroy();
-      this.wall.body.velocity.x = 400;
+      if (yellowLevel == 0)
+         this.wall.body.velocity.x = 300;
+      else this.wall.body.velocity.x = 400;
    },
 
    // Debug stuff
