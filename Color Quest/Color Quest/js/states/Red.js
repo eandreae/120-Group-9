@@ -426,7 +426,7 @@ Red.prototype = {
    },
 
    enemyShoot: function(enemy) {
-      var bullet = new Bullet(game, enemy.x, enemy.y, -1, 300);
+      var bullet = new Bullet(game, enemy.x, enemy.y, enemy.direction, 300);
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
    },
