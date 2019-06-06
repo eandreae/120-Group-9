@@ -195,7 +195,7 @@ Tutorial.prototype = {
       }
 
       // NPC2
-      this.n2 = new NPC(game, 800, 500, 'npc_solaire');
+      this.n2 = new NPC(game, 3808, 128, 'npc_solaire');
       game.add.existing(this.n2);
       this.npcs.add(this.n2);
 
