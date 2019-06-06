@@ -21,8 +21,8 @@ Yellow.prototype = {
       song.play('', 0, 0.5, true);
 
       // Background
-      backgroundColor = "#FFEE99"
-      game.stage.backgroundColor = backgroundColor;
+      background = game.add.image(0, 0, 'bg_yellow');
+      background.fixedToCamera = true;
 
       // Setting the world bounds
       game.world.setBounds(0, 0, 1024, 1024);

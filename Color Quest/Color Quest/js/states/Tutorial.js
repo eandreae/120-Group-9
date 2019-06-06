@@ -33,12 +33,19 @@ Tutorial.prototype = {
       this.map = game.add.tilemap('layout');
       this.map.addTilesetImage('color_tiles_2', 'tilesheet');
 
+      if (metKingColor == false) {
+         background = game.add.image(0, 0, 'bg_town');
+      }
+      else {
+         background = game.add.image(0, 0, 'bg_town_gray');
+         if (hasYellow) background = game.add.image(0, 0, 'bg_town_y');
+         if (hasBlue) background = game.add.image(0, 0, 'bg_town_b');
+         if (hasYellow && hasBlue) background = game.add.image(0, 0, 'bg_town_by');
+      }
+      background.fixedToCamera = true;
+
       // If they haven't met king color yet, everything is all happy
       if (metKingColor == false) {
-
-         // Background
-         backgroundColor = "#72C4FF"
-         game.stage.backgroundColor = backgroundColor;
 
          // Map Layer
          this.mapLayer = this.map.createLayer('Ground_0');
@@ -49,9 +56,6 @@ Tutorial.prototype = {
       // They have met King Color. The World is sad now and color has been taken
       // from the world. Check if they have collected any of the colors.
       else {
-         // Set up the world without colors.
-         backgroundColor = "#D3D3D3"
-         game.stage.backgroundColor = backgroundColor;
          this.mapLayer = this.map.createLayer('Ground_1');
          this.map.setCollisionBetween(0, 999, true, 'Ground_1');
          this.noColorBackground = this.map.createLayer('Background_1');
@@ -64,8 +68,6 @@ Tutorial.prototype = {
             this.yellowLayer = this.map.createLayer('Yellow');
          }
          if (hasBlue) {
-            backgroundColor = "#72C4FF"
-            game.stage.backgroundColor = backgroundColor;
             this.blueLayer = this.map.createLayer('Blue');
          }
       }
