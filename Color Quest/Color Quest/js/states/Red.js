@@ -123,8 +123,9 @@ Red.prototype = {
          // Red collectable
          bmd = game.add.bitmapData(75, 75);
          bmd.fill(255, 0, 0, 1);
-         this.red = game.add.sprite(3680, 832, 'upgrade_r');
+         this.red = game.add.sprite(3680, 864, 'upgrade_r');
          game.physics.arcade.enable(this.red);
+
       } else if (redLevel == 1) {
          // The player has just entered the Red level 1, load level 1.
          backgroundColor = "#FF9999";
@@ -177,8 +178,9 @@ Red.prototype = {
          // Red collectable
          bmd = game.add.bitmapData(75, 75);
          bmd.fill(255, 0, 0, 1);
-         this.red = game.add.sprite(3680, 832, 'upgrade_r');
+         this.red = game.add.sprite(3680, 864, 'upgrade_r');
          game.physics.arcade.enable(this.red);
+
       } else if (redLevel == 2) {
          // The player has just entered the Red level 2, load level 2.
          backgroundColor = "#FF9999";
@@ -234,12 +236,12 @@ Red.prototype = {
 
          // These next two enemies move.
          // enemy 8
-         var e8 = new Enemy(game, 2720, 864, 150, false, false);
+         var e8 = new Enemy(game, 2720, 864, 100, false, false);
          game.add.existing(e8);
          this.shootingEnemies.add(e8);
 
          // enemy 9
-         var e9 = new Enemy(game, 3040, 864, 150, false, false);
+         var e9 = new Enemy(game, 3040, 864, 100, false, false);
          game.add.existing(e9);
          this.shootingEnemies.add(e9);
 
@@ -248,7 +250,7 @@ Red.prototype = {
          // Red collectable
          bmd = game.add.bitmapData(75, 75);
          bmd.fill(255, 0, 0, 1);
-         this.red = game.add.sprite(3680, 832, 'upgrade_r');
+         this.red = game.add.sprite(3680, 864, 'upgrade_r');
          game.physics.arcade.enable(this.red);
       }
 
