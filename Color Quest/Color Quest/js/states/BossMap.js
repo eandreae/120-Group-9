@@ -150,22 +150,21 @@ BossMap.prototype = {
 
       // Bullet collision for CK
       game.physics.arcade.collide(this.playerBullets, this.boss, this.bulletHitsBoss, null, this);
-
    },
 
-      // Health loss and death for CK upon bullet collision
-      bulletHitsBoss: function(bullet, boss) {
-         console.log(bossHealth);
-         bulletDestroyed(game, bullet);
-         console.log(bossHealth);
-         bossHealth--;
-         console.log(bossHealth);
-         
-         if(bossHealth <= 0){
-             console.log(bossHealth);
-             boss.destroy();
-         }
-      },
+   // Health loss and death for CK upon bullet collision
+   bulletHitsBoss: function(boss, bullet) {
+      //console.log(bossHealth);
+      bulletDestroyed(game, bullet);
+      //console.log(bossHealth);
+      bossHealth--;
+      console.log(bossHealth);
+
+      if (bossHealth <= 0) {
+         //console.log(bossHealth);
+         boss.destroy();
+      }
+   },
 
    // Called with a player bullet hits an enemy
    bulletHitsEnemy: function(bullet, enemy) {
