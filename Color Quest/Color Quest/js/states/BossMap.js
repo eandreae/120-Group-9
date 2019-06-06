@@ -73,37 +73,32 @@ BossMap.prototype = {
       // Shooting enemies for the final level.
 
       // Enemy 1
-      var e1 = new Enemy(game, 2496, 576, 0);
+      var e1 = new Enemy(game, 2496, 1120, 0);
       game.add.existing(e1);
       this.shootingEnemies.add(e1);
 
       // Enemy 2
-      var e2 = new Enemy(game, 2704, 672, 0);
+      var e2 = new Enemy(game, 2675, 991, 0);
       game.add.existing(e2);
       this.shootingEnemies.add(e2);
 
       // Enemy 3
-      var e3 = new Enemy(game, 2672, 448, 0);
+      var e3 = new Enemy(game, 2706, 1214, 0);
       game.add.existing(e3);
       this.shootingEnemies.add(e3);
 
       // Enemy 4
-      var e4 = new Enemy(game, 3152, 448, 0);
+      var e4 = new Enemy(game, 3040, 1214, 0);
       game.add.existing(e4);
       this.shootingEnemies.add(e4);
 
       // Enemy 5
-      var e5 = new Enemy(game, 3024, 672, 0);
+      var e5 = new Enemy(game, 3168, 992, 0);
       game.add.existing(e5);
       this.shootingEnemies.add(e5);
 
-      // Enemy 6
-      var e6 = new Enemy(game, 5920, 320, 0);
-      game.add.existing(e6);
-      this.shootingEnemies.add(e6);
-
       // Add KC
-      this.boss = new Boss(game, 800, 224);
+      this.boss = new Boss(game, 7815, 800, 0);
       game.add.existing(this.boss);
       this.boss.enableBody = true;
 
@@ -154,13 +149,23 @@ BossMap.prototype = {
       this.healthText.text = health;
 
       // Bullet collision for CK
-      game.physics.arcade.collide(this.playerBullets, this.boss, bulletHitsBoss, null, this);
+      game.physics.arcade.collide(this.playerBullets, this.boss, this.bulletHitsBoss, null, this);
 
-      function bulletHitsBoss(bullet, boss) {
-         bullet.destroy();
-         boss.destroy();
-      }
    },
+
+      // Health loss and death for CK upon bullet collision
+      bulletHitsBoss: function(bullet, boss) {
+         console.log(bossHealth);
+         bulletDestroyed(game, bullet);
+         console.log(bossHealth);
+         bossHealth--;
+         console.log(bossHealth);
+         
+         if(bossHealth <= 0){
+             console.log(bossHealth);
+             boss.destroy();
+         }
+      },
 
    // Called with a player bullet hits an enemy
    bulletHitsEnemy: function(bullet, enemy) {

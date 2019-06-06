@@ -4,6 +4,8 @@ function Boss(game, x, y) {
 
    game.physics.arcade.enable(this);
    this.body.collideWorldBounds = true;
+   
+   this.body.immovable = true;
 }
 
 // Define Boss's prototype and constructor
