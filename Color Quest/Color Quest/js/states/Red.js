@@ -139,7 +139,7 @@ Red.prototype = {
          // Load the enemies/NPCs/collectibles for level 1
 
          // NPCs --------------------------------------------------------------
-         this.n2 = new NPC(game, 500, 800, 'npc_cute');
+         this.n2 = new NPC(game, 500, 544, 'npc_cute');
          game.add.existing(this.n2);
          this.npcs.add(this.n2);
 
@@ -198,29 +198,50 @@ Red.prototype = {
          // enemies 1, 2, and 3 for level 0 of Red.
 
          // enemy 1
-         var e1 = new Enemy(game, 1984, 864, 0);
+         var e1 = new Enemy(game, 704, 480, 0);
          game.add.existing(e1);
          this.shootingEnemies.add(e1);
 
          // enemy 2
-         var e2 = new Enemy(game, 2240, 768, 0);
+         var e2 = new Enemy(game, 864, 608, 0);
          game.add.existing(e2);
          this.shootingEnemies.add(e2);
 
          // enemy 3
-         var e3 = new Enemy(game, 2528, 672, 0);
+         var e3 = new Enemy(game, 992, 864, 0);
          game.add.existing(e3);
          this.shootingEnemies.add(e3);
 
          // enemy 4
-         var e4 = new Enemy(game, 3168, 672, 0);
+         var e4 = new Enemy(game, 1344, 480, 0);
          game.add.existing(e4);
          this.shootingEnemies.add(e4);
 
          // enemy 5
-         var e5 = new Enemy(game, 3360, 800, 0);
+         var e5 = new Enemy(game, 1344, 736, 0);
          game.add.existing(e5);
          this.shootingEnemies.add(e5);
+
+         // enemy 6
+         var e6 = new Enemy(game, 1632, 864, 0);
+         game.add.existing(e6);
+         this.shootingEnemies.add(e6);
+
+         // enemy 7
+         var e7 = new Enemy(game, 1824, 608, 0);
+         game.add.existing(e7);
+         this.shootingEnemies.add(e7);
+
+         // These next two enemies move.
+         // enemy 8
+         var e8 = new Enemy(game, 2720, 864, 150, false, false);
+         game.add.existing(e8);
+         this.shootingEnemies.add(e8);
+
+         // enemy 9
+         var e9 = new Enemy(game, 3040, 864, 150, false, false);
+         game.add.existing(e9);
+         this.shootingEnemies.add(e9);
 
          // COLLECTIBLES ------------------------------------------------------
 
@@ -235,6 +256,9 @@ Red.prototype = {
       // Dependant on level. On level 1, the player spawns at a different y value.
       if( redLevel == 1 ){
           this.player = new Player(game, 64, 544, this.mapLayer);
+      }
+      else if( redLevel == 2 ){
+          this.player = new Player(game, 64, 608, this.mapLayer);
       }
       else {
           this.player = new Player(game, 64, 800, this.mapLayer);
