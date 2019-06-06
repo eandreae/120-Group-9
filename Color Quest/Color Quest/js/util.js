@@ -44,7 +44,7 @@ function bulletDestroyed(game, bullet) {
    deathEmitter.setYSpeed(-300,300);			         // vertical speed range
    deathEmitter.start(true, 200, null, 20);	         // (explode, lifespan, freq, quantity)
 
-   bullet.kill();
+   bullet.destroy();
 }
 
 function jumpParticle(game, object) {
