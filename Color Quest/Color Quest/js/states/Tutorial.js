@@ -426,7 +426,7 @@ Tutorial.prototype = {
 
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
-         var bullet = new Bullet(game, this.player.x, this.player.y, direction, 1500);
+         var bullet = new Bullet(game, this.player.x, this.player.y, direction, playerBulletSpeed);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
       }
