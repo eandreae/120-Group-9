@@ -1,5 +1,5 @@
 this.v = 0;    // Velocity of the enemy
-this.direction;   // Direction the enemy is facing
+this.direction = -1;   // Direction the enemy is facing
 this.dashing;     // If the enemy can dash
 this.jumping;     // If the enemy can jump
 this.sprite;      // Sets the sprite of the enemy depending on their abilities
@@ -63,8 +63,15 @@ Enemy.prototype.constructor = Enemy;
 
 Enemy.prototype.update = function() {
    // Sets the direction of the enemy
-   if (this.v > 0) this.direction = 1;
-   else if (this.v < 0) this.direction = -1;
+   if (this.v > 0) {
+      this.direction = 1;
+      this.anchor.set(0.85, 0.45);
+   }
+   else if (this.v < 0) {
+      this.direction = -1;
+      this.anchor.set(0.15, 0.45);
+   }
+   else this.direction = -1;
 
    // If they bump into an object, change their direction
    if (this.body.blocked.left || this.body.blocked.right) {

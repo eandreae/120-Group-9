@@ -20,7 +20,8 @@ Red.prototype = {
       song.play('', 0, 0.5, true);
 
       // Background
-      game.stage.backgroundColor = backgroundColor;
+      background = game.add.image(0, 0, 'bg_red');
+      background.fixedToCamera = true;
 
       // Setting the world bounds
       game.world.setBounds(0, 0, 1024, 1024);
@@ -101,7 +102,7 @@ Red.prototype = {
          this.n1Text[2] = "Watch out for flying bullets! You wouldn't\nwant to get hit by them";
          this.n1Text[3] = "";
          // ENEMIES -----------------------------------------------------------
-         // enemies 1, 2, and 3 for level 0 of Red.
+         // enemies 1, 2, and 3 for Red level 0.
 
          // enemy 1
          var e1 = new Enemy(game, 1376, 704, 0);
@@ -123,8 +124,9 @@ Red.prototype = {
          // Red collectable
          bmd = game.add.bitmapData(75, 75);
          bmd.fill(255, 0, 0, 1);
-         this.red = game.add.sprite(3680, 832, 'upgrade_r');
+         this.red = game.add.sprite(3680, 864, 'upgrade_r');
          game.physics.arcade.enable(this.red);
+
       } else if (redLevel == 1) {
          // The player has just entered the Red level 1, load level 1.
          backgroundColor = "#FF9999";
@@ -150,7 +152,7 @@ Red.prototype = {
          this.n2Text[2] = "Show King Color's cronies what they deserve";
          this.n2Text[3] = "";
          // ENEMIES -----------------------------------------------------------
-         // enemies 1, 2, and 3 for level 0 of Red.
+         // enemies 1, 2, 3, and 4 for Red level 1.
 
          // enemy 1
          var e1 = new Enemy(game, 1824, 864, 0);
@@ -177,8 +179,9 @@ Red.prototype = {
          // Red collectable
          bmd = game.add.bitmapData(75, 75);
          bmd.fill(255, 0, 0, 1);
-         this.red = game.add.sprite(3680, 832, 'upgrade_r');
+         this.red = game.add.sprite(3680, 864, 'upgrade_r');
          game.physics.arcade.enable(this.red);
+
       } else if (redLevel == 2) {
          // The player has just entered the Red level 2, load level 2.
          backgroundColor = "#FF9999";
@@ -195,7 +198,7 @@ Red.prototype = {
          // NPCs --------------------------------------------------------------
 
          // ENEMIES -----------------------------------------------------------
-         // enemies 1, 2, and 3 for level 0 of Red.
+         // enemies 1, 2, 3, 4, 5, 6, 7, 8, and 9 for Red leve 2.
 
          // enemy 1
          var e1 = new Enemy(game, 704, 480, 0);
@@ -248,7 +251,7 @@ Red.prototype = {
          // Red collectable
          bmd = game.add.bitmapData(75, 75);
          bmd.fill(255, 0, 0, 1);
-         this.red = game.add.sprite(3680, 832, 'upgrade_r');
+         this.red = game.add.sprite(3680, 864, 'upgrade_r');
          game.physics.arcade.enable(this.red);
       }
 
@@ -281,7 +284,7 @@ Red.prototype = {
    update: function() {
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
-         var bullet = new Bullet(game, this.player.x, this.player.y, direction, 1500);
+         var bullet = new Bullet(game, this.player.x, this.player.y, direction, playerBulletSpeed);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
       }
@@ -426,7 +429,7 @@ Red.prototype = {
    },
 
    enemyShoot: function(enemy) {
-      var bullet = new Bullet(game, enemy.x, enemy.y, -1, 300);
+      var bullet = new Bullet(game, enemy.x, enemy.y, enemy.direction, 300);
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
    },

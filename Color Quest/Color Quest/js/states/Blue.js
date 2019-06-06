@@ -20,7 +20,8 @@ Blue.prototype = {
       song.play('', 0, 0.5, true);
 
       // Background
-      game.stage.backgroundColor = backgroundColor;
+      background = game.add.image(0, 0, 'bg_blue');
+      background.fixedToCamera = true;
 
       // Setting the world bounds
       game.world.setBounds(0, 0, 1024, 1024);
@@ -99,8 +100,12 @@ Blue.prototype = {
          this.n1Text[2] = "";
          // ENEMIES -----------------------------------------------------------
          // Adding the enemies for Level 0.
-         // There are 4 jumping enemies in level 0.
-         // Represented with e1, e2, e3, e4.
+         // There are 5 jumping enemies in level 0.
+         // Represented with e0, e1, e2, e3, e4.
+
+         var e0 = new Enemy(game, 832, 832, 0, false, true);
+         game.add.existing(e0);
+         this.jumpingEnemies.add(e0);
 
          var e1 = new Enemy(game, 1504, 832, 0, false, true);
          game.add.existing(e1);
@@ -123,7 +128,7 @@ Blue.prototype = {
          // Blue collectable
          bmd = game.add.bitmapData(75, 75);
          bmd.fill(0, 0, 255, 1);
-         this.blue = game.add.sprite(3968, 832, 'upgrade_b');
+         this.blue = game.add.sprite(3968, 864, 'upgrade_b');
          game.physics.arcade.enable(this.blue);
       } else if (blueLevel == 1) {
          // Loading the correct TileMap.
@@ -139,7 +144,7 @@ Blue.prototype = {
          // Load the enemies/NPCs/collectibles for level 0
 
          // NPCs --------------------------------------------------------------
-         this.n2 = new NPC(game, 350, 800, 'npc_smiely');
+         this.n2 = new NPC(game, 350, 576, 'npc_smiely');
          game.add.existing(this.n2);
          this.npcs.add(this.n2);
 
@@ -153,19 +158,19 @@ Blue.prototype = {
          // There are 7 jumping enemies in level 1.
          // Represented with e1, e2, e3, e4, e5, e6, e7.
 
-         var e1 = new Enemy(game, 1216, 832, 0, false, true);
+         var e1 = new Enemy(game, 1024, 832, 100, false, true);
          game.add.existing(e1);
          this.jumpingEnemies.add(e1);
 
-         var e2 = new Enemy(game, 1472, 832, 0, false, true);
+         var e2 = new Enemy(game, 1344, 832, 100, false, true);
          game.add.existing(e2);
          this.jumpingEnemies.add(e2);
 
-         var e3 = new Enemy(game, 1728, 832, 0, false, true);
+         var e3 = new Enemy(game, 1664, 832, 100, false, true);
          game.add.existing(e3);
          this.jumpingEnemies.add(e3);
 
-         var e4 = new Enemy(game, 2144, 672, 0, false, true);
+         var e4 = new Enemy(game, 1984, 832, 100, false, true);
          game.add.existing(e4);
          this.jumpingEnemies.add(e4);
 
@@ -186,7 +191,7 @@ Blue.prototype = {
          // Blue collectable
          bmd = game.add.bitmapData(75, 75);
          bmd.fill(0, 0, 255, 1);
-         this.blue = game.add.sprite(3968, 832, 'upgrade_b');
+         this.blue = game.add.sprite(3968, 864, 'upgrade_b');
          game.physics.arcade.enable(this.blue);
       } else if (blueLevel == 2) {
          // Loading the correct TileMap.
@@ -208,35 +213,35 @@ Blue.prototype = {
          // There are 8 jumping enemies in level 2.
          // Represented with e1, e2, e3, e4, e5, e6, e7, e8.
 
-         var e1 = new Enemy(game, 1088, 832, 0, false, true);
+         var e1 = new Enemy(game, 64, 832, 150, false, true);
          game.add.existing(e1);
          this.jumpingEnemies.add(e1);
 
-         var e2 = new Enemy(game, 1728, 832, 0, false, true);
+         var e2 = new Enemy(game, 608, 832, 150, false, true);
          game.add.existing(e2);
          this.jumpingEnemies.add(e2);
 
-         var e3 = new Enemy(game, 1760, 320, 0, false, true);
+         var e3 = new Enemy(game, 1152, 832, 150, false, true);
          game.add.existing(e3);
          this.jumpingEnemies.add(e3);
 
-         var e4 = new Enemy(game, 2304, 832, 0, false, true);
+         var e4 = new Enemy(game, 1696, 832, 150, false, true);
          game.add.existing(e4);
          this.jumpingEnemies.add(e4);
 
-         var e5 = new Enemy(game, 2592, 832, 0, false, true);
+         var e5 = new Enemy(game, 2240, 832, 150, false, true);
          game.add.existing(e5);
          this.jumpingEnemies.add(e5);
 
-         var e6 = new Enemy(game, 3040, 320, 0, false, true);
+         var e6 = new Enemy(game, 2784, 832, 150, false, true);
          game.add.existing(e6);
          this.jumpingEnemies.add(e6);
 
-         var e7 = new Enemy(game, 3424, 320, 0, false, true);
+         var e7 = new Enemy(game, 3328, 832, 150, false, true);
          game.add.existing(e7);
          this.jumpingEnemies.add(e7);
 
-         var e8 = new Enemy(game, 3968, 832, 0, false, true);
+         var e8 = new Enemy(game, 3680, 512, 0, false, true);
          game.add.existing(e8);
          this.jumpingEnemies.add(e8);
 
@@ -245,12 +250,20 @@ Blue.prototype = {
          // Blue collectable
          bmd = game.add.bitmapData(75, 75);
          bmd.fill(0, 0, 255, 1);
-         this.blue = game.add.sprite(3776, 320, 'upgrade_b');
+         this.blue = game.add.sprite(3968, 544, 'upgrade_b');
          game.physics.arcade.enable(this.blue);
       }
 
       // Adds the player into the state
-      this.player = new Player(game, 64, 832, this.mapLayer);
+      if( blueLevel == 2 ){
+          this.player = new Player(game, 64, 256, this.mapLayer);
+      }
+      else if( blueLevel == 1 ){
+          this.player = new Player(game, 64, 576, this.mapLayer);
+      }
+      else {
+          this.player = new Player(game, 64, 832, this.mapLayer);
+      }
       game.add.existing(this.player);
 
       // Camera follows player
@@ -264,7 +277,7 @@ Blue.prototype = {
    update: function() {
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
-         var bullet = new Bullet(game, this.player.x, this.player.y, direction, 1500);
+         var bullet = new Bullet(game, this.player.x, this.player.y, direction, playerBulletSpeed);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
       }

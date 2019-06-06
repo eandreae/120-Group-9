@@ -21,8 +21,8 @@ Yellow.prototype = {
       song.play('', 0, 0.5, true);
 
       // Background
-      backgroundColor = "#FFEE99"
-      game.stage.backgroundColor = backgroundColor;
+      background = game.add.image(0, 0, 'bg_yellow');
+      background.fixedToCamera = true;
 
       // Setting the world bounds
       game.world.setBounds(0, 0, 1024, 1024);
@@ -166,7 +166,7 @@ Yellow.prototype = {
 
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
-         var bullet = new Bullet(game, this.player.x, this.player.y, direction, 1500);
+         var bullet = new Bullet(game, this.player.x, this.player.y, direction, playerBulletSpeed);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
       }
