@@ -10,6 +10,7 @@ BossMap.prototype = {
    preload: function() {
       console.log('BossMap: preload');
 
+      game.load.image('bg', 'assets/img/bg_kingcolor.png');
       game.load.tilemap('layout', 'assets/TileMaps/KingColor.json', null, Phaser.Tilemap.TILED_JSON);
       game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles_2.png', 32, 32);
    },
@@ -19,6 +20,9 @@ BossMap.prototype = {
 
       // Background
       game.stage.backgroundColor = backgroundColor;
+      
+      background = game.add.image(0, 0, 'bg');
+      background.fixedToCamera = true;
 
       // Setting the world bounds
       game.world.setBounds(0, 0, 1024, 1024);
