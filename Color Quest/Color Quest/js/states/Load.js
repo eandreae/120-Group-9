@@ -20,6 +20,7 @@ Load.prototype = {
       game.load.atlas('enemies_r', 'assets/img/enemy_red.png', 'assets/img/enemy_red.json');     // [0] is facing left, [1] is facing right
       game.load.atlas('enemies_y', 'assets/img/enemy_yellow.png', 'assets/img/enemy_yellow.json');
       game.load.atlas('enemies_b', 'assets/img/enemy_blue.png', 'assets/img/enemy_blue.json');
+      game.load.atlas('boss', 'assets/img/kingcolor.png', 'assets/img/kingcolor.json');
 
 		// Background Images
       game.load.image('bg_blue', 'assets/img/bg_blue.png');
@@ -34,7 +35,6 @@ Load.prototype = {
       game.load.image('title', 'assets/img/TitleScreen.png');
 
       // Rest of the sprites
-      game.load.image('boss', 'assets/img/kingcolor.png');
       game.load.image('bPortal', 'assets/img/KingColorButton.png');
       game.load.image('bullet_l', 'assets/img/bullet_left.png');
       game.load.image('bullet_r', 'assets/img/bullet_right.png');

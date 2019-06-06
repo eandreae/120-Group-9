@@ -56,7 +56,7 @@ BossMap.prototype = {
       this.shootingEnemies.enableBody = true;
 
       // Adds the player into the state
-      this.player = new Player(game, 64, 825, this.mapLayer);
+      this.player = new Player(game, 64, 1340, this.mapLayer);
       game.add.existing(this.player);
 
       // Bullet groups
@@ -150,8 +150,19 @@ BossMap.prototype = {
 
       // Bullet collision for CK
       game.physics.arcade.collide(this.playerBullets, this.boss, this.bulletHitsBoss, null, this);
-   },
+      
+      // Player dying when falling into pit
+      if(this.player.y >= 1475){
+          if(health > 0){
+             playerDies(game, this.player, 'BossMap');
+             health = 0;
+             song.stop();
+          }
 
+      }
+   
+   },
+   
    // Health loss and death for CK upon bullet collision
    bulletHitsBoss: function(boss, bullet) {
       //console.log(bossHealth);
@@ -191,8 +202,13 @@ BossMap.prototype = {
 
    // Called every 2 seconds by the timer to have the enemies shoot
    enemyGroup: function() {
-      this.shootingEnemies.forEach(this.enemyShoot, this, true);
-      this.bossShoot(this.boss);
+       if(this.player.x > 1440 && this.player.x < 3934){
+          this.shootingEnemies.forEach(this.enemyShoot, this, true);
+       }
+       if(bossHealth > 0 && this.player.x > 6462){
+             this.bossShoot(this.boss);
+       }
+
    },
 
    enemyShoot: function(enemy) {
@@ -202,13 +218,14 @@ BossMap.prototype = {
    },
    
    bossShoot: function(boss) {
-      var bullet = new Bullet(game, boss.x, boss.y + 30, -1, 300);
+      this.boss.animations.play('shoot');
+      var bullet = new Bullet(game, boss.x + 10, boss.y + 30, -1, 300);
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
-      var bullet = new Bullet(game, boss.x, boss.y + 65, -1, 300);
+      var bullet = new Bullet(game, boss.x + 10, boss.y + 65, -1, 300);
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
-      var bullet = new Bullet(game, boss.x, boss.y + 100, -1, 300);
+      var bullet = new Bullet(game, boss.x + 10, boss.y + 100, -1, 300);
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
    },

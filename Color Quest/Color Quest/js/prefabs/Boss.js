@@ -1,6 +1,10 @@
 function Boss(game, x, y) {
    // Inherits Phaser.Sprite and puts the sprite in a position on the screen
-   Phaser.Sprite.call(this, game, x, y, 'boss');
+   Phaser.Sprite.call(this, game, x, y, 'boss', 'kingcolor');
+
+   // Adds idle and shooting animations for King Color
+   this.animations.add('idle', [0], 10, true);
+   this.animations.add('shoot', [1, 2, 3, 4, 5, 0], 10, false);
 
    game.physics.arcade.enable(this);
    this.body.collideWorldBounds = true;
