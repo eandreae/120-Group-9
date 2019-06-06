@@ -236,12 +236,12 @@ Red.prototype = {
 
          // These next two enemies move.
          // enemy 8
-         var e8 = new Enemy(game, 2720, 864, 100, false, false);
+         var e8 = new Enemy(game, 2720, 864, 150, false, false);
          game.add.existing(e8);
          this.shootingEnemies.add(e8);
 
          // enemy 9
-         var e9 = new Enemy(game, 3040, 864, 100, false, false);
+         var e9 = new Enemy(game, 3040, 864, 150, false, false);
          game.add.existing(e9);
          this.shootingEnemies.add(e9);
 
