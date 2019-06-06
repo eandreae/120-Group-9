@@ -10,6 +10,7 @@ BossMap.prototype = {
    preload: function() {
       console.log('BossMap: preload');
 
+      game.load.image('bg', 'assets/img/bg_kingcolor.png');
       game.load.tilemap('layout', 'assets/TileMaps/KingColor.json', null, Phaser.Tilemap.TILED_JSON);
       game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles_2.png', 32, 32);
    },
@@ -19,6 +20,9 @@ BossMap.prototype = {
 
       // Background
       game.stage.backgroundColor = backgroundColor;
+
+      background = game.add.image(0, 0, 'bg');
+      background.fixedToCamera = true;
 
       // Setting the world bounds
       game.world.setBounds(0, 0, 1024, 1024);
@@ -117,7 +121,7 @@ BossMap.prototype = {
 
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
-         var bullet = new Bullet(game, this.player.x, this.player.y, direction, 1500);
+         var bullet = new Bullet(game, this.player.x, this.player.y, direction, playerBulletSpeed);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
       }
@@ -191,7 +195,7 @@ BossMap.prototype = {
    },
 
    enemyShoot: function(enemy) {
-      var bullet = new Bullet(game, enemy.x, enemy.y, -1, 300);
+      var bullet = new Bullet(game, enemy.x, enemy.y, enemy.direction, 300);
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
    },

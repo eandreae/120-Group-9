@@ -16,6 +16,7 @@ var metKingColor = false; // If we've seen the beginning cutscene
 var direction = 1; // Player direction. 1 (facing right), -1 (facing left)
 var backgroundColor = "#72C4FF" // light blue.
 var health = 5; // Player health
+var playerBulletSpeed = 1000;
 var injured = false; // If the player is injured
 var buckyValue = 0; // Determines which Bucky sprite we're using
 var redLevel = 0; // keeps track of the progress in the Red level.
