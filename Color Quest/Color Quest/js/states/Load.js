@@ -21,7 +21,19 @@ Load.prototype = {
       game.load.atlas('enemies_y', 'assets/img/enemy_yellow.png', 'assets/img/enemy_yellow.json');
       game.load.atlas('enemies_b', 'assets/img/enemy_blue.png', 'assets/img/enemy_blue.json');
 
-		// Loading images
+		// Background Images
+      game.load.image('bg_blue', 'assets/img/bg_blue.png');
+      game.load.image('bg_red', 'assets/img/bg_red.png');
+      game.load.image('bg_yellow', 'assets/img/bg_yellow.png');
+      game.load.image('bg_town', 'assets/img/bg_townsmile.png');
+      game.load.image('bg_town_b', 'assets/img/bg_townsmile_b.png');
+      game.load.image('bg_town_by', 'assets/img/bg_townsmile_by.png');
+      game.load.image('bg_town_y', 'assets/img/bg_townsmile_y.png');
+      game.load.image('bg_town_gray', 'assets/img/bg_townsmile_gray.png');
+      game.load.image('bg_boss', 'assets/img/bg_kingcolor.png');
+      game.load.image('title', 'assets/img/TitleScreen.png');
+
+      // Rest of the sprites
       game.load.image('boss', 'assets/img/kingcolor.png');
       game.load.image('bPortal', 'assets/img/KingColorButton.png');
       game.load.image('bullet_l', 'assets/img/bullet_left.png');
@@ -38,7 +50,6 @@ Load.prototype = {
       game.load.image('particle_r', 'assets/img/particle_red.png');
       game.load.image('particle_y', 'assets/img/particle_yellow.png');
       game.load.image('particle_b', 'assets/img/particle_blue.png');
-      game.load.image('title', 'assets/img/TitleScreen.png');
       game.load.image('upgrade_b', 'assets/img/upgrade_blue.png');
       game.load.image('upgrade_r', 'assets/img/upgrade_red.png');
       game.load.image('upgrade_y', 'assets/img/upgrade_yellow.png');

@@ -35,10 +35,9 @@ Tutorial.prototype = {
 
       // If they haven't met king color yet, everything is all happy
       if (metKingColor == false) {
-
          // Background
-         backgroundColor = "#72C4FF"
-         game.stage.backgroundColor = backgroundColor;
+         background = game.add.image(0, 0, 'bg_town');
+         background.fixedToCamera = true;
 
          // Map Layer
          this.mapLayer = this.map.createLayer('Ground_0');
@@ -49,9 +48,10 @@ Tutorial.prototype = {
       // They have met King Color. The World is sad now and color has been taken
       // from the world. Check if they have collected any of the colors.
       else {
-         // Set up the world without colors.
-         backgroundColor = "#D3D3D3"
-         game.stage.backgroundColor = backgroundColor;
+         // Background
+         background = game.add.image(0, 0, 'bg_town_gray');
+         background.fixedToCamera = true;
+
          this.mapLayer = this.map.createLayer('Ground_1');
          this.map.setCollisionBetween(0, 999, true, 'Ground_1');
          this.noColorBackground = this.map.createLayer('Background_1');
@@ -61,13 +61,20 @@ Tutorial.prototype = {
             this.redLayer = this.map.createLayer('Red');
          }
          if (hasYellow) {
+            // Background
+            background = game.add.image(0, 0, 'bg_town_y');
+            if (hasBlue) background = game.add.image(0, 0, 'bg_town_by');
+            background.fixedToCamera = true;
             this.yellowLayer = this.map.createLayer('Yellow');
          }
          if (hasBlue) {
-            backgroundColor = "#72C4FF"
-            game.stage.backgroundColor = backgroundColor;
+            background = game.add.image(0, 0, 'bg_town_b');
+            if (hasYellow) background = game.add.image(0, 0, 'bg_town_by');
+            background.fixedToCamera = true;
             this.blueLayer = this.map.createLayer('Blue');
          }
+
+         if (hasBlue && hasYellow) background_sprite = 'bg_town_by'
       }
       this.mapLayer.resizeWorld();
 

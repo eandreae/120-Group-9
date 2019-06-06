@@ -8,20 +8,16 @@ BossMap.prototype = {
    },
 
    preload: function() {
-      console.log('BossMap: preload');
 
-      game.load.image('bg', 'assets/img/bg_kingcolor.png');
       game.load.tilemap('layout', 'assets/TileMaps/KingColor.json', null, Phaser.Tilemap.TILED_JSON);
       game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles_2.png', 32, 32);
    },
 
    create: function() {
-      console.log('BossMap: create');
-
       // Background
       game.stage.backgroundColor = backgroundColor;
 
-      background = game.add.image(0, 0, 'bg');
+      background = game.add.image(0, 0, 'bg_boss');
       background.fixedToCamera = true;
 
       // Setting the world bounds
