@@ -192,10 +192,23 @@ BossMap.prototype = {
    // Called every 2 seconds by the timer to have the enemies shoot
    enemyGroup: function() {
       this.shootingEnemies.forEach(this.enemyShoot, this, true);
+      this.bossShoot(this.boss);
    },
 
    enemyShoot: function(enemy) {
       var bullet = new Bullet(game, enemy.x, enemy.y, enemy.direction, 300);
+      game.add.existing(bullet);
+      this.enemyBullets.add(bullet);
+   },
+   
+   bossShoot: function(boss) {
+      var bullet = new Bullet(game, boss.x, boss.y + 30, -1, 300);
+      game.add.existing(bullet);
+      this.enemyBullets.add(bullet);
+      var bullet = new Bullet(game, boss.x, boss.y + 65, -1, 300);
+      game.add.existing(bullet);
+      this.enemyBullets.add(bullet);
+      var bullet = new Bullet(game, boss.x, boss.y + 100, -1, 300);
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
    },
