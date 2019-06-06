@@ -163,12 +163,12 @@ Red.prototype = {
          this.shootingEnemies.add(e2);
 
          // enemy 3
-         var e3 = new Enemy(game, 2848, 704, 0);
+         var e3 = new Enemy(game, 2816, 672, 0);
          game.add.existing(e3);
          this.shootingEnemies.add(e3);
 
          // enemy 4
-         var e4 = new Enemy(game, 3264, 704, 0);
+         var e4 = new Enemy(game, 3232, 672, 0);
          game.add.existing(e4);
          this.shootingEnemies.add(e4);
 
@@ -232,7 +232,13 @@ Red.prototype = {
       }
 
       // Adds the player into the level.
-      this.player = new Player(game, 64, 800, this.mapLayer);
+      // Dependant on level. On level 1, the player spawns at a different y value.
+      if( redLevel == 1 ){
+          this.player = new Player(game, 64, 544, this.mapLayer);
+      }
+      else {
+          this.player = new Player(game, 64, 800, this.mapLayer);
+      }
       game.add.existing(this.player);
 
       // Camera follows player
