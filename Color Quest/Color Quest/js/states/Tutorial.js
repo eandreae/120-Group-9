@@ -6,6 +6,7 @@ Tutorial.prototype = {
    // Variables used in Tutorial
    init: function() {
       this.talking = false;
+      health = 5;
    },
 
    // Preload the tilemap
@@ -304,9 +305,9 @@ Tutorial.prototype = {
       this.shootingEnemies.enableBody = true;
 
       // // // Place a moving enemy
-      // var e1 = new Enemy(game, 500, 300, -100, true, false, this.player);
-      // game.add.existing(e1);
-      // this.enemies.add(e1);
+      var e1 = new Enemy(game, 500, 300, -100, true, false, this.player);
+      game.add.existing(e1);
+      this.enemies.add(e1);
       // //
       // // // Place a shooting enemy
       // var e2 = new Enemy(game, 500, 300, -100, false, true, this.player);
@@ -427,7 +428,7 @@ Tutorial.prototype = {
       }
 
       // Player shoots a bullet for each key press
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
+      if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed && !playerDead) {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, playerBulletSpeed);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
@@ -560,7 +561,7 @@ Tutorial.prototype = {
    // Called with a player bullet hits an enemy
    bulletHitsEnemy: function(bullet, enemy) {
       bulletDestroyed(game, bullet);
-      enemy.destroy();
+      enemyDies(game, enemy);
    },
 
    // Called with an enemy bullet hits the player

@@ -6,6 +6,7 @@ Yellow.prototype = {
    init: function() {
       this.talking = false;
 		this.stoppedWall = false;
+      health = 5;
    },
 
    // Preload the tilemap
@@ -242,7 +243,7 @@ Yellow.prototype = {
       // }
 
       // Player shoots a bullet for each key press
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
+      if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed && !playerDead) {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, playerBulletSpeed);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
@@ -366,7 +367,7 @@ Yellow.prototype = {
    // Called with a player bullet hits an enemy
    bulletHitsEnemy: function(bullet, enemy) {
       bulletDestroyed(game, bullet);
-      enemy.destroy();
+      enemyDies(game, enemy);
    },
 
    // Called when any bullet hits the platforms

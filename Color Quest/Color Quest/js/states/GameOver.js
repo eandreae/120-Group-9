@@ -14,6 +14,7 @@ GameOver.prototype = {
 
       health = 5;
       injured = false;
+      playerDead = false;
    },
 
    update: function() {

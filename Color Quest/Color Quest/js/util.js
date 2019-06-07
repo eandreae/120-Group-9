@@ -4,6 +4,7 @@
 function playerDies(game, player, state) {
 
    injured = false;
+   playerDead = true;
 
    // Red square bit map data
    bmd = game.add.bitmapData(18, 18);
@@ -21,6 +22,23 @@ function playerDies(game, player, state) {
    player.kill();
 
    game.time.events.add(Phaser.Timer.SECOND * 2, function() { game.state.start('GameOver', true, false, state)});
+}
+
+function enemyDies(game, enemy) {
+   // Red square bit map data
+   bmd = game.add.bitmapData(18, 18);
+   bmd.fill(255, 0, 0, 1);
+
+   // Emitter used when player dies
+   deathEmitter = game.add.emitter(enemy.x, enemy.y, 200);
+   deathEmitter.makeParticles(enemy.color);		        // red squares used as particles
+   deathEmitter.gravity = 0;
+   deathEmitter.setScale(.4, .6, .4, .6, 0);
+   deathEmitter.setAlpha(.8, 0, 700); 	      // .8 to .3 alpha
+   deathEmitter.setXSpeed(-100,100);			   // horizontal speed range
+   deathEmitter.setYSpeed(-100,100);			   // vertical speed range
+   deathEmitter.start(true, 700, null, 30);	   // (explode, lifespan, freq, quantity)
+   enemy.kill();
 }
 
 function bulletDestroyed(game, bullet) {

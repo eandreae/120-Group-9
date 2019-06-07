@@ -4,7 +4,7 @@ BossMap.prototype = {
 
    // Variables used in Boss
    init: function() {
-
+      health = 5;
    },
 
    preload: function() {
@@ -111,7 +111,7 @@ BossMap.prototype = {
    update: function() {
 
       // Player shoots a bullet for each key press
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
+      if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed && !playerDead) {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, playerBulletSpeed);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
@@ -178,7 +178,7 @@ BossMap.prototype = {
    // Called with a player bullet hits an enemy
    bulletHitsEnemy: function(bullet, enemy) {
       bulletDestroyed(game, bullet);
-      enemy.destroy();
+      enemyDies(game, enemy);
    },
 
    // Called with an enemy bullet hits the player
