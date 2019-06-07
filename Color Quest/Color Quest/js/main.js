@@ -18,6 +18,7 @@ var backgroundColor = "#72C4FF" // light blue.
 var health = 5; // Player health
 var playerBulletSpeed = 1000;
 var injured = false; // If the player is injured
+var playerDead = false;
 var buckyValue = 0; // Determines which Bucky sprite we're using
 var redLevel = 0; // keeps track of the progress in the Red level.
 var yellowLevel = 0; // keeps track of the progress in the Yellow level.

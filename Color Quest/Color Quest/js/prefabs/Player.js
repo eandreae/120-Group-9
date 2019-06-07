@@ -137,7 +137,7 @@ Player.prototype.update = function() {
    }
 
    // Player can jump only if they're touching the Ground
-   if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && jumps >= 1) {
+   if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && jumps >= 1 && !playerDead) {
       jumpSFX.play('', 0, .5, false);
       offPlatform = true;
       this.body.velocity.y = -500;
@@ -149,7 +149,7 @@ Player.prototype.update = function() {
    }
 
    // Player can only dash once in the air
-   if (game.input.keyboard.justPressed(Phaser.Keyboard.C) && dash != 0) {
+   if (game.input.keyboard.justPressed(Phaser.Keyboard.C) && dash != 0 && !playerDead) {
       dashing = true;
       oldPos = this.x;
       dash--;

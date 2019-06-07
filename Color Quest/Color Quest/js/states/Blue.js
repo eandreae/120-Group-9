@@ -276,7 +276,7 @@ Blue.prototype = {
 
    update: function() {
       // Player shoots a bullet for each key press
-      if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed) {
+      if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed && !playerDead) {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, playerBulletSpeed);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);

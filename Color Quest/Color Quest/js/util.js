@@ -4,6 +4,7 @@
 function playerDies(game, player, state) {
 
    injured = false;
+   playerDead = true;
 
    // Red square bit map data
    bmd = game.add.bitmapData(18, 18);
