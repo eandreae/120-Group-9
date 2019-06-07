@@ -61,16 +61,30 @@ Yellow.prototype = {
       this.npcs = game.add.group();
       this.npcs.enableBody = true;
 
+      // Enemy group
+      this.dashingEnemies = game.add.group();
+      this.dashingEnemies.enableBody = true;
+
       // Create new tilemap
       this.map = game.add.tilemap('layout');
       this.map.addTilesetImage('color_tiles_tileset', 'tilesheet');
 
       // The layers for each yellow level
       if (yellowLevel == 0) {
+          // The player has just entered the Yellow level, load Yello level 0.
+          // Load the correct tilemaps for level 0.
          this.mapLayer = this.map.createLayer('Ground_0');
          this.map.setCollisionBetween(0, 999, true, 'Ground_0');
 
-         this.n1 = new NPC(game, 500, 800, 'npc_generic_l');
+         // LOADING MAP -------------------------------------------------------
+         // Now that the correct level has been loaded, do the rest of the level.
+         this.mapLayer.resizeWorld();
+
+         // Load the enemies/NPCs/collectibles for level 0
+
+         // NPCs --------------------------------------------------------------
+
+         this.n1 = new NPC(game, 416, 800, 'npc_generic_l');
          game.add.existing(this.n1);
          this.npcs.add(this.n1);
 
@@ -80,11 +94,31 @@ Yellow.prototype = {
          this.n1Text[1] = "You may want to get through this area\nas quickly as possible...";
          this.n1Text[2] = "";
 
+         // ENEMIES -----------------------------------------------------------
+         // no enemies in Yellow level 0.
+
+         // COLLECTIBLES ------------------------------------------------------
+
+         // Yellow collectable
+         bmd = game.add.bitmapData(75, 75);
+         bmd.fill(255, 255, 0, 1);
+         this.yellow = game.add.sprite(4000, 800, 'upgrade_y');
+         game.physics.arcade.enable(this.yellow);
+
       } else if (yellowLevel == 1) {
+          // Level 1 of Yellow.
          this.mapLayer = this.map.createLayer('Ground_1');
          this.map.setCollisionBetween(0, 999, true, 'Ground_1');
 
-         this.n2 = new NPC(game, 500, 800, 'npc_generic_r');
+         // LOADING MAP -------------------------------------------------------
+         // Now that the correct level has been loaded, do the rest of the level.
+         this.mapLayer.resizeWorld();
+
+         // Load the enemies/NPCs/collectibles for level 1
+
+         // NPCs --------------------------------------------------------------
+
+         this.n2 = new NPC(game, 416, 608, 'npc_generic_r');
          game.add.existing(this.n2);
          this.npcs.add(this.n2);
 
@@ -94,24 +128,67 @@ Yellow.prototype = {
          this.n2Text[1] = "Press C to dash a short distance foward.";
          this.n2Text[2] = "You can dash as many times as you want\n, but you can only dash once in the air\nbefore touching the ground again.";
 			this.n2Text[3] = "";
+
+        // ENEMIES -----------------------------------------------------------
+        // no enemies in Yellow level 1.
+
+        // COLLECTIBLES ------------------------------------------------------
+
+        // Yellow collectable
+        bmd = game.add.bitmapData(75, 75);
+        bmd.fill(255, 255, 0, 1);
+        this.yellow = game.add.sprite(4000, 800, 'upgrade_y');
+        game.physics.arcade.enable(this.yellow);
+
       } else if (yellowLevel == 2) {
+          // Level 2 of Yellow.
          this.mapLayer = this.map.createLayer('Ground_2');
          this.map.setCollisionBetween(0, 999, true, 'Ground_2');
-      }
 
-      this.mapLayer.resizeWorld();
+         // LOADING MAP -------------------------------------------------------
+         // Now that the correct level has been loaded, do the rest of the level.
+         this.mapLayer.resizeWorld();
+
+         // Load the enemies/NPCs/collectibles for level 1
+
+         // NPCs --------------------------------------------------------------
+         // No NPCs in level 2.
+
+         // ENEMIES -----------------------------------------------------------
+         // There are 2 enemies in Level 2
+         // They are represented by e1 and e2.
+
+         // enemy 1
+         var e1 = new Enemy(game, 1920, 800, 100, true, false);
+         game.add.existing(e1);
+         this.dashingEnemies.add(e1);
+
+         // enemy 2
+         var e2 = new Enemy(game, 2336, 800, 100, true, false);
+         game.add.existing(e2);
+         this.dashingEnemies.add(e2);
+
+         // COLLECTIBLES ------------------------------------------------------
+
+         // Yellow collectable
+         bmd = game.add.bitmapData(75, 75);
+         bmd.fill(255, 255, 0, 1);
+         this.yellow = game.add.sprite(4000, 800, 'upgrade_y');
+         game.physics.arcade.enable(this.yellow);
+
+      }
 
       // set 32-pixel buffer around tiles to avoid collision tunneling
       game.physics.arcade.TILE_BIAS = 32;
 
-      // Yellow collectable
-      bmd = game.add.bitmapData(75, 75);
-      bmd.fill(255, 255, 0, 1);
-      this.yellow = game.add.sprite(4000, 800, 'upgrade_y');
-      game.physics.arcade.enable(this.yellow);
 
       // Adds the player into the state
-      this.player = new Player(game, 416, 800, this.mapLayer);
+      if( yellowLevel == 1 ){
+          this.player = new Player(game, 64, 608, this.mapLayer);
+      }
+      else {
+          this.player = new Player(game, 64, 800, this.mapLayer);
+      }
       game.add.existing(this.player);
 
       // Bullet groups
@@ -212,12 +289,12 @@ Yellow.prototype = {
 
       // All the collisions needed
       game.physics.arcade.collide(this.enemies, this.mapLayer); // Enemies with platforms
-      game.physics.arcade.collide(this.shootingEnemies, this.mapLayer); // Shooting enemies with platforms
+      game.physics.arcade.collide(this.dashingEnemies, this.mapLayer); // Shooting enemies with platforms
       game.physics.arcade.collide(this.npcs, this.mapLayer); // NPCs with the platforms
 
       // Player with enemies
       if (!injured) {
-         if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
+         if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.dashingEnemies, this.player)) {
             health--;
 
             // If player health reaches 0, they die
@@ -230,7 +307,7 @@ Yellow.prototype = {
 
       // Player bullet with enemies
       game.physics.arcade.collide(this.playerBullets, this.enemies, this.bulletHitsEnemy, null, this);
-      game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, this.bulletHitsEnemy, null, this);
+      game.physics.arcade.collide(this.playerBullets, this.dashingEnemies, this.bulletHitsEnemy, null, this);
 
       // Bullets hitting a wall
       game.physics.arcade.collide(this.enemyBullets, this.mapLayer, this.bulletHitsWall, null, this);
