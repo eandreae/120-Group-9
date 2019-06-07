@@ -6,6 +6,9 @@ var dashing; // If the player is currently dashing
 var oldPos; // Old position of the player. Used for dashing and knockback
 var jumpSFX; // The jumping sound effect
 var hp = health; // Player health
+var knockback;
+var timerFlash;
+var timerStopFlash;
 
 // objects: The things the player can collide with
 function Player(game, x, y, objects) {
@@ -104,7 +107,7 @@ Player.prototype.update = function() {
    this.body.maxVelocity.setTo(300, 99999);
 
    // Moving Left
-   if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && !dashing && !injured) {
+   if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && !dashing && !knockback) {
       this.body.acceleration.x = -1500;
       if (this.body.blocked.down) this.animations.play('left');
       else this.animations.play('jump_left');
@@ -112,7 +115,7 @@ Player.prototype.update = function() {
    }
 
    // Moving Right
-   else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && !dashing && !injured) {
+   else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && !dashing && !knockback) {
       this.body.acceleration.x = 1500;
       if (this.body.blocked.down) this.animations.play('right');
       else this.animations.play('jump_right');
@@ -167,17 +170,37 @@ Player.prototype.update = function() {
    } else dashing = false;
 
    // If the player has taken damage
-   if (health < hp) {
+   if (health < hp && health != 0) {
       injured = true;
+      knockback = true;
       hp = health;
       oldPos = this.x;
+
+      timerFlash = game.time.create(false);
+      timerFlash.loop(20, playerFlash, this, this);
+      timerFlash.start();
+
+      timerStopFlash = game.time.create(false);
+      timerStopFlash.loop(3000, playerStopFlash, this, this);
+      timerStopFlash.start();
    }
 
    // Player knockback when injured. They cannot be hit again during this
-   if (injured && Math.abs(oldPos - this.x) < 75) {
-      this.body.velocity.x = 300 * -direction;
-      this.body.velocity.y = -175;
+   if (knockback && Math.abs(oldPos - this.x) < 75) {
+      this.body.velocity.x = 350 * -direction;
+      this.body.velocity.y = -150;
       dashing = false;
-      if (this.body.blocked.right || this.body.blocked.left) injured = false;
-   } else injured = false;
+      if (this.body.blocked.right || this.body.blocked.left) knockback = false;
+   } else knockback = false;
+}
+
+function playerFlash(player) {
+   player.visible = !player.visible;
+}
+
+function playerStopFlash(player) {
+   player.visible = true;
+   injured = false;
+   timerFlash.stop();
+   timerStopFlash.stop();
 }
