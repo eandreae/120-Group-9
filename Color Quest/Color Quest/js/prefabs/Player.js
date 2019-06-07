@@ -15,6 +15,7 @@ function Player(game, x, y, objects) {
    platforms = objects;
    jumpSFX = game.add.audio('jump');
    hp = health;
+   direction = 1;
 
    // call to Phaser.Sprite
    Phaser.Sprite.call(this, game, x, y, 'bucky', 'bucky_stand_right');

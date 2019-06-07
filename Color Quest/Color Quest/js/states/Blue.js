@@ -5,6 +5,7 @@ Blue.prototype = {
    // Variables used in Tutorial
    init: function() {
       this.talking = false;
+      health = 5;
    },
 
    // Preload the tilemap
@@ -382,7 +383,7 @@ Blue.prototype = {
    // Called with a player bullet hits an enemy
    bulletHitsEnemy: function(bullet, enemy) {
       bulletDestroyed(game, bullet);
-      enemy.destroy();
+      enemyDies(game, enemy);
    },
 
    // Called when any bullet hits the platforms

@@ -4,7 +4,7 @@ BossMap.prototype = {
 
    // Variables used in Boss
    init: function() {
-
+      health = 5;
    },
 
    preload: function() {
@@ -178,7 +178,7 @@ BossMap.prototype = {
    // Called with a player bullet hits an enemy
    bulletHitsEnemy: function(bullet, enemy) {
       bulletDestroyed(game, bullet);
-      enemy.destroy();
+      enemyDies(game, enemy);
    },
 
    // Called with an enemy bullet hits the player

@@ -1,5 +1,6 @@
 this.v = 0;    // Velocity of the enemy
 this.direction = -1;   // Direction the enemy is facing
+this.color;       // For death particle color
 this.dashing;     // If the enemy can dash
 this.jumping;     // If the enemy can jump
 this.sprite;      // Sets the sprite of the enemy depending on their abilities
@@ -17,16 +18,19 @@ function Enemy(game, x, y, speed, d = false, j = false) {
    // If enemy is stationary, they're a shooting red enemy
    if (!d && !j) {
       this.sprite = "enemies_r";
+      this.color = 'particle_r';
    }
 
    // Yellow moving/dashing enemies
    else if (d && !j) {
       this.sprite = "enemies_y";
+      this.color = 'particle_y';
    }
 
    // Blue jumping enemies
    if (j) {
       this.sprite = "enemies_b";
+      this.color = 'particle_b';
    }
 
    // Inherits Phaser.Sprite and puts the sprite in a position on the screen

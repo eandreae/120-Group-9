@@ -6,6 +6,7 @@ Yellow.prototype = {
    init: function() {
       this.talking = false;
 		this.stoppedWall = false;
+      health = 5;
    },
 
    // Preload the tilemap
@@ -289,7 +290,7 @@ Yellow.prototype = {
    // Called with a player bullet hits an enemy
    bulletHitsEnemy: function(bullet, enemy) {
       bulletDestroyed(game, bullet);
-      enemy.destroy();
+      enemyDies(game, enemy);
    },
 
    // Called when any bullet hits the platforms
