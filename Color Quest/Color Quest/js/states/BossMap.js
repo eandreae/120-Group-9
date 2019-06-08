@@ -5,6 +5,7 @@ BossMap.prototype = {
    // Variables used in Boss
    init: function() {
       health = 5;
+      injured = false;
    },
 
    preload: function() {

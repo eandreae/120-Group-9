@@ -6,6 +6,7 @@ Yellow.prototype = {
    init: function() {
       this.talking = false;
 		this.stoppedWall = false;
+      injured = false;
       health = 5;
    },
 

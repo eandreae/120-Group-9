@@ -5,6 +5,7 @@ Red.prototype = {
    // Variables used in Tutorial
    init: function() {
       this.talking = false;
+      injured = false;
       health = 5;
    },
 
