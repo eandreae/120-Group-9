@@ -169,7 +169,7 @@ Tutorial.prototype = {
       this.npcs = game.add.group();
       this.npcs.enableBody = true;
 
-      this.n1 = new NPC(game, 500, 800, 'npc_cute');
+      this.n1 = new NPC(game, 500, 865, 'npc_cute');
       game.add.existing(this.n1);
       this.npcs.add(this.n1);
 
@@ -179,8 +179,8 @@ Tutorial.prototype = {
       // NPC1's text
       if (metKingColor == false) {
          this.n1Text[0] = "Howdy! You havin' a good day\nhere in Palette Town?";
-         this.n1Text[1] = "Y'know how to move left 'n' right\nwith the arrow keys already. You can\njump with Up, too!";
-         this.n1Text[2] = "Why don'tcha talk to the other townsfolk?\nPress Z to interact with 'em,\nor anythin' else!";
+         this.n1Text[1] = "Y'know how to move left 'n' right\nwith the arrow keys already.\nYou can jump with Up, too!";
+         this.n1Text[2] = "Why don'tcha talk to the other\ntownsfolk? Press Z to interact\nwith 'em, or anythin' else!";
          this.n1Text[3] = "";
       } else if (metKingColor == true && !hasRed && !hasYellow && !hasBlue) {
          this.n1Text[0] = "Oh no...what are we gonna do?!";
@@ -206,23 +206,23 @@ Tutorial.prototype = {
 
       // NPC2's text
       if (metKingColor == false) {
-         this.n2Text[0] = "I'm on the ROOF!";
+         this.n2Text[0] = "I'm on a CLOUD!";
          this.n2Text[1] = "The SUN! It's RIGHT THERE!";
-         this.n2Text[2] = "PRAISE IT! PRAISE IT FOR ALL YOU'RE WORTH!";
-         this.n2Text[3] = "BY THE POWER OF THE YELLOW LIGHT!";
+         this.n2Text[2] = "PRAISE IT! PRAISE IT FOR\nALL YOU'RE WORTH!";
+         this.n2Text[3] = "BY THE POWER OF\nTHE YELLOW LIGHT!";
          this.n2Text[4] = "";
       } else if (metKingColor == true && !hasYellow) {
          this.n2Text[0] = "The SUN! NOOOOOOO!";
-         this.n2Text[1] = "OUR YELLOW GLORY MUST BE RESTORED!";
+         this.n2Text[1] = "OUR YELLOW GLORY\nMUST BE RESTORED!";
          this.n2Text[2] = "";
       } else {
          this.n2Text[0] = "The SUN! IT HAS RETURNED!";
-         this.n2Text[1] = "HAHAHAHA! With this, we are...UNBEATABLE!\nThat false king will FALL before the SUN!";
+         this.n2Text[1] = "HAHAHAHA! With this, we\nare...UNBEATABLE! That false\nking will FALL before the SUN!";
          this.n2Text[2] = "";
       }
 
       // NPC3
-      this.n3 = new NPC(game, 1100, 800, 'npc_generic_l');
+      this.n3 = new NPC(game, 800, 740, 'npc_smiley');
       game.add.existing(this.n3);
       this.npcs.add(this.n3);
 
@@ -231,21 +231,21 @@ Tutorial.prototype = {
 
       // NPC3's text
       if (metKingColor == false) {
-         this.n3Text[0] = "These berries sure are coming along nicely!\nBig, red, and juicy.";
-         this.n3Text[1] = "Their color's really coming through today!";
+         this.n3Text[0] = "These berries sure are coming\nalong nicely! We'll eat\ngood this season.";
+         this.n3Text[1] = "Their color's really coming\nthrough today!";
          this.n3Text[2] = "";
       } else if (metKingColor == true && !hasRed) {
-         this.n3Text[0] = "The berries...they're withering! Oh, no...";
-         this.n3Text[1] = "Without the power of red to sustain them...";
+         this.n3Text[0] = "The berries...they're\nwithering! Oh, no...";
+         this.n3Text[1] = "Without the power of red\nto sustain them...";
          this.n3Text[2] = "";
       } else {
-         this.n3Text[0] = "You've returned the power of Red!";
+         this.n3Text[0] = "You've returned the\npower of Red!";
          this.n3Text[1] = "Oh, thank you, thank you!\nYou're a true hero!";
          this.n3Text[2] = "";
       }
 
       // NPC4
-      this.n4 = new NPC(game, 1800, 700, 'npc_generic_r');
+      this.n4 = new NPC(game, 1800, 700, 'npc_sleep');
       game.add.existing(this.n4);
       this.npcs.add(this.n4);
 
@@ -255,7 +255,7 @@ Tutorial.prototype = {
       // NPC4's text
       if (metKingColor == false) {
          this.n4Text[0] = "Zzzz...";
-         this.n4Text[1] = "(He's sleeping pretty soundly.)";
+         this.n4Text[1] = "(He's sleeping standing up.)";
          this.n4Text[2] = "";
       } else if (metKingColor == true && (!hasRed || !hasYellow || !hasBlue)) {
          this.n4Text[0] = "Zzzz...";
@@ -267,7 +267,7 @@ Tutorial.prototype = {
       }
 
       // NPC5
-      this.n5 = new NPC(game, 1700, 800, 'npc_whatever');
+      this.n5 = new NPC(game, 1695, 800, 'npc_whatever');
       game.add.existing(this.n5);
       this.npcs.add(this.n5);
 
@@ -276,9 +276,11 @@ Tutorial.prototype = {
 
       // NPC5's text
       if (metKingColor == false) {
-         this.n5Text[0] = "Ugh...why's he sleeping there of all places?\nDoesn't he know how sacred those\ncolors are?";
-         this.n5Text[1] = "Red, yellow, and blue! The\ncornerstones of our world!";
-         this.n5Text[2] = "";
+         this.n5Text[0] = "Uh...hey. This is Blue corner.\nY'know, color of the sky,\nthe ocean, all that?";
+         this.n5Text[1] = "Yeah...it's pretty cool.\n'S why I dyed my hair blue.\nIt used to be red, but...eh.";
+         this.n5Text[2] = "If you're wondering about\nthat guy, he's been sleeping\nlike that for a few hours.";
+         this.n5Text[3] = "It was funny at first.\nNow I'm just kinda worried...";
+         this.n5Text[4] = "";
       } else if (metKingColor == true && !hasRed && !hasYellow && !hasBlue) {
          this.n5Text[0] = "No...the colors, t-they're all gone!";
          this.n5Text[1] = "Y-you have to get them back!\nThose portals, they must lead to the colors!";
@@ -294,9 +296,40 @@ Tutorial.prototype = {
          this.n5Text[1] = "The door to King Color awaits. Defeat him,\nand you'll surely restore color to\nthe world!";
          this.n5Text[2] = "";
       }
+      
+      // NPC6
+      this.n6 = new NPC(game, 2207, 833, 'npc_generic_r');
+      game.add.existing(this.n6);
+      this.npcs.add(this.n6);
+
+      //The array for the text
+      this.n6Text = new Array();
+
+      // NPC6's text
+      if (metKingColor == false) {
+         this.n6Text[0] = "Red, yellow, and blue...\nThe cornerstones of our world.";
+         this.n6Text[1] = "They give us life, and passion!\nEnergy, and joy!\n";
+         this.n6Text[2] = "If you're wondering about\nthat guy, he's been sleeping\nlike that for a few hours.";
+         this.n6Text[3] = "It was funny at first.\nNow I'm just kinda worried...";
+         this.n6Text[4] = "";
+      } else if (metKingColor == true && !hasRed && !hasYellow && !hasBlue) {
+         this.n6Text[0] = "No...the colors, t-they're all gone!";
+         this.n6Text[1] = "Y-you have to get them back!\nThose portals, they must lead to the colors!";
+         this.n6Text[2] = "Please, go through those portals,\nget our colors back...";
+         this.n6Text[3] = "The world is counting on you!";
+         this.n6Text[4] = ""
+      } else if (metKingColor == true && (!hasRed || !hasYellow || !hasBlue)) {
+         this.n6Text[0] = "Look! The colors, they're\nstarting to come back!";
+         this.n6Text[1] = "Keep it up! You can do this!";
+         this.n6Text[2] = "";
+      } else {
+         this.n6Text[0] = "You've done it...all that's left is the man himself.";
+         this.n6Text[1] = "The door to King Color awaits. Defeat him,\nand you'll surely restore color to\nthe world!";
+         this.n6Text[2] = "";
+      }
 
       // Adds the player into the state
-      this.player = new Player(game, 64, 736, this.mapLayer);
+      this.player = new Player(game, 64, 840, this.mapLayer);
       game.add.existing(this.player);
 
       // The enemy groups
@@ -523,6 +556,24 @@ Tutorial.prototype = {
             this.setTextPosition(this.textArea, this.n5);
             this.textArea.text = this.n5Text[0];
             npcText.loop(3000, this.goThroughText, this, this.n5Text);
+            npcText.start();
+         }
+      }
+      
+      // NPC6 text trigger
+      if (game.physics.arcade.overlap(this.player, this.n6) && !this.talking) {
+         // Display interact text
+         this.setTextPosition(this.interactText, this.n6);
+         this.interactText.visible = true;
+
+         if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
+            // Timer for npc text
+            this.talking = true;
+				this.behindText.visible = true;
+            this.interactText.visible = false;
+            this.setTextPosition(this.textArea, this.n6);
+            this.textArea.text = this.n6Text[0];
+            npcText.loop(3000, this.goThroughText, this, this.n6Text);
             npcText.start();
          }
       }

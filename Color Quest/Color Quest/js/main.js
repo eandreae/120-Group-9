@@ -25,6 +25,7 @@ var yellowLevel = 0; // keeps track of the progress in the Yellow level.
 var blueLevel = 0; // keeps track of the progress in the Blue level.
 var song; // The song that's playing
 var bossHealth = 10; // King Color's health
+var bossDefeated = false;
 
 // Wait for browser to load before creating Phaser game
 window.onload = function() {

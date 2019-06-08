@@ -43,15 +43,17 @@ Load.prototype = {
       game.load.image('npc_cute', 'assets/img/npc_cute.png');
       game.load.image('npc_generic_l', 'assets/img/npc_generic_left.png');
       game.load.image('npc_generic_r', 'assets/img/npc_generic_right.png');
-      game.load.image('npc_smiely', 'assets/img/npc_smiley.png');
+      game.load.image('npc_smiley', 'assets/img/npc_smiley.png');
       game.load.image('npc_solaire', 'assets/img/npc_solaire.png');
       game.load.image('npc_whatever', 'assets/img/npc_whatever.png');
+      game.load.image('npc_sleep', 'assets/img/npc_sleep.png');
       game.load.image('particle_r', 'assets/img/particle_red.png');
       game.load.image('particle_y', 'assets/img/particle_yellow.png');
       game.load.image('particle_b', 'assets/img/particle_blue.png');
       game.load.image('upgrade_b', 'assets/img/upgrade_blue.png');
       game.load.image('upgrade_r', 'assets/img/upgrade_red.png');
       game.load.image('upgrade_y', 'assets/img/upgrade_yellow.png');
+      game.load.image('rainbow_pickup', 'assets/img/pickup.png');
 
 		// Loading audio
       game.load.audio('jump', 'assets/audio/Jump.mp3');

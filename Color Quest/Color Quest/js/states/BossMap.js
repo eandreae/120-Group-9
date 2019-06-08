@@ -53,6 +53,9 @@ BossMap.prototype = {
       this.healthText = this.add.text(10, 10, "", styleDescription);
       this.healthText.fixedToCamera = true;
 
+      pickup = game.add.sprite(7879, 835, 'pickup');
+      game.physics.arcade.enable(pickup);
+        
       // Handle the group management before loading the levels.
       // The group of shooting enemies.
       this.shootingEnemies = game.add.group();
@@ -114,6 +117,7 @@ BossMap.prototype = {
       game.physics.arcade.collide(this.enemies, this.mapLayer); // Enemies with platforms
       game.physics.arcade.collide(this.shootingEnemies, this.mapLayer); // Shooting enemies with platforms
       game.physics.arcade.collide(this.npcs, this.mapLayer); // NPCs with the platforms
+      game.physics.arcade.overlap(pickup, this.player, this.playerGetsPickup, null, this);
 
       // Player with enemies
       if (!injured) {
@@ -233,6 +237,13 @@ BossMap.prototype = {
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
    },
+   
+   playerGetsPickup: function(player, pickup){
+      if(bossHealth <= 0){
+        song.stop();
+        game.state.start('Tutorial');
+      }
+   }
 
    // render: function() {
    //    game.debug.bodyInfo(this.player, 100, 100, 'black');
