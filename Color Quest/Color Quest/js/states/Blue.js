@@ -151,7 +151,7 @@ Blue.prototype = {
          // Load the enemies/NPCs/collectibles for level 0
 
          // NPCs --------------------------------------------------------------
-         this.n2 = new NPC(game, 350, 576, 'npc_smiely');
+         this.n2 = new NPC(game, 350, 576, 'npc_smiley');
          game.add.existing(this.n2);
          this.npcs.add(this.n2);
 

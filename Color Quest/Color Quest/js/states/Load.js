@@ -34,7 +34,6 @@ Load.prototype = {
       game.load.image('title', 'assets/img/TitleScreen.png');
 
       // Rest of the sprites
-      game.load.image('bPortal', 'assets/img/KingColorButton.png');
       game.load.image('bullet_l', 'assets/img/bullet_left.png');
       game.load.image('bullet_r', 'assets/img/bullet_right.png');
       game.load.image('door_b', 'assets/img/door_blue.png');
