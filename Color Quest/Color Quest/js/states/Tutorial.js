@@ -118,9 +118,9 @@ Tutorial.prototype = {
          this.kingColorTrigger = game.add.sprite(3580, 600, bmd);
          game.physics.enable(this.kingColorTrigger);
 
-         this.kingColorDude = game.add.sprite(4200, 675, 'boss', 'kingcolor');
-         this.kingColorDude.scale.x = 2;
-         this.kingColorDude.scale.y = 2;
+         this.kingColorDude = game.add.sprite(4200, 670, 'boss_fixed', 'KingColor');
+         // this.kingColorDude.scale.x = 2;
+         // this.kingColorDude.scale.y = 2;
          game.physics.enable(this.kingColorDude);
       }
 		if (metKingColor) {
