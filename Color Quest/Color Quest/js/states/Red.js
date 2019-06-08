@@ -89,8 +89,6 @@ Red.prototype = {
       if (redLevel == 0) {
          // The player has just entered the Red level, load Level 0.
          // Load the correct tilemaps for level 0.
-         backgroundColor = "#FF9999";
-         game.stage.backgroundColor = backgroundColor;
          this.mapLayer = this.map.createLayer('Ground_0');
          this.map.setCollisionBetween(0, 999, true, 'Ground_0');
 
@@ -139,8 +137,6 @@ Red.prototype = {
 
       } else if (redLevel == 1) {
          // The player has just entered the Red level 1, load level 1.
-         backgroundColor = "#FF9999";
-         game.stage.backgroundColor = backgroundColor;
          this.mapLayer = this.map.createLayer('Ground_1');
          this.map.setCollisionBetween(0, 999, true, 'Ground_1');
 
@@ -194,8 +190,6 @@ Red.prototype = {
 
       } else if (redLevel == 2) {
          // The player has just entered the Red level 2, load level 2.
-         backgroundColor = "#FF9999";
-         game.stage.backgroundColor = backgroundColor;
          this.mapLayer = this.map.createLayer('Ground_2');
          this.map.setCollisionBetween(0, 999, true, 'Ground_2');
 

@@ -87,8 +87,6 @@ Blue.prototype = {
 
       if (blueLevel == 0) {
          // Loading the correct TileMap.
-         backgroundColor = "#72C4FF";
-         game.stage.backgroundColor = backgroundColor;
          this.mapLayer = this.map.createLayer('Ground_0');
          this.map.setCollisionBetween(0, 999, true, 'Ground_0');
 
@@ -142,8 +140,6 @@ Blue.prototype = {
          game.physics.arcade.enable(this.blue);
       } else if (blueLevel == 1) {
          // Loading the correct TileMap.
-         backgroundColor = "#72C4FF";
-         game.stage.backgroundColor = backgroundColor;
          this.mapLayer = this.map.createLayer('Ground_1');
          this.map.setCollisionBetween(0, 999, true, 'Ground_1');
 
@@ -205,8 +201,6 @@ Blue.prototype = {
          game.physics.arcade.enable(this.blue);
       } else if (blueLevel == 2) {
          // Loading the correct TileMap.
-         backgroundColor = "#72C4FF";
-         game.stage.backgroundColor = backgroundColor;
          this.mapLayer = this.map.createLayer('Ground_2');
          this.map.setCollisionBetween(0, 999, true, 'Ground_2');
 
