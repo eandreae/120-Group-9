@@ -180,7 +180,7 @@ BossMap.prototype = {
       console.log(bossHealth);
 
       if (bossHealth <= 0) {
-         //console.log(bossHealth);
+         bossDefeated = true;
          boss.destroy();
       }
    },
