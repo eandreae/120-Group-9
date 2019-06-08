@@ -127,6 +127,19 @@ BossMap.prototype = {
             }
          }
       }
+      
+      // Player with boss
+      if (!injured) {
+         if (game.physics.arcade.collide(this.boss, this.player)) {
+            health--;
+
+            // If player health reaches 0, they die
+            if (health == 0) {
+               song.stop();
+               playerDies(game, this.player, 'BossMap');
+            }
+         }
+      }
 
       // Player bullet with enemies
       game.physics.arcade.collide(this.playerBullets, this.enemies, this.bulletHitsEnemy, null, this);
