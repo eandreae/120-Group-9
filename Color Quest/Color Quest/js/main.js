@@ -25,7 +25,7 @@ var playerDead = false;          // If the player has died
 var bossDefeated = false;        // If King Color has been defeated
 var bossHealth = 15;             // King Color's health
 var hitByKingColor = false;      // If you were hit by King Color in the cutscene
-var metKingColor = true;        // If we've seen the beginning cutscene
+var metKingColor = false;        // If we've seen the beginning cutscene
 
 // Color level globals
 var redLevel = 0;                // Keeps track of the progress in the Red level.

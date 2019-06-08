@@ -16,9 +16,9 @@ MainMenu.prototype = {
       // Reset player globals
       buckyValue = 0;              // Determines which Bucky sprite we're using
       direction = 1;               // Player direction. 1 (facing right), -1 (facing left)
-      hasRed = true;               // If the player has collected Red
-      hasYellow = true;            // If the player has collected Yellow
-      hasBlue = true;              // If the player has collected Blue
+      hasRed = false;              // If the player has collected Red
+      hasYellow = false;           // If the player has collected Yellow
+      hasBlue = false;             // If the player has collected Blue
       health = 5;                  // Player health
       injured = false;             // If the player is injured
       playerBulletSpeed = 1000;    // Bullet speed of player bullet
@@ -26,9 +26,9 @@ MainMenu.prototype = {
 
       // Reset King Color globals
       bossDefeated = false;        // If King Color has been defeated
-      bossHealth = 10;             // King Color's health
+      bossHealth = 15;             // King Color's health
       hitByKingColor = false;      // If you were hit by King Color in the cutscene
-      metKingColor = true;         // If we've seen the beginning cutscene
+      metKingColor = false;        // If we've seen the beginning cutscene
 
       // Reset Color level globals
       redLevel = 0;                // Keeps track of the progress in the Red level.
