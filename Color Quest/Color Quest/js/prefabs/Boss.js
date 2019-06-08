@@ -1,3 +1,5 @@
+// x: x position
+// y: y position
 function Boss(game, x, y) {
    // Inherits Phaser.Sprite and puts the sprite in a position on the screen
    Phaser.Sprite.call(this, game, x, y, 'boss', 'kingcolor');
@@ -8,7 +10,7 @@ function Boss(game, x, y) {
 
    game.physics.arcade.enable(this);
    this.body.collideWorldBounds = true;
-   
+
    this.body.immovable = true;
 }
 

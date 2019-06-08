@@ -1,33 +1,38 @@
-this.v = 0;    // Velocity of the enemy
+this.color;            // For death particle color
 this.direction = -1;   // Direction the enemy is facing
-this.color;       // For death particle color
-this.dashing;     // If the enemy can dash
-this.jumping;     // If the enemy can jump
-this.sprite;      // Sets the sprite of the enemy depending on their abilities
-this.dash = false;   // If the enemy is currently dashing
-this.jump = false;   // If the enemy is currently jumping
-this.oldPos;      // Old position of the enemy. Used for dashing
-this.timerJump;   // Timer for how often the enemy jumps
-this.timerDash;   // Timer for how often the enemy dashes
+this.dashing;          // If the enemy can dash
+this.dash = false;     // If the enemy is currently dashing
+this.jumping;          // If the enemy can jump
+this.jump = false;     // If the enemy is currently jumping
+this.oldPos;           // Old position of the enemy. Used for dashing
+this.sprite;           // Sets the sprite of the enemy depending on their abilities
+this.timerJump;        // Timer for how often the enemy jumps
+this.timerDash;        // Timer for how often the enemy dashes
+this.v = 0;            // Velocity of the enemy
 
+// x: x position
+// y: y position
+// speed: Speed of the enemy
+// d: If the enemy can dash (default to false)
+// j: If the enemy can jump (default to false)
 function Enemy(game, x, y, speed, d = false, j = false) {
    this.v = speed;
    this.dashing = d;
    this.jumping = j;
 
-   // If enemy is stationary, they're a shooting red enemy
+   // If enemy can't jump or dash, they're a shooting red enemy
    if (!d && !j) {
       this.sprite = "enemies_r";
       this.color = 'particle_r';
    }
 
-   // Yellow moving/dashing enemies
+   // If enemy can dash and not jump, they're a yellow dashing enemy
    else if (d && !j) {
       this.sprite = "enemies_y";
       this.color = 'particle_y';
    }
 
-   // Blue jumping enemies
+   // If enemy can jump, they're a blue jumping enemy
    if (j) {
       this.sprite = "enemies_b";
       this.color = 'particle_b';
@@ -46,14 +51,14 @@ function Enemy(game, x, y, speed, d = false, j = false) {
    this.animations.add('left', [0], 10, true);
    this.animations.add('right', [1], 10, true);
 
-   // Blue jumping enemies
+   // Timer for how often the blue enemies jump
    if (j) {
       timerJump = game.time.create(false);
       timerJump.loop(1500, enemyJumping, this, this);
       timerJump.start();
    }
 
-   // Yellow dashing enemies
+   // Timer for how often the yellow enemies dash
    if (d) {
       timerDash = game.time.create(false);
       timerDash.loop(2000, enemyDashing, this, this);
@@ -66,7 +71,7 @@ Enemy.prototype = Object.create(Phaser.Sprite.prototype);
 Enemy.prototype.constructor = Enemy;
 
 Enemy.prototype.update = function() {
-   // Sets the direction of the enemy
+   // Sets the direction of the enemy based on which way they're moving
    if (this.v > 0) {
       this.direction = 1;
       this.anchor.set(0.85, 0.45);
@@ -83,6 +88,7 @@ Enemy.prototype.update = function() {
       this.dash = false;
    }
 
+   // Sets gravity and velocity each update
    this.body.gravity.y = 850;
    this.body.velocity.x = this.v;
 
@@ -98,7 +104,6 @@ Enemy.prototype.update = function() {
    // Makes the enemy jump once
    if (this.jump) {
       this.body.velocity.y = -500;
-      //jumpParticle(game, this);
       this.jump = false;
    }
 

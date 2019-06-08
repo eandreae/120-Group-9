@@ -1,3 +1,6 @@
+// x: x position
+// y: y position
+// sprite: The sprite to use for this npc (defaults to 'npc' which doesn't exist)
 function NPC(game, x, y, sprite = 'npc') {
 
    // Inherits Phaser.Sprite and puts the sprite in a position on the screen
