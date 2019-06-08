@@ -127,7 +127,7 @@ BossMap.prototype = {
       this.jumpingEnemies.add(e8);
 
       // Add KC
-      this.boss = new Boss(game, 7939, 800, 0);
+      this.boss = new Boss(game, 7774, 675, 0);
       game.add.existing(this.boss);
       this.boss.enableBody = true;
 
@@ -264,13 +264,13 @@ BossMap.prototype = {
 
    bossShoot: function(boss) {
       this.boss.animations.play('shoot');
-      var bullet = new Bullet(game, boss.x + 10, boss.y + 30, -1, 300);
+      var bullet = new Bullet(game, boss.x + 24, boss.y + 85, -1, 300);
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
-      var bullet = new Bullet(game, boss.x + 10, boss.y + 65, -1, 300);
+      var bullet = new Bullet(game, boss.x + 24, boss.y + 130, -1, 300);
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
-      var bullet = new Bullet(game, boss.x + 10, boss.y + 100, -1, 300);
+      var bullet = new Bullet(game, boss.x + 24, boss.y + 175, -1, 300);
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
    },
