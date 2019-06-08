@@ -58,7 +58,7 @@ Blue.prototype = {
       this.healthText = this.add.text(10, 10, "", styleDescription);
       this.healthText.fixedToCamera = true;
 
-      // Position of the NPC text. Set to 1 because it displays textPos 0 elsewhere
+      // Position of the NPC text
       this.textPos = 1;
 
       // Interact text that appears above things the Player can interact with
