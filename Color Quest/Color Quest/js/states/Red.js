@@ -66,6 +66,7 @@ Red.prototype = {
       this.textArea.fixedToCamera = false;
       this.world.bringToTop(this.textArea);
 
+      // Background for text
       bmd = game.add.bitmapData(400, 100);
       bmd.fill(255, 255, 255, 1);
       this.behindText = game.add.sprite(0, 0, bmd);
@@ -89,8 +90,6 @@ Red.prototype = {
       if (redLevel == 0) {
          // The player has just entered the Red level, load Level 0.
          // Load the correct tilemaps for level 0.
-         backgroundColor = "#FF9999";
-         game.stage.backgroundColor = backgroundColor;
          this.mapLayer = this.map.createLayer('Ground_0');
          this.map.setCollisionBetween(0, 999, true, 'Ground_0');
 
@@ -139,8 +138,6 @@ Red.prototype = {
 
       } else if (redLevel == 1) {
          // The player has just entered the Red level 1, load level 1.
-         backgroundColor = "#FF9999";
-         game.stage.backgroundColor = backgroundColor;
          this.mapLayer = this.map.createLayer('Ground_1');
          this.map.setCollisionBetween(0, 999, true, 'Ground_1');
 
@@ -194,8 +191,6 @@ Red.prototype = {
 
       } else if (redLevel == 2) {
          // The player has just entered the Red level 2, load level 2.
-         backgroundColor = "#FF9999";
-         game.stage.backgroundColor = backgroundColor;
          this.mapLayer = this.map.createLayer('Ground_2');
          this.map.setCollisionBetween(0, 999, true, 'Ground_2');
 
@@ -340,6 +335,7 @@ Red.prototype = {
          }
       }
 
+      // Advance the text
       if (talking) {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             this.goThroughText(this.whichNPC);
@@ -347,13 +343,12 @@ Red.prototype = {
       }
 
       // All the collisions needed
-      game.physics.arcade.collide(this.enemies, this.mapLayer); // Enemies with platforms
       game.physics.arcade.collide(this.shootingEnemies, this.mapLayer); // Shooting enemies with platforms
       game.physics.arcade.collide(this.npcs, this.mapLayer); // NPCs with the platforms
 
       // Player with enemies
       if (!injured) {
-         if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
+         if (game.physics.arcade.collide(this.shootingEnemies, this.player)) {
             health--;
 
             // If player health reaches 0, they die
@@ -368,7 +363,6 @@ Red.prototype = {
       this.physics.arcade.overlap(this.player, this.red, this.collectRed, null, this);
 
       // Player bullet with enemies
-      game.physics.arcade.collide(this.playerBullets, this.enemies, this.bulletHitsEnemy, null, this);
       game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, this.bulletHitsEnemy, null, this);
 
       // Enemy bullets with player
@@ -463,6 +457,7 @@ Red.prototype = {
 		this.behindText.visible = true;
    },
 
+   // Displays the next text
    goThroughText: function(text) {
       //The text change with the step
       this.textArea.text = text[this.textPos];

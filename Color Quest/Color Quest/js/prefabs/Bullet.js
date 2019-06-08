@@ -1,8 +1,9 @@
-this.direction;
+this.direction;   // Direction the bullet is going
 
 // x: x position
 // y: y position
-// d: 1 (going right) or -1 (going left)
+// dir: 1 (going right) or -1 (going left)
+// speed: Speed of the bullet
 function Bullet(game, x, y, dir, speed) {
    this.direction = dir;
 

@@ -74,6 +74,7 @@ Blue.prototype = {
       this.textArea.fixedToCamera = false;
       this.world.bringToTop(this.textArea);
 
+      // Background for text
       bmd = game.add.bitmapData(400, 100);
       bmd.fill(255, 255, 255, 1);
       this.behindText = game.add.sprite(0, 0, bmd);
@@ -87,8 +88,6 @@ Blue.prototype = {
 
       if (blueLevel == 0) {
          // Loading the correct TileMap.
-         backgroundColor = "#72C4FF";
-         game.stage.backgroundColor = backgroundColor;
          this.mapLayer = this.map.createLayer('Ground_0');
          this.map.setCollisionBetween(0, 999, true, 'Ground_0');
 
@@ -142,8 +141,6 @@ Blue.prototype = {
          game.physics.arcade.enable(this.blue);
       } else if (blueLevel == 1) {
          // Loading the correct TileMap.
-         backgroundColor = "#72C4FF";
-         game.stage.backgroundColor = backgroundColor;
          this.mapLayer = this.map.createLayer('Ground_1');
          this.map.setCollisionBetween(0, 999, true, 'Ground_1');
 
@@ -154,7 +151,7 @@ Blue.prototype = {
          // Load the enemies/NPCs/collectibles for level 0
 
          // NPCs --------------------------------------------------------------
-         this.n2 = new NPC(game, 350, 576, 'npc_smiely');
+         this.n2 = new NPC(game, 350, 576, 'npc_smiley');
          game.add.existing(this.n2);
          this.npcs.add(this.n2);
 
@@ -205,8 +202,6 @@ Blue.prototype = {
          game.physics.arcade.enable(this.blue);
       } else if (blueLevel == 2) {
          // Loading the correct TileMap.
-         backgroundColor = "#72C4FF";
-         game.stage.backgroundColor = backgroundColor;
          this.mapLayer = this.map.createLayer('Ground_2');
          this.map.setCollisionBetween(0, 999, true, 'Ground_2');
 
@@ -333,6 +328,7 @@ Blue.prototype = {
          }
       }
 
+      // Advance the text
       if (talking) {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             this.goThroughText(this.whichNPC);
@@ -419,6 +415,7 @@ Blue.prototype = {
 		this.behindText.visible = true;
    },
 
+   // Displays the next text
    goThroughText: function(text) {
       //The text change with the step
       this.textArea.text = text[this.textPos];

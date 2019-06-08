@@ -76,7 +76,7 @@ Tutorial.prototype = {
          if (hasBlue) {
             this.blueLayer = this.map.createLayer('Blue');
          }
-         
+
       }
       this.mapLayer.resizeWorld();
 
@@ -486,6 +486,7 @@ Tutorial.prototype = {
             this.setTextPosition(this.textArea, this.n7);
             this.textArea.text = this.n7Text[0];
             this.whichNPC = this.n7Text;
+            this.textPos++;
          }
       }
 

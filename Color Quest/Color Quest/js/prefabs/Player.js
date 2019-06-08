@@ -1,18 +1,22 @@
-var platforms; // The platforms in the state
-var jumps = 0; // The # of jumps the player gets
-var offPlatform = false; // If the player has gone off the platform
-var dash = 0; // The # of dashes the player gets
-var dashing; // If the player is currently dashing
-var oldPos; // Old position of the player. Used for dashing and knockback
-var jumpSFX; // The jumping sound effect
-var hp = health; // Player health
-var knockback;
-var timerFlash;
-var timerStopFlash;
+var dashing;               // If the player is currently dashing
+var dash = 0;              // The # of dashes the player gets
+var jumps = 0;             // The # of jumps the player gets
+var jumpSFX;               // The jumping sound effect
+var hp = health;           // Player health
+var knockback;             // If player is currently in knockback state
+var platforms;             // The platforms in the state
+var hitPlatform = false    // If a player is colliding with a platform
+var offPlatform = false;   // If the player has gone off the platform
+var oldPos;                // Old position of the player. Used for dashing and knockback
+var timerFlash;            // Timer for how often the player flashes when injured
+var timerStopFlash;        // Timer to stop timerFlash
 
-// objects: The things the player can collide with
-function Player(game, x, y, objects) {
-   platforms = objects;
+
+// x: x position
+// y: y position
+// map: The map the player will collide with
+function Player(game, x, y, map) {
+   platforms = map;
    jumpSFX = game.add.audio('jump');
    hp = health;
    direction = 1;
@@ -49,10 +53,9 @@ Player.prototype.constructor = Player;
 // UP to jump
 // x to shoot
 // c to dash
-var hitPlatform;
 Player.prototype.update = function() {
 
-   // Determines which Bucky sprite we will be using
+   // Determines which Bucky sprite we will be using based on the colors we have
    if (hasBlue) {
       buckyValue = 16;
       if (hasYellow) {
@@ -73,7 +76,6 @@ Player.prototype.update = function() {
    }
 
    // If player is colliding with a platform
-   var hitPlatform;
    hitPlatform = game.physics.arcade.collide(this, platforms);
 
    // If the player hits an obstacle while dashing, stop their dash
@@ -102,7 +104,7 @@ Player.prototype.update = function() {
       if (hasYellow) dash = 1;
    }
 
-   // Reset player velocity
+   // Reset player velocity/acceleration
    this.body.acceleration.x = 0;
    this.body.gravity.y = 850;
    this.body.maxVelocity.setTo(300, 99999);
@@ -177,10 +179,12 @@ Player.prototype.update = function() {
       hp = health;
       oldPos = this.x;
 
+      // How often the player flashes when they take damage
       timerFlash = game.time.create(false);
       timerFlash.loop(18, playerFlash, this, this);
       timerFlash.start();
 
+      // Stops the flashing after 3 seconds
       timerStopFlash = game.time.create(false);
       timerStopFlash.loop(3000, playerStopFlash, this, this);
       timerStopFlash.start();
@@ -191,9 +195,12 @@ Player.prototype.update = function() {
       this.body.velocity.x = 350 * -direction;
       this.body.velocity.y = -150;
       dashing = false;
+
+      // Stops the knockback if they collide with something
       if (this.body.blocked.right || this.body.blocked.left) knockback = false;
    } else knockback = false;
 
+   // When they get hit by King Color in the cut scene, they get sent flying
    if (hitByKingColor) {
       this.body.maxVelocity.setTo(10000, 99999);
       this.body.velocity.x = -1800;
@@ -201,10 +208,12 @@ Player.prototype.update = function() {
    }
 }
 
+// Flashes the player very quickly
 function playerFlash(player) {
    player.visible = !player.visible;
 }
 
+// Stops the player from flashing
 function playerStopFlash(player) {
    player.visible = true;
    injured = false;
