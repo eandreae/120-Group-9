@@ -137,8 +137,8 @@ Tutorial.prototype = {
 	      this.bossPortalText[2] = "";
 		}
 
-      // Position of the NPC text. Set to 1 because it displays textPos 0 elsewhere
-      this.textPos = 1;
+      // Position of the NPC text.
+      this.textPos = 0;
 
       // Style of the NPC text
       var styleDescription = {
@@ -351,7 +351,10 @@ Tutorial.prototype = {
       }
 
       // Adds the player into the state
-      this.player = new Player(game, 64, 840, this.mapLayer);
+      if (metKingColor && !hasRed && !hasYellow && !hasBlue) {
+         this.player = new Player(game, 64, 150, this.mapLayer);
+      }
+      else this.player = new Player(game, 64, 840, this.mapLayer);
       game.add.existing(this.player);
 
       // The enemy groups
@@ -585,27 +588,26 @@ Tutorial.prototype = {
          }
       }
 
-      if (talking) {
-         if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
-            this.goThroughText(this.whichNPC);
-         }
-      }
-
       // NPC6 text trigger
-      if (game.physics.arcade.overlap(this.player, this.n6) && !this.talking) {
+      if (game.physics.arcade.overlap(this.player, this.n6) && !talking) {
          // Display interact text
          this.setTextPosition(this.interactText, this.n6);
          this.interactText.visible = true;
 
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
-            this.talking = true;
+            talking = true;
 				this.behindText.visible = true;
             this.interactText.visible = false;
             this.setTextPosition(this.textArea, this.n6);
             this.textArea.text = this.n6Text[0];
-            npcText.loop(3000, this.goThroughText, this, this.n6Text);
-            npcText.start();
+            this.whichNPC = this.n6Text;
+         }
+      }
+
+      if (talking) {
+         if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
+            this.goThroughText(this.whichNPC);
          }
       }
 

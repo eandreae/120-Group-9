@@ -196,8 +196,8 @@ Player.prototype.update = function() {
 
    if (hitByKingColor) {
       this.body.maxVelocity.setTo(10000, 99999);
-      this.body.velocity.x = -2000;
-      this.body.velocity.y = -200;
+      this.body.velocity.x = -1800;
+      this.body.velocity.y = -500;
    }
 }
 

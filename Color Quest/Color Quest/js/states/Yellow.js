@@ -44,8 +44,8 @@ Yellow.prototype = {
       this.healthText = this.add.text(10, 10, "", styleDescription);
       this.healthText.fixedToCamera = true;
 
-      // Position of the NPC text. Set to 1 because it displays textPos 0 elsewhere
-      this.textPos = 1;
+      // Position of the NPC text.
+      this.textPos = 0;
 
       // Interact text that appears above things the Player can interact with
       this.interactText = this.add.text(0, 0, "Press Z to interact", styleDescription);
