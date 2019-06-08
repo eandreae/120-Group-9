@@ -1,3 +1,5 @@
+"use strict";
+
 // Main Menu state
 var MainMenu = function(game) {};
 MainMenu.prototype = {
