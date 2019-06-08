@@ -60,6 +60,7 @@ Yellow.prototype = {
       this.textArea.fixedToCamera = false;
       this.world.bringToTop(this.textArea);
 
+      // Background for text
       bmd = game.add.bitmapData(400, 100);
       bmd.fill(255, 255, 255, 1);
       this.behindText = game.add.sprite(0, 0, bmd);
@@ -204,15 +205,6 @@ Yellow.prototype = {
       // Bullet groups
       this.playerBullets = game.add.group();
 
-      // Add the enemy that chases you.
-      // The group handling. No shooting.
-      this.enemies = game.add.group();
-      this.enemies.enableBody = true;
-      // // The enemy that chases you.
-      // var enemy = new Enemy(game, 64, 800, 190);
-      // game.add.existing(enemy);
-      // this.enemies.add(enemy);
-
       // Invisible collision to trigger the wall
       bmd = game.add.bitmapData(10, 10000);
       this.x = game.add.sprite(1350, 0, bmd);
@@ -283,6 +275,7 @@ Yellow.prototype = {
          }
       }
 
+      // Advance the text
       if (talking) {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             this.goThroughText(this.whichNPC);
@@ -290,13 +283,12 @@ Yellow.prototype = {
       }
 
       // All the collisions needed
-      game.physics.arcade.collide(this.enemies, this.mapLayer); // Enemies with platforms
       game.physics.arcade.collide(this.dashingEnemies, this.mapLayer); // Shooting enemies with platforms
       game.physics.arcade.collide(this.npcs, this.mapLayer); // NPCs with the platforms
 
       // Player with enemies
       if (!injured) {
-         if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.dashingEnemies, this.player)) {
+         if (game.physics.arcade.collide(this.dashingEnemies, this.player)) {
             health--;
 
             // If player health reaches 0, they die
@@ -308,14 +300,16 @@ Yellow.prototype = {
       }
 
       // Player bullet with enemies
-      game.physics.arcade.collide(this.playerBullets, this.enemies, this.bulletHitsEnemy, null, this);
       game.physics.arcade.collide(this.playerBullets, this.dashingEnemies, this.bulletHitsEnemy, null, this);
 
       // Bullets hitting a wall
       game.physics.arcade.collide(this.enemyBullets, this.mapLayer, this.bulletHitsWall, null, this);
       game.physics.arcade.collide(this.playerBullets, this.mapLayer, this.bulletHitsWall, null, this);
 
+      // Collecting yellow
       this.physics.arcade.overlap(this.player, this.yellow, this.collectYellow, null, this);
+
+      // Overlap with trigger that starts the wall
       this.physics.arcade.overlap(this.player, this.x, this.startWall, null, this);
 
       // If the player touches the death wall, they instantly die
@@ -387,6 +381,7 @@ Yellow.prototype = {
 		this.behindText.visible = true;
    },
 
+   // Displays the next text
    goThroughText: function(text) {
       //The text change with the step
       this.textArea.text = text[this.textPos];

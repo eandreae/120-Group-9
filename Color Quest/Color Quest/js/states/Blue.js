@@ -74,6 +74,7 @@ Blue.prototype = {
       this.textArea.fixedToCamera = false;
       this.world.bringToTop(this.textArea);
 
+      // Background for text
       bmd = game.add.bitmapData(400, 100);
       bmd.fill(255, 255, 255, 1);
       this.behindText = game.add.sprite(0, 0, bmd);
@@ -327,6 +328,7 @@ Blue.prototype = {
          }
       }
 
+      // Advance the text
       if (talking) {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             this.goThroughText(this.whichNPC);
@@ -413,6 +415,7 @@ Blue.prototype = {
 		this.behindText.visible = true;
    },
 
+   // Displays the next text
    goThroughText: function(text) {
       //The text change with the step
       this.textArea.text = text[this.textPos];
