@@ -4,6 +4,7 @@ Blue.prototype = {
 
    // Variables used in Tutorial
    init: function() {
+      this.whichNPC;
       talking = false;
       injured = false;
       health = 5;
@@ -311,8 +312,7 @@ Blue.prototype = {
             this.behindText.visible = true;
             this.setTextPosition(this.textArea, this.n1);
             this.textArea.text = this.n1Text[0];
-            npcText.loop(3000, this.goThroughText, this, this.n1Text);
-            npcText.start();
+            this.whichNPC = this.n1Text;
          }
       }
 
@@ -329,8 +329,13 @@ Blue.prototype = {
             this.behindText.visible = true;
             this.setTextPosition(this.textArea, this.n2);
             this.textArea.text = this.n2Text[0];
-            npcText.loop(3000, this.goThroughText, this, this.n2Text);
-            npcText.start();
+            this.whichNPC = this.n2Text;
+         }
+      }
+
+      if (talking) {
+         if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
+            this.goThroughText(this.whichNPC);
          }
       }
 
@@ -427,7 +432,7 @@ Blue.prototype = {
          npcText.stop();
          this.behindText.visible = false;
          talking = false;
-         this.textPos = 1;
+         this.textPos = 0;
       }
    },
 

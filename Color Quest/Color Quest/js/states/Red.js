@@ -4,6 +4,7 @@ Red.prototype = {
 
    // Variables used in Tutorial
    init: function() {
+      this.whichNPC;
       talking = false;
       injured = false;
       health = 5;
@@ -318,12 +319,11 @@ Red.prototype = {
             this.behindText.visible = true;
             this.setTextPosition(this.textArea, this.n1);
             this.textArea.text = this.n1Text[0];
-            npcText.loop(3000, this.goThroughText, this, this.n1Text);
-            npcText.start();
+            this.whichNPC = this.n1Text;
          }
       }
 
-      // NPC1 text trigger
+      // NPC2 text trigger
       if (game.physics.arcade.overlap(this.player, this.n2) && !talking) {
          // Display interact text
          this.setTextPosition(this.interactText, this.n2);
@@ -336,8 +336,13 @@ Red.prototype = {
             this.behindText.visible = true;
             this.setTextPosition(this.textArea, this.n2);
             this.textArea.text = this.n2Text[0];
-            npcText.loop(3000, this.goThroughText, this, this.n2Text);
-            npcText.start();
+            this.whichNPC = this.n2Text;
+         }
+      }
+
+      if (talking) {
+         if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
+            this.goThroughText(this.whichNPC);
          }
       }
 
@@ -471,7 +476,7 @@ Red.prototype = {
          npcText.stop();
 			this.behindText.visible = false;
          talking = false;
-         this.textPos = 1;
+         this.textPos = 0;
       }
    },
 

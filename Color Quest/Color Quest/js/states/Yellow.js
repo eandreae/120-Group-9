@@ -4,6 +4,7 @@ Yellow.prototype = {
 
    // Variables used in Tutorial
    init: function() {
+      this.whichNPC;
       talking = false;
 		this.stoppedWall = false;
       injured = false;
@@ -233,22 +234,6 @@ Yellow.prototype = {
    },
 
    update: function() {
-      // Making it so the enemy will follow the Player.
-      // If player is on the enemy's left.
-      // if( this.enemy.body.x < this.player.body.x ){
-      //     // Make the Enemy chase after the Player.
-      //     this.enemy.body.velocity.x = 190;
-      // }
-      // // If player is on the enemy's right.
-      // if( this.enemy.body.x > this.player.body.x ){
-      //     // Make the Enemy chase after the Player.
-      //     this.enemy.body.velocity.x = -190;
-      // }
-      // // if player is directly above/below the enemy.
-      // if( this.enemy.body.x == this.player.body.x ){
-      //     // Make the Enemy stand still.
-      //     this.enemy.body.velocity.x = 0;
-      // }
 
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed && !playerDead) {
@@ -277,8 +262,7 @@ Yellow.prototype = {
             this.behindText.visible = true;
             this.setTextPosition(this.textArea, this.n1);
             this.textArea.text = this.n1Text[0];
-            npcText.loop(3000, this.goThroughText, this, this.n1Text);
-            npcText.start();
+            this.whichNPC = this.n1Text;
          }
       }
 
@@ -295,8 +279,13 @@ Yellow.prototype = {
             this.behindText.visible = true;
             this.setTextPosition(this.textArea, this.n2);
             this.textArea.text = this.n2Text[0];
-            npcText.loop(3000, this.goThroughText, this, this.n2Text);
-            npcText.start();
+            this.whichNPC = this.n2Text;
+         }
+      }
+
+      if (talking) {
+         if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
+            this.goThroughText(this.whichNPC);
          }
       }
 
@@ -411,7 +400,7 @@ Yellow.prototype = {
          npcText.stop();
          this.behindText.visible = false;
          talking = false;
-         this.textPos = 1;
+         this.textPos = 0;
       }
    },
 
