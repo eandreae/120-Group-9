@@ -127,11 +127,9 @@ BossMap.prototype = {
       this.jumpingEnemies.add(e8);
 
       // Add KC
-      this.boss = new Boss(game, 7815, 800, 0);
+      this.boss = new Boss(game, 7939, 800, 0);
       game.add.existing(this.boss);
       this.boss.enableBody = true;
-      this.boss.scale.x = 2;
-      this.boss.scale.y = 2;
 
       // Timer for how often the enemies shoot
       enemyShootTimer = game.time.create(false);
