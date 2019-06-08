@@ -113,7 +113,7 @@ Tutorial.prototype = {
       if (metKingColor == false) {
          bmd = game.add.bitmapData(700, 300);
          bmd.fill(140, 140, 140, 1)
-         this.kingColorTrigger = game.add.sprite(3480, 600, bmd);
+         this.kingColorTrigger = game.add.sprite(3580, 600, bmd);
          game.physics.enable(this.kingColorTrigger);
 
          this.kingColorDude = game.add.sprite(4200, 675, 'boss', 'kingcolor');
@@ -304,7 +304,7 @@ Tutorial.prototype = {
          this.n5Text[1] = "The door to King Color awaits. Defeat him,\nand you'll surely restore color to\nthe world!";
          this.n5Text[2] = "";
       }
-      
+
       // NPC6
       this.n6 = new NPC(game, 2207, 833, 'npc_generic_r');
       game.add.existing(this.n6);
@@ -336,6 +336,21 @@ Tutorial.prototype = {
          this.n6Text[2] = "";
       }
 
+      // NPC7
+      if (metKingColor == false) {
+         this.n7 = new NPC(game, 3700, 833, 'npc_cute');
+         game.add.existing(this.n7);
+         this.npcs.add(this.n7);
+
+         //The array for the text
+         this.n7Text = new Array();
+
+         this.n7Text[0] = "Hey... Where'd the color go?";
+         this.n7Text[1] = "Something doesn't feel right...";
+         this.n7Text[2] = "WOAH! Bucky! Watch out!";
+         this.n7Text[3] = "";
+      }
+
       // Adds the player into the state
       this.player = new Player(game, 64, 840, this.mapLayer);
       game.add.existing(this.player);
@@ -347,9 +362,9 @@ Tutorial.prototype = {
       this.shootingEnemies.enableBody = true;
 
       // // // Place a moving enemy
-      var e1 = new Enemy(game, 500, 300, -100, true, false, this.player);
-      game.add.existing(e1);
-      this.enemies.add(e1);
+      // var e1 = new Enemy(game, 500, 300, -100, true, false, this.player);
+      // game.add.existing(e1);
+      // this.enemies.add(e1);
       // //
       // // // Place a shooting enemy
       // var e2 = new Enemy(game, 500, 300, -100, false, true, this.player);
@@ -434,19 +449,24 @@ Tutorial.prototype = {
       }
 
       // Meet King Color.
-      if (metKingColor == false) {
-         if (this.physics.arcade.overlap(this.player, this.kingColorTrigger)) {
-            metKingColorTrigger = true;
-            game.camera.unfollow();
-            game.time.events.add(Phaser.Timer.SECOND * 3.2, function() {
-               metKingColor = true;
-               game.state.start('Tutorial')
-            });
+      if (metKingColor == false && !metKingColorTrigger) {
+         if (this.physics.arcade.overlap(this.player, this.kingColorTrigger) && !talking) {
+            talking = true;
+            this.behindText.visible = true;
+            this.interactText.visible = false;
+            this.setTextPosition(this.textArea, this.n7);
+            this.textArea.text = this.n7Text[0];
+            this.whichNPC = this.n7Text;
          }
       }
 
       if (metKingColorTrigger) {
-         this.kingColorDude.body.velocity.x = -600;
+         this.kingColorDude.body.velocity.x = -650;
+      }
+
+      if (this.physics.arcade.collide(this.npcs, this.kingColorDude)) {
+         this.n7.body.velocity.x = -2000;
+         this.n7.body.velocity.y = -500;
       }
 
       if (this.physics.arcade.collide(this.player, this.kingColorDude)) {
@@ -469,8 +489,7 @@ Tutorial.prototype = {
                this.interactText.visible = false;
                this.setTextPosition(this.textArea, this.bossPortal);
                this.textArea.text = this.bossPortalText[0];
-               npcText.loop(3000, this.goThroughText, this, this.bossPortalText);
-               npcText.start();
+               this.whichNPC = this.bossPortalText;
             }
          }
       }
@@ -572,7 +591,7 @@ Tutorial.prototype = {
             this.goThroughText(this.whichNPC);
          }
       }
-      
+
       // NPC6 text trigger
       if (game.physics.arcade.overlap(this.player, this.n6) && !this.talking) {
          // Display interact text
@@ -684,6 +703,15 @@ Tutorial.prototype = {
 			this.behindText.visible = false;
          talking = false;
          this.textPos = 0;
+
+         if (text == this.n7Text) {
+            metKingColorTrigger = true;
+            game.camera.unfollow();
+            game.time.events.add(Phaser.Timer.SECOND * 3.2, function() {
+               metKingColor = true;
+               game.state.start('Tutorial')
+            });
+         }
       }
    },
 
