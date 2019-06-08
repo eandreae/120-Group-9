@@ -38,7 +38,7 @@ Tutorial.prototype = {
       this.map = game.add.tilemap('layout');
       this.map.addTilesetImage('color_tiles_2', 'tilesheet');
 
-      if (metKingColor == false) {
+      if (metKingColor == false || bossDefeated) {
          background = game.add.image(0, 0, 'bg_town');
       }
       else {
@@ -50,13 +50,14 @@ Tutorial.prototype = {
       background.fixedToCamera = true;
 
       // If they haven't met king color yet, everything is all happy
-      if (metKingColor == false) {
+      if (metKingColor == false || bossDefeated) {
 
          // Map Layer
          this.mapLayer = this.map.createLayer('Ground_0');
          this.map.setCollisionBetween(0, 999, true, 'Ground_0');
          this.backGroundLayer = this.map.createLayer('Background_0');
       }
+
 
       // They have met King Color. The World is sad now and color has been taken
       // from the world. Check if they have collected any of the colors.
@@ -75,6 +76,7 @@ Tutorial.prototype = {
          if (hasBlue) {
             this.blueLayer = this.map.createLayer('Blue');
          }
+         
       }
       this.mapLayer.resizeWorld();
 
