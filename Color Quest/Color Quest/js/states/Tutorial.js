@@ -157,7 +157,7 @@ Tutorial.prototype = {
       this.textArea.fixedToCamera = false;
       this.world.bringToTop(this.textArea);
 
-		bmd = game.add.bitmapData(300, 100);
+		bmd = game.add.bitmapData(400, 100);
 		bmd.fill(255, 255, 255, 1);
 		this.behindText = game.add.sprite(0, 0, bmd);
 		this.behindText.anchor.set(0.5);
@@ -191,8 +191,8 @@ Tutorial.prototype = {
          this.n1Text[1] = "";
       } else {
          this.n1Text[0] = "You've got all the colors...y'know what to do.";
-         this.n1Text[1] = "Go beat that tyrant, King Color, an'\nrestore color to our land!";
-         this.n1Text[2] = "You can do it! You're the only one who can!";
+         this.n1Text[1] = "Go beat that tyrant, King\nColor, an' restore color to our land!";
+         this.n1Text[2] = "You can do it! You're the\nonly one who can!";
          this.n1Text[3] = "";
       }
 
@@ -231,7 +231,7 @@ Tutorial.prototype = {
 
       // NPC3's text
       if (metKingColor == false) {
-         this.n3Text[0] = "These berries sure are coming along nicely!\nBig, red, and juicy.";
+         this.n3Text[0] = "These berries sure are coming\nalong nicely! Big, red, and juicy.";
          this.n3Text[1] = "Their color's really coming through today!";
          this.n3Text[2] = "";
       } else if (metKingColor == true && !hasRed) {
