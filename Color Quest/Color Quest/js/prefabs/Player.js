@@ -108,7 +108,7 @@ Player.prototype.update = function() {
    this.body.maxVelocity.setTo(300, 99999);
 
    // Moving Left
-   if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && !dashing && !knockback) {
+   if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && !dashing && !knockback && !talking) {
       this.body.acceleration.x = -1500;
       if (this.body.blocked.down) this.animations.play('left');
       else this.animations.play('jump_left');
@@ -116,7 +116,7 @@ Player.prototype.update = function() {
    }
 
    // Moving Right
-   else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && !dashing && !knockback) {
+   else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && !dashing && !knockback && !talking) {
       this.body.acceleration.x = 1500;
       if (this.body.blocked.down) this.animations.play('right');
       else this.animations.play('jump_right');
@@ -141,7 +141,7 @@ Player.prototype.update = function() {
    }
 
    // Player can jump only if they're touching the Ground
-   if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && jumps >= 1 && !playerDead) {
+   if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && jumps >= 1 && !playerDead && !talking) {
       jumpSFX.play('', 0, .5, false);
       offPlatform = true;
       this.body.velocity.y = -500;
@@ -153,7 +153,7 @@ Player.prototype.update = function() {
    }
 
    // Player can only dash once in the air
-   if (game.input.keyboard.justPressed(Phaser.Keyboard.C) && dash != 0 && !playerDead) {
+   if (game.input.keyboard.justPressed(Phaser.Keyboard.C) && dash != 0 && !playerDead && !talking) {
       dashing = true;
       oldPos = this.x;
       dash--;
@@ -193,6 +193,12 @@ Player.prototype.update = function() {
       dashing = false;
       if (this.body.blocked.right || this.body.blocked.left) knockback = false;
    } else knockback = false;
+
+   if (hitByKingColor) {
+      this.body.maxVelocity.setTo(10000, 99999);
+      this.body.velocity.x = -2000;
+      this.body.velocity.y = -200;
+   }
 }
 
 function playerFlash(player) {

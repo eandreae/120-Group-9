@@ -10,7 +10,7 @@
 // define globals
 var game;
 var hasRed = false; // If the player has collected Red
-var hasYellow = false; // If the player has collected Yellow
+var hasYellow = true; // If the player has collected Yellow
 var hasBlue = false; // If the player has collected Blue
 var metKingColor = false; // If we've seen the beginning cutscene
 var direction = 1; // Player direction. 1 (facing right), -1 (facing left)
@@ -25,6 +25,8 @@ var yellowLevel = 0; // keeps track of the progress in the Yellow level.
 var blueLevel = 0; // keeps track of the progress in the Blue level.
 var song; // The song that's playing
 var bossHealth = 10; // King Color's health
+var hitByKingColor = false;
+var talking = false; // If the player is talking with an NPC
 
 // Wait for browser to load before creating Phaser game
 window.onload = function() {

@@ -4,7 +4,7 @@ Blue.prototype = {
 
    // Variables used in Tutorial
    init: function() {
-      this.talking = false;
+      talking = false;
       injured = false;
       health = 5;
    },
@@ -292,21 +292,21 @@ Blue.prototype = {
       }
 
       // If the player isn't overlapping with anything interactable, the interactText is invisible
-      if (!game.physics.arcade.overlap(this.player, this.npcs) && !game.physics.arcade.overlap(this.player, this.portals) || this.talking) {
+      if (!game.physics.arcade.overlap(this.player, this.npcs) && !game.physics.arcade.overlap(this.player, this.portals) || talking) {
          this.interactText.visible = false;
-         if (!this.talking)
+         if (!talking)
             this.behindText.visible = false;
       }
 
       // NPC1 text trigger
-      if (game.physics.arcade.overlap(this.player, this.n1) && !this.talking) {
+      if (game.physics.arcade.overlap(this.player, this.n1) && !talking) {
          // Display interact text
          this.setTextPosition(this.interactText, this.n1);
          this.interactText.visible = true;
 
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
-            this.talking = true;
+            talking = true;
             this.interactText.visible = false;
             this.behindText.visible = true;
             this.setTextPosition(this.textArea, this.n1);
@@ -317,14 +317,14 @@ Blue.prototype = {
       }
 
       // NPC2 text trigger
-      if (game.physics.arcade.overlap(this.player, this.n2) && !this.talking) {
+      if (game.physics.arcade.overlap(this.player, this.n2) && !talking) {
          // Display interact text
          this.setTextPosition(this.interactText, this.n2);
          this.interactText.visible = true;
 
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
-            this.talking = true;
+            talking = true;
             this.interactText.visible = false;
             this.behindText.visible = true;
             this.setTextPosition(this.textArea, this.n2);
@@ -426,7 +426,7 @@ Blue.prototype = {
       if (this.textPos == text.length) {
          npcText.stop();
          this.behindText.visible = false;
-         this.talking = false;
+         talking = false;
          this.textPos = 1;
       }
    },
