@@ -21,9 +21,11 @@ function playerDies(game, player, state) {
    deathEmitter.start(true, 2000, null, 50);	   // (explode, lifespan, freq, quantity)
    player.kill();
 
+   // Moves player to game over state
    game.time.events.add(Phaser.Timer.SECOND * 2, function() { game.state.start('GameOver', true, false, state)});
 }
 
+// Called when an enemy dies
 function enemyDies(game, enemy) {
    // Red square bit map data
    bmd = game.add.bitmapData(18, 18);
@@ -41,8 +43,9 @@ function enemyDies(game, enemy) {
    enemy.kill();
 }
 
+// Called when a bullet gets destroyed (hitting a wall/player/enemy)
 function bulletDestroyed(game, bullet) {
-   // Red square bit map data
+   // Adjusts particles based on the direction the bullet was going
    if (bullet.direction > 0) {
       minVelocity = -400;
       maxVelocity = 100;
@@ -65,6 +68,7 @@ function bulletDestroyed(game, bullet) {
    bullet.kill();
 }
 
+// Called when the player double jumps
 function jumpParticle(game, object) {
    // Emitter used when object double jumps
    jumpEmitter = game.add.emitter(object.x, object.y + 55, 100);
@@ -77,8 +81,9 @@ function jumpParticle(game, object) {
    jumpEmitter.start(true, 250, null, 20);	      // (explode, lifespan, freq, quantity)
 }
 
+// Called when the player dashes
 function dashParticle(game, object) {
-   // Emitter used when object double jumps
+   // Emitter used when object dashes
    dashEmitter = game.add.emitter(object.x, object.y + 32, 100);
    dashEmitter.makeParticles('particle_y');
    dashEmitter.gravity = 0;
