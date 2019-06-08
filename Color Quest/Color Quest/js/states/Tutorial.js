@@ -191,8 +191,8 @@ Tutorial.prototype = {
          this.n1Text[2] = "Why don'tcha talk to the other\ntownsfolk? Press Z to interact\nwith 'em, or anythin' else!";
          this.n1Text[3] = "";
       } else if (metKingColor == true && !hasRed && !hasYellow && !hasBlue) {
-         this.n1Text[0] = "Oh no...what are we gonna do?!";
-         this.n1Text[1] = "The portals...maybe those are the key...";
+         this.n1Text[0] = "Oh no...the colors,\nthey're all gone!";
+         this.n1Text[1] = "That King Color...\nhe stole them all!";
          this.n1Text[2] = "";
       } else if (metKingColor == true && (hasRed || hasYellow || hasBlue) && (!hasRed || !hasYellow || !hasBlue)) {
          this.n1Text[0] = "Yeah, that's it! Keep collectin' the colors!";
@@ -290,19 +290,15 @@ Tutorial.prototype = {
          this.n5Text[3] = "It was funny at first.\nNow I'm just kinda worried...";
          this.n5Text[4] = "";
       } else if (metKingColor == true && !hasRed && !hasYellow && !hasBlue) {
-         this.n5Text[0] = "No...the colors, t-they're all gone!";
-         this.n5Text[1] = "Y-you have to get them back!\nThose portals, they must lead to the colors!";
-         this.n5Text[2] = "Please, go through those portals,\nget our colors back...";
-         this.n5Text[3] = "The world is counting on you!";
-         this.n5Text[4] = ""
+         this.n5Text[0] = "Oh, man...what happened\nto all the colors?!";
+         this.n5Text[1] = "A-at least I've still\ngot my hair...";
+         this.n5Text[2] = ""
       } else if (metKingColor == true && (!hasRed || !hasYellow || !hasBlue)) {
-         this.n5Text[0] = "Look! The colors, they're\nstarting to come back!";
-         this.n5Text[1] = "Keep it up! You can do this!";
-         this.n5Text[2] = "";
+         this.n5Text[0] = "Hey, you're doing it! Great\nwork, man. Keep at it!";
+         this.n5Text[1] = "";
       } else {
-         this.n5Text[0] = "You've done it...all that's left is the man himself.";
-         this.n5Text[1] = "The door to King Color awaits. Defeat him,\nand you'll surely restore color to\nthe world!";
-         this.n5Text[2] = "";
+         this.n5Text[0] = "Almost there. Show that\nKing Color guy what\nyou can do, eh?";
+         this.n5Text[1] = "";
       }
       
       // NPC6
@@ -316,23 +312,23 @@ Tutorial.prototype = {
       // NPC6's text
       if (metKingColor == false) {
          this.n6Text[0] = "Red, yellow, and blue...\nThe cornerstones of our world.";
-         this.n6Text[1] = "They give us life, and passion!\nEnergy, and joy!\n";
-         this.n6Text[2] = "If you're wondering about\nthat guy, he's been sleeping\nlike that for a few hours.";
-         this.n6Text[3] = "It was funny at first.\nNow I'm just kinda worried...";
+         this.n6Text[1] = "They protect us, nourish\nus, make us what we are.";
+         this.n6Text[2] = "But I've heard stories of an\nevil tyrant, who wants to\nsteal our colors away...";
+         this.n6Text[3] = "I hope those stories are\nindeed just stories.";
          this.n6Text[4] = "";
       } else if (metKingColor == true && !hasRed && !hasYellow && !hasBlue) {
-         this.n6Text[0] = "No...the colors, t-they're all gone!";
-         this.n6Text[1] = "Y-you have to get them back!\nThose portals, they must lead to the colors!";
-         this.n6Text[2] = "Please, go through those portals,\nget our colors back...";
-         this.n6Text[3] = "The world is counting on you!";
+         this.n6Text[0] = "No...the colors,\nt-they're all gone!";
+         this.n6Text[1] = "Y-you have to get them\nback! Those portals, they\nmust lead to the colors!";
+         this.n6Text[2] = "Please, go through those\nportals, get our colors back...";
+         this.n6Text[3] = "The world is\ncounting on you!";
          this.n6Text[4] = ""
       } else if (metKingColor == true && (!hasRed || !hasYellow || !hasBlue)) {
          this.n6Text[0] = "Look! The colors, they're\nstarting to come back!";
          this.n6Text[1] = "Keep it up! You can do this!";
          this.n6Text[2] = "";
       } else {
-         this.n6Text[0] = "You've done it...all that's left is the man himself.";
-         this.n6Text[1] = "The door to King Color awaits. Defeat him,\nand you'll surely restore color to\nthe world!";
+         this.n6Text[0] = "You've done it...all that's\nleft is the man himself.";
+         this.n6Text[1] = "The door to King Color awaits.\nDefeat him, and you'll surely\nrestore color to the world!";
          this.n6Text[2] = "";
       }
 
