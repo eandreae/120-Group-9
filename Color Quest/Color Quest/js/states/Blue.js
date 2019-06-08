@@ -4,7 +4,8 @@ Blue.prototype = {
 
    // Variables used in Tutorial
    init: function() {
-      this.talking = false;
+      this.whichNPC;
+      talking = false;
       injured = false;
       health = 5;
    },
@@ -72,6 +73,13 @@ Blue.prototype = {
       this.textArea.anchor.set(0.5);
       this.textArea.fixedToCamera = false;
       this.world.bringToTop(this.textArea);
+
+      bmd = game.add.bitmapData(400, 100);
+      bmd.fill(255, 255, 255, 1);
+      this.behindText = game.add.sprite(0, 0, bmd);
+      this.behindText.anchor.set(0.5);
+      this.behindText.visible = false;
+      this.behindText.alpha = 0.5;
 
       // NPC Group
       this.npcs = game.add.group();
@@ -285,41 +293,49 @@ Blue.prototype = {
       }
 
       // If the player isn't overlapping with anything interactable, the interactText is invisible
-      if (!game.physics.arcade.overlap(this.player, this.npcs) && !game.physics.arcade.overlap(this.player, this.portals) && !this.talking) {
+      if (!game.physics.arcade.overlap(this.player, this.npcs) && !game.physics.arcade.overlap(this.player, this.portals) || talking) {
          this.interactText.visible = false;
+         if (!talking)
+            this.behindText.visible = false;
       }
 
       // NPC1 text trigger
-      if (game.physics.arcade.overlap(this.player, this.n1) && !this.talking) {
+      if (game.physics.arcade.overlap(this.player, this.n1) && !talking) {
          // Display interact text
          this.setTextPosition(this.interactText, this.n1);
          this.interactText.visible = true;
 
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
-            this.talking = true;
+            talking = true;
             this.interactText.visible = false;
+            this.behindText.visible = true;
             this.setTextPosition(this.textArea, this.n1);
             this.textArea.text = this.n1Text[0];
-            npcText.loop(3000, this.goThroughText, this, this.n1Text);
-            npcText.start();
+            this.whichNPC = this.n1Text;
          }
       }
 
       // NPC2 text trigger
-      if (game.physics.arcade.overlap(this.player, this.n2) && !this.talking) {
+      if (game.physics.arcade.overlap(this.player, this.n2) && !talking) {
          // Display interact text
          this.setTextPosition(this.interactText, this.n2);
          this.interactText.visible = true;
 
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
-            this.talking = true;
+            talking = true;
             this.interactText.visible = false;
+            this.behindText.visible = true;
             this.setTextPosition(this.textArea, this.n2);
             this.textArea.text = this.n2Text[0];
-            npcText.loop(3000, this.goThroughText, this, this.n2Text);
-            npcText.start();
+            this.whichNPC = this.n2Text;
+         }
+      }
+
+      if (talking) {
+         if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
+            this.goThroughText(this.whichNPC);
          }
       }
 
@@ -397,6 +413,10 @@ Blue.prototype = {
       text.x = object.x;
       text.y = object.y - 75;
       this.world.bringToTop(text);
+
+      this.behindText.x = text.x;
+		this.behindText.y = text.y;
+		this.behindText.visible = true;
    },
 
    goThroughText: function(text) {
@@ -410,8 +430,9 @@ Blue.prototype = {
       // When finished through the dialog
       if (this.textPos == text.length) {
          npcText.stop();
-         this.talking = false;
-         this.textPos = 1;
+         this.behindText.visible = false;
+         talking = false;
+         this.textPos = 0;
       }
    },
 
