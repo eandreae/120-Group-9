@@ -65,6 +65,13 @@ Red.prototype = {
       this.textArea.fixedToCamera = false;
       this.world.bringToTop(this.textArea);
 
+      bmd = game.add.bitmapData(400, 100);
+      bmd.fill(255, 255, 255, 1);
+      this.behindText = game.add.sprite(0, 0, bmd);
+      this.behindText.anchor.set(0.5);
+      this.behindText.visible = false;
+      this.behindText.alpha = 0.5;
+
       // NPC Group
       this.npcs = game.add.group();
       this.npcs.enableBody = true;
@@ -292,8 +299,10 @@ Red.prototype = {
       }
 
       // If the player isn't overlapping with anything interactable, the interactText is invisible
-      if (!game.physics.arcade.overlap(this.player, this.npcs) && !game.physics.arcade.overlap(this.player, this.portals) && !this.talking) {
+      if (!game.physics.arcade.overlap(this.player, this.npcs) && !game.physics.arcade.overlap(this.player, this.portals) || this.talking) {
          this.interactText.visible = false;
+         if (!this.talking)
+            this.behindText.visible = false;
       }
 
       // NPC1 text trigger
@@ -306,6 +315,7 @@ Red.prototype = {
             // Timer for npc text
             this.talking = true;
             this.interactText.visible = false;
+            this.behindText.visible = true;
             this.setTextPosition(this.textArea, this.n1);
             this.textArea.text = this.n1Text[0];
             npcText.loop(3000, this.goThroughText, this, this.n1Text);
@@ -323,6 +333,7 @@ Red.prototype = {
             // Timer for npc text
             this.talking = true;
             this.interactText.visible = false;
+            this.behindText.visible = true;
             this.setTextPosition(this.textArea, this.n2);
             this.textArea.text = this.n2Text[0];
             npcText.loop(3000, this.goThroughText, this, this.n2Text);
@@ -441,6 +452,10 @@ Red.prototype = {
       text.x = object.x;
       text.y = object.y - 75;
       this.world.bringToTop(text);
+
+      this.behindText.x = text.x;
+		this.behindText.y = text.y;
+		this.behindText.visible = true;
    },
 
    goThroughText: function(text) {
@@ -454,6 +469,7 @@ Red.prototype = {
       // When finished through the dialog
       if (this.textPos == text.length) {
          npcText.stop();
+			this.behindText.visible = false;
          this.talking = false;
          this.textPos = 1;
       }
