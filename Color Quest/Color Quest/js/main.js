@@ -13,9 +13,9 @@ var game;
 // Player globals
 var buckyValue = 0;              // Determines which Bucky sprite we're using
 var direction = 1;               // Player direction. 1 (facing right), -1 (facing left)
-var hasRed = true;              // If the player has collected Red
-var hasYellow = true;           // If the player has collected Yellow
-var hasBlue = true;             // If the player has collected Blue
+var hasRed = false;              // If the player has collected Red
+var hasYellow = false;           // If the player has collected Yellow
+var hasBlue = false;             // If the player has collected Blue
 var health = 5;                  // Player health
 var injured = false;             // If the player is injured
 var playerBulletSpeed = 1000;    // Bullet speed of player bullet
