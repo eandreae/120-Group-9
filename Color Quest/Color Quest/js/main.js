@@ -25,7 +25,7 @@ var yellowLevel = 0; // keeps track of the progress in the Yellow level.
 var blueLevel = 0; // keeps track of the progress in the Blue level.
 var song; // The song that's playing
 var bossHealth = 10; // King Color's health
-var bossDefeated = true; // Check to see if King Color is dead
+var bossDefeated = false; // Check to see if King Color is dead
 var hitByKingColor = false;
 var talking = false; // If the player is talking with an NPC
 

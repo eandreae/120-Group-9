@@ -60,6 +60,14 @@ BossMap.prototype = {
       // The group of shooting enemies.
       this.shootingEnemies = game.add.group();
       this.shootingEnemies.enableBody = true;
+      
+      // The group of jumping enemies.
+      this.jumpingEnemies = game.add.group();
+      this.jumpingEnemies.enableBody = true;
+      
+      // The group of dashing enemies.
+      this.dashingEnemies = game.add.group();
+      this.dashingEnemies.enableBody = true;
 
       // Adds the player into the state
       this.player = new Player(game, 64, 1340, this.mapLayer);
@@ -78,25 +86,52 @@ BossMap.prototype = {
       // ENEMIES -----------------------------------------------------------
       // Shooting enemies for the final level.
 
-      // Enemy 1
+      // Enemy 1 (Shooting)
       var e1 = new Enemy(game, 2928, 1120, 0);
       game.add.existing(e1);
       this.shootingEnemies.add(e1);
 
-      // Enemy 2
+      // Enemy 2 (Shooting)
       var e2 = new Enemy(game, 3040, 1214, 0);
       game.add.existing(e2);
       this.shootingEnemies.add(e2);
 
-      // Enemy 3
+      // Enemy 3 (Shooting)
       var e3 = new Enemy(game, 3168, 992, 0);
       game.add.existing(e3);
       this.shootingEnemies.add(e3);
+
+      // Enemy 4 (Dashing)
+      var e4 = new Enemy(game, 1120, 1344, 100, true, false);
+      game.add.existing(e4);
+      this.dashingEnemies.add(e4);
+      
+      // Enemy 5 (Dashing)
+      var e5 = new Enemy(game, 1344, 1344, 100, true, false);
+      game.add.existing(e5);
+      this.dashingEnemies.add(e5);
+      
+      // Enemy 6 (Jumping)
+      var e6 = new Enemy(game, 3859, 1024, 0, false, true);
+      game.add.existing(e6);
+      this.jumpingEnemies.add(e6);
+      
+      // Enemy 7 (Jumping)
+      var e7 = new Enemy(game, 4145, 929, 0, false, true);
+      game.add.existing(e7);
+      this.jumpingEnemies.add(e7);
+      
+      // Enemy 8 (Jumping)
+      var e8 = new Enemy(game, 4368, 1216, 0, false, true);
+      game.add.existing(e8);
+      this.jumpingEnemies.add(e8);
 
       // Add KC
       this.boss = new Boss(game, 7815, 800, 0);
       game.add.existing(this.boss);
       this.boss.enableBody = true;
+      this.boss.scale.x = 2;
+      this.boss.scale.y = 2;
 
       // Timer for how often the enemies shoot
       enemyShootTimer = game.time.create(false);
@@ -116,12 +151,14 @@ BossMap.prototype = {
       // All the collisions needed
       game.physics.arcade.collide(this.enemies, this.mapLayer); // Enemies with platforms
       game.physics.arcade.collide(this.shootingEnemies, this.mapLayer); // Shooting enemies with platforms
+      game.physics.arcade.collide(this.dashingEnemies, this.mapLayer); // Dashing enemies with platforms
+      game.physics.arcade.collide(this.jumpingEnemies, this.mapLayer); // Jumping enemies with platforms
       game.physics.arcade.collide(this.npcs, this.mapLayer); // NPCs with the platforms
-      game.physics.arcade.overlap(pickup, this.player, this.playerGetsPickup, null, this);
+      game.physics.arcade.overlap(pickup, this.player, this.playerGetsPickup, null, this); // Player with post-boss pickup
 
       // Player with enemies
       if (!injured) {
-         if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
+         if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player) || game.physics.arcade.collide(this.dashingEnemies, this.player) || game.physics.arcade.collide(this.jumpingEnemies, this.player)) {
             health--;
 
             // If player health reaches 0, they die
@@ -148,6 +185,8 @@ BossMap.prototype = {
       // Player bullet with enemies
       game.physics.arcade.collide(this.playerBullets, this.enemies, this.bulletHitsEnemy, null, this);
       game.physics.arcade.collide(this.playerBullets, this.shootingEnemies, this.bulletHitsEnemy, null, this);
+      game.physics.arcade.collide(this.playerBullets, this.jumpingEnemies, this.bulletHitsEnemy, null, this);
+      game.physics.arcade.collide(this.playerBullets, this.dashingEnemies, this.bulletHitsEnemy, null, this);
 
       // Enemy bullets with player
       if (!injured) game.physics.arcade.collide(this.player, this.enemyBullets, this.bulletHitsPlayer, null, this);

@@ -22,7 +22,7 @@ Tutorial.prototype = {
    create: function() {
       // Choose the song depending how far you've progressed in the game
       song.stop();
-      if (metKingColor == false) {
+      if (metKingColor == false || bossDefeated) {
          song = game.add.audio('happy');
       } else if (hasRed && hasYellow && hasBlue) {
          song = game.add.audio('motivational');
@@ -119,11 +119,11 @@ Tutorial.prototype = {
          game.physics.enable(this.kingColorTrigger);
 
          this.kingColorDude = game.add.sprite(4200, 675, 'boss', 'kingcolor');
-         this.kingColorDude.scale.x = 2;
-         this.kingColorDude.scale.y = 2;
+       //  this.kingColorDude.scale.x = 2;
+       //  this.kingColorDude.scale.y = 2;
          game.physics.enable(this.kingColorDude);
       }
-		if (metKingColor) {
+		if (metKingColor && !bossDefeated) {
 	      this.bossPortal = game.add.sprite(3136, 841, 'boss_door', 'bossdoor_b');
 	      this.bossPortal.anchor.set(0.5);
 			this.bossPortal.animations.add('sprite', [buckyValue / 16], 10, true)
@@ -188,7 +188,7 @@ Tutorial.prototype = {
 
       // NPC1's text
       if (metKingColor == false) {
-         this.n1Text[0] = "Howdy! You havin' a good day\nhere in Palette Town?";
+         this.n1Text[0] = "Howdy! You havin' a good day\nhere in Palette Town?\n(Press Z to advance text)";
          this.n1Text[1] = "Y'know how to move left 'n' right\nwith the arrow keys already.\nYou can jump with Up, too!";
          this.n1Text[2] = "Why don'tcha talk to the other\ntownsfolk? Press Z to interact\nwith 'em, or anythin' else!";
          this.n1Text[3] = "";
@@ -199,10 +199,15 @@ Tutorial.prototype = {
       } else if (metKingColor == true && (hasRed || hasYellow || hasBlue) && (!hasRed || !hasYellow || !hasBlue)) {
          this.n1Text[0] = "Yeah, that's it! Keep collectin' the colors!";
          this.n1Text[1] = "";
-      } else {
+      } else if (!bossDefeated){
          this.n1Text[0] = "You've got all the colors...y'know what to do.";
          this.n1Text[1] = "Go beat that tyrant, King\nColor, an' restore color to our land!";
          this.n1Text[2] = "You can do it! You're the\nonly one who can!";
+         this.n1Text[3] = "";
+      } else {
+         this.n1Text[0] = "Y'did it! Ya really did it!";
+         this.n1Text[1] = "Thanks so much! I knew you'd\nmake a good hero!";
+         this.n1Text[2] = "How? Ah...ya just look the\npart, I guess.";
          this.n1Text[3] = "";
       }
 
@@ -225,10 +230,15 @@ Tutorial.prototype = {
          this.n2Text[0] = "The SUN! NOOOOOOO!";
          this.n2Text[1] = "OUR YELLOW GLORY\nMUST BE RESTORED!";
          this.n2Text[2] = "";
-      } else {
+      } else if (!bossDefeated){
          this.n2Text[0] = "The SUN! IT HAS RETURNED!";
          this.n2Text[1] = "HAHAHAHA! With this, we\nare...UNBEATABLE! That false\nking will FALL before the SUN!";
          this.n2Text[2] = "";
+      } else {
+         this.n2Text[0] = "Beautiful! BEAUTIFUL!";
+         this.n2Text[1] = "It is thanks to you that\nwe no longer suffer under that\nMALEVOLENT MONARCH!";
+         this.n2Text[2] = "HAHAHAHA! PRAISE THE SUN!";
+         this.n2Text[3] = "";
       }
 
       // NPC3
@@ -248,9 +258,13 @@ Tutorial.prototype = {
          this.n3Text[0] = "The berries...they're\nwithering! Oh, no...";
          this.n3Text[1] = "Without the power of red\nto sustain them...";
          this.n3Text[2] = "";
-      } else {
+      } else if (!bossDefeated) {
          this.n3Text[0] = "You've returned the\npower of Red!";
          this.n3Text[1] = "Oh, thank you, thank you!\nYou're a true hero!";
+         this.n3Text[2] = "";
+      } else {
+         this.n3Text[0] = "Ah...the berries are red,\nthe bushes are green,\nand the sun shines again!";
+         this.n3Text[1] = "Thank you so much, Mister. We'd love\nto have you here again anytime!";
          this.n3Text[2] = "";
       }
 
@@ -271,6 +285,9 @@ Tutorial.prototype = {
          this.n4Text[0] = "Zzzz...";
          this.n4Text[1] = "(He's STILL sleeping, somehow.)";
          this.n4Text[2] = "";
+      } else if (!bossDefeated) {
+         this.n4Text[0] = "Zzzz...";
+         this.n4Text[1] = "(Never before have you seen\nsomeone so determined to sleep\nthrough the end of the world."
       } else {
          this.n4Text[0] = "Zzz...snrk...h-huh...?";
          this.n4Text[1] = "H-how long was I asleep...?\nAw, man, what'd I miss...?";
@@ -299,9 +316,14 @@ Tutorial.prototype = {
       } else if (metKingColor == true && (!hasRed || !hasYellow || !hasBlue)) {
          this.n5Text[0] = "Hey, you're doing it! Great\nwork, man. Keep at it!";
          this.n5Text[1] = "";
-      } else {
+      } else if (!bossDefeated){ 
          this.n5Text[0] = "Almost there. Show that\nKing Color guy what\nyou can do, eh?";
          this.n5Text[1] = "";
+      } else {
+         this.n5Text[0] = "Wow...you really showed\nthat guy what for, huh?";
+         this.n5Text[1] = "I guess this'll just go\nback to being regular ol'\nblue corner...";
+         this.n5Text[2] = "That's cool.";
+         this.n5Text[3] = "";
       }
 
       // NPC6
@@ -329,11 +351,16 @@ Tutorial.prototype = {
          this.n6Text[0] = "Look! The colors, they're\nstarting to come back!";
          this.n6Text[1] = "Keep it up! You can do this!";
          this.n6Text[2] = "";
-      } else {
-         this.n6Text[0] = "You've done it...all that's\nleft is the man himself.";
+      } else if (!bossDefeated) {
+         this.n6Text[0] = "You've done it...all that's\nleft is the tyrant himself.";
          this.n6Text[1] = "The door to King Color awaits.\nDefeat him, and you'll surely\nrestore color to the world!";
          this.n6Text[2] = "";
-      }
+      } else {
+         this.n6Text[0] = "You've done it! King Color is\nno more, and with that, our\ncolors have returned!";
+         this.n6Text[1] = "I really can't thank you enough.\nOver to the right, I've put a little\nsomething together for you."
+         this.n6Text[2] = "It doesn't even begin to repay\nall the good you've done, but\nhopefully, it's at least a start.";
+         this.n6Text[3] = "";
+   }
 
       // NPC7
       if (metKingColor == false) {
@@ -392,7 +419,7 @@ Tutorial.prototype = {
 
    update: function() {
 		// Sets boss door sprite depending on what colors you have
-		if (metKingColor)
+		if (metKingColor && !bossDefeated)
 			this.bossPortal.animations.play('sprite')
 
 		// If the player isn't overlapping with anything interactable, the interactText is invisible
