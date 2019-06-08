@@ -178,7 +178,7 @@ Player.prototype.update = function() {
       oldPos = this.x;
 
       timerFlash = game.time.create(false);
-      timerFlash.loop(20, playerFlash, this, this);
+      timerFlash.loop(18, playerFlash, this, this);
       timerFlash.start();
 
       timerStopFlash = game.time.create(false);
