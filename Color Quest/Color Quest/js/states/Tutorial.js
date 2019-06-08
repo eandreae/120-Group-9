@@ -289,6 +289,7 @@ Tutorial.prototype = {
       } else if (!bossDefeated) {
          this.n4Text[0] = "Zzzz...";
          this.n4Text[1] = "(Never before have you seen\nsomeone so determined to sleep\nthrough the end of the world."
+         this.n4Text[2] = "";
       } else {
          this.n4Text[0] = "Zzz...snrk...h-huh...?";
          this.n4Text[1] = "H-how long was I asleep...?\nAw, man, what'd I miss...?";
