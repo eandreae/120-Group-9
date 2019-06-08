@@ -76,29 +76,19 @@ BossMap.prototype = {
       // Shooting enemies for the final level.
 
       // Enemy 1
-      var e1 = new Enemy(game, 2496, 1120, 0);
+      var e1 = new Enemy(game, 2928, 1120, 0);
       game.add.existing(e1);
       this.shootingEnemies.add(e1);
 
       // Enemy 2
-      var e2 = new Enemy(game, 2675, 991, 0);
+      var e2 = new Enemy(game, 3040, 1214, 0);
       game.add.existing(e2);
       this.shootingEnemies.add(e2);
 
       // Enemy 3
-      var e3 = new Enemy(game, 2706, 1214, 0);
+      var e3 = new Enemy(game, 3168, 992, 0);
       game.add.existing(e3);
       this.shootingEnemies.add(e3);
-
-      // Enemy 4
-      var e4 = new Enemy(game, 3040, 1214, 0);
-      game.add.existing(e4);
-      this.shootingEnemies.add(e4);
-
-      // Enemy 5
-      var e5 = new Enemy(game, 3168, 992, 0);
-      game.add.existing(e5);
-      this.shootingEnemies.add(e5);
 
       // Add KC
       this.boss = new Boss(game, 7815, 800, 0);
@@ -128,6 +118,19 @@ BossMap.prototype = {
       // Player with enemies
       if (!injured) {
          if (game.physics.arcade.collide(this.enemies, this.player) || game.physics.arcade.collide(this.shootingEnemies, this.player)) {
+            health--;
+
+            // If player health reaches 0, they die
+            if (health == 0) {
+               song.stop();
+               playerDies(game, this.player, 'BossMap');
+            }
+         }
+      }
+      
+      // Player with boss
+      if (!injured) {
+         if (game.physics.arcade.collide(this.boss, this.player)) {
             health--;
 
             // If player health reaches 0, they die
