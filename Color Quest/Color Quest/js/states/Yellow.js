@@ -218,9 +218,9 @@ Yellow.prototype = {
       game.physics.arcade.enable(this.x);
 
       // Wall of death that chases the player when activated
-      bmd = game.add.bitmapData(10000, 1000);
+      bmd = game.add.bitmapData(10000, 10000);
       bmd.fill(127, 106, 0, 1);
-      this.wall = game.add.sprite(-10100, 200, bmd);
+      this.wall = game.add.sprite(-10100, 0, bmd);
       game.physics.arcade.enable(this.wall);
       this.wall.body.immovable = true;
 
