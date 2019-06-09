@@ -180,91 +180,53 @@ Tutorial.prototype = {
       this.npcs = game.add.group();
       this.npcs.enableBody = true;
 
-      // All NPCs spawn in different spaces depending on the stage of the game.
-      if( bossDefeated == false ) {
-          // If the boss hasn't been defeated, then we spawn them in their normal spaces.
+      // NPCS ------------------------------------------------------------------
 
-          // NPC 1
-          this.n1 = new NPC(game, 416, 800, 'npc_cute');
-          game.add.existing(this.n1);
-          this.npcs.add(this.n1);
+      // NPC 1
+      this.n1 = new NPC(game, 416, 864, 'npc_cute');
+      game.add.existing(this.n1);
+      this.npcs.add(this.n1);
 
-          // NPC2
-          this.n2 = new NPC(game, 3808, 128, 'npc_solaire');
-          game.add.existing(this.n2);
-          this.npcs.add(this.n2);
+      // NPC2
+      this.n2 = new NPC(game, 3808, 128, 'npc_solaire');
+      game.add.existing(this.n2);
+      this.npcs.add(this.n2);
 
-          // NPC3
-          this.n3 = new NPC(game, 800, 800, 'npc_generic_r');
-          game.add.existing(this.n3);
-          this.npcs.add(this.n3);
+      // NPC3
+      this.n3 = new NPC(game, 800, 864, 'npc_generic_r');
+      game.add.existing(this.n3);
+      this.npcs.add(this.n3);
 
-          // NPC4
-          this.n4 = new NPC(game, 1792, 800, 'npc_sleep');
-          game.add.existing(this.n4);
-          this.npcs.add(this.n4);
+      // NPC4
+      this.n4 = new NPC(game, 1792, 864, 'npc_sleep');
+      game.add.existing(this.n4);
+      this.npcs.add(this.n4);
 
-          // NPC5
-          this.n5 = new NPC(game, 1696, 800, 'npc_whatever');
-          game.add.existing(this.n5);
-          this.npcs.add(this.n5);
+      // NPC5
+      this.n5 = new NPC(game, 1696, 864, 'npc_whatever');
+      game.add.existing(this.n5);
+      this.npcs.add(this.n5);
 
-          // NPC6
-          this.n6 = new NPC(game, 2464, 800, 'npc_smiley');
-          game.add.existing(this.n6);
-          this.npcs.add(this.n6);
+      // NPC6
+      this.n6 = new NPC(game, 2464, 864, 'npc_smiley');
+      game.add.existing(this.n6);
+      this.npcs.add(this.n6);
 
-          // NPC7
-          if (metKingColor == false) {
-             this.n7 = new NPC(game, 3712, 800, 'npc_cute');
-             game.add.existing(this.n7);
-             this.npcs.add(this.n7);
-             //The array for the text
-             this.n7Text = new Array();
+      // NPC7
+      if (metKingColor == false) {
+         this.n7 = new NPC(game, 3712, 864, 'npc_cute');
+         game.add.existing(this.n7);
+         this.npcs.add(this.n7);
+         //The array for the text
+         this.n7Text = new Array();
 
-             this.n7Text[0] = "Hey... Where'd the color go?";
-             this.n7Text[1] = "Something doesn't feel right...";
-             this.n7Text[2] = "WOAH! Bucky! Watch out!";
-             this.n7Text[3] = "";
-          }
-      }
-      else {
-          // If the boss has been defeated, then they all amass at the end of the game,
-          // to congratulate the player for prevailing.
-
-          // NPC 1
-          this.n1 = new NPC(game, 3264, 800, 'npc_cute');
-          game.add.existing(this.n1);
-          this.npcs.add(this.n1);
-
-          // NPC2 - Stay in the clouds, but says different things.
-          this.n2 = new NPC(game, 3808, 128, 'npc_solaire');
-          game.add.existing(this.n2);
-          this.npcs.add(this.n2);
-
-          // NPC3
-          this.n3 = new NPC(game, 3552, 800, 'npc_generic_r');
-          game.add.existing(this.n3);
-          this.npcs.add(this.n3);
-
-          // NPC4
-          this.n4 = new NPC(game, 2976, 800, 'npc_sleep');
-          game.add.existing(this.n4);
-          this.npcs.add(this.n4);
-
-          // NPC5
-          this.n5 = new NPC(game, 2848, 800, 'npc_whatever');
-          game.add.existing(this.n5);
-          this.npcs.add(this.n5);
-
-          // NPC6
-          this.n6 = new NPC(game, 3840, 800, 'npc_smiley');
-          game.add.existing(this.n6);
-          this.npcs.add(this.n6);
-
+         this.n7Text[0] = "Hey... Where'd the color go?";
+         this.n7Text[1] = "Something doesn't feel right...";
+         this.n7Text[2] = "WOAH! Bucky! Watch out!";
+         this.n7Text[3] = "";
       }
 
-      // NPC TEXT
+      // NPC TEXT --------------------------------------------------------------
       //The array for the text
       this.n1Text = new Array();
 
@@ -420,11 +382,25 @@ Tutorial.prototype = {
          this.n6Text[3] = "";
    }
 
+   // CREDITS ------------------------------------------------------------------
+
    // The text at the end of the game for the credits.
    // Check if they have beaten the game.
    if( bossDefeated == true ){
-       game.add.text(3424, 608, "You Won!!");
+       game.add.text(128, 376, "You Won!! Pallette Town is safe once again!");
+       game.add.text(64, 440, "These are the wonderful people who made this game");
+       var EricHu = game.add.sprite(416, 500, 'EricHu');
+       var EricAndreae = game.add.sprite(1890, 500, 'EricAndreae');
+       var Dylan = game.add.sprite(2656, 500, 'Dylan');
+       var Daniel = game.add.sprite(3264, 500, 'Daniel');
+       game.add.text(600, 500, "Eric Hu\nOur main programmer,\nwho made everything work,\nespecially the amazing cutscene");
+       game.add.text(2050, 500, "Eric Andreae\nThe level designer, SFX maker,\nand audio guy\nspent hours dying in Tiled");
+       game.add.text(2790, 500, "Dylan Deardorff\nThe main writer of the story,\nand made the bossfight level");
+       game.add.text(3400, 500, "Daniel Phipps\nOur super cool Artist\nmade our dreams become reality")
+
    }
+
+   // EVERYTHING ELSE ----------------------------------------------------------
 
 
 

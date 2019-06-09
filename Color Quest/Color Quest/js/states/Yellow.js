@@ -113,7 +113,7 @@ Yellow.prototype = {
          // Yellow collectable
          bmd = game.add.bitmapData(75, 75);
          bmd.fill(255, 255, 0, 1);
-         this.yellow = game.add.sprite(4000, 800, 'upgrade_y');
+         this.yellow = game.add.sprite(4000, 864, 'upgrade_y');
          game.physics.arcade.enable(this.yellow);
 
       } else if (yellowLevel == 1) {
@@ -148,7 +148,7 @@ Yellow.prototype = {
         // Yellow collectable
         bmd = game.add.bitmapData(75, 75);
         bmd.fill(255, 255, 0, 1);
-        this.yellow = game.add.sprite(4000, 800, 'upgrade_y');
+        this.yellow = game.add.sprite(4000, 864, 'upgrade_y');
         game.physics.arcade.enable(this.yellow);
 
       } else if (yellowLevel == 2) {
@@ -166,25 +166,30 @@ Yellow.prototype = {
          // No NPCs in level 2.
 
          // ENEMIES -----------------------------------------------------------
-         // There are 2 enemies in Level 2
-         // They are represented by e1 and e2.
+         // There are 3 enemies in Level 2
+         // They are represented by e1, e2, and e3.
 
          // enemy 1
-         var e1 = new Enemy(game, 1920, 800, 100, true, false);
+         var e1 = new Enemy(game, 2336, 800, 100, true, false);
          game.add.existing(e1);
          this.dashingEnemies.add(e1);
 
          // enemy 2
-         var e2 = new Enemy(game, 2336, 800, 100, true, false);
+         var e2 = new Enemy(game, 2944, 800, 100, true, false);
          game.add.existing(e2);
          this.dashingEnemies.add(e2);
+
+         // enemy 3
+         var e3 = new Enemy(game, 3456, 800, 100, true, false);
+         game.add.existing(e3);
+         this.dashingEnemies.add(e3);
 
          // COLLECTIBLES ------------------------------------------------------
 
          // Yellow collectable
          bmd = game.add.bitmapData(75, 75);
          bmd.fill(255, 255, 0, 1);
-         this.yellow = game.add.sprite(4000, 800, 'upgrade_y');
+         this.yellow = game.add.sprite(4000, 864, 'upgrade_y');
          game.physics.arcade.enable(this.yellow);
 
       }
@@ -405,9 +410,13 @@ Yellow.prototype = {
       song = game.add.audio('action');
       song.play('', 0, 0.5, true);
       x.destroy();
-      if (yellowLevel == 0)
-         this.wall.body.velocity.x = 300;
-      else this.wall.body.velocity.x = 400;
+      if (yellowLevel == 0 ){
+          this.wall.body.velocity.x = 300;
+      }
+      else {
+          this.wall.body.velocity.x = 350;
+      }
+
    },
 
    // // Debug stuff

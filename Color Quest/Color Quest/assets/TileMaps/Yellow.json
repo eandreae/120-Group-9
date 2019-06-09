@@ -183,7 +183,7 @@
                  "visible":true,
                  "width":64,
                  "x":416,
-                 "y":799.667
+                 "y":800
                 }, 
                 {
                  "height":32,
@@ -195,17 +195,6 @@
                  "width":32,
                  "x":1280,
                  "y":672
-                }, 
-                {
-                 "height":63.3333,
-                 "id":50,
-                 "name":"Yellow Enemy",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":1920,
-                 "y":800
                 }, 
                 {
                  "height":63.3333,
@@ -231,13 +220,13 @@
                 }, 
                 {
                  "height":63.3333,
-                 "id":53,
+                 "id":54,
                  "name":"Yellow Enemy",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":3488,
+                 "x":3456,
                  "y":800
                 }],
          "opacity":1,
@@ -247,7 +236,7 @@
          "y":0
         }],
  "nextlayerid":12,
- "nextobjectid":54,
+ "nextobjectid":55,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",

@@ -55,6 +55,10 @@ Load.prototype = {
       game.load.image('upgrade_r', 'assets/img/upgrade_red.png');
       game.load.image('upgrade_y', 'assets/img/upgrade_yellow.png');
       game.load.image('rainbow_pickup', 'assets/img/pickup.png');
+      game.load.image('EricHu', 'assets/img/EricHu.png');
+      game.load.image('EricAndreae', 'assets/img/EricAndreae.png');
+      game.load.image('Dylan', 'assets/img/Dylan.png');
+      game.load.image('Daniel', 'assets/img/Daniel.png');
 
 		// Loading audio
       game.load.audio('jump', 'assets/audio/Jump.mp3');
