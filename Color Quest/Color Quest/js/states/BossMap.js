@@ -55,16 +55,16 @@ BossMap.prototype = {
 
       pickup = game.add.sprite(7879, 835, 'pickup');
       game.physics.arcade.enable(pickup);
-        
+
       // Handle the group management before loading the levels.
       // The group of shooting enemies.
       this.shootingEnemies = game.add.group();
       this.shootingEnemies.enableBody = true;
-      
+
       // The group of jumping enemies.
       this.jumpingEnemies = game.add.group();
       this.jumpingEnemies.enableBody = true;
-      
+
       // The group of dashing enemies.
       this.dashingEnemies = game.add.group();
       this.dashingEnemies.enableBody = true;
@@ -105,22 +105,22 @@ BossMap.prototype = {
       var e4 = new Enemy(game, 1120, 1344, 100, true, false);
       game.add.existing(e4);
       this.dashingEnemies.add(e4);
-      
+
       // Enemy 5 (Dashing)
       var e5 = new Enemy(game, 1344, 1344, 100, true, false);
       game.add.existing(e5);
       this.dashingEnemies.add(e5);
-      
+
       // Enemy 6 (Jumping)
       var e6 = new Enemy(game, 3859, 1024, 0, false, true);
       game.add.existing(e6);
       this.jumpingEnemies.add(e6);
-      
+
       // Enemy 7 (Jumping)
       var e7 = new Enemy(game, 4145, 929, 0, false, true);
       game.add.existing(e7);
       this.jumpingEnemies.add(e7);
-      
+
       // Enemy 8 (Jumping)
       var e8 = new Enemy(game, 4368, 1216, 0, false, true);
       game.add.existing(e8);
@@ -138,6 +138,8 @@ BossMap.prototype = {
    },
 
    update: function() {
+
+      this.boss.tint = 0xFFFFFF;
 
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed && !playerDead) {
@@ -166,7 +168,7 @@ BossMap.prototype = {
             }
          }
       }
-      
+
       // Player with boss
       if (!injured) {
          if (game.physics.arcade.collide(this.boss, this.player)) {
@@ -210,11 +212,10 @@ BossMap.prototype = {
 
    // Health loss and death for CK upon bullet collision
    bulletHitsBoss: function(boss, bullet) {
-      //console.log(bossHealth);
       bulletDestroyed(game, bullet);
-      //console.log(bossHealth);
       bossHealth--;
       console.log(bossHealth);
+      boss.tint = 0xFF0000;
 
       if (bossHealth <= 0) {
          bossDefeated = true;
@@ -262,6 +263,7 @@ BossMap.prototype = {
       this.enemyBullets.add(bullet);
    },
 
+   // Boss shooting bullets
    bossShoot: function(boss) {
       this.boss.animations.play('shoot');
       var bullet = new Bullet(game, boss.x + 24, boss.y + 85, -1, 300);
@@ -274,7 +276,8 @@ BossMap.prototype = {
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
    },
-   
+
+   // Player picking up the item dropped by king color
    playerGetsPickup: function(player, pickup){
       if(bossHealth <= 0){
         song.stop();
