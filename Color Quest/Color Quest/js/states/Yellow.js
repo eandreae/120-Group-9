@@ -126,7 +126,7 @@ Yellow.prototype = {
          // Yellow collectable
          bmd = game.add.bitmapData(75, 75);
          bmd.fill(255, 255, 0, 1);
-         this.yellow = game.add.sprite(4000, 864, 'upgrade_y');
+         this.yellow = game.add.sprite(4000, 832, 'upgrade_y');
          game.physics.arcade.enable(this.yellow);
 
       } else if (yellowLevel == 1) {
@@ -161,7 +161,7 @@ Yellow.prototype = {
         // Yellow collectable
         bmd = game.add.bitmapData(75, 75);
         bmd.fill(255, 255, 0, 1);
-        this.yellow = game.add.sprite(4000, 864, 'upgrade_y');
+        this.yellow = game.add.sprite(4000, 832, 'upgrade_y');
         game.physics.arcade.enable(this.yellow);
 
       } else if (yellowLevel == 2) {
@@ -202,7 +202,7 @@ Yellow.prototype = {
          // Yellow collectable
          bmd = game.add.bitmapData(75, 75);
          bmd.fill(255, 255, 0, 1);
-         this.yellow = game.add.sprite(4000, 864, 'upgrade_y');
+         this.yellow = game.add.sprite(4000, 832, 'upgrade_y');
          game.physics.arcade.enable(this.yellow);
       }
 
@@ -230,7 +230,7 @@ Yellow.prototype = {
       // Wall of death that chases the player when activated
       bmd = game.add.bitmapData(2000, 2000);
       bmd.fill(127, 106, 0, 1);
-      this.wall = game.add.sprite(-1000, 0, bmd);
+      this.wall = game.add.sprite(-2000, 0, bmd);
       game.physics.arcade.enable(this.wall);
       this.wall.body.immovable = true;
 

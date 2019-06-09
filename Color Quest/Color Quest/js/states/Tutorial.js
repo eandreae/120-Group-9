@@ -405,7 +405,7 @@ Tutorial.prototype = {
       // The text at the end of the game for the credits.
       // Check if they have beaten the game.
       if (bossDefeated == true) {
-         youWin = game.add.text(3424, 608, "You Won!!\nPress R to restart the game from the beginning!");
+         youWin = game.add.text(3424, 758, "Press R to restart the game from the beginning!");
          youWin.anchor.set(0.5);
       }
 
