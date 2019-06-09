@@ -208,7 +208,7 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":2304,
+                 "x":1792,
                  "y":800
                 }, 
                 {
@@ -219,7 +219,7 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":2016,
+                 "x":1696,
                  "y":800
                 }, 
                 {
@@ -230,7 +230,7 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":2528,
+                 "x":2464,
                  "y":800
                 }, 
                 {
@@ -263,7 +263,7 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":3200,
+                 "x":3264,
                  "y":800
                 }, 
                 {
@@ -285,7 +285,7 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":3424,
+                 "x":3552,
                  "y":800
                 }, 
                 {
@@ -307,7 +307,7 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":2816,
+                 "x":2848,
                  "y":800
                 }, 
                 {
@@ -318,19 +318,19 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":3648,
+                 "x":3840,
                  "y":800
                 }, 
                 {
                  "height":63.3333,
                  "id":60,
-                 "name":"NPC 7",
+                 "name":"Text",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":3872,
-                 "y":800
+                 "x":3424,
+                 "y":608
                 }],
          "opacity":1,
          "type":"objectgroup",

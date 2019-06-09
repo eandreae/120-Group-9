@@ -267,18 +267,18 @@
   <object id="34" name="NPC 1" x="416" y="800" width="64" height="63.3333"/>
   <object id="35" name="NPC 2" x="3808" y="128" width="64" height="63.3333"/>
   <object id="36" name="NPC 3" x="800" y="800" width="64" height="63.3333"/>
-  <object id="37" name="NPC 4" x="2304" y="800" width="64" height="63.3333"/>
-  <object id="38" name="NPC 5" x="2016" y="800" width="64" height="63.3333"/>
-  <object id="39" name="NPC 6" x="2528" y="800" width="64" height="63.3333"/>
+  <object id="37" name="NPC 4" x="1792" y="800" width="64" height="63.3333"/>
+  <object id="38" name="NPC 5" x="1696" y="800" width="64" height="63.3333"/>
+  <object id="39" name="NPC 6" x="2464" y="800" width="64" height="63.3333"/>
   <object id="46" name="NPC 7" x="3712" y="800" width="64" height="63.3333"/>
  </objectgroup>
  <objectgroup id="37" name="NPCs After Boss">
-  <object id="54" name="NPC 1" x="3200" y="800" width="64" height="63.3333"/>
+  <object id="54" name="NPC 1" x="3264" y="800" width="64" height="63.3333"/>
   <object id="55" name="NPC 2" x="3808" y="128" width="64" height="63.3333"/>
-  <object id="56" name="NPC 3" x="3424" y="800" width="64" height="63.3333"/>
+  <object id="56" name="NPC 3" x="3552" y="800" width="64" height="63.3333"/>
   <object id="57" name="NPC 4" x="2976" y="800" width="64" height="63.3333"/>
-  <object id="58" name="NPC 5" x="2816" y="800" width="64" height="63.3333"/>
-  <object id="59" name="NPC 6" x="3648" y="800" width="64" height="63.3333"/>
-  <object id="60" name="NPC 7" x="3872" y="800" width="64" height="63.3333"/>
+  <object id="58" name="NPC 5" x="2848" y="800" width="64" height="63.3333"/>
+  <object id="59" name="NPC 6" x="3840" y="800" width="64" height="63.3333"/>
+  <object id="60" name="Text" x="3424" y="608" width="64" height="63.3333"/>
  </objectgroup>
 </map>

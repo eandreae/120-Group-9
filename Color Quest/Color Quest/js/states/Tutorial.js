@@ -200,17 +200,17 @@ Tutorial.prototype = {
           this.npcs.add(this.n3);
 
           // NPC4
-          this.n4 = new NPC(game, 2304, 800, 'npc_sleep');
+          this.n4 = new NPC(game, 1792, 800, 'npc_sleep');
           game.add.existing(this.n4);
           this.npcs.add(this.n4);
 
           // NPC5
-          this.n5 = new NPC(game, 2016, 800, 'npc_whatever');
+          this.n5 = new NPC(game, 1696, 800, 'npc_whatever');
           game.add.existing(this.n5);
           this.npcs.add(this.n5);
 
           // NPC6
-          this.n6 = new NPC(game, 2258, 800, 'npc_smiley');
+          this.n6 = new NPC(game, 2464, 800, 'npc_smiley');
           game.add.existing(this.n6);
           this.npcs.add(this.n6);
 
@@ -233,7 +233,7 @@ Tutorial.prototype = {
           // to congratulate the player for prevailing.
 
           // NPC 1
-          this.n1 = new NPC(game, 3232, 800, 'npc_cute');
+          this.n1 = new NPC(game, 3264, 800, 'npc_cute');
           game.add.existing(this.n1);
           this.npcs.add(this.n1);
 
@@ -243,7 +243,7 @@ Tutorial.prototype = {
           this.npcs.add(this.n2);
 
           // NPC3
-          this.n3 = new NPC(game, 3520, 800, 'npc_generic_r');
+          this.n3 = new NPC(game, 3552, 800, 'npc_generic_r');
           game.add.existing(this.n3);
           this.npcs.add(this.n3);
 
@@ -253,12 +253,12 @@ Tutorial.prototype = {
           this.npcs.add(this.n4);
 
           // NPC5
-          this.n5 = new NPC(game, 2816, 800, 'npc_whatever');
+          this.n5 = new NPC(game, 2848, 800, 'npc_whatever');
           game.add.existing(this.n5);
           this.npcs.add(this.n5);
 
           // NPC6
-          this.n6 = new NPC(game, 3808, 800, 'npc_smiley');
+          this.n6 = new NPC(game, 3840, 800, 'npc_smiley');
           game.add.existing(this.n6);
           this.npcs.add(this.n6);
 
@@ -421,7 +421,11 @@ Tutorial.prototype = {
    }
 
    // The text at the end of the game for the credits.
-   game.add.text(3424, 608, "You Won!!");
+   // Check if they have beaten the game.
+   if( bossDefeated == true ){
+       game.add.text(3424, 608, "You Won!!");
+   }
+
 
 
       // Adds the player into the state
