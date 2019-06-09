@@ -1,5 +1,8 @@
 // Tutorial state
 // the first level of the game.
+var shootSFX;
+var enemyShootSFX;
+var hurtSFX;
 var Tutorial = function(game) {};
 Tutorial.prototype = {
 
@@ -17,6 +20,9 @@ Tutorial.prototype = {
    preload: function() {
       game.load.tilemap('layout', 'assets/TileMaps/Tutorial.json', null, Phaser.Tilemap.TILED_JSON);
       game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles_2.png', 32, 32);
+      shootSFX = game.add.audio('shoot');
+      enemyShootSFX = game.add.audio('enemyShoot');
+      hurtSFX = game.add.audio('hurt');
    },
 
    create: function() {
@@ -29,7 +35,7 @@ Tutorial.prototype = {
       } else {
          song = game.add.audio('sad1');
       }
-      song.play('', 0, 0.5, true);
+      song.play('', 0, 0.2, true);
 
       // Setting the world bounds
       game.world.setBounds(0, 0, 1024, 1024);
@@ -564,6 +570,7 @@ Tutorial.prototype = {
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed && !playerDead) {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, playerBulletSpeed);
+         shootSFX.play('', 0, 0.5, false);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
       }
@@ -692,6 +699,7 @@ Tutorial.prototype = {
 
             // If player health reaches 0, they die
             if (health == 0) {
+                hurtSFX.play('', 0, 0.5, false);
                song.stop();
                playerDies(game, this.player, 'Tutorial');
             }
@@ -730,6 +738,7 @@ Tutorial.prototype = {
 
       // If player health reaches 0, they die
       if (health == 0) {
+          hurtSFX.play('', 0, 0.5, false);
          playerDies(game, player, 'Tutorial');
          song.stop();
       }
@@ -748,6 +757,7 @@ Tutorial.prototype = {
    // Creates the bullet for each enemy
    enemyShoot: function(enemy) {
       var bullet = new Bullet(game, enemy.x, enemy.y, enemy.direction, 350);
+      enemyShootSFX.play('', 0, 0.5, false);
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
    },

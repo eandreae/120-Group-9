@@ -1,4 +1,6 @@
 // Red color state
+var shootSFX;
+var enemyShootSFX;
 var Red = function(game) {};
 Red.prototype = {
 
@@ -8,12 +10,15 @@ Red.prototype = {
       talking = false;
       injured = false;
       health = 5;
+
    },
 
    // Preload the tilemap
    preload: function() {
       game.load.tilemap('layout', 'assets/TileMaps/Red.json', null, Phaser.Tilemap.TILED_JSON);
       game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles.png', 32, 32);
+      shootSFX = game.add.audio('shoot');
+      enemyShootSFX = game.add.audio('enemyShoot');
    },
 
    create: function() {
@@ -299,6 +304,7 @@ Red.prototype = {
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed && !playerDead) {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, playerBulletSpeed);
+         shootSFX.play('', 0, 0.5, false);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
       }
@@ -456,6 +462,7 @@ Red.prototype = {
 
    enemyShoot: function(enemy) {
       var bullet = new Bullet(game, enemy.x, enemy.y, enemy.direction, 300);
+      enemyShootSFX.play('', 0, 0.5, false);
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
    },

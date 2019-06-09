@@ -89,6 +89,8 @@ Load.prototype = {
       game.load.audio('hi_6', 'assets/audio/NPChi6.mp3');
       game.load.audio('hi_7', 'assets/audio/NPChi7.mp3');
       game.load.audio('solaire', 'assets/audio/solaire.mp3');
+      // enemy sounds
+      game.load.audio('enemyShoot', 'assets/audio/enemyShoot.mp3');
 
 
    },

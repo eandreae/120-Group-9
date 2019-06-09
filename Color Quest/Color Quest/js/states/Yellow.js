@@ -1,4 +1,6 @@
 // Yellow color state
+var shootSFX;
+var hurtSFX;
 var Yellow = function(game) {};
 Yellow.prototype = {
 
@@ -15,6 +17,8 @@ Yellow.prototype = {
    preload: function() {
       game.load.tilemap('layout', 'assets/TileMaps/Yellow.json', null, Phaser.Tilemap.TILED_JSON);
       game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles.png', 32, 32);
+      shootSFX = game.add.audio('shoot');
+      hurtSFX = game.add.audio('hurt');
    },
 
    create: function() {
@@ -260,6 +264,7 @@ Yellow.prototype = {
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed && !playerDead) {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, playerBulletSpeed);
+         shootSFX.play('', 0, 0.5, false);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
       }
@@ -323,6 +328,7 @@ Yellow.prototype = {
 
             // If player health reaches 0, they die
             if (health == 0) {
+                hurtSFX.play('', 0, 0.5, false);
                song.stop();
                playerDies(game, this.player, 'Yellow');
             }
@@ -346,6 +352,7 @@ Yellow.prototype = {
       if (this.physics.arcade.collide(this.player, this.wall)) {
 			if (!this.stoppedWall) {
 	         health = 0;
+             hurtSFX.play('', 0, 0.5, false);
 	         playerDies(this, this.player, 'Yellow');
 			}
       }

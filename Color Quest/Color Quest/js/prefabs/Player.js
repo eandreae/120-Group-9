@@ -2,6 +2,8 @@ var dashing;               // If the player is currently dashing
 var dash = 0;              // The # of dashes the player gets
 var jumps = 0;             // The # of jumps the player gets
 var jumpSFX;               // The jumping sound effect
+var dashSFX;               // The dashing sound effect
+var hurtSFX;               // The hurt sound effect
 var hp = 5;           // Player health
 var knockback;             // If player is currently in knockback state
 var platforms;             // The platforms in the state
@@ -18,6 +20,8 @@ var timerStopFlash;        // Timer to stop timerFlash
 function Player(game, x, y, map) {
    platforms = map;
    jumpSFX = game.add.audio('jump');
+   dashSFX = game.add.audio('dash');
+   hurtSFX = game.add.audio('hurt');
    hp = health;
    direction = 1;
 
@@ -156,6 +160,7 @@ Player.prototype.update = function() {
 
    // Player can only dash once in the air
    if (game.input.keyboard.justPressed(Phaser.Keyboard.C) && dash != 0 && !playerDead && !talking) {
+       dashSFX.play('', 0, 0.5, false);
       dashing = true;
       oldPos = this.x;
       dash--;
@@ -174,6 +179,7 @@ Player.prototype.update = function() {
 
    // If the player has taken damage
    if (health < hp && health != 0) {
+       hurtSFX.play('', 0, 0.5, false);
       injured = true;
       knockback = true;
       hp = health;

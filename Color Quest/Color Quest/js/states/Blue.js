@@ -1,4 +1,5 @@
 // Blue color state
+var shootSFX;
 var Blue = function(game) {};
 Blue.prototype = {
 
@@ -14,6 +15,7 @@ Blue.prototype = {
    preload: function() {
       game.load.tilemap('layout', 'assets/TileMaps/Blue.json', null, Phaser.Tilemap.TILED_JSON);
       game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles.png', 32, 32);
+      game.load.audio('shoot');
    },
 
    create: function() {
@@ -292,6 +294,7 @@ Blue.prototype = {
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed && !playerDead) {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, playerBulletSpeed);
+         shootSFX.play('', 0, 0.5, false);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
       }
