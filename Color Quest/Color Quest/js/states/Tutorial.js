@@ -180,10 +180,91 @@ Tutorial.prototype = {
       this.npcs = game.add.group();
       this.npcs.enableBody = true;
 
-      this.n1 = new NPC(game, 500, 865, 'npc_cute');
-      game.add.existing(this.n1);
-      this.npcs.add(this.n1);
+      // All NPCs spawn in different spaces depending on the stage of the game.
+      if( bossDefeated == false ) {
+          // If the boss hasn't been defeated, then we spawn them in their normal spaces.
 
+          // NPC 1
+          this.n1 = new NPC(game, 416, 800, 'npc_cute');
+          game.add.existing(this.n1);
+          this.npcs.add(this.n1);
+
+          // NPC2
+          this.n2 = new NPC(game, 3808, 128, 'npc_solaire');
+          game.add.existing(this.n2);
+          this.npcs.add(this.n2);
+
+          // NPC3
+          this.n3 = new NPC(game, 800, 800, 'npc_generic_r');
+          game.add.existing(this.n3);
+          this.npcs.add(this.n3);
+
+          // NPC4
+          this.n4 = new NPC(game, 2304, 800, 'npc_sleep');
+          game.add.existing(this.n4);
+          this.npcs.add(this.n4);
+
+          // NPC5
+          this.n5 = new NPC(game, 2016, 800, 'npc_whatever');
+          game.add.existing(this.n5);
+          this.npcs.add(this.n5);
+
+          // NPC6
+          this.n6 = new NPC(game, 2258, 800, 'npc_smiley');
+          game.add.existing(this.n6);
+          this.npcs.add(this.n6);
+
+          // NPC7
+          if (metKingColor == false) {
+             this.n7 = new NPC(game, 3712, 800, 'npc_cute');
+             game.add.existing(this.n7);
+             this.npcs.add(this.n7);
+             //The array for the text
+             this.n7Text = new Array();
+
+             this.n7Text[0] = "Hey... Where'd the color go?";
+             this.n7Text[1] = "Something doesn't feel right...";
+             this.n7Text[2] = "WOAH! Bucky! Watch out!";
+             this.n7Text[3] = "";
+          }
+      }
+      else {
+          // If the boss has been defeated, then they all amass at the end of the game,
+          // to congratulate the player for prevailing.
+
+          // NPC 1
+          this.n1 = new NPC(game, 3232, 800, 'npc_cute');
+          game.add.existing(this.n1);
+          this.npcs.add(this.n1);
+
+          // NPC2 - Stay in the clouds, but says different things.
+          this.n2 = new NPC(game, 3808, 128, 'npc_solaire');
+          game.add.existing(this.n2);
+          this.npcs.add(this.n2);
+
+          // NPC3
+          this.n3 = new NPC(game, 3520, 800, 'npc_generic_r');
+          game.add.existing(this.n3);
+          this.npcs.add(this.n3);
+
+          // NPC4
+          this.n4 = new NPC(game, 2976, 800, 'npc_sleep');
+          game.add.existing(this.n4);
+          this.npcs.add(this.n4);
+
+          // NPC5
+          this.n5 = new NPC(game, 2816, 800, 'npc_whatever');
+          game.add.existing(this.n5);
+          this.npcs.add(this.n5);
+
+          // NPC6
+          this.n6 = new NPC(game, 3808, 800, 'npc_smiley');
+          game.add.existing(this.n6);
+          this.npcs.add(this.n6);
+
+      }
+
+      // NPC TEXT
       //The array for the text
       this.n1Text = new Array();
 
@@ -212,11 +293,6 @@ Tutorial.prototype = {
          this.n1Text[3] = "";
       }
 
-      // NPC2
-      this.n2 = new NPC(game, 3808, 128, 'npc_solaire');
-      game.add.existing(this.n2);
-      this.npcs.add(this.n2);
-
       //The array for the text
       this.n2Text = new Array();
 
@@ -242,11 +318,6 @@ Tutorial.prototype = {
          this.n2Text[3] = "";
       }
 
-      // NPC3
-      this.n3 = new NPC(game, 800, 740, 'npc_smiley');
-      game.add.existing(this.n3);
-      this.npcs.add(this.n3);
-
       //The array for the text
       this.n3Text = new Array();
 
@@ -268,11 +339,6 @@ Tutorial.prototype = {
          this.n3Text[1] = "Thank you so much, Mister. We'd love\nto have you here again anytime!";
          this.n3Text[2] = "";
       }
-
-      // NPC4
-      this.n4 = new NPC(game, 1800, 700, 'npc_sleep');
-      game.add.existing(this.n4);
-      this.npcs.add(this.n4);
 
       //The array for the text
       this.n4Text = new Array();
@@ -296,11 +362,6 @@ Tutorial.prototype = {
          this.n4Text[2] = "";
       }
 
-      // NPC5
-      this.n5 = new NPC(game, 1695, 800, 'npc_whatever');
-      game.add.existing(this.n5);
-      this.npcs.add(this.n5);
-
       //The array for the text
       this.n5Text = new Array();
 
@@ -318,7 +379,7 @@ Tutorial.prototype = {
       } else if (metKingColor == true && (!hasRed || !hasYellow || !hasBlue)) {
          this.n5Text[0] = "Hey, you're doing it! Great\nwork, man. Keep at it!";
          this.n5Text[1] = "";
-      } else if (!bossDefeated){ 
+      } else if (!bossDefeated){
          this.n5Text[0] = "Almost there. Show that\nKing Color guy what\nyou can do, eh?";
          this.n5Text[1] = "";
       } else {
@@ -327,11 +388,6 @@ Tutorial.prototype = {
          this.n5Text[2] = "That's cool.";
          this.n5Text[3] = "";
       }
-
-      // NPC6
-      this.n6 = new NPC(game, 2207, 833, 'npc_generic_r');
-      game.add.existing(this.n6);
-      this.npcs.add(this.n6);
 
       //The array for the text
       this.n6Text = new Array();
@@ -364,20 +420,9 @@ Tutorial.prototype = {
          this.n6Text[3] = "";
    }
 
-      // NPC7
-      if (metKingColor == false) {
-         this.n7 = new NPC(game, 3700, 833, 'npc_cute');
-         game.add.existing(this.n7);
-         this.npcs.add(this.n7);
+   // The text at the end of the game for the credits.
+   game.add.text(3424, 608, "You Won!!");
 
-         //The array for the text
-         this.n7Text = new Array();
-
-         this.n7Text[0] = "Hey... Where'd the color go?";
-         this.n7Text[1] = "Something doesn't feel right...";
-         this.n7Text[2] = "WOAH! Bucky! Watch out!";
-         this.n7Text[3] = "";
-      }
 
       // Adds the player into the state
       if (metKingColor && !hasRed && !hasYellow && !hasBlue) {

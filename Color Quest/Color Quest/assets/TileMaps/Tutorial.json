@@ -103,17 +103,6 @@
                 }, 
                 {
                  "height":63.3333,
-                 "id":3,
-                 "name":"NPC1",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":64,
-                 "x":256,
-                 "y":832
-                }, 
-                {
-                 "height":63.3333,
                  "id":14,
                  "name":"Red",
                  "rotation":0,
@@ -166,17 +155,182 @@
                  "width":64,
                  "x":2880,
                  "y":832
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":36,
+         "name":"NPCs Before Boss",
+         "objects":[
+                {
+                 "height":63.3333,
+                 "id":34,
+                 "name":"NPC 1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":416,
+                 "y":800
                 }, 
                 {
                  "height":63.3333,
-                 "id":19,
-                 "name":"Blue",
+                 "id":35,
+                 "name":"NPC 2",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":64,
                  "x":3808,
                  "y":128
+                }, 
+                {
+                 "height":63.3333,
+                 "id":36,
+                 "name":"NPC 3",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":800,
+                 "y":800
+                }, 
+                {
+                 "height":63.3333,
+                 "id":37,
+                 "name":"NPC 4",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":2304,
+                 "y":800
+                }, 
+                {
+                 "height":63.3333,
+                 "id":38,
+                 "name":"NPC 5",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":2016,
+                 "y":800
+                }, 
+                {
+                 "height":63.3333,
+                 "id":39,
+                 "name":"NPC 6",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":2528,
+                 "y":800
+                }, 
+                {
+                 "height":63.3333,
+                 "id":46,
+                 "name":"NPC 7",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":3712,
+                 "y":800
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":37,
+         "name":"NPCs After Boss",
+         "objects":[
+                {
+                 "height":63.3333,
+                 "id":54,
+                 "name":"NPC 1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":3200,
+                 "y":800
+                }, 
+                {
+                 "height":63.3333,
+                 "id":55,
+                 "name":"NPC 2",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":3808,
+                 "y":128
+                }, 
+                {
+                 "height":63.3333,
+                 "id":56,
+                 "name":"NPC 3",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":3424,
+                 "y":800
+                }, 
+                {
+                 "height":63.3333,
+                 "id":57,
+                 "name":"NPC 4",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":2976,
+                 "y":800
+                }, 
+                {
+                 "height":63.3333,
+                 "id":58,
+                 "name":"NPC 5",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":2816,
+                 "y":800
+                }, 
+                {
+                 "height":63.3333,
+                 "id":59,
+                 "name":"NPC 6",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":3648,
+                 "y":800
+                }, 
+                {
+                 "height":63.3333,
+                 "id":60,
+                 "name":"NPC 7",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":3872,
+                 "y":800
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -184,11 +338,11 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":36,
- "nextobjectid":20,
+ "nextlayerid":38,
+ "nextobjectid":61,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.2.4",
+ "tiledversion":"1.2.3",
  "tileheight":32,
  "tilesets":[
         {
