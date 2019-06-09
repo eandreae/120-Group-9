@@ -74,6 +74,12 @@ Load.prototype = {
       game.load.audio('shoot', 'assets/audio/shoot.mp3');
       game.load.audio('hurt', 'assets/audio/ow4.mp3');
       game.load.audio('dash', 'assets/audio/dash.mp3');
+      game.load.audio('KC_laugh', 'assets/audio/KingColor laugh.mp3');
+      game.load.audio('KC_shoot', 'assets/audio/KingColor shoot.mp3');
+      game.load.audio('KC_hurt', 'assets/audio/KingColor hurt.mp3');
+      game.load.audio('KC_dies', 'assets/audio/KingColor dies.mp3');
+
+
 
    },
    create: function() {
