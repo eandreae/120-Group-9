@@ -40,8 +40,7 @@ Tutorial.prototype = {
 
       if (metKingColor == false || bossDefeated) {
          background = game.add.image(0, 0, 'bg_town');
-      }
-      else {
+      } else {
          background = game.add.image(0, 0, 'bg_town_gray');
          if (hasYellow) background = game.add.image(0, 0, 'bg_town_y');
          if (hasBlue) background = game.add.image(0, 0, 'bg_town_b');
@@ -124,19 +123,19 @@ Tutorial.prototype = {
 
          game.physics.enable(this.kingColorDude);
       }
-		if (metKingColor && !bossDefeated) {
-	      this.bossPortal = game.add.sprite(3136, 841, 'boss_door', 'bossdoor_b');
-	      this.bossPortal.anchor.set(0.5);
-			this.bossPortal.animations.add('sprite', [buckyValue / 16], 10, true)
-	      game.physics.arcade.enable(this.bossPortal);
-	      this.portals.add(this.bossPortal);
+      if (metKingColor && !bossDefeated) {
+         this.bossPortal = game.add.sprite(3136, 841, 'boss_door', 'bossdoor_b');
+         this.bossPortal.anchor.set(0.5);
+         this.bossPortal.animations.add('sprite', [buckyValue / 16], 10, true)
+         game.physics.arcade.enable(this.bossPortal);
+         this.portals.add(this.bossPortal);
 
-	      this.bossPortalText = new Array();
+         this.bossPortalText = new Array();
 
-	      this.bossPortalText[0] = "The door is sealed tight.";
-	      this.bossPortalText[1] = "Without the power of Red, Yellow, and\nBlue, you cannot hope to open the door.";
-	      this.bossPortalText[2] = "";
-		}
+         this.bossPortalText[0] = "The door is sealed tight.";
+         this.bossPortalText[1] = "Without the power of Red, Yellow, and\nBlue, you cannot hope to open the door.";
+         this.bossPortalText[2] = "";
+      }
 
       // Position of the NPC text.
       this.textPos = 0;
@@ -168,12 +167,12 @@ Tutorial.prototype = {
       this.textArea.fixedToCamera = false;
       this.world.bringToTop(this.textArea);
 
-		bmd = game.add.bitmapData(400, 100);
-		bmd.fill(255, 255, 255, 1);
-		this.behindText = game.add.sprite(0, 0, bmd);
-		this.behindText.anchor.set(0.5);
-		this.behindText.visible = false;
-		this.behindText.alpha = 0.5;
+      bmd = game.add.bitmapData(400, 100);
+      bmd.fill(255, 255, 255, 1);
+      this.behindText = game.add.sprite(0, 0, bmd);
+      this.behindText.anchor.set(0.5);
+      this.behindText.visible = false;
+      this.behindText.alpha = 0.5;
 
       // NPC Group
       // All NPCs have different text depending on where you are at the game
@@ -181,86 +180,85 @@ Tutorial.prototype = {
       this.npcs.enableBody = true;
 
       // All NPCs spawn in different spaces depending on the stage of the game.
-      if( bossDefeated == false ) {
-          // If the boss hasn't been defeated, then we spawn them in their normal spaces.
+      if (bossDefeated == false) {
+         // If the boss hasn't been defeated, then we spawn them in their normal spaces.
 
-          // NPC 1
-          this.n1 = new NPC(game, 416, 800, 'npc_cute');
-          game.add.existing(this.n1);
-          this.npcs.add(this.n1);
+         // NPC 1
+         this.n1 = new NPC(game, 416, 800, 'npc_cute');
+         game.add.existing(this.n1);
+         this.npcs.add(this.n1);
 
-          // NPC2
-          this.n2 = new NPC(game, 3808, 128, 'npc_solaire');
-          game.add.existing(this.n2);
-          this.npcs.add(this.n2);
+         // NPC2
+         this.n2 = new NPC(game, 3808, 128, 'npc_solaire');
+         game.add.existing(this.n2);
+         this.npcs.add(this.n2);
 
-          // NPC3
-          this.n3 = new NPC(game, 800, 800, 'npc_generic_r');
-          game.add.existing(this.n3);
-          this.npcs.add(this.n3);
+         // NPC3
+         this.n3 = new NPC(game, 800, 800, 'npc_generic_r');
+         game.add.existing(this.n3);
+         this.npcs.add(this.n3);
 
-          // NPC4
-          this.n4 = new NPC(game, 1792, 800, 'npc_sleep');
-          game.add.existing(this.n4);
-          this.npcs.add(this.n4);
+         // NPC4
+         this.n4 = new NPC(game, 1792, 800, 'npc_sleep');
+         game.add.existing(this.n4);
+         this.npcs.add(this.n4);
 
-          // NPC5
-          this.n5 = new NPC(game, 1696, 800, 'npc_whatever');
-          game.add.existing(this.n5);
-          this.npcs.add(this.n5);
+         // NPC5
+         this.n5 = new NPC(game, 1696, 800, 'npc_whatever');
+         game.add.existing(this.n5);
+         this.npcs.add(this.n5);
 
-          // NPC6
-          this.n6 = new NPC(game, 2464, 800, 'npc_smiley');
-          game.add.existing(this.n6);
-          this.npcs.add(this.n6);
+         // NPC6
+         this.n6 = new NPC(game, 2464, 800, 'npc_smiley');
+         game.add.existing(this.n6);
+         this.npcs.add(this.n6);
 
-          // NPC7
-          if (metKingColor == false) {
-             this.n7 = new NPC(game, 3712, 800, 'npc_cute');
-             game.add.existing(this.n7);
-             this.npcs.add(this.n7);
-             //The array for the text
-             this.n7Text = new Array();
+         // NPC7
+         if (metKingColor == false) {
+            this.n7 = new NPC(game, 3712, 800, 'npc_cute');
+            game.add.existing(this.n7);
+            this.npcs.add(this.n7);
+            //The array for the text
+            this.n7Text = new Array();
 
-             this.n7Text[0] = "Hey... Where'd the color go?";
-             this.n7Text[1] = "Something doesn't feel right...";
-             this.n7Text[2] = "WOAH! Bucky! Watch out!";
-             this.n7Text[3] = "";
-          }
-      }
-      else {
-          // If the boss has been defeated, then they all amass at the end of the game,
-          // to congratulate the player for prevailing.
+            this.n7Text[0] = "Hey... Where'd the color go?";
+            this.n7Text[1] = "Something doesn't feel right...";
+            this.n7Text[2] = "WOAH! Bucky! Watch out!";
+            this.n7Text[3] = "";
+         }
+      } else {
+         // If the boss has been defeated, then they all amass at the end of the game,
+         // to congratulate the player for prevailing.
 
-          // NPC 1
-          this.n1 = new NPC(game, 3264, 800, 'npc_cute');
-          game.add.existing(this.n1);
-          this.npcs.add(this.n1);
+         // NPC 1
+         this.n1 = new NPC(game, 3264, 800, 'npc_cute');
+         game.add.existing(this.n1);
+         this.npcs.add(this.n1);
 
-          // NPC2 - Stay in the clouds, but says different things.
-          this.n2 = new NPC(game, 3808, 128, 'npc_solaire');
-          game.add.existing(this.n2);
-          this.npcs.add(this.n2);
+         // NPC2 - Stay in the clouds, but says different things.
+         this.n2 = new NPC(game, 3808, 128, 'npc_solaire');
+         game.add.existing(this.n2);
+         this.npcs.add(this.n2);
 
-          // NPC3
-          this.n3 = new NPC(game, 3552, 800, 'npc_generic_r');
-          game.add.existing(this.n3);
-          this.npcs.add(this.n3);
+         // NPC3
+         this.n3 = new NPC(game, 3552, 800, 'npc_generic_r');
+         game.add.existing(this.n3);
+         this.npcs.add(this.n3);
 
-          // NPC4
-          this.n4 = new NPC(game, 2976, 800, 'npc_sleep');
-          game.add.existing(this.n4);
-          this.npcs.add(this.n4);
+         // NPC4
+         this.n4 = new NPC(game, 2976, 800, 'npc_sleep');
+         game.add.existing(this.n4);
+         this.npcs.add(this.n4);
 
-          // NPC5
-          this.n5 = new NPC(game, 2848, 800, 'npc_whatever');
-          game.add.existing(this.n5);
-          this.npcs.add(this.n5);
+         // NPC5
+         this.n5 = new NPC(game, 2848, 800, 'npc_whatever');
+         game.add.existing(this.n5);
+         this.npcs.add(this.n5);
 
-          // NPC6
-          this.n6 = new NPC(game, 3840, 800, 'npc_smiley');
-          game.add.existing(this.n6);
-          this.npcs.add(this.n6);
+         // NPC6
+         this.n6 = new NPC(game, 3840, 800, 'npc_smiley');
+         game.add.existing(this.n6);
+         this.npcs.add(this.n6);
 
       }
 
@@ -281,7 +279,7 @@ Tutorial.prototype = {
       } else if (metKingColor == true && (hasRed || hasYellow || hasBlue) && (!hasRed || !hasYellow || !hasBlue)) {
          this.n1Text[0] = "Yeah, that's it! Keep collectin' the colors!";
          this.n1Text[1] = "";
-      } else if (!bossDefeated){
+      } else if (!bossDefeated) {
          this.n1Text[0] = "You've got all the colors...y'know what to do.";
          this.n1Text[1] = "Go beat that tyrant, King\nColor, an' restore color to our land!";
          this.n1Text[2] = "You can do it! You're the\nonly one who can!";
@@ -307,7 +305,7 @@ Tutorial.prototype = {
          this.n2Text[0] = "The SUN! NOOOOOOO!";
          this.n2Text[1] = "OUR YELLOW GLORY\nMUST BE RESTORED!";
          this.n2Text[2] = "";
-      } else if (!bossDefeated){
+      } else if (!bossDefeated) {
          this.n2Text[0] = "The SUN! IT HAS RETURNED!";
          this.n2Text[1] = "HAHAHAHA! With this, we\nare...UNBEATABLE! That false\nking will FALL before the SUN!";
          this.n2Text[2] = "";
@@ -379,7 +377,7 @@ Tutorial.prototype = {
       } else if (metKingColor == true && (!hasRed || !hasYellow || !hasBlue)) {
          this.n5Text[0] = "Hey, you're doing it! Great\nwork, man. Keep at it!";
          this.n5Text[1] = "";
-      } else if (!bossDefeated){
+      } else if (!bossDefeated) {
          this.n5Text[0] = "Almost there. Show that\nKing Color guy what\nyou can do, eh?";
          this.n5Text[1] = "";
       } else {
@@ -418,21 +416,18 @@ Tutorial.prototype = {
          this.n6Text[1] = "I really can't thank you enough.\nOver to the right, I've put a little\nsomething together for you."
          this.n6Text[2] = "It doesn't even begin to repay\nall the good you've done, but\nhopefully, it's at least a start.";
          this.n6Text[3] = "";
-   }
+      }
 
-   // The text at the end of the game for the credits.
-   // Check if they have beaten the game.
-   if( bossDefeated == true ){
-       game.add.text(3424, 608, "You Won!!");
-   }
-
-
+      // The text at the end of the game for the credits.
+      // Check if they have beaten the game.
+      if (bossDefeated == true) {
+         game.add.text(3424, 608, "You Won!!\nPress R to restart the game from the beginning!");
+      }
 
       // Adds the player into the state
       if (metKingColor && !hasRed && !hasYellow && !hasBlue) {
          this.player = new Player(game, 64, 150, this.mapLayer);
-      }
-      else this.player = new Player(game, 64, 840, this.mapLayer);
+      } else this.player = new Player(game, 64, 840, this.mapLayer);
       game.add.existing(this.player);
 
       // The enemy groups
@@ -469,26 +464,26 @@ Tutorial.prototype = {
    },
 
    update: function() {
-		// Sets boss door sprite depending on what colors you have
-		if (metKingColor && !bossDefeated)
-			this.bossPortal.animations.play('sprite')
+      // Sets boss door sprite depending on what colors you have
+      if (metKingColor && !bossDefeated)
+         this.bossPortal.animations.play('sprite')
 
-		// If the player isn't overlapping with anything interactable, the interactText is invisible
-	   if (!game.physics.arcade.overlap(this.player, this.npcs) && !game.physics.arcade.overlap(this.player, this.portals) || talking) {
-	      this.interactText.visible = false;
-			if (!talking)
-				this.behindText.visible = false;
-	   }
+      // If the player isn't overlapping with anything interactable, the interactText is invisible
+      if (!game.physics.arcade.overlap(this.player, this.npcs) && !game.physics.arcade.overlap(this.player, this.portals) || talking) {
+         this.interactText.visible = false;
+         if (!talking)
+            this.behindText.visible = false;
+      }
 
       // Go into the red state
       if (!hasRed) {
          if (this.physics.arcade.overlap(this.player, this.redPortal)) {
 
-				if (!talking) {
-	            // Display interact text
-	            this.setTextPosition(this.interactText, this.redPortal);
-	            this.interactText.visible = true;
-				}
+            if (!talking) {
+               // Display interact text
+               this.setTextPosition(this.interactText, this.redPortal);
+               this.interactText.visible = true;
+            }
 
             if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
                game.state.start('Red');
@@ -500,11 +495,11 @@ Tutorial.prototype = {
       if (!hasYellow) {
          if (this.physics.arcade.overlap(this.player, this.yellowPortal)) {
 
-				if (!talking) {
-	            // Display interact text
-	            this.setTextPosition(this.interactText, this.yellowPortal);
-	            this.interactText.visible = true;
-				}
+            if (!talking) {
+               // Display interact text
+               this.setTextPosition(this.interactText, this.yellowPortal);
+               this.interactText.visible = true;
+            }
 
             if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
                game.state.start('Yellow');
@@ -516,11 +511,11 @@ Tutorial.prototype = {
       if (!hasBlue) {
          if (this.physics.arcade.overlap(this.player, this.bluePortal)) {
 
-				if (!talking) {
-	            // Display interact text
-	            this.setTextPosition(this.interactText, this.bluePortal);
-	            this.interactText.visible = true;
-				}
+            if (!talking) {
+               // Display interact text
+               this.setTextPosition(this.interactText, this.bluePortal);
+               this.interactText.visible = true;
+            }
 
             if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
                game.state.start('Blue');
@@ -566,7 +561,7 @@ Tutorial.prototype = {
             else {
                // Timer for boss door text
                talking = true;
-					this.behindText.visible = true;
+               this.behindText.visible = true;
                this.interactText.visible = false;
                this.setTextPosition(this.textArea, this.bossPortal);
                this.textArea.text = this.bossPortalText[0];
@@ -582,6 +577,10 @@ Tutorial.prototype = {
          this.playerBullets.add(bullet);
       }
 
+      if (game.input.keyboard.justPressed(Phaser.Keyboard.R) && bossDefeated == true) {
+         game.state.start('MainMenu');
+      }
+
       // NPC1 text trigger
       if (game.physics.arcade.overlap(this.player, this.n1) && !talking) {
          // Display interact text
@@ -591,7 +590,7 @@ Tutorial.prototype = {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
             talking = true;
-				this.behindText.visible = true;
+            this.behindText.visible = true;
             this.interactText.visible = false;
             this.setTextPosition(this.textArea, this.n1);
             this.textArea.text = this.n1Text[0];
@@ -608,7 +607,7 @@ Tutorial.prototype = {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
             talking = true;
-				this.behindText.visible = true;
+            this.behindText.visible = true;
             this.interactText.visible = false;
             this.setTextPosition(this.textArea, this.n2);
             this.textArea.text = this.n2Text[0];
@@ -625,7 +624,7 @@ Tutorial.prototype = {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
             talking = true;
-				this.behindText.visible = true;
+            this.behindText.visible = true;
             this.interactText.visible = false;
             this.setTextPosition(this.textArea, this.n3);
             this.textArea.text = this.n3Text[0];
@@ -642,7 +641,7 @@ Tutorial.prototype = {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
             talking = true;
-				this.behindText.visible = true;
+            this.behindText.visible = true;
             this.interactText.visible = false;
             this.setTextPosition(this.textArea, this.n4);
             this.textArea.text = this.n4Text[0];
@@ -659,7 +658,7 @@ Tutorial.prototype = {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
             talking = true;
-				this.behindText.visible = true;
+            this.behindText.visible = true;
             this.interactText.visible = false;
             this.setTextPosition(this.textArea, this.n5);
             this.textArea.text = this.n5Text[0];
@@ -676,7 +675,7 @@ Tutorial.prototype = {
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
             talking = true;
-				this.behindText.visible = true;
+            this.behindText.visible = true;
             this.interactText.visible = false;
             this.setTextPosition(this.textArea, this.n6);
             this.textArea.text = this.n6Text[0];
@@ -763,9 +762,9 @@ Tutorial.prototype = {
       text.y = object.y - 75;
       this.world.bringToTop(text);
 
-		this.behindText.x = text.x;
-		this.behindText.y = text.y;
-		this.behindText.visible = true;
+      this.behindText.x = text.x;
+      this.behindText.y = text.y;
+      this.behindText.visible = true;
    },
 
    goThroughText: function(text) {
@@ -780,7 +779,7 @@ Tutorial.prototype = {
       // When finished through the dialog
       if (this.textPos == text.length) {
          npcText.stop();
-			this.behindText.visible = false;
+         this.behindText.visible = false;
          talking = false;
          this.textPos = 0;
 
