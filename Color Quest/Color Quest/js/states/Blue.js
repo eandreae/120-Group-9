@@ -105,7 +105,7 @@ Blue.prototype = {
          this.n1Text = new Array();
 
          this.n1Text[0] = "This place gives me the Blues :(";
-         this.n1Text[1] = "You better be careful of the platforming\nin here. Also watch out for King Color's cronies\njumping all around the place";
+         this.n1Text[1] = "You better be careful of the platforming\nin here. Also watch out for King Color's\ncronies jumping all around the place";
          this.n1Text[2] = "";
          // ENEMIES -----------------------------------------------------------
          // Adding the enemies for Level 0.

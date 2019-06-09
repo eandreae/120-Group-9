@@ -421,7 +421,8 @@ Tutorial.prototype = {
       // The text at the end of the game for the credits.
       // Check if they have beaten the game.
       if (bossDefeated == true) {
-         game.add.text(3424, 608, "You Won!!\nPress R to restart the game from the beginning!");
+         youWin = game.add.text(3424, 608, "You Won!!\nPress R to restart the game from the beginning!");
+         youWin.anchor.set(0.5);
       }
 
       // Adds the player into the state
@@ -437,9 +438,9 @@ Tutorial.prototype = {
       this.shootingEnemies.enableBody = true;
 
       // // // Place a moving enemy
-      var e1 = new Enemy(game, 500, 300, -100, true, false, this.player);
-      game.add.existing(e1);
-      this.enemies.add(e1);
+      // var e1 = new Enemy(game, 500, 300, -100, true, false, this.player);
+      // game.add.existing(e1);
+      // this.enemies.add(e1);
       // //
       // // // Place a shooting enemy
       // var e2 = new Enemy(game, 500, 300, -100, false, true, this.player);
@@ -786,7 +787,7 @@ Tutorial.prototype = {
          if (text == this.n7Text) {
             metKingColorTrigger = true;
             game.camera.unfollow();
-            game.time.events.add(Phaser.Timer.SECOND * 3.2, function() {
+            game.time.events.add(Phaser.Timer.SECOND * 3.1, function() {
                metKingColor = true;
                game.state.start('Tutorial')
             });

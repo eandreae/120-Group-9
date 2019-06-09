@@ -68,6 +68,19 @@ Yellow.prototype = {
       this.behindText.visible = false;
       this.behindText.alpha = 0.5;
 
+      // Handle the text customization and health GUI
+      var dangerDescription = {
+         font: '50px Arial',
+         fill: '#000000',
+         align: 'center',
+         fontWeight: 'bold',
+         stroke: '#000000',
+         strokeThickness: 0
+      };
+
+      this.dangerText = this.add.text(1400, 550, "<- DANGER APPROACHING", dangerDescription);
+      this.dangerText.visible = false;
+
       // NPC Group
       this.npcs = game.add.group();
       this.npcs.enableBody = true;
@@ -137,7 +150,7 @@ Yellow.prototype = {
 
          this.n2Text[0] = "You've recovered some of the Yellow power!";
          this.n2Text[1] = "Press C to dash a short distance foward.";
-         this.n2Text[2] = "You can dash as many times as you want\n, but you can only dash once in the air\nbefore touching the ground again.";
+         this.n2Text[2] = "You can dash as many times as you want,\nbut you can only dash once in the air\nbefore touching the ground again.";
 			this.n2Text[3] = "";
 
         // ENEMIES -----------------------------------------------------------
@@ -186,7 +199,6 @@ Yellow.prototype = {
          bmd.fill(255, 255, 0, 1);
          this.yellow = game.add.sprite(4000, 800, 'upgrade_y');
          game.physics.arcade.enable(this.yellow);
-
       }
 
       // set 32-pixel buffer around tiles to avoid collision tunneling
@@ -211,9 +223,9 @@ Yellow.prototype = {
       game.physics.arcade.enable(this.x);
 
       // Wall of death that chases the player when activated
-      bmd = game.add.bitmapData(10000, 10000);
+      bmd = game.add.bitmapData(2000, 2000);
       bmd.fill(127, 106, 0, 1);
-      this.wall = game.add.sprite(-10100, 0, bmd);
+      this.wall = game.add.sprite(-1000, 0, bmd);
       game.physics.arcade.enable(this.wall);
       this.wall.body.immovable = true;
 
@@ -405,8 +417,9 @@ Yellow.prototype = {
       song = game.add.audio('action');
       song.play('', 0, 0.5, true);
       x.destroy();
-      if (yellowLevel == 0)
-         this.wall.body.velocity.x = 300;
+      this.dangerText.visible = true;
+      if (yellowLevel == 0) this.wall.body.velocity.x = 300;
+      else if (yellowLevel == 1) this.wall.body.velocity.x = 350;
       else this.wall.body.velocity.x = 400;
    },
 
