@@ -91,6 +91,13 @@ Load.prototype = {
       game.load.audio('solaire', 'assets/audio/solaire.mp3');
       // enemy sounds
       game.load.audio('enemyShoot', 'assets/audio/enemyShoot.mp3');
+      game.load.audio('enemyDies', 'assets/audio/enemyDies.mp3');
+      game.load.audio('enemyDash', 'assets/audio/enemyDash.mp3');
+      game.load.audio('enemyJump', 'assets/audio/enemyJump.mp3');
+      // color sounds.
+      game.load.audio('enter', 'assets/audio/enter color.mp3');
+      // other sounds
+      game.load.audio('slap', 'assets/audio/slap.mp3');
 
 
    },

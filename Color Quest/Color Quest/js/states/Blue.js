@@ -1,5 +1,8 @@
 // Blue color state
 var shootSFX;
+var hurtSFX;
+var enemyDiesSFX;
+var enterSFX;
 var Blue = function(game) {};
 Blue.prototype = {
 
@@ -15,14 +18,18 @@ Blue.prototype = {
    preload: function() {
       game.load.tilemap('layout', 'assets/TileMaps/Blue.json', null, Phaser.Tilemap.TILED_JSON);
       game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles.png', 32, 32);
-      game.load.audio('shoot');
+
+      shootSFX = game.load.audio('shoot');
+      hurtSFX = game.load.audio('hurt');
+      enemyDiesSFX = game.load.audio('enemyDies');
+      enterSFX = game.load.audio('enter');
    },
 
    create: function() {
       // Music
       song.stop();
       song = game.add.audio('action2');
-      song.play('', 0, 0.5, true);
+      song.play('', 0, 0.2, true);
 
       // Background
       background = game.add.image(0, 0, 'bg_blue');
@@ -294,7 +301,7 @@ Blue.prototype = {
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed && !playerDead) {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, playerBulletSpeed);
-         shootSFX.play('', 0, 0.5, false);
+         shootSFX.play('', 0, 0.2, false);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
       }
@@ -364,6 +371,7 @@ Blue.prototype = {
 
             // If player health reaches 0, they die
             if (health == 0) {
+                hurtSFX.play('', 0, 1, false);
                song.stop();
                playerDies(game, this.player, 'Blue');
             }
@@ -385,6 +393,9 @@ Blue.prototype = {
    collectBlue: function(player, color) {
       hasBlue = true;
       blueLevel++;
+
+      // Play the sound effect.
+      enterSFX.play('', 0, 1, false);
 
       // Blue bdm
       bmd = game.add.bitmapData(18, 18);
@@ -413,6 +424,7 @@ Blue.prototype = {
    // Called with a player bullet hits an enemy
    bulletHitsEnemy: function(bullet, enemy) {
       bulletDestroyed(game, bullet);
+      enemyDiesSFX.play('', 0, 1, false);
       enemyDies(game, enemy);
    },
 

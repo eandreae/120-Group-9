@@ -12,6 +12,7 @@ BossMap.prototype = {
 
       game.load.tilemap('layout', 'assets/TileMaps/KingColor.json', null, Phaser.Tilemap.TILED_JSON);
       game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles_2.png', 32, 32);
+
    },
 
    create: function() {

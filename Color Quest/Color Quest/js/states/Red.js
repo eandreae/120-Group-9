@@ -1,6 +1,9 @@
 // Red color state
 var shootSFX;
 var enemyShootSFX;
+var hurtSFX;
+var enemyDiesSFX;
+var enterSFX;
 var Red = function(game) {};
 Red.prototype = {
 
@@ -19,13 +22,16 @@ Red.prototype = {
       game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles.png', 32, 32);
       shootSFX = game.add.audio('shoot');
       enemyShootSFX = game.add.audio('enemyShoot');
+      hurtSFX = game.add.audio('hurt');
+      enemyDiesSFX = game.add.audio('enemyDies');
+      enterSFX = game.add.audio('enter');
    },
 
    create: function() {
       // Music for Red.
       song.stop();
       song = game.add.audio('action2');
-      song.play('', 0, 0.5, true);
+      song.play('', 0, 0.2, true);
 
       // Background
       background = game.add.image(0, 0, 'bg_red');
@@ -304,7 +310,7 @@ Red.prototype = {
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed && !playerDead) {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, playerBulletSpeed);
-         shootSFX.play('', 0, 0.5, false);
+         shootSFX.play('', 0, 0.2, false);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
       }
@@ -368,6 +374,7 @@ Red.prototype = {
 
             // If player health reaches 0, they die
             if (health == 0) {
+                hurtSFX.play('', 0, 1, false);
                song.stop();
                playerDies(game, this.player, 'Red');
             }
@@ -399,6 +406,9 @@ Red.prototype = {
    collectRed: function(player, color) {
       // increment the level variable upwards.
       redLevel++;
+
+      // Play the sound effect.
+      enterSFX.play('', 0, 1, false);
 
       if (redLevel == 1) {
          // If they have reacehd the last Red level, give them the ability
@@ -435,6 +445,7 @@ Red.prototype = {
    // Called with a player bullet hits an enemy
    bulletHitsEnemy: function(bullet, enemy) {
       bulletDestroyed(game, bullet);
+      enemyDiesSFX.play('', 0, 1, false);
       enemyDies(game, enemy);
    },
 
@@ -445,6 +456,7 @@ Red.prototype = {
 
       // If player health reaches 0, they die
       if (health == 0) {
+          hurtSFX.play('', 0, 1, false);
          playerDies(game, player, 'Red');
          song.stop();
       }
@@ -462,7 +474,7 @@ Red.prototype = {
 
    enemyShoot: function(enemy) {
       var bullet = new Bullet(game, enemy.x, enemy.y, enemy.direction, 300);
-      enemyShootSFX.play('', 0, 0.5, false);
+      enemyShootSFX.play('', 0, 0.2, false);
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
    },

@@ -1,6 +1,8 @@
 // Yellow color state
 var shootSFX;
 var hurtSFX;
+var enemyDiesSFX;
+var enterSFX;
 var Yellow = function(game) {};
 Yellow.prototype = {
 
@@ -19,13 +21,15 @@ Yellow.prototype = {
       game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles.png', 32, 32);
       shootSFX = game.add.audio('shoot');
       hurtSFX = game.add.audio('hurt');
+      enemyDiesSFX = game.add.audio('enemyDies');
+      enterSFX = game.add.audio('enter');
    },
 
    create: function() {
       // Music
       song.stop();
       song = game.add.audio('action2');
-      song.play('', 0, 0.5, true);
+      song.play('', 0, 0.2, true);
 
       // Background
       background = game.add.image(0, 0, 'bg_yellow');
@@ -264,7 +268,7 @@ Yellow.prototype = {
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed && !playerDead) {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, playerBulletSpeed);
-         shootSFX.play('', 0, 0.5, false);
+         shootSFX.play('', 0, 0.2, false);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
       }
@@ -328,7 +332,7 @@ Yellow.prototype = {
 
             // If player health reaches 0, they die
             if (health == 0) {
-                hurtSFX.play('', 0, 0.5, false);
+                hurtSFX.play('', 0, 1, false);
                song.stop();
                playerDies(game, this.player, 'Yellow');
             }
@@ -352,7 +356,7 @@ Yellow.prototype = {
       if (this.physics.arcade.collide(this.player, this.wall)) {
 			if (!this.stoppedWall) {
 	         health = 0;
-             hurtSFX.play('', 0, 0.5, false);
+             hurtSFX.play('', 0, 1, false);
 	         playerDies(this, this.player, 'Yellow');
 			}
       }
@@ -369,6 +373,10 @@ Yellow.prototype = {
    collectYellow: function(player, color) {
       // increment the yellowLevel progress.
       yellowLevel++;
+
+      // Play the sound effect.
+      enterSFX.play('', 0, 1, false);
+
       if (yellowLevel == 1) {
          hasYellow = true;
       }
@@ -404,6 +412,7 @@ Yellow.prototype = {
    // Called with a player bullet hits an enemy
    bulletHitsEnemy: function(bullet, enemy) {
       bulletDestroyed(game, bullet);
+      enemyDiesSFX.play('', 0, 1, false);
       enemyDies(game, enemy);
    },
 
@@ -445,7 +454,7 @@ Yellow.prototype = {
    startWall: function(player, x) {
       song.stop();
       song = game.add.audio('action');
-      song.play('', 0, 0.5, true);
+      song.play('', 0, 0.2, true);
       x.destroy();
       this.dangerText.visible = true;
       if (yellowLevel == 0) this.wall.body.velocity.x = 300;

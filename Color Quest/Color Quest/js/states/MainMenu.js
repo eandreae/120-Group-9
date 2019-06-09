@@ -10,7 +10,7 @@ MainMenu.prototype = {
 
       // Song that plays in the title screen
       song = game.add.audio('title music');
-      song.play('', 0, 0.5, true);
+      song.play('', 0, 0.2, true);
 
       // Resetting global variables if the player resets the game
       // Reset player globals

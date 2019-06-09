@@ -3,6 +3,8 @@
 var shootSFX;
 var enemyShootSFX;
 var hurtSFX;
+var enterSFX;
+var kingColorLaugh;
 var Tutorial = function(game) {};
 Tutorial.prototype = {
 
@@ -23,6 +25,8 @@ Tutorial.prototype = {
       shootSFX = game.add.audio('shoot');
       enemyShootSFX = game.add.audio('enemyShoot');
       hurtSFX = game.add.audio('hurt');
+      enterSFX = game.add.audio('enter');
+      kingColorLaugh = game.add.audio('KC_laugh');
    },
 
    create: function() {
@@ -483,6 +487,7 @@ Tutorial.prototype = {
             }
 
             if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
+                enterSFX.play('', 0, 1, false);
                game.state.start('Red');
             }
          }
@@ -499,6 +504,7 @@ Tutorial.prototype = {
             }
 
             if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
+                enterSFX.play('', 0, 1, false);
                game.state.start('Yellow');
             }
          }
@@ -515,6 +521,7 @@ Tutorial.prototype = {
             }
 
             if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
+                enterSFX.play('', 0, 1, false);
                game.state.start('Blue');
             }
          }
@@ -553,9 +560,10 @@ Tutorial.prototype = {
          this.interactText.visible = true;
 
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
-            if (hasRed && hasYellow && hasBlue)
+            if (hasRed && hasYellow && hasBlue){
                game.state.start('BossMap');
-            else {
+               enterSFX.play('', 0, 1, false);
+           } else {
                // Timer for boss door text
                talking = true;
                this.behindText.visible = true;
@@ -570,7 +578,7 @@ Tutorial.prototype = {
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed && !playerDead) {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, playerBulletSpeed);
-         shootSFX.play('', 0, 0.5, false);
+         shootSFX.play('', 0, 0.2, false);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
       }
@@ -699,7 +707,7 @@ Tutorial.prototype = {
 
             // If player health reaches 0, they die
             if (health == 0) {
-                hurtSFX.play('', 0, 0.5, false);
+                hurtSFX.play('', 0, 1, false);
                song.stop();
                playerDies(game, this.player, 'Tutorial');
             }
@@ -738,7 +746,7 @@ Tutorial.prototype = {
 
       // If player health reaches 0, they die
       if (health == 0) {
-          hurtSFX.play('', 0, 0.5, false);
+          hurtSFX.play('', 0, 1, false);
          playerDies(game, player, 'Tutorial');
          song.stop();
       }
@@ -757,7 +765,7 @@ Tutorial.prototype = {
    // Creates the bullet for each enemy
    enemyShoot: function(enemy) {
       var bullet = new Bullet(game, enemy.x, enemy.y, enemy.direction, 350);
-      enemyShootSFX.play('', 0, 0.5, false);
+      enemyShootSFX.play('', 0, 0.2, false);
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
    },
@@ -792,6 +800,7 @@ Tutorial.prototype = {
          if (text == this.n7Text) {
             metKingColorTrigger = true;
             game.camera.unfollow();
+            kingColorLaugh.play('', 0, 1, false);
             game.time.events.add(Phaser.Timer.SECOND * 3.1, function() {
                metKingColor = true;
                game.state.start('Tutorial')

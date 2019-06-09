@@ -4,6 +4,7 @@ var jumps = 0;             // The # of jumps the player gets
 var jumpSFX;               // The jumping sound effect
 var dashSFX;               // The dashing sound effect
 var hurtSFX;               // The hurt sound effect
+var slapSFX;               // The slap sound effect
 var hp = 5;           // Player health
 var knockback;             // If player is currently in knockback state
 var platforms;             // The platforms in the state
@@ -22,6 +23,7 @@ function Player(game, x, y, map) {
    jumpSFX = game.add.audio('jump');
    dashSFX = game.add.audio('dash');
    hurtSFX = game.add.audio('hurt');
+   slapSFX = game.add.audio('slap');
    hp = health;
    direction = 1;
 
@@ -179,7 +181,7 @@ Player.prototype.update = function() {
 
    // If the player has taken damage
    if (health < hp && health != 0) {
-       hurtSFX.play('', 0, 0.5, false);
+       hurtSFX.play('', 0, 1, false);
       injured = true;
       knockback = true;
       hp = health;
