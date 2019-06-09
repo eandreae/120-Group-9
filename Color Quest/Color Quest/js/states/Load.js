@@ -70,15 +70,25 @@ Load.prototype = {
       game.load.audio('action', 'assets/audio/bensound-dance.mp3');
       game.load.audio('action2', 'assets/audio/bensound-funkyelement.mp3');
       // Sound effects.
+      // Player sounds
       game.load.audio('jump', 'assets/audio/Jump.mp3');
       game.load.audio('shoot', 'assets/audio/shoot.mp3');
       game.load.audio('hurt', 'assets/audio/ow4.mp3');
       game.load.audio('dash', 'assets/audio/dash.mp3');
+      // King Color sounds
       game.load.audio('KC_laugh', 'assets/audio/KingColor laugh.mp3');
       game.load.audio('KC_shoot', 'assets/audio/KingColor shoot.mp3');
       game.load.audio('KC_hurt', 'assets/audio/KingColor hurt.mp3');
       game.load.audio('KC_dies', 'assets/audio/KingColor dies.mp3');
-
+      // NPC sounds
+      game.load.audio('hi_1', 'assets/audio/NPChi1.mp3');
+      game.load.audio('hi_2', 'assets/audio/NPChi2.mp3');
+      game.load.audio('hi_3', 'assets/audio/NPChi3.mp3');
+      game.load.audio('hi_4', 'assets/audio/NPChi4.mp3');
+      game.load.audio('hi_5', 'assets/audio/NPChi5.mp3');
+      game.load.audio('hi_6', 'assets/audio/NPChi6.mp3');
+      game.load.audio('hi_7', 'assets/audio/NPChi7.mp3');
+      game.load.audio('solaire', 'assets/audio/solaire.mp3');
 
 
    },
