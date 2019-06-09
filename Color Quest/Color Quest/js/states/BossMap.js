@@ -38,21 +38,6 @@ BossMap.prototype = {
       // set 32-pixel buffer around tiles to avoid collision tunneling
       game.physics.arcade.TILE_BIAS = 32;
 
-      // Handle the text customization and health GUI
-      var styleDescription = {
-         font: '18px Arial',
-         fill: '#000000',
-         align: 'center',
-         fontWeight: 'bold',
-         stroke: '#000000',
-         strokeThickness: 0
-      };
-
-
-      // Health GUI
-      this.healthText = this.add.text(10, 10, "", styleDescription);
-      this.healthText.fixedToCamera = true;
-
       pickup = game.add.sprite(7879, 835, 'pickup');
       game.physics.arcade.enable(pickup);
 
@@ -72,6 +57,19 @@ BossMap.prototype = {
       // Adds the player into the state
       this.player = new Player(game, 64, 1340, this.mapLayer);
       game.add.existing(this.player);
+
+      this.hpSprite = game.add.sprite(20, 20, 'hp_palette');
+      this.hpSprite.fixedToCamera = true;
+
+      this.hpSprite.animations.add('0', [0], 10, true);
+      this.hpSprite.animations.add('1', [1], 10, true);
+      this.hpSprite.animations.add('2', [2], 10, true);
+      this.hpSprite.animations.add('3', [3], 10, true);
+      this.hpSprite.animations.add('4', [4], 10, true);
+      this.hpSprite.animations.add('5', [5], 10, true);
+
+      this.hpSprite.scale.x = 1.2;
+      this.hpSprite.scale.y = 1.2;
 
       // Bullet groups
       this.playerBullets = game.add.group();
@@ -195,8 +193,6 @@ BossMap.prototype = {
       game.physics.arcade.collide(this.enemyBullets, this.mapLayer, this.bulletHitsWall, null, this);
       game.physics.arcade.collide(this.playerBullets, this.mapLayer, this.bulletHitsWall, null, this);
 
-      this.healthText.text = health;
-
       // Bullet collision for CK
       game.physics.arcade.collide(this.playerBullets, this.boss, this.bulletHitsBoss, null, this);
 
@@ -208,13 +204,19 @@ BossMap.prototype = {
              song.stop();
           }
       }
+
+      if (health == 0) this.hpSprite.animations.play('0');
+      else if (health == 1) this.hpSprite.animations.play('1');
+      else if (health == 2) this.hpSprite.animations.play('2');
+      else if (health == 3) this.hpSprite.animations.play('3');
+      else if (health == 4) this.hpSprite.animations.play('4');
+      else this.hpSprite.animations.play('5');
    },
 
    // Health loss and death for CK upon bullet collision
    bulletHitsBoss: function(boss, bullet) {
       bulletDestroyed(game, bullet);
       bossHealth--;
-      console.log(bossHealth);
       boss.tint = 0xFF0000;
 
       if (bossHealth <= 0) {

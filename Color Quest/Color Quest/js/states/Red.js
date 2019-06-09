@@ -46,10 +46,6 @@ Red.prototype = {
          strokeThickness: 0
       };
 
-      // Health GUI
-      this.healthText = this.add.text(10, 10, "", styleDescription);
-      this.healthText.fixedToCamera = true;
-
       // Position of the NPC text.
       this.textPos = 0;
 
@@ -273,6 +269,19 @@ Red.prototype = {
       }
       game.add.existing(this.player);
 
+      this.hpSprite = game.add.sprite(20, 20, 'hp_palette');
+      this.hpSprite.fixedToCamera = true;
+
+      this.hpSprite.animations.add('0', [0], 10, true);
+      this.hpSprite.animations.add('1', [1], 10, true);
+      this.hpSprite.animations.add('2', [2], 10, true);
+      this.hpSprite.animations.add('3', [3], 10, true);
+      this.hpSprite.animations.add('4', [4], 10, true);
+      this.hpSprite.animations.add('5', [5], 10, true);
+
+      this.hpSprite.scale.x = 1.2;
+      this.hpSprite.scale.y = 1.2;
+
       // Camera follows player
       game.camera.follow(this.player);
       game.camera.deadzone = new Phaser.Rectangle(325, 200, 50, 150); // (x,y,width,height)
@@ -372,7 +381,12 @@ Red.prototype = {
       game.physics.arcade.collide(this.enemyBullets, this.mapLayer, this.bulletHitsWall, null, this);
       game.physics.arcade.collide(this.playerBullets, this.mapLayer, this.bulletHitsWall, null, this);
 
-      this.healthText.text = health;
+      if (health == 0) this.hpSprite.animations.play('0');
+      else if (health == 1) this.hpSprite.animations.play('1');
+      else if (health == 2) this.hpSprite.animations.play('2');
+      else if (health == 3) this.hpSprite.animations.play('3');
+      else if (health == 4) this.hpSprite.animations.play('4');
+      else this.hpSprite.animations.play('5');
    },
 
    // When the player collects the color at the end of the level.

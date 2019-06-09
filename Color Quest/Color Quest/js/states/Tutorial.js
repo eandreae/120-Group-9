@@ -118,9 +118,6 @@ Tutorial.prototype = {
          game.physics.enable(this.kingColorTrigger);
 
          this.kingColorDude = game.add.sprite(4200, 670, 'boss_fixed', 'KingColor');
-         // this.kingColorDude.scale.x = 2;
-         // this.kingColorDude.scale.y = 2;
-
          game.physics.enable(this.kingColorDude);
       }
       if (metKingColor && !bossDefeated) {
@@ -149,10 +146,6 @@ Tutorial.prototype = {
          stroke: '#000000',
          strokeThickness: 0
       };
-
-      // The health the player has
-      this.healthText = this.add.text(10, 10, "", styleDescription);
-      this.healthText.fixedToCamera = true;
 
       // Interact text that appears above things the Player can interact with
       this.interactText = this.add.text(0, 0, "Press Z to interact", styleDescription);
@@ -379,27 +372,27 @@ Tutorial.prototype = {
          this.n6Text[1] = "I really can't thank you enough.\nOver to the right, I've put a little\nsomething together for you."
          this.n6Text[2] = "It doesn't even begin to repay\nall the good you've done, but\nhopefully, it's at least a start.";
          this.n6Text[3] = "";
-   }
+      }
 
-   // CREDITS ------------------------------------------------------------------
+      // CREDITS ------------------------------------------------------------------
 
-   // The text at the end of the game for the credits.
-   // Check if they have beaten the game.
-   if( bossDefeated == true ){
-       game.add.text(128, 376, "You Won!! Pallette Town is safe once again!");
-       game.add.text(64, 440, "These are the wonderful people who made this game");
-       var EricHu = game.add.sprite(416, 500, 'EricHu');
-       var EricAndreae = game.add.sprite(1890, 500, 'EricAndreae');
-       var Dylan = game.add.sprite(2656, 500, 'Dylan');
-       var Daniel = game.add.sprite(3264, 500, 'Daniel');
-       game.add.text(600, 500, "Eric Hu\nOur main programmer,\nwho made everything work,\nespecially the amazing cutscene");
-       game.add.text(2050, 500, "Eric Andreae\nThe level designer, SFX maker,\nand audio guy\nspent hours dying in Tiled");
-       game.add.text(2790, 500, "Dylan Deardorff\nThe main writer of the story,\nand made the bossfight level");
-       game.add.text(3400, 500, "Daniel Phipps\nOur super cool Artist\nmade our dreams become reality")
+      // The text at the end of the game for the credits.
+      // Check if they have beaten the game.
+      if (bossDefeated == true) {
+         game.add.text(128, 376, "You Won!! Pallette Town is safe once again!");
+         game.add.text(64, 440, "These are the wonderful people who made this game");
+         var EricHu = game.add.sprite(416, 500, 'EricHu');
+         var EricAndreae = game.add.sprite(1890, 500, 'EricAndreae');
+         var Dylan = game.add.sprite(2656, 500, 'Dylan');
+         var Daniel = game.add.sprite(3264, 500, 'Daniel');
+         game.add.text(600, 500, "Eric Hu\nOur main programmer,\nwho made everything work,\nespecially the amazing cutscene");
+         game.add.text(2050, 500, "Eric Andreae\nThe level designer, SFX maker,\nand audio guy\nspent hours dying in Tiled");
+         game.add.text(2790, 500, "Dylan Deardorff\nThe main writer of the story,\nand made the bossfight level");
+         game.add.text(3400, 500, "Daniel Phipps\nOur super cool Artist\nmade our dreams become reality")
 
-   }
+      }
 
-   // EVERYTHING ELSE ----------------------------------------------------------
+      // EVERYTHING ELSE ----------------------------------------------------------
 
 
       // The text at the end of the game for the credits.
@@ -415,13 +408,26 @@ Tutorial.prototype = {
       } else this.player = new Player(game, 64, 840, this.mapLayer);
       game.add.existing(this.player);
 
+      this.hpSprite = game.add.sprite(20, 20, 'hp_palette');
+      this.hpSprite.fixedToCamera = true;
+
+      this.hpSprite.animations.add('0', [0], 10, true);
+      this.hpSprite.animations.add('1', [1], 10, true);
+      this.hpSprite.animations.add('2', [2], 10, true);
+      this.hpSprite.animations.add('3', [3], 10, true);
+      this.hpSprite.animations.add('4', [4], 10, true);
+      this.hpSprite.animations.add('5', [5], 10, true);
+
+      this.hpSprite.scale.x = 1.2;
+      this.hpSprite.scale.y = 1.2;
+
       // The enemy groups
       this.enemies = game.add.group();
       this.enemies.enableBody = true;
       this.shootingEnemies = game.add.group();
       this.shootingEnemies.enableBody = true;
 
-      // // // Place a moving enemy
+      // // // // Place a moving enemy
       // var e1 = new Enemy(game, 500, 300, -100, true, false, this.player);
       // game.add.existing(e1);
       // this.enemies.add(e1);
@@ -703,7 +709,12 @@ Tutorial.prototype = {
       game.physics.arcade.collide(this.enemyBullets, this.mapLayer, this.bulletHitsWall, null, this);
       game.physics.arcade.collide(this.playerBullets, this.mapLayer, this.bulletHitsWall, null, this);
 
-      this.healthText.text = health;
+      if (health == 0) this.hpSprite.animations.play('0');
+      else if (health == 1) this.hpSprite.animations.play('1');
+      else if (health == 2) this.hpSprite.animations.play('2');
+      else if (health == 3) this.hpSprite.animations.play('3');
+      else if (health == 4) this.hpSprite.animations.play('4');
+      else this.hpSprite.animations.play('5');
    },
 
    // Called with a player bullet hits an enemy
