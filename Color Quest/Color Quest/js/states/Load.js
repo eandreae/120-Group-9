@@ -62,13 +62,18 @@ Load.prototype = {
       game.load.image('Daniel', 'assets/img/Daniel.png');
 
 		// Loading audio
-      game.load.audio('jump', 'assets/audio/Jump.mp3');
+      // Music
       game.load.audio('sad1', 'assets/audio/bensound-november.mp3');
       game.load.audio('happy', 'assets/audio/bensound-littleidea.mp3');
       game.load.audio('motivational', 'assets/audio/bensound-birthofahero.mp3');
       game.load.audio('title music', 'assets/audio/bensound-funkysuspense.mp3');
       game.load.audio('action', 'assets/audio/bensound-dance.mp3');
       game.load.audio('action2', 'assets/audio/bensound-funkyelement.mp3');
+      // Sound effects.
+      game.load.audio('jump', 'assets/audio/Jump.mp3');
+      game.load.audio('shoot', 'assets/audio/shoot.mp3');
+      game.load.audio('hurt', 'assets/audio/ow4.mp3');
+      game.load.audio('dash', 'assets/audio/dash.mp3');
 
    },
    create: function() {
