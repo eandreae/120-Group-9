@@ -49,14 +49,16 @@ function bulletDestroyed(game, bullet) {
    if (bullet.direction > 0) {
       minVelocity = -400;
       maxVelocity = 100;
+      value = 19;
    }
    else {
       minVelocity = -100;
       maxVelocity = 400;
+      value = -19;
    }
 
    // Emitter used when player dies
-   deathEmitter = game.add.emitter(bullet.x, bullet.y, 100);
+   deathEmitter = game.add.emitter(bullet.x + value, bullet.y, 100);
    deathEmitter.makeParticles('particle_r');
    deathEmitter.gravity = 0;
    deathEmitter.setScale(.3, .5, .3, .5, 0);
