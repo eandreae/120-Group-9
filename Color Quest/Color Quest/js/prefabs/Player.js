@@ -2,7 +2,7 @@ var dashing;               // If the player is currently dashing
 var dash = 0;              // The # of dashes the player gets
 var jumps = 0;             // The # of jumps the player gets
 var jumpSFX;               // The jumping sound effect
-var hp = health;           // Player health
+var hp = 5;           // Player health
 var knockback;             // If player is currently in knockback state
 var platforms;             // The platforms in the state
 var hitPlatform = false    // If a player is colliding with a platform

@@ -21,6 +21,7 @@ Load.prototype = {
       game.load.atlas('enemies_r', 'assets/img/enemy_red.png', 'assets/img/enemy_red.json');     // [0] is facing left, [1] is facing right
       game.load.atlas('enemies_y', 'assets/img/enemy_yellow.png', 'assets/img/enemy_yellow.json');
       game.load.atlas('enemies_b', 'assets/img/enemy_blue.png', 'assets/img/enemy_blue.json');
+      game.load.atlas('hp_palette', 'assets/img/health.png', 'assets/img/health.json');
 
 		// Background Images
       game.load.image('bg_blue', 'assets/img/bg_blue.png');
