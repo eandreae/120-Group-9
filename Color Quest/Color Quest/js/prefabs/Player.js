@@ -181,7 +181,7 @@ Player.prototype.update = function() {
 
       // How often the player flashes when they take damage
       timerFlash = game.time.create(false);
-      timerFlash.loop(18, playerFlash, this, this);
+      timerFlash.loop(22, playerFlash, this, this);
       timerFlash.start();
 
       // Stops the flashing after 3 seconds
@@ -210,12 +210,14 @@ Player.prototype.update = function() {
 
 // Flashes the player very quickly
 function playerFlash(player) {
-   player.visible = !player.visible;
+   value = player.alpha;
+   if (value == 1) player.alpha = 0;
+   else player.alpha = 1;
 }
 
 // Stops the player from flashing
 function playerStopFlash(player) {
-   player.visible = true;
+   player.alpha = 1;
    injured = false;
    timerFlash.stop();
    timerStopFlash.stop();
