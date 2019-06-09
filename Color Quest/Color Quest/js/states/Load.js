@@ -33,6 +33,7 @@ Load.prototype = {
       game.load.image('bg_town_gray', 'assets/img/bg_townsmile_gray.png');
       game.load.image('bg_boss', 'assets/img/bg_kingcolor.png');
       game.load.image('title', 'assets/img/TitleScreen.png');
+      game.load.image('Game Over', 'assets/img/Game_Over.png');
 
       // Rest of the sprites
       game.load.image('bullet_l', 'assets/img/bullet_left.png');

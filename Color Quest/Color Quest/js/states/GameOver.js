@@ -9,8 +9,7 @@ GameOver.prototype = {
 
    create: function() {
       // Background
-      game.stage.backgroundColor = "#0c4196";
-      game.add.text(450, 450, "You Died!")
+      background = game.add.image(0, 0, 'Game Over');
 
       health = 5;
       injured = false;
