@@ -317,6 +317,7 @@ BossMap.prototype = {
       if(bossHealth <= 0){
         enterSFX.play('', 0, 1, false);
         song.stop();
+        pickup.destroy();
         game.time.events.add(Phaser.Timer.SECOND * 2, function() {
             game.state.start('Tutorial');
         });

@@ -145,7 +145,7 @@ Tutorial.prototype = {
          this.kingColorTrigger = game.add.sprite(3580, 600, bmd);
          game.physics.enable(this.kingColorTrigger);
 
-         this.kingColorDude = game.add.sprite(4200, 670, 'boss_fixed', 'KingColor');
+         this.kingColorDude = game.add.sprite(4200, 670, 'boss', 'KingColor');
          game.physics.enable(this.kingColorDude);
       }
       if (metKingColor && !bossDefeated) {
@@ -554,13 +554,12 @@ Tutorial.prototype = {
       }
 
       if (this.physics.arcade.collide(this.npcs, this.kingColorDude)) {
-          slapSFX.play('', 0, 1, false);
          this.n7.body.velocity.x = -2000;
          this.n7.body.velocity.y = -500;
       }
 
       if (this.physics.arcade.collide(this.player, this.kingColorDude)) {
-          slapSFX.play('', 0, 1, false);
+         slapSFX.play('', 0, 1, false);
          hitByKingColor = true;
       }
 
