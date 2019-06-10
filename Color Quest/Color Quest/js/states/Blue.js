@@ -325,7 +325,7 @@ Blue.prototype = {
 
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
-            hi_6.play('', 0, 1, false);
+            hi_6.play('', 0, 1.5, false);
             talking = true;
             this.interactText.visible = false;
             this.behindText.visible = true;
@@ -343,7 +343,7 @@ Blue.prototype = {
 
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
-            hi_7.play('', 0, 1, false);
+            hi_7.play('', 0, 1.5, false);
             talking = true;
             this.interactText.visible = false;
             this.behindText.visible = true;

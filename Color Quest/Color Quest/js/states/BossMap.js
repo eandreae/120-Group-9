@@ -313,7 +313,7 @@ BossMap.prototype = {
    },
 
    // Player picking up the item dropped by king color
-   playerGetsPickup: function(player, pickup){
+   playerGetsPickup: function(pickup, player){
       if(bossHealth <= 0){
         enterSFX.play('', 0, 1, false);
         song.stop();

@@ -609,7 +609,7 @@ Tutorial.prototype = {
 
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
-            hi_3.play('', 0, 1.5, false);
+            hi_3.play('', 0, 2, false);
             talking = true;
             this.behindText.visible = true;
             this.interactText.visible = false;
