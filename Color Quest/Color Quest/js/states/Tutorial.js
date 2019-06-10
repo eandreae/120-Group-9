@@ -195,6 +195,10 @@ Tutorial.prototype = {
       this.behindText.visible = false;
       this.behindText.alpha = 0.5;
 
+      if (metKingColor == false) {
+         game.add.text(20, 640, "Use the arrow keys to move");
+      }
+
       // NPC Group
       // All NPCs have different text depending on where you are at the game
       this.npcs = game.add.group();
@@ -253,7 +257,7 @@ Tutorial.prototype = {
       // NPC1's text
       if (metKingColor == false) {
          this.n1Text[0] = "Howdy! You havin' a good day\nhere in Palette Town?\n(Press Z to advance text)";
-         this.n1Text[1] = "Y'know how to move left 'n' right\nwith the arrow keys already.\nYou can jump with Up, too!";
+         this.n1Text[1] = "Y'know how to move left 'n' right\nwith the arrow keys already.\nYou can jump with UP, too!";
          this.n1Text[2] = "Why don'tcha talk to the other\ntownsfolk? Press Z to interact\nwith 'em, or anythin' else!";
          this.n1Text[3] = "";
       } else if (metKingColor == true && !hasRed && !hasYellow && !hasBlue) {
@@ -418,7 +422,6 @@ Tutorial.prototype = {
          game.add.text(2050, 500, "Eric Andreae\nThe level designer, SFX maker,\nand audio guy\nspent hours dying in Tiled");
          game.add.text(2790, 500, "Dylan Deardorff\nThe main writer of the story,\nand made the bossfight level");
          game.add.text(3400, 500, "Daniel Phipps\nOur super cool Artist\nmade our dreams become reality")
-
       }
 
       // EVERYTHING ELSE ----------------------------------------------------------
