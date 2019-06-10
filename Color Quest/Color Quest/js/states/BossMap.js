@@ -58,7 +58,9 @@ BossMap.prototype = {
       // set 32-pixel buffer around tiles to avoid collision tunneling
       game.physics.arcade.TILE_BIAS = 32;
 
-      pickup = game.add.sprite(7879, 835, 'pickup');
+      pickup = game.add.sprite(7920, 835, 'pickup');
+      pickup.anchor.set(0.5);
+      pickup.scale.set(0.1);
       game.physics.arcade.enable(pickup);
 
       // Handle the group management before loading the levels.
