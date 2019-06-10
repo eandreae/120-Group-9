@@ -113,9 +113,9 @@ Red.prototype = {
 
          this.n1Text = new Array();
 
-         this.n1Text[0] = "I can sense the power of the color red here";
-         this.n1Text[1] = "But it seems King Color's cronies have gotten\na hold of it...";
-         this.n1Text[2] = "Watch out for flying bullets! You wouldn't\nwant to get hit by them";
+         this.n1Text[0] = "I can sense the power of\nthe color red here...";
+         this.n1Text[1] = "But it seems King Color's cronies\nhave gotten a hold of it.";
+         this.n1Text[2] = "Watch out for flying bullets!\nYou wouldn't want to\nget hit by them!";
          this.n1Text[3] = "";
          // ENEMIES -----------------------------------------------------------
          // enemies 1, 2, and 3 for Red level 0.
@@ -161,9 +161,9 @@ Red.prototype = {
 
          this.n2Text = new Array();
 
-         this.n2Text[0] = "Wow! It looks like you've recovered some\nof the red power!";
-         this.n2Text[1] = "Press the X key to shoot a projectile.";
-         this.n2Text[2] = "Show King Color's cronies what they deserve";
+         this.n2Text[0] = "Wow! It looks like you've recovered\nsome of the red power!";
+         this.n2Text[1] = "Press the X key to\nshoot a projectile.";
+         this.n2Text[2] = "Show King Color's cronies\nwhat they deserve!";
          this.n2Text[3] = "";
          // ENEMIES -----------------------------------------------------------
          // enemies 1, 2, 3, and 4 for Red level 1.

@@ -110,7 +110,7 @@ Blue.prototype = {
          this.n1Text = new Array();
 
          this.n1Text[0] = "This place gives me the Blues :(";
-         this.n1Text[1] = "You better be careful of the platforming\nin here. Also watch out for King Color's\ncronies jumping all around the place";
+         this.n1Text[1] = "You'd better be careful of the platforming\nin here. Also, watch out for King Color's\ncronies jumping all around the place!";
          this.n1Text[2] = "";
          // ENEMIES -----------------------------------------------------------
          // Adding the enemies for Level 0.
@@ -162,8 +162,8 @@ Blue.prototype = {
 
          this.n2Text = new Array();
 
-         this.n2Text[0] = "You've recovered some of the Blue power!";
-         this.n2Text[1] = "You can now double jump! Simply press the\nUP key again when you're in the air!";
+         this.n2Text[0] = "You've recovered some\nof the Blue power!";
+         this.n2Text[1] = "You can now double jump! Simply\npress the UP key again when\nyou're in the air!";
          this.n2Text[2] = "";
          // ENEMIES -----------------------------------------------------------
          // Adding the enemies for Level 1.
