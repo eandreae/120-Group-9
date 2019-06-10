@@ -122,13 +122,13 @@ Enemy.prototype.update = function() {
 
 // Called by the jumping timer
 function enemyJumping(enemy) {
-   enemyJumpSFX.play('', 0, 0.5, false);
+   enemyJumpSFX.play('', 0, 1, false);
    this.jump = true;
 }
 
 // Called by the dashing timer
 function enemyDashing(enemy) {
-   enemyDashSFX.play('', 0, 0.5, false);
+   enemyDashSFX.play('', 0, 1, false);
    enemy.dash = true;
    enemy.oldPos = enemy.x;
 }

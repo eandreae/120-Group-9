@@ -3,6 +3,8 @@ var shootSFX;
 var hurtSFX;
 var enemyDiesSFX;
 var enterSFX;
+var hi_2;
+var hi_5;
 var Yellow = function(game) {};
 Yellow.prototype = {
 
@@ -23,6 +25,8 @@ Yellow.prototype = {
       hurtSFX = game.add.audio('hurt');
       enemyDiesSFX = game.add.audio('enemyDies');
       enterSFX = game.add.audio('enter');
+      hi_2 = game.add.audio('hi_2');
+      hi_5 = game.add.audio('hi_5');
    },
 
    create: function() {
@@ -288,6 +292,7 @@ Yellow.prototype = {
 
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
+            hi_2.play('', 0, 1, false);
             talking = true;
             this.interactText.visible = false;
             this.behindText.visible = true;
@@ -305,6 +310,7 @@ Yellow.prototype = {
 
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
+            hi_5.play('', 0, 1, false);
             talking = true;
             this.interactText.visible = false;
             this.behindText.visible = true;

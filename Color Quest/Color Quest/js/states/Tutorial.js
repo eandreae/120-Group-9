@@ -607,7 +607,7 @@ Tutorial.prototype = {
 
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
-            hi_3.play('', 0, 1, false);
+            hi_3.play('', 0, 1.5, false);
             talking = true;
             this.behindText.visible = true;
             this.interactText.visible = false;
@@ -661,7 +661,7 @@ Tutorial.prototype = {
 
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
-            snore.play('', 0, 1.5, false);
+            snore.play('', 0, 1, false);
             talking = true;
             this.behindText.visible = true;
             this.interactText.visible = false;
