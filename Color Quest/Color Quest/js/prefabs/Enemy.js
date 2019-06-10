@@ -21,8 +21,8 @@ function Enemy(game, x, y, speed, d = false, j = false) {
    this.v = speed;
    this.dashing = d;
    this.jumping = j;
-   enemyDashSFX = game.load.audio('enemyDash');
-   enemyJumpSFX = game.load.audio('enemyJump');
+   enemyDashSFX = game.add.audio('enemyDash');
+   enemyJumpSFX = game.add.audio('enemyJump');
 
    // If enemy can't jump or dash, they're a shooting red enemy
    if (!d && !j) {
