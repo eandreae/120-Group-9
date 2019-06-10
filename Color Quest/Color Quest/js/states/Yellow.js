@@ -122,8 +122,8 @@ Yellow.prototype = {
 
          this.n1Text = new Array();
 
-			this.n1Text[0] = "Hey Bucky! It seems the Yellow power is\nbeing kept here, but I sense a trap...";
-         this.n1Text[1] = "You may want to get through this area\nas quickly as possible...";
+			this.n1Text[0] = "Hey Bucky! It seems the Yellow\npower is being kept here,\nbut I sense a trap...";
+         this.n1Text[1] = "You may want to get through this\narea as quickly as possible...";
          this.n1Text[2] = "";
 
          // ENEMIES -----------------------------------------------------------
