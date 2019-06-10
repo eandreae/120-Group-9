@@ -332,7 +332,7 @@ Yellow.prototype = {
 
             // If player health reaches 0, they die
             if (health == 0) {
-                hurtSFX.play('', 0, 1, false);
+                hurtSFX.play('', 0, 1.5, false);
                song.stop();
                playerDies(game, this.player, 'Yellow');
             }
@@ -356,7 +356,7 @@ Yellow.prototype = {
       if (this.physics.arcade.collide(this.player, this.wall)) {
 			if (!this.stoppedWall) {
 	         health = 0;
-             hurtSFX.play('', 0, 1, false);
+             hurtSFX.play('', 0, 1.5, false);
 	         playerDies(this, this.player, 'Yellow');
 			}
       }
@@ -375,7 +375,7 @@ Yellow.prototype = {
       yellowLevel++;
 
       // Play the sound effect.
-      enterSFX.play('', 0, 1, false);
+      enterSFX.play('', 0, 2.5, false);
 
       if (yellowLevel == 1) {
          hasYellow = true;

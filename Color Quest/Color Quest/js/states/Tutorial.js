@@ -5,6 +5,15 @@ var enemyShootSFX;
 var hurtSFX;
 var enterSFX;
 var kingColorLaugh;
+var hi_1; // Male
+var hi_2; // Male
+var hi_3; // Female
+var hi_4; // Female
+var hi_5; // Male
+var hi_6; // Male Deep
+var hi_7; // Male
+var solaire;
+var snore;
 var Tutorial = function(game) {};
 Tutorial.prototype = {
 
@@ -27,6 +36,15 @@ Tutorial.prototype = {
       hurtSFX = game.add.audio('hurt');
       enterSFX = game.add.audio('enter');
       kingColorLaugh = game.add.audio('KC_laugh');
+      hi_1 = game.add.audio('hi_1');
+      hi_2 = game.add.audio('hi_2');
+      hi_3 = game.add.audio('hi_3');
+      hi_4 = game.add.audio('hi_4');
+      hi_5 = game.add.audio('hi_5');
+      hi_6 = game.add.audio('hi_6');
+      hi_7 = game.add.audio('hi_7');
+      solaire = game.add.audio('solaire');
+      snore = game.add.audio('snore');
    },
 
    create: function() {
@@ -487,7 +505,7 @@ Tutorial.prototype = {
             }
 
             if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
-                enterSFX.play('', 0, 1, false);
+                enterSFX.play('', 0, 2.5, false);
                game.state.start('Red');
             }
          }
@@ -504,7 +522,7 @@ Tutorial.prototype = {
             }
 
             if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
-                enterSFX.play('', 0, 1, false);
+                enterSFX.play('', 0, 2.5, false);
                game.state.start('Yellow');
             }
          }
@@ -521,7 +539,7 @@ Tutorial.prototype = {
             }
 
             if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
-                enterSFX.play('', 0, 1, false);
+                enterSFX.play('', 0, 2.5, false);
                game.state.start('Blue');
             }
          }
@@ -545,11 +563,13 @@ Tutorial.prototype = {
       }
 
       if (this.physics.arcade.collide(this.npcs, this.kingColorDude)) {
+          slapSFX.play('', 0, 1, false);
          this.n7.body.velocity.x = -2000;
          this.n7.body.velocity.y = -500;
       }
 
       if (this.physics.arcade.collide(this.player, this.kingColorDude)) {
+          slapSFX.play('', 0, 1, false);
          hitByKingColor = true;
       }
 
@@ -584,6 +604,7 @@ Tutorial.prototype = {
       }
 
       if (game.input.keyboard.justPressed(Phaser.Keyboard.R) && bossDefeated == true) {
+          song.stop();
          game.state.start('MainMenu');
       }
 
@@ -595,6 +616,7 @@ Tutorial.prototype = {
 
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
+            hi_3.play('', 0, 1, false);
             talking = true;
             this.behindText.visible = true;
             this.interactText.visible = false;
@@ -612,6 +634,7 @@ Tutorial.prototype = {
 
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
+            solaire.play('', 0, 2, false);
             talking = true;
             this.behindText.visible = true;
             this.interactText.visible = false;
@@ -629,6 +652,7 @@ Tutorial.prototype = {
 
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
+            hi_7.play('', 0, 3, false);
             talking = true;
             this.behindText.visible = true;
             this.interactText.visible = false;
@@ -646,6 +670,7 @@ Tutorial.prototype = {
 
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
+            snore.play('', 0, 1.5, false);
             talking = true;
             this.behindText.visible = true;
             this.interactText.visible = false;
@@ -663,6 +688,7 @@ Tutorial.prototype = {
 
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
+            hi_6.play('', 0, 3, false);
             talking = true;
             this.behindText.visible = true;
             this.interactText.visible = false;
@@ -680,6 +706,7 @@ Tutorial.prototype = {
 
          if (game.input.keyboard.justPressed(Phaser.Keyboard.Z)) {
             // Timer for npc text
+            hi_5.play('', 0, 2, false);
             talking = true;
             this.behindText.visible = true;
             this.interactText.visible = false;
@@ -707,7 +734,7 @@ Tutorial.prototype = {
 
             // If player health reaches 0, they die
             if (health == 0) {
-                hurtSFX.play('', 0, 1, false);
+                hurtSFX.play('', 0, 1.5, false);
                song.stop();
                playerDies(game, this.player, 'Tutorial');
             }
@@ -746,7 +773,7 @@ Tutorial.prototype = {
 
       // If player health reaches 0, they die
       if (health == 0) {
-          hurtSFX.play('', 0, 1, false);
+          hurtSFX.play('', 0, 1.5, false);
          playerDies(game, player, 'Tutorial');
          song.stop();
       }
@@ -800,7 +827,7 @@ Tutorial.prototype = {
          if (text == this.n7Text) {
             metKingColorTrigger = true;
             game.camera.unfollow();
-            kingColorLaugh.play('', 0, 1, false);
+            kingColorLaugh.play('', 0, 0.7, false);
             game.time.events.add(Phaser.Timer.SECOND * 3.1, function() {
                metKingColor = true;
                game.state.start('Tutorial')

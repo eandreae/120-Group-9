@@ -1,4 +1,13 @@
 // BossMap state
+var shootSFX;
+var enemyShootSFX;
+var hurtSFX;
+var enemyDiesSFX;
+var enterSFX;
+var kingColorLaugh;
+var kingColorHurt;
+var kingColorDies;
+var kingColorShoot;
 var BossMap = function(game) {};
 BossMap.prototype = {
 
@@ -13,6 +22,16 @@ BossMap.prototype = {
       game.load.tilemap('layout', 'assets/TileMaps/KingColor.json', null, Phaser.Tilemap.TILED_JSON);
       game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles_2.png', 32, 32);
 
+      shootSFX = game.add.audio('shoot');
+      enemyShootSFX = game.add.audio('enemyShoot');
+      hurtSFX = game.add.audio('hurt');
+      enemyDiesSFX = game.add.audio('enemyDies');
+      enterSFX = game.add.audio('enter');
+      kingColorLaugh = game.add.audio('KC_laugh');
+      kingColorHurt = game.add.audio('KC_hurt');
+      kingColorDies = game.add.audio('KC_dies');
+      kingColorShoot = game.add.audio('KC_shoot');
+
    },
 
    create: function() {
@@ -22,7 +41,7 @@ BossMap.prototype = {
 
       song.stop();
       song = game.add.audio('motivational');
-      song.play('', 0, 0.5, true);
+      song.play('', 0, 0.2, true);
 
       // Setting the world bounds
       game.world.setBounds(0, 0, 1024, 1024);
@@ -143,6 +162,7 @@ BossMap.prototype = {
       // Player shoots a bullet for each key press
       if (game.input.keyboard.justPressed(Phaser.Keyboard.X) && hasRed && !playerDead) {
          var bullet = new Bullet(game, this.player.x, this.player.y, direction, playerBulletSpeed);
+         shootSFX.play('', 0, 0.2, false);
          game.add.existing(bullet);
          this.playerBullets.add(bullet);
       }
@@ -163,6 +183,7 @@ BossMap.prototype = {
             // If player health reaches 0, they die
             if (health == 0) {
                song.stop();
+               hurtSFX.play('', 0, 0.5, false);
                playerDies(game, this.player, 'BossMap');
             }
          }
@@ -176,6 +197,7 @@ BossMap.prototype = {
             // If player health reaches 0, they die
             if (health == 0) {
                song.stop();
+               hurtSFX.play('', 0, 0.5, false);
                playerDies(game, this.player, 'BossMap');
             }
          }
@@ -201,6 +223,7 @@ BossMap.prototype = {
       if(this.player.y >= 1475){
           if(health > 0){
              playerDies(game, this.player, 'BossMap');
+             hurtSFX.play('', 0, 0.5, false);
              health = 0;
              song.stop();
           }
@@ -218,9 +241,11 @@ BossMap.prototype = {
    bulletHitsBoss: function(boss, bullet) {
       bulletDestroyed(game, bullet);
       bossHealth--;
+      kingColorHurt.play('', 0, 0.8, false);
       boss.tint = 0xFF0000;
 
       if (bossHealth <= 0) {
+          kingColorDies.play('', 0, 1, false);
          bossDefeated = true;
          boss.destroy();
       }
@@ -229,6 +254,7 @@ BossMap.prototype = {
    // Called with a player bullet hits an enemy
    bulletHitsEnemy: function(bullet, enemy) {
       bulletDestroyed(game, bullet);
+      enemyDiesSFX.play('', 0, 0.5, false);
       enemyDies(game, enemy);
    },
 
@@ -240,6 +266,7 @@ BossMap.prototype = {
       // If player health reaches 0, they die
       if (health == 0) {
          playerDies(game, player, 'BossMap');
+         hurtSFX.play('', 0, 0.5, false);
          song.stop();
       }
    },
@@ -262,6 +289,7 @@ BossMap.prototype = {
 
    enemyShoot: function(enemy) {
       var bullet = new Bullet(game, enemy.x, enemy.y, enemy.direction, 300);
+      enemyShootSFX.play('', 0, 0.2, false);
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
    },
@@ -269,6 +297,8 @@ BossMap.prototype = {
    // Boss shooting bullets
    bossShoot: function(boss) {
       this.boss.animations.play('shoot');
+      kingColorShoot.play('', 0, 0.8, false);
+      kingColorLaugh.play('', 0, 0.5, false);
       var bullet = new Bullet(game, boss.x + 24, boss.y + 85, -1, 300);
       game.add.existing(bullet);
       this.enemyBullets.add(bullet);
@@ -283,10 +313,13 @@ BossMap.prototype = {
    // Player picking up the item dropped by king color
    playerGetsPickup: function(player, pickup){
       if(bossHealth <= 0){
+        enterSFX.play('', 0, 1, false);
         song.stop();
-        game.state.start('Tutorial');
-      }
-   }
+        game.time.events.add(Phaser.Timer.SECOND * 2, function() {
+            game.state.start('Tutorial');
+        });
+        }
+    },
 
    // render: function() {
    //    game.debug.bodyInfo(this.player, 100, 100, 'black');

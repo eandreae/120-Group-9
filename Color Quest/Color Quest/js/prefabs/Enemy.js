@@ -21,8 +21,8 @@ function Enemy(game, x, y, speed, d = false, j = false) {
    this.v = speed;
    this.dashing = d;
    this.jumping = j;
-   enemyDashSFX = game.load.audio('enemyDash');
-   enemyJumpSFX = game.load.audio('enemyJump');
+   enemyDashSFX = game.add.audio('enemyDash');
+   enemyJumpSFX = game.add.audio('enemyJump');
 
    // If enemy can't jump or dash, they're a shooting red enemy
    if (!d && !j) {
@@ -107,14 +107,12 @@ Enemy.prototype.update = function() {
 
    // Makes the enemy jump once
    if (this.jump) {
-      // enemyJumpSFX.play('', 0, 0.5, false);
       this.body.velocity.y = -500;
       this.jump = false;
    }
 
    // Enemy dashes a certain amount
    if (this.dash && Math.abs(this.oldPos - this.x) < 150) {
-       //enemyDashSFX.play('', 0, 0.5, false);
       this.body.velocity.x = 700 * this.direction;
       this.body.velocity.y = 0;
       this.body.gravity.y = 0;
@@ -124,11 +122,13 @@ Enemy.prototype.update = function() {
 
 // Called by the jumping timer
 function enemyJumping(enemy) {
+   enemyJumpSFX.play('', 0, 0.5, false);
    this.jump = true;
 }
 
 // Called by the dashing timer
 function enemyDashing(enemy) {
+   enemyDashSFX.play('', 0, 0.5, false);
    enemy.dash = true;
    enemy.oldPos = enemy.x;
 }

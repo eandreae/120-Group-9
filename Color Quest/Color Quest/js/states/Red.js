@@ -374,7 +374,7 @@ Red.prototype = {
 
             // If player health reaches 0, they die
             if (health == 0) {
-                hurtSFX.play('', 0, 1, false);
+                hurtSFX.play('', 0, 1.5, false);
                song.stop();
                playerDies(game, this.player, 'Red');
             }
@@ -408,7 +408,7 @@ Red.prototype = {
       redLevel++;
 
       // Play the sound effect.
-      enterSFX.play('', 0, 1, false);
+      enterSFX.play('', 0, 2.5, false);
 
       if (redLevel == 1) {
          // If they have reacehd the last Red level, give them the ability
@@ -456,7 +456,7 @@ Red.prototype = {
 
       // If player health reaches 0, they die
       if (health == 0) {
-          hurtSFX.play('', 0, 1, false);
+          hurtSFX.play('', 0, 1.5, false);
          playerDies(game, player, 'Red');
          song.stop();
       }

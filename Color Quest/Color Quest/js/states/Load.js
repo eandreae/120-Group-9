@@ -5,6 +5,7 @@
 // "title music" = bensound-funkysuspense.mp3
 // "action music" = bensound-dance.mp3
 // "action music2" = bensound-funkyelement.mp3
+// "slap" = https://www.youtube.com/watch?v=xRihZvKxNYU
 
 
 // Load state
@@ -89,6 +90,7 @@ Load.prototype = {
       game.load.audio('hi_6', 'assets/audio/NPChi6.mp3');
       game.load.audio('hi_7', 'assets/audio/NPChi7.mp3');
       game.load.audio('solaire', 'assets/audio/solaire.mp3');
+      game.load.audio('snore', 'assets/audio/snore.mp3');
       // enemy sounds
       game.load.audio('enemyShoot', 'assets/audio/enemyShoot.mp3');
       game.load.audio('enemyDies', 'assets/audio/enemyDies.mp3');

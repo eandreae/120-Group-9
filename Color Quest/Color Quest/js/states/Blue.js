@@ -19,10 +19,10 @@ Blue.prototype = {
       game.load.tilemap('layout', 'assets/TileMaps/Blue.json', null, Phaser.Tilemap.TILED_JSON);
       game.load.spritesheet('tilesheet', 'assets/TileMaps/color_tiles.png', 32, 32);
 
-      shootSFX = game.load.audio('shoot');
-      hurtSFX = game.load.audio('hurt');
-      enemyDiesSFX = game.load.audio('enemyDies');
-      enterSFX = game.load.audio('enter');
+      shootSFX = game.add.audio('shoot');
+      hurtSFX = game.add.audio('hurt');
+      enemyDiesSFX = game.add.audio('enemyDies');
+      enterSFX = game.add.audio('enter');
    },
 
    create: function() {
@@ -371,7 +371,7 @@ Blue.prototype = {
 
             // If player health reaches 0, they die
             if (health == 0) {
-                hurtSFX.play('', 0, 1, false);
+                hurtSFX.play('', 0, 1.5, false);
                song.stop();
                playerDies(game, this.player, 'Blue');
             }
@@ -395,7 +395,7 @@ Blue.prototype = {
       blueLevel++;
 
       // Play the sound effect.
-      enterSFX.play('', 0, 1, false);
+      enterSFX.play('', 0, 2.5, false);
 
       // Blue bdm
       bmd = game.add.bitmapData(18, 18);
