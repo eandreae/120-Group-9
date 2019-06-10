@@ -15,6 +15,7 @@ BossMap.prototype = {
    init: function() {
       health = 5;
       injured = false;
+      bossHealth = 15;
    },
 
    preload: function() {
