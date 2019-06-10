@@ -397,9 +397,10 @@ Tutorial.prototype = {
          this.n6Text[2] = "";
       } else {
          this.n6Text[0] = "You've done it! King Color is\nno more, and with that, our\ncolors have returned!";
-         this.n6Text[1] = "I really can't thank you enough.\nOver to the right, I've put a little\nsomething together for you."
-         this.n6Text[2] = "It doesn't even begin to repay\nall the good you've done, but\nhopefully, it's at least a start.";
-         this.n6Text[3] = "";
+         this.n6Text[1] = "I really can't thank you enough.\nOver to the right, the townsfolk\nhave given you a way"
+         this.n6Text[2] = "Over to the right, the townsfolk\nhave given you a way for you to\nreplay your whole adventure again.";
+         this.n6Text[3] = "Go ahead and check it out!";
+         this.n6Text[4] = "";
       }
 
       // CREDITS ------------------------------------------------------------------
@@ -454,16 +455,6 @@ Tutorial.prototype = {
       this.enemies.enableBody = true;
       this.shootingEnemies = game.add.group();
       this.shootingEnemies.enableBody = true;
-
-      // // // // Place a moving enemy
-      // var e1 = new Enemy(game, 500, 300, -100, true, false, this.player);
-      // game.add.existing(e1);
-      // this.enemies.add(e1);
-      // //
-      // // // Place a shooting enemy
-      // var e2 = new Enemy(game, 500, 300, -100, false, true, this.player);
-      // game.add.existing(e2);
-      // this.enemies.add(e2);
 
       // Bullet groups
       this.playerBullets = game.add.group();

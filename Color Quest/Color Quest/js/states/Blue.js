@@ -64,7 +64,7 @@ Blue.prototype = {
       };
 
       // Position of the NPC text
-      this.textPos = 1;
+      this.textPos = 0;
 
       // Interact text that appears above things the Player can interact with
       this.interactText = this.add.text(0, 0, "Press Z to interact", styleDescription);
@@ -163,7 +163,7 @@ Blue.prototype = {
          this.n2Text = new Array();
 
          this.n2Text[0] = "You've recovered some of the Blue power!";
-         this.n2Text[1] = "You can now double jump! Simply press the Z\n key again when you're in the air!";
+         this.n2Text[1] = "You can now double jump! Simply press the\nUP key again when you're in the air!";
          this.n2Text[2] = "";
          // ENEMIES -----------------------------------------------------------
          // Adding the enemies for Level 1.
