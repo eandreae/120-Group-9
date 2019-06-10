@@ -2,7 +2,7 @@
 // y: y position
 function Boss(game, x, y) {
    // Inherits Phaser.Sprite and puts the sprite in a position on the screen
-   Phaser.Sprite.call(this, game, x, y, 'boss_fixed', 'KingColor');
+   Phaser.Sprite.call(this, game, x, y, 'boss', 'KingColor');
 
    // Adds idle and shooting animations for King Color
    this.animations.add('idle', [0], 10, true);
