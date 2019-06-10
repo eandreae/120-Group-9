@@ -397,7 +397,7 @@ Tutorial.prototype = {
          this.n6Text[2] = "";
       } else {
          this.n6Text[0] = "You've done it! King Color is\nno more, and with that, our\ncolors have returned!";
-         this.n6Text[1] = "I really can't thank you enough.\nOver to the right, the townsfolk\nhave given you a way"
+         this.n6Text[1] = "I really can't thank you enough."
          this.n6Text[2] = "Over to the right, the townsfolk\nhave given you a way for you to\nreplay your whole adventure again.";
          this.n6Text[3] = "Go ahead and check it out!";
          this.n6Text[4] = "";
